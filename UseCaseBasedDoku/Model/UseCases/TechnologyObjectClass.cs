@@ -4,6 +4,9 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Openness.TO;
 
 namespace UseCaseBasedDoku.Model.UseCases
 {
+    /// <summary>
+    /// All the functions to configure and generate Technology Objects are defined here.
+    /// </summary>
     public class TechnologyObjectClass
     {
         /// <summary>

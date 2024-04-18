@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Modular Application Creator Use Case Based Doku", "index.html", [
+  [ "Modular Application Creator Use Case Based Documentation", "index.html", [
     [ "Overview", "index.html", "index" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
