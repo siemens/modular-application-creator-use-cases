@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<HelpTopics ID="IntelligentBelt">
+  <SupportedLanguage Key="en"></SupportedLanguage>
+  <SupportedLanguage Key="de"></SupportedLanguage>
+  <Topic Name="ModuleInfo" FileName="OnlineHelp.html">Description</Topic>
+  <Topic Name="FirstPage" FileName="OnlineHelp.html" Anchor="#EM_FIRST_PAGE">Description</Topic>
+  <Topic Name="SecondPage" FileName="OnlineHelp.html" Anchor="#EM_SECOND_PAGE">Description</Topic>
+</HelpTopics>

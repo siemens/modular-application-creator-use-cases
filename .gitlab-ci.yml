@@ -1,0 +1,67 @@
+include:
+    - project: awesome-ci/templates
+      ref: v1.7.0
+      file:
+          - general/use-proxy.gitlab-ci.yml
+    - template: Security/SAST.gitlab-ci.yml
+
+stages:
+  - build
+  - pages
+  - analyze
+  
+
+build:
+  stage: build
+  script:
+  - nuget restore UseCaseBasedDoku.sln
+  - msbuild UseCaseBasedDoku.sln
+  - xcopy /E C:\Users\uawetf33\.nuget\packages\doxygen\1.8.14\tools .
+  - .\doxygen.exe Doxyfile
+  tags:
+    - APC-HQ-Team-Openness
+  artifacts:
+    when: on_success  
+    paths:  
+      - "html/"  
+
+code-quality:
+    stage: analyze
+    image: mcr.microsoft.com/dotnet/sdk:7.0
+    extends: .use-proxy
+    needs:
+        - build
+    except:
+        - tags
+        - merge_requests
+    tags:
+        - DOCKER
+    before_script:
+        - dotnet tool restore
+    script:
+        - 'dotnet tool run roslynator analyze ./UseCaseBasedDoku.sln -o roslynator.xml || true'
+        - 'dotnet tool run cq roslynator roslynator.xml code-quality-report.json ${CI_PROJECT_DIR}'
+    artifacts:
+        reports:
+            codequality: code-quality-report.json
+        paths:
+            - code-quality-report.json
+        expire_in: 1 day
+
+pages:  
+  stage: pages
+  needs:
+        - build
+  script:
+    - mkdir .public
+    - cp -r * .public
+    - mv .public public
+    - cp -r html public  
+  artifacts:  
+    paths:  
+      - public 
+  only:  
+    - main
+
+sast:
+  stage: analyze

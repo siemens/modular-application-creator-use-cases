@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2024 Siemens AG
+# SPDX-License-Identifier: MIT
+
+dssAutomation<dsschmitt@siemens.com>
+ClaudiusR<claudius.rimmele@siemens.com>
+fabianzacharias<fabian.zacharias@siemens.com>

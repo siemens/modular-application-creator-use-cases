@@ -1,0 +1,43 @@
+<ImportedResources>
+  <RootElement OriginalLibraryName="UseCaseBasedDokuLibrary" ZipName="UseCaseBasedDokuLibrary.zip" Version="1.0.0" Name="UseCaseBasedDokuLibrary" Type="Library">
+    <ResourceCategory Name="Tags" GenerationName="Tags.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_Tags&quot;]">
+      <Group Name="LibraryRoot" GenerationName="Tags.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryTagsRootGroup">
+        <Group Name="UseCaseBasedDokuLibrary_Tags" GenerationName="Tags.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_Tags&quot;]" />
+      </Group>
+    </ResourceCategory>
+    <ResourceCategory Name="Types" GenerationName="Types.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_Types&quot;]">
+      <Group Name="LibraryRoot" GenerationName="Types.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryTypesRootGroup">
+        <Group Name="UseCaseBasedDokuLibrary_Types" GenerationName="Types.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_Types&quot;]" />
+      </Group>
+    </ResourceCategory>
+    <ResourceCategory Name="Blocks" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_Blocks&quot;]">
+      <Group Name="LibraryRoot" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryBlocksRootGroup">
+        <Group Name="UseCaseBasedDokuLibrary_Blocks" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_Blocks&quot;]" />
+      </Group>
+      <Blocks Name="UseCaseBasedDokuFB" GroupPath="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_Blocks&quot;].Blocks" BlockType="FB" allowRename="true" createOnlyOnce="false" ContainingLibrary="UseCaseBasedDokuLibrary" OriginalTypeName="UseCaseBasedDokuFB" LibraryType="False" />
+    </ResourceCategory>
+    <ResourceCategory Name="TOs" />
+    <ResourceCategory Name="WatchTables" GenerationName="WatchTables.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_WatchTables&quot;]">
+      <Group Name="LibraryRoot" GenerationName="WatchTables.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryWatchTablesRootGroup">
+        <Group Name="UseCaseBasedDokuLibrary_WatchTables" GenerationName="WatchTables.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_WatchTables&quot;]" />
+      </Group>
+    </ResourceCategory>
+    <ResourceCategory Name="Devices" />
+  </RootElement>
+  <RootElement AutoDeleteOnBuild="True" Name="ModuleInstance" Type="Instance">
+    <ResourceCategory Name="Tags" GenerationName="Tags.Groups[module.NameAndType]" AutoDeleteOnBuild="True">
+      <Group Name="@NameAndType" GenerationName="Tags.Groups[module.NameAndType]" RootGroupMemberName="ModuleTagsRootGroup" />
+    </ResourceCategory>
+    <ResourceCategory Name="Types" GenerationName="Types.Groups[module.NameAndType]" AutoDeleteOnBuild="True">
+      <Group Name="@NameAndType" GenerationName="Types.Groups[module.NameAndType]" RootGroupMemberName="ModuleTypesRootGroup" />
+    </ResourceCategory>
+    <ResourceCategory Name="Blocks" GenerationName="Blocks.Groups[module.NameAndType]" AutoDeleteOnBuild="True">
+      <Group Name="@NameAndType" GenerationName="Blocks.Groups[module.NameAndType]" RootGroupMemberName="ModuleBlocksRootGroup" />
+    </ResourceCategory>
+    <ResourceCategory Name="TOs" />
+    <ResourceCategory Name="WatchTables" GenerationName="WatchTables.Groups[module.NameAndType]" AutoDeleteOnBuild="True">
+      <Group Name="@NameAndType" GenerationName="WatchTables.Groups[module.NameAndType]" RootGroupMemberName="ModuleWatchTablesRootGroup" />
+    </ResourceCategory>
+    <ResourceCategory Name="Devices" />
+  </RootElement>
+</ImportedResources>

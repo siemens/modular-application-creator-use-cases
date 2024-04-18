@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>UseCaseBasedDoku</id>
+    <version>1.0.8874-pre21052</version>
+    <title>UseCaseBasedDoku</title>
+    <authors>SIEMENS AG</authors>
+    <projectUrl>http://equipmentmodule.info/</projectUrl>
+    <description>#descr_en##descr_de##descr_zh##rnote_en##rnote_de##rnote_zh#</description>
+    <releaseNotes>#rnote_en##rnote_de##rnote_zh#</releaseNotes>
+    <copyright>Copyright © SIEMENS AG</copyright>
+    <dependencies>
+      <group targetFramework=".NETFramework4.8">
+        <dependency id="Newtonsoft.Json" version="13.0.3" />
+      </group>
+    </dependencies>
+    <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V19.0</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="Microsoft.VisualBasic" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="PresentationCore" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="PresentationFramework" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Configuration" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Data.DataSetExtensions" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Data" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Drawing" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.IO.Compression" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.IO.Compression.FileSystem" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Web.Extensions" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Windows.Forms" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Windows.Presentation" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Xaml" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework4.8" />
+    </frameworkAssemblies>
+    <contentFiles>
+      <files include="any/net48/Images/AddLibrary.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/ClassExplanation.PNG" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CodeExplanation.PNG" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/ConfigureTO.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CreateFB.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CreateInstanceDB.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CreateTag.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CreateTagTable.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CreateTO.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/DynamicCall.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/FunctionExplanation.PNG" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/GenerateDB.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/GenerateOB.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/GenerateS120.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/GenerateS210.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/MultiInstanceFB.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/OpenLibrary.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/OpenTiares.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/SetDefaultValue.png" buildAction="Content" copyToOutput="false" />
+      <files include="lib/net48/UseCaseBasedDoku.dll" buildAction="Content" copyToOutput="false" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="Helpfiles\OnlineHelp.zip" target="Help\OnlineHelp.zip" />
+    <file src="Helpfiles\OnlineHelpTopics.xml" target="Help\OnlineHelpTopics.xml" />
+  </files>
+</package>

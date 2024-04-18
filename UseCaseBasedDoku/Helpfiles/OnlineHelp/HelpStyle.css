@@ -1,0 +1,246 @@
+@font-face {
+				font-family: 'MAC Sans';
+				src: url('font/SISAN03.eot');
+				font-weight: normal;
+				font-style: normal;
+}
+@font-face {
+				font-family: 'MAC Sans';
+				src: url('font/SISAN06.eot');
+				font-weight: bold;
+				font-style: normal;
+}
+
+body {
+    font-family: Siemens Sans, 'MAC Sans', Calibre, Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    padding: 0px;
+	margin-left: 10px;
+	margin-right: 0px;
+	margin-top: 8px;
+    color: #1C1C1C;
+}
+
+a:link {
+    font-size: 14px;
+    text-decoration: none;
+    color: #054687;
+    line-height: 18px;
+}
+
+a:visited {
+    font-size: 14px;
+    text-decoration: none;
+    color: #054687;
+    line-height: 18px;
+}
+
+a:active {
+    font-size: 14px;
+    color: #054687;
+}
+
+a.current{
+    font-size: 14px;
+    text-decoration: underline;
+    color: #054687;
+    line-height: 18px;
+}
+
+/*
+h1 {
+    font-size: 14px;
+    color: #2d354d;
+    padding: 0px 0px 0px 0px;
+	margin: 0px 0px 8px 0px;
+}
+*/
+
+h2 {
+    font-size: 14px;
+    color: #1C1C1C;
+    background-color: #d9d9d9;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #ffffff;
+    padding: 7px 10px 7px 10px;
+	margin: -2px -10px -10px 0px;
+}
+
+h1 {
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #2d354d;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #ffffff;
+    padding: 7px 10px 7px 10px;
+	margin: -2px -10px -10px 0px;
+}
+
+h3 {
+    font-size: 14px;
+    color: #1C1C1C;
+    background-color: #c3d1ed;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #ffffff;
+    padding: 7px 10px 7px 10px;
+	margin: -6px -10px -10px 0px;
+}
+
+h4 {
+    font-weight: bold;
+    font-size: 14px;
+    color: #2d354d;
+/*    padding: 2px 10px 2px 0px; */
+	margin-bottom: -10px;
+
+}
+
+ul {
+    font-size: 14px;
+    list-style-image: url('html_files/ident.png');
+}
+
+    ul li {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    ul li p{
+        font-size: 14px;
+        line-height: 18px;
+        margin: 4px 0px 4px 0px;
+    }
+
+ul.WithoutBulletPoint {
+        font-size: 14px;
+        list-style-image: none;
+        list-style: none;
+        list-style-position: inside;
+        padding: 0px 10px 0px 10px;
+        margin: 0px 0px 0px 10px;
+    }
+
+ol {
+    font-size: 14px;
+}
+
+    ol li {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    ol li p{
+        font-size: 14px;
+        line-height: 18px;
+        margin: 4px 0px 4px 0px;
+    }
+
+table {
+    font-size: 14px;
+    margin: 10px;
+}
+
+
+p {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+    p.BulletText1 {
+    }
+
+    p.Blocktitel {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333333;
+        background-color: #CDD9E1;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #ffffff;
+        padding: 2px 10px 2px 10px;
+        margin: 0px;
+    }
+
+    p.FormatvorlageBlocktitel {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333333;
+        background-color: #CDD9E1;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #ffffff;
+        padding: 2px 10px 2px 10px;
+        margin: 0px;
+    }
+
+    p.ContentGroup {
+		font-size: 14px;
+		color: #0066CC;
+        margin: 7px 20px 7px 13px;
+    }
+	
+    p.SecondaryContent {
+        margin: 7px 20px 7px 33px;
+    }
+
+    p.PrimaryContent {
+        margin: 0px 20px 7px 13px;
+    }
+	
+/*
+    p.TertiaryContent {
+        margin: 6px 20px 6px 65px;
+    }
+*/
+
+    p.MsoNormal {
+        margin: 10px;
+    }
+
+    p.MsoListParagraphCxSpFirst {
+        margin: 10px;
+    }
+
+    p.MsoListParagraphCxSpMiddle {
+        margin: 10px;
+    }
+
+    p.MsoListParagraphCxSpLast {
+        margin: 10px;
+    }
+
+    p.BulletTextTest {
+        display: inline-block;
+        margin: 0px;
+    }
+
+span.class31 {
+    background: url(html_files/ident.png) left center;
+    background-repeat: no-repeat;
+    width: 3px;
+    height: 3px;
+    display: block;
+    float: left;
+    background-position: center;
+    margin: 0px 4px 6px 4px;
+    display: inline-block;
+}
+
+span.class46 {
+    background: url(html_files/ident.png) left center;
+    background-repeat: no-repeat;
+    width: 3px;
+    height: 3px;
+    display: block;
+    float: left;
+    background-position: center;
+    margin: 0px 4px 6px 20px;
+    display: inline-block;
+}
+
+span.class62 {
+    font-weight: bold;
+}
