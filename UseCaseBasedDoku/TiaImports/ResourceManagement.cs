@@ -24,8 +24,13 @@ namespace UseCaseBasedDoku.TiaImports
 {
     public class ResourceManagement
     {
-        private List<TiaLibraryInfo> _libraryInfos;
+        private List<TiaLibraryInfo> m_libraryInfos;
+        private List<LibraryBase> m_libraries;
         private Dictionary<NameAndType, LibraryTypeObject> m_nameAndType2LibraryTypeObject = new Dictionary<NameAndType, LibraryTypeObject>();
+        private List<TagGroup> m_duplicatedRootTagGroups = new List<TagGroup>();
+        private List<TypeGroup> m_duplicatedRootTypeGroups = new List<TypeGroup>();
+        private List<BlockGroup> m_duplicatedRootBlockGroups = new List<BlockGroup>();
+        private List<WatchTableGroup> m_duplicatedRootWatchTableGroups = new List<WatchTableGroup>();
         // List of generated blocks
         public Dictionary<object, object> __created_block_list = new Dictionary<object, object>();
         public UseCaseBasedDokuLibrary UseCaseBasedDokuLibrary { get; set; }
@@ -155,18 +160,28 @@ namespace UseCaseBasedDoku.TiaImports
 
         public List<TiaLibraryInfo> GetLibraryInfos()
         {
-            if (_libraryInfos != null)
+            if (m_libraryInfos != null)
             {
-                return _libraryInfos;
+                return m_libraryInfos;
             }
 
-            _libraryInfos = new List<TiaLibraryInfo>();
+            m_libraryInfos = new List<TiaLibraryInfo>();
 
             LibraryBase lib = new UseCaseBasedDokuLibrary(false);
             var libInfo = new TiaLibraryInfo("UseCaseBasedDokuLibrary", lib.Version);
-            _libraryInfos.Add(libInfo);
+            m_libraryInfos.Add(libInfo);
 
-            return _libraryInfos;
+            return m_libraryInfos;
+        }
+
+        public List<LibraryBase> GetLibraries()
+        {
+
+            m_libraries = new List<LibraryBase>();
+
+            m_libraries.Add(UseCaseBasedDokuLibrary);
+
+            return m_libraries;
         }
 
         private void DeleteExistingInstanceGroups(PlcDevice targetDevice, UseCaseBasedDokuEM module)
@@ -303,6 +318,9 @@ namespace UseCaseBasedDoku.TiaImports
             LibraryWatchTablesRootGroup.AddGroup("UseCaseBasedDokuLibrary_WatchTables");
 
 
+            // Populate library types with ModuleBlocksRootGroup for InstanceDB creation
+            AddRootGroupToLibraryTypes();
+
             // Create tag lists
 
             // Create types
@@ -331,6 +349,26 @@ namespace UseCaseBasedDoku.TiaImports
 
         private void FinishGeneration(TiaTemplateContext tiaTemplateContext, UseCaseBasedDokuEM module)
         {
+            foreach (var group in m_duplicatedRootBlockGroups)
+            {
+                tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(group);
+            }
+
+            foreach (var group in m_duplicatedRootTagGroups)
+            {
+                tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(group);
+            }
+
+            foreach (var group in m_duplicatedRootTypeGroups)
+            {
+                tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(group);
+            }
+
+            foreach (var group in m_duplicatedRootWatchTableGroups)
+            {
+                tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(group);
+            }
+
             tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(ModuleTagsRootGroup);
             tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(ModuleTypesRootGroup);
             tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(ModuleBlocksRootGroup);
@@ -402,6 +440,20 @@ namespace UseCaseBasedDoku.TiaImports
                 {
                     ProgramBlock block = programFolder[name.Name];
                     __created_block_list[typeObject] = block;
+                }
+            }
+        }
+
+        private void AddRootGroupToLibraryTypes()
+        {
+            foreach (LibraryBase library in GetLibraries())
+            {
+                foreach (LibraryTypeObject libraryTypeObject in library.Types.Values)
+                {
+                    if (libraryTypeObject is ICanCreateInstanceDB canCreateInstanceDbType)
+                    {
+                        canCreateInstanceDbType.InstanceDbTargetFolder = ModuleBlocksRootGroup.Blocks;
+                    }
                 }
             }
         }

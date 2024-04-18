@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
-    <id>UseCaseBasedDoku</id>
-    <version>1.0.8874-pre21052</version>
-    <title>UseCaseBasedDoku</title>
+    <id>MAC_use_cases</id>
+    <version>1.0.8867-pre28103</version>
+    <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
     <description>#descr_en##descr_de##descr_zh##rnote_en##rnote_de##rnote_zh#</description>

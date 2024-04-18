@@ -33,7 +33,7 @@ namespace UseCaseBasedDoku
         {
             get
             {
-                return "TIA-V18.0";
+                return "TIA-V19.0";
             }
         }
         
