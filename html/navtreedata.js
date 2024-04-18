@@ -24,12 +24,28 @@
 */
 var NAVTREE =
 [
-  [ "Modular Application Creator Use Case Based Doku", "index.html", ]
+  [ "Modular Application Creator Use Case Based Doku", "index.html", [
+    [ "Overview", "index.html", "index" ],
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ],
+        [ "Properties", "functions_prop.html", null ]
+      ] ]
+    ] ],
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ]
+    ] ]
+  ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"_base_use_case_based_doku_e_m_8cs_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
