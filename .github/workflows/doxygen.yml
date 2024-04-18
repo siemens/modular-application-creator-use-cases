@@ -3,6 +3,7 @@ name: Update Doxygen Files and Publish Pages
 on:  
   push:  
     branches:  
+      - main
       - CI/CD  
 jobs:  
   build:  
