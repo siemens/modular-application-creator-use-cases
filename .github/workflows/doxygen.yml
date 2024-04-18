@@ -17,7 +17,7 @@ jobs:
       run: choco install doxygen.portable -y  
           
     - name: Generate Doxygen documentation  
-      run: doxygen Doxy  
+      run: doxygen Doxyfile
           
     - name: Upload Doxygen artifacts  
       uses: actions/upload-artifact@v2  
