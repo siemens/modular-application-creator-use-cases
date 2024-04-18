@@ -35,3 +35,20 @@ jobs:
       with:  
         github_token: ${{ secrets.GITHUB_TOKEN }}  
         publish_dir: ./docs  
+
+    - name: Create Release  
+      id: create_release  
+      uses: actions/create-release@v1  
+      env:  
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+      with:  
+        tag_name: ${{ github.sha }}  
+        release_name: Release ${{ github.sha }}  
+        body: |  
+          Doxygen Documentation Artifacts  
+        draft: false  
+        prerelease: false  
+  
+    - name: Get Artifacts Link  
+      id: get_artifacts_link  
+      run: echo "::set-output name=artifacts_url::${{ steps.create_release.outputs.upload_url }}"  
