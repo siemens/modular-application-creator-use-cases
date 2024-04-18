@@ -7,23 +7,17 @@ on:
   
 jobs:  
   build:  
-    runs-on: ubuntu-latest  
+    runs-on: windows-latest  
   
     steps:  
     - name: Checkout repository  
       uses: actions/checkout@v2  
   
     - name: Install Doxygen  
-      run: sudo apt-get install -y doxygen  
+      run: choco install doxygen.portable -y  
   
     - name: Generate Doxygen documentation  
       run: doxygen Doxyfile  
-  
-    - name: Upload Doxygen artifacts  
-      uses: actions/upload-artifact@v2  
-      with:  
-        name: Doxygen Documentation  
-        path: ./html  
   
     - name: Download Doxygen artifacts  
       uses: actions/download-artifact@v2  
@@ -38,3 +32,4 @@ jobs:
         git add .  
         git commit -m "docs: Update Doxygen documentation"  
         git push  
+   
