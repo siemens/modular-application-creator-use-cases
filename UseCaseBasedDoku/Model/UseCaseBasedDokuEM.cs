@@ -10,6 +10,9 @@ using UseCaseBasedDoku.Model.UseCases;
 
 namespace UseCaseBasedDoku.Model
 {
+    /// <summary>
+    /// This is the main class in which the workflow starts. Here are all sections for creating or generating the TIA Portal Project
+    /// </summary>
     public class UseCaseBasedDokuEM : BaseUseCaseBasedDokuEM
     {
         //-------------------------------------------
