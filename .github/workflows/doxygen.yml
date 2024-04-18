@@ -19,8 +19,12 @@ jobs:
     - name: Generate Doxygen documentation  
       run: doxygen Doxyfile  
         
-    - name: Deploy to GitHub Pages  
-      uses: peaceiris/actions-gh-pages@v3  
+    - name: Upload Doxygen artifacts  
+      uses: actions/upload-artifact@v2  
       with:  
-        github_token: ${{ secrets.GITHUB_TOKEN }}  
-        publish_dir: ./html
+        name: Doxygen Documentation  
+        path: ./html  
+    - name: Move artifacts to GitHub Pages directory  
+      run: |  
+        mkdir -p ./docs/doxygen  
+        mv ./html/* ./docs/doxygen  
