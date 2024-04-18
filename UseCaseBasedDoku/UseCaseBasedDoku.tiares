@@ -1,4 +1,4 @@
-<ImportedResources>
+<ImportedResources GenerateAllTypedLibraryObjects="True">
   <RootElement OriginalLibraryName="UseCaseBasedDokuLibrary" ZipName="UseCaseBasedDokuLibrary.zip" Version="1.0.0" Name="UseCaseBasedDokuLibrary" Type="Library">
     <ResourceCategory Name="Tags" GenerationName="Tags.Groups[&quot;LibraryRoot&quot;][&quot;UseCaseBasedDokuLibrary_Tags&quot;]">
       <Group Name="LibraryRoot" GenerationName="Tags.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryTagsRootGroup">
