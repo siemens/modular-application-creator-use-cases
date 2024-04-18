@@ -28,3 +28,8 @@ jobs:
       run: |  
         mkdir -p ./docs/doxygen  
         mv ./html/* ./docs/doxygen  
+    - name: Trigger GitHub Pages update  
+      uses: peaceiris/actions-gh-pages@v3  
+      with:  
+        github_token: ${{ secrets.GITHUB_TOKEN }}  
+        publish_dir: ./docs  
