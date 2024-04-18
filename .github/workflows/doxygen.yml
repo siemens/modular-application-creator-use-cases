@@ -7,48 +7,34 @@ on:
   
 jobs:  
   build:  
-    runs-on: windows-latest  
-        
+    runs-on: ubuntu-latest  
+  
     steps:  
     - name: Checkout repository  
       uses: actions/checkout@v2  
-          
+  
     - name: Install Doxygen  
-      run: choco install doxygen.portable -y  
-          
+      run: sudo apt-get install -y doxygen  
+  
     - name: Generate Doxygen documentation  
-      run: doxygen Doxyfile
-          
+      run: doxygen Doxyfile  
+  
     - name: Upload Doxygen artifacts  
       uses: actions/upload-artifact@v2  
       with:  
         name: Doxygen Documentation  
         path: ./html  
-          
-    - name: Move artifacts to GitHub Pages directory  
-      run: |  
-        mkdir .\docs  
-        move .\html\* .\docs  
-          
-    - name: Trigger GitHub Pages update  
-      uses: peaceiris/actions-gh-pages@v3  
-      with:  
-        github_token: ${{ secrets.GITHUB_TOKEN }}  
-        publish_dir: ./docs  
-
-    - name: Create Release  
-      id: create_release  
-      uses: actions/create-release@v1  
-      env:  
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-      with:  
-        tag_name: ${{ github.sha }}  
-        release_name: Release ${{ github.sha }}  
-        body: |  
-          Doxygen Documentation Artifacts  
-        draft: false  
-        prerelease: false  
   
-    - name: Get Artifacts Link  
-      id: get_artifacts_link  
-      run: echo "::set-output name=artifacts_url::${{ steps.create_release.outputs.upload_url }}"  
+    - name: Download Doxygen artifacts  
+      uses: actions/download-artifact@v2  
+      with:  
+        name: Doxygen Documentation  
+        path: ./docs  
+  
+    - name: Commit and push changes  
+      run: |  
+        git config --global user.name "GitHub Actions"  
+        git config --global user.email "actions@github.com"  
+        git add .  
+        git commit -m "docs: Update Doxygen documentation"  
+        git push  
