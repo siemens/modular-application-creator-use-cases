@@ -1,0 +1,35 @@
+name: Update Doxygen Files and Publish Pages  
+  
+on:  
+  push:  
+    branches:  
+      - main
+      - CI/CD  
+jobs:  
+  build:  
+    runs-on: windows-latest  
+        
+    steps:  
+    - name: Checkout repository  
+      uses: actions/checkout@v2  
+          
+    - name: Install Doxygen  
+      run: choco install doxygen.portable -y  
+          
+    - name: Generate Doxygen documentation  
+      run: doxygen Doxyfile
+          
+    - name: Upload Doxygen artifacts  
+      uses: actions/upload-artifact@v2  
+      with:  
+        name: Doxygen Documentation  
+        path: ./html   
+        
+    - name: Commit and push changes  
+      run: |  
+        git config --global user.name "GitHub Actions"  
+        git config --global user.email "actions@github.com"  
+        git add .  
+        git commit -m "docs: Update Doxygen documentation"  
+        git push  
+   
