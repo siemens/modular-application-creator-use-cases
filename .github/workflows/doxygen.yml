@@ -6,7 +6,7 @@ on:
       - main
       - CI/CD  
 jobs:  
-  build:  
+  documentation:  
     runs-on: windows-latest  
         
     steps:  
