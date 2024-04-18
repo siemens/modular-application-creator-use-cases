@@ -18,7 +18,13 @@ jobs:
   
     - name: Generate Doxygen documentation  
       run: doxygen Doxyfile  
-  
+      
+    - name: Upload Doxygen artifacts  
+      uses: actions/upload-artifact@v2  
+      with:  
+        name: Doxygen Documentation  
+        path: ./docs  
+
     - name: Download Doxygen artifacts  
       uses: actions/download-artifact@v2  
       with:  
