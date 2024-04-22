@@ -15,8 +15,9 @@ We just updated our [Modular Application Creator Use Case Based Documentation](h
 1. clone this repository in your Visual Studio
 1. optional: go to the Properties of your project in Visual Studio --> Debug --> Start external program and select the ModularApplicationCreator.exe
 1. Start your solution --> Modular Application Creator should show up
+    1. Go to settings and add the the location of the nuget packages to the sources (xxx\modular-application-creator-use-cases\UseCaseBasedDoku\bin\Debug)
     1. Create new Modular Application Creator project
-    1. Assign Equipment Module: modular-application-creator-use-cases to your PLC
+    1. Assign Equipment Module: MAC_use_cases.xxx-prexxx to your PLC
     1. Configure your Module under the "Configure modules" tab
     1. Click generate under the "Generate" tab
 
