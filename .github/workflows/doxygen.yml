@@ -7,7 +7,7 @@ on:
       - CI/CD
       - development
 jobs:  
-  build:  
+  documentation:  
     runs-on: windows-latest  
         
     steps:  
