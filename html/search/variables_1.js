@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['datatype_0',['dataType',['../class_use_case_based_doku_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a7e0f9b1e1536d0215da143aef2e650bc',1,'UseCaseBasedDoku::Model::UseCases::GenericBlockCreation']]],
-  ['dbname_1',['dbName',['../class_use_case_based_doku_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#adf26f8f331ac134ff0be2313bbbe83f1',1,'UseCaseBasedDoku::Model::UseCases::GenericBlockCreation']]]
+  ['datatype_0',['dataType',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a06b0a6a47508b5048cdcbdd56c46c591',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['dbname_1',['dbName',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a320981f311000b0caa2aa757c3fc51ab',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]]
 ];

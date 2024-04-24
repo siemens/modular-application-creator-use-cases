@@ -1,4 +1,4 @@
 var files_dup =
 [
-    [ "UseCaseBasedDoku", "dir_ae7827ad1cb255974bd72e1d9ccef2f2.html", "dir_ae7827ad1cb255974bd72e1d9ccef2f2" ]
+    [ "MAC_use_cases", "dir_002ca9274f0ed87fc8ac8d232fab552e.html", "dir_002ca9274f0ed87fc8ac8d232fab552e" ]
 ];

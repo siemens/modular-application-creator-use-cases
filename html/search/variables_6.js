@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['virtualaxismode_0',['VirtualAxisMode',['../class_use_case_based_doku_1_1_model_1_1_use_cases_1_1_technology_object_class.html#a0edf0573470862afaf1ed3933e7436ed',1,'UseCaseBasedDoku::Model::UseCases::TechnologyObjectClass']]]
+  ['virtualaxismode_0',['VirtualAxisMode',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#afaacd6bae58611be5b97b66d6a606450',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]]
 ];

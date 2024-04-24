@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Modular Application Creator Use Case Based Doku", "index.html", [
+  [ "Modular Application Creator Use Case Based Documentation", "index.html", [
     [ "Overview", "index.html", "index" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -45,7 +45,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_base_use_case_based_doku_e_m_8cs_source.html"
+"_base_m_a_c__use__cases_e_m_8cs_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
