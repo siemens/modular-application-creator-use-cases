@@ -8,7 +8,7 @@ We just updated our [Modular Application Creator Use Case Based Documentation](h
 
 ## Prerequisites
 - TIA-Portal 19 installed on Windows PC
-- Download the [Modular Application Creator 19.1](https://support.industry.siemens.com/cs/attachments/109762852/Modular_Application_Creator_19.00.01_all_in_one.zip)
+- Download the [Modular Application Creator 19.1](https://support.industry.siemens.com/cs/de/en/view/109762852)
 - Microsoft Visual Studio with [Modular Application Creator Module Builder](https://support.industry.siemens.com/cs/de/en/view/109762852) installed
 
 ## First steps
