@@ -220,10 +220,6 @@ namespace MAC_use_cases.Model.UseCases
 
             Main.Networks.Add(Network);
 
-            //var sclNetwork = new Parser().ParseSclSnippet("\"GlobalDB\".Run := false;", _plcDevice, BlockType.FC, GroupBlockCalls.NOGROUPING).FirstOrDefault();
-            //functionBlock.Networks.Add(sclNetwork);
-
-
             ///Create a SCL-network
             var content = "\"myDB\".myParameterName := 100;";
             string sclContent = content;
