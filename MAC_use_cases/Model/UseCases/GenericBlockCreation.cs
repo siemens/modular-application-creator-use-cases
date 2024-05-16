@@ -7,6 +7,7 @@ using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using System.IO;
 using MAC_use_cases.TiaImports;
 using ProgrammingLanguage = Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.ProgrammingLanguage;
+using System.Linq;
 
 namespace MAC_use_cases.Model.UseCases
 {
@@ -58,6 +59,8 @@ namespace MAC_use_cases.Model.UseCases
 
             myFB.BlockComments[TypeMapper.BaseCulture.Name] = "myFB Block Comment"; // If necessary
             myFB.BlockTitles[TypeMapper.BaseCulture.Name] = "myFB Block Title";     // If necessary
+
+
 
             myFB.GenerateXmlBlock(plcDevice);
         }
@@ -195,6 +198,11 @@ namespace MAC_use_cases.Model.UseCases
             Main.BlockAttributes.ProgrammingLanguage = ProgrammingLanguage.LAD;
             ((OB_BlockAttributes)Main.BlockAttributes).BlockSecondaryType = "ProgramCycle";
 
+            var itf = Main.Interface[InterfaceSections.Temp];
+            InterfaceParameter temp;
+            temp = new InterfaceParameter("Temp", "Bool");
+            itf.Add(temp);
+
 
             //create block call of instance DB 
             BlockCall myFBCall = new BlockCall(instanceDbName, plcDevice)
@@ -211,6 +219,18 @@ namespace MAC_use_cases.Model.UseCases
 
 
             Main.Networks.Add(Network);
+
+            //var sclNetwork = new Parser().ParseSclSnippet("\"GlobalDB\".Run := false;", _plcDevice, BlockType.FC, GroupBlockCalls.NOGROUPING).FirstOrDefault();
+            //functionBlock.Networks.Add(sclNetwork);
+
+
+            ///Create a SCL-network
+            var content = "\"myDB\".myParameterName := 100;";
+            string sclContent = content;
+            var sclcode_network = parseSingleSCLCall(sclContent, plcDevice);
+            sclcode_network.GenerationLabel = new GenerationLabel(module.Name, "Virtual_Master_scl_code", module.ModuleID.ToString());
+            Main.Networks.Add(sclcode_network);
+
             AddCodeBlockToOB(Main, module.ResourceManagement, tiaTemplateContext, plcDevice);
         }
 
@@ -284,6 +304,21 @@ namespace MAC_use_cases.Model.UseCases
             }
 
             AddCodeBlockToOB(myOB, Module.ResourceManagement, tiaTemplateContext, plcDevice);
+        }
+
+        private static INetwork parseSingleSCLCall(string sclCall, PlcDevice plc)
+        {
+            var parsed = new Parser().ParseSclSnippet(sclCall, plc, Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.BlockType.OB, GroupBlockCalls.NOGROUPING).FirstOrDefault();
+
+            if (parsed is BlockNetwork blockNetwork)
+            {
+                return blockNetwork;
+            }
+            else if (parsed is FixNetwork fixNetwork)
+            {
+                return fixNetwork;
+            }
+            return null;
         }
 
     }
