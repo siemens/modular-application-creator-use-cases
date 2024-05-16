@@ -185,7 +185,7 @@ namespace MAC_use_cases.Model.UseCases
         }
 
         /// <summary>
-        /// This function generates an OB and creates an block call
+        /// This function generates an OB and creates an block call in FBD and SCL
         /// \image html GenerateOB.png
         /// </summary>
         /// <param name="instanceDbName">The name of the generated OB</param>

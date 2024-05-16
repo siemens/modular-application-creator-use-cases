@@ -12,7 +12,7 @@ We just updated our [Modular Application Creator Use Case Based Documentation](h
 - Microsoft Visual Studio with [Modular Application Creator Module Builder](https://support.industry.siemens.com/cs/de/en/view/109762852) installed
 
 ## First steps
-1. clone this repository in your Visual Studio
+1. clone this repository in your Visual Studio (avoid OneDrive folder)
 1. optional: go to the Properties of your project in Visual Studio --> Debug --> Start external program and select the ModularApplicationCreator.exe
 1. Start your solution --> Modular Application Creator should show up
     1. Go to settings and add the the location of the nuget packages to the sources (xxx\modular-application-creator-use-cases\UseCaseBasedDoku\bin\Debug)
