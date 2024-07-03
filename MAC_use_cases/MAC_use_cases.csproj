@@ -155,7 +155,7 @@ where to where -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="EquipmentModule.Build.Tasks">
-      <Version>19.0.1</Version>
+      <Version>19.1.1</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -168,11 +168,11 @@ where to where -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Basics">
-      <Version>19.0.1</Version>
+      <Version>19.1.1</Version>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Core">
-      <Version>19.0.1</Version>
+      <Version>19.1.1</Version>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>

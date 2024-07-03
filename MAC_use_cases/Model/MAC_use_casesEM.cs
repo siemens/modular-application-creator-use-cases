@@ -7,6 +7,7 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Modules;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using MAC_use_cases.Model.UseCases;
+using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 
 namespace MAC_use_cases.Model
 {
@@ -43,6 +44,12 @@ namespace MAC_use_cases.Model
         /// This string can be changed in the View 
         /// </summary>
         public string NameOfMyFb { get; set; } = "myFB";
+
+        /// <summary>
+        /// This attribute is the string which is used for the renaming of the safety-FB.
+        /// This string can be changed in the View 
+        /// </summary>
+        public string SafetyFb { get; set; } = "SafetyFB";
 
         [JsonIgnore]
         public string NameAndType => NamingConventions.CreateModuleNameAndTypeForEM("MAC_use_cases", this);
@@ -118,15 +125,17 @@ namespace MAC_use_cases.Model
 
                     IntegrateLibraries.CreateInstanceDB(this, this.ResourceManagement.MAC_use_casesFB, "CreatedDbFromMasterCopy", this.ResourceManagement.ModuleBlocksRootGroup);
 
+                    IntegrateLibraries.CreateInstanceDB_via_XmlInstDB(this, this.ResourceManagement.MAC_use_casesFB, "CreatedDbFromMasterCopy_XmlInstDB", this.ResourceManagement.ModuleBlocksRootGroup, m_plcDevice);
+
                     GenericBlockCreation.GenerateDB("myDB", m_plcDevice, this);
 
                     GenericBlockCreation.SetDefaultValue("myDB", "myParameterName", TIATYPE.INT, "99", this);
 
-                    GenericBlockCreation.GenerateMultiInstanceFB(m_plcDevice, tiaTemplateContext, this);
+                    GenericBlockCreation.GenerateMultiInstanceFB(m_plcDevice, tiaTemplateContext.TiaProject.GetEditingLanguage(), this);
 
-                    GenericBlockCreation.GenerateOB_Main("CreatedDbFromMasterCopy", this, tiaTemplateContext, m_plcDevice);
+                    GenericBlockCreation.GenerateOB_Main("CreatedDbFromMasterCopy", this, tiaTemplateContext.TiaProject.GetEditingLanguage(), m_plcDevice);
 
-                    GenericBlockCreation.GenerateMainOBWithMultipleCalls("myOB", 10, tiaTemplateContext, m_plcDevice, this);
+                    GenericBlockCreation.GenerateMainOBWithMultipleCalls("myOB", 10, tiaTemplateContext.TiaProject.GetEditingLanguage(), m_plcDevice, this);
 
                     GenericBlockCreation.CreateFB(NameOfMyFb, "CreatedDbFromMasterCopy", m_plcDevice);
 

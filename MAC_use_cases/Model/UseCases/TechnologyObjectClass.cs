@@ -105,9 +105,6 @@ namespace MAC_use_cases.Model.UseCases
             toPath = "DynamicDefaults.Velocity";
             TechnologicalObject.AdditionalParameter[toPath] = "50.0";
 
-            //Add the TechnologicalObjectInfo Object to the list of ProvidedTechnologicalObjects of the module
-            //myModule.ProvidedTechnologicalObjects.Add(TechnologicalObject);
         }
     }
-
 }
