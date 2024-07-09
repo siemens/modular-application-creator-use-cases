@@ -92,6 +92,7 @@ where to where -->
     <Compile Include="Model\BaseMAC_use_casesEMGeneratedItems.cs" />
     <Compile Include="TiaImports\GeneratedClasses\Lib_MAC_use_cases.cs" />
     <Compile Include="TiaImports\GeneratedClasses\MAC_use_casesFB.cs" />
+    <Compile Include="TiaImports\GeneratedClasses\myDataType.cs" />
     <Compile Include="TiaImports\ResourceManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\MultiPageFrame.xaml.cs">
@@ -120,7 +121,6 @@ where to where -->
     <None Include="Helpfiles\OnlineHelpTopics.xml">
       <SubType>Content</SubType>
     </None>
-    <EmbeddedResource Include="TiaImports\Lib_MAC_use_cases.zip" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\Lang_en.xaml">
@@ -199,6 +199,9 @@ where to where -->
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TiaResources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TiaImports\Lib_MAC_use_cases.zip" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="CleanProjPkgs" AfterTargets="Clean">
