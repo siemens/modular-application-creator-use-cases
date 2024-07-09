@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
+using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
 using System;
 
 

@@ -9,7 +9,9 @@
       <Group Name="LibraryRoot" GenerationName="Types.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryTypesRootGroup">
         <Group Name="Lib_MAC_use_cases_Types" GenerationName="Types.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Types&quot;]" />
       </Group>
+      <Types Name="myDataType" GroupPath="Types.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Types&quot;].Types" allowRename="false" createOnlyOnce="true" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="myDataType" LibraryType="False" />
     </ResourceCategory>
+    <ResourceCategory Name="SoftwareUnits" />
     <ResourceCategory Name="Blocks" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;]">
       <Group Name="LibraryRoot" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryBlocksRootGroup">
         <Group Name="Lib_MAC_use_cases_Blocks" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;]" />
@@ -31,6 +33,7 @@
     <ResourceCategory Name="Types" GenerationName="Types.Groups[module.NameAndType]" AutoDeleteOnBuild="True">
       <Group Name="@NameAndType" GenerationName="Types.Groups[module.NameAndType]" RootGroupMemberName="ModuleTypesRootGroup" />
     </ResourceCategory>
+    <ResourceCategory Name="SoftwareUnits" />
     <ResourceCategory Name="Blocks" GenerationName="Blocks.Groups[module.NameAndType]" AutoDeleteOnBuild="True">
       <Group Name="@NameAndType" GenerationName="Blocks.Groups[module.NameAndType]" RootGroupMemberName="ModuleBlocksRootGroup" />
     </ResourceCategory>

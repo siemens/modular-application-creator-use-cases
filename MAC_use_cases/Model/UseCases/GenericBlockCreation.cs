@@ -65,7 +65,7 @@ namespace MAC_use_cases.Model.UseCases
 
 
         /// <summary>
-        /// This function creates a Data Block with dynamic parameters in a desired folder
+        /// This function creates a Data Block with interface (sub-)parameters in a desired folder. The variables in the interface can have a standard data types or a data type defined in the project.
         /// \image html GenerateDB.png
         /// </summary>
         /// <param name="plcDevice">The PLC on which the equipment module is implemented</param>
@@ -75,17 +75,17 @@ namespace MAC_use_cases.Model.UseCases
             var axesDataDB = new XmlGlobalDB(dbName);
             var itf = axesDataDB.Interface[InterfaceSections.Static];
 
-            //Define two interface parameters
-            InterfaceParameter standardParam;
-            InterfaceParameter customParam;
-
             //Create new parameters. The custom parameter means you are using your own user defined data type.
-            standardParam = new InterfaceParameter(parameterName, "Int");
-            customParam = new InterfaceParameter(parameterName, "\"" + dataType + "\"");
+            var standardParam = new InterfaceParameter(parameterName, "Int");
+            var customParam1 = new InterfaceParameter("var_struct", "Struct");
+            customParam1.SubParameter.Add(new InterfaceParameter("Var1", "Bool"));
+            customParam1.SubParameter.Add(new InterfaceParameter("Var2", "Int"));
+            var customParam2 = new InterfaceParameter("datatyp_from_lib", "\"" + "myDataType" + "\"");
 
             //Add your parameters 
             itf.Add(standardParam);
-            //itf.Add(customParam); // Add this if your DataType exists
+            itf.Add(customParam1);
+            itf.Add(customParam2);
 
             axesDataDB.GenerateXmlBlock(plcDevice);
         }

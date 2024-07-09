@@ -147,6 +147,7 @@ namespace MAC_use_cases.Model
                     provider.WriteValues(m_plcDevice);
                     break;
             }
+
             return true;
         }
     }
