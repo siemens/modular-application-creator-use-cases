@@ -22,6 +22,9 @@ We just updated our [Modular Application Creator Use Case Based Documentation](h
     1. Click generate under the "Generate" tab
 
     --> your TIA-Portal project is generated
+   
+## Contact us
+If you have problems or suggestions, please send an email to [modular.application.creator.industry@siemens.com](mailto:modular.application.creator.industry@siemens.com)
 
 ## 📝 License
 
