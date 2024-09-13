@@ -1,4 +1,4 @@
-﻿using Siemens.Automation.ModularApplicationCreator.Tia.Helper.TypeIdentifier;
+using Siemens.Automation.ModularApplicationCreator.Tia.Helper.TypeIdentifier;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.TypeIdentifier.Enums;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness.DO;
 using System.Linq;
@@ -19,7 +19,7 @@ namespace MAC_use_cases.Model.UseCases
         /// <param name="deviceName">The name of the device</param>
         /// <param name="path">Path if necessary</param>
         /// <param name="comment">Comment if necessary</param>
-        public static void GenerateS120WithMasterCopy(MAC_use_casesEM module, string name, string deviceName,
+        public static void GenerateS120(MAC_use_casesEM module, string name, string deviceName,
             string path = null, string comment = null)
         {
             if (!module.SynchronizedCollection.HardwareInterfaces.OfType<ProfiDriveObjectInfo>()
@@ -49,7 +49,7 @@ namespace MAC_use_cases.Model.UseCases
         /// <param name="deviceName">The name of the device</param>
         /// <param name="path">Path if necessary</param>
         /// <param name="comment">Comment if necessary</param>
-        public static void GenerateS210WithMasterCopy(MAC_use_casesEM module, string name, string deviceName,
+        public static void GenerateS210(MAC_use_casesEM module, string name, string deviceName,
             string path = null, string comment = null)
         {
             if (!module.SynchronizedCollection.HardwareInterfaces.OfType<ProfiDriveObjectInfo>()
