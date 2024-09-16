@@ -1,5 +1,5 @@
 var class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation =
 [
-    [ "GenerateS120WithMasterCopy", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a85c44a6fc24f0f958c26fd351677e093", null ],
-    [ "GenerateS210WithMasterCopy", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#abdd01ba4026816d129c6222324af34ef", null ]
+    [ "GenerateS120", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#ab51a6f9a62a046694033dd0ad2c9f8a2", null ],
+    [ "GenerateS210", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a721184cebfffe9e2241d582f82b860a1", null ]
 ];
