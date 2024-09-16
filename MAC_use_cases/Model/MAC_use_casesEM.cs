@@ -110,9 +110,9 @@ namespace MAC_use_cases.Model
                 case TiaGenerationPhases.Init:
 
                     //Hardware config has to be in the Init phase. Otherwise it can't be used in the MAC.
-                    HardwareGeneration.GenerateS120WithMasterCopy(this, "S120MACTest", "S120DeviceTest", "this drive is generated with MAC");
+                    HardwareGeneration.GenerateS120(this, "S120MACTest", "S120DeviceTest", "this drive is generated with MAC");
 
-                    HardwareGeneration.GenerateS210WithMasterCopy(this, "S210MACTest", "S210DeviceTest", "this drive is generated with MAC");
+                    HardwareGeneration.GenerateS210(this, "S210MACTest", "S210DeviceTest", "this drive is generated with MAC");
 
                     break;
                 case TiaGenerationPhases.Build:
