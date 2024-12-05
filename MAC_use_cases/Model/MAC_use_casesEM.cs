@@ -8,6 +8,8 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using MAC_use_cases.Model.UseCases;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
+using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
+using Siemens.Automation.ModularApplicationCreator.Core;
 
 namespace MAC_use_cases.Model
 {
@@ -121,6 +123,13 @@ namespace MAC_use_cases.Model
 
                     myTO.ConfigureTO(myTO.TechnologicalObject, this);
 
+                    /// <summary>
+                    /// This function creates all TOs (toInfo objects) that the user added to module.ProvidedTechnologicalObjects
+                    /// Call this method after adding all your TOs in myModule to myModule.ProvidedTechnologicalObjects
+                    /// </summary>
+                    /// <param name="plcDevice">The PLC on which the equipment module is implemented</param>
+                    /// <param name="module">The corresponding equipment module</param>
+                    MacManagement.LoggingService.LogMessage(LogTypes.GenerationInfo, "Generate technology objects", Name);
                     TechnologyObjectClass.CreateTOs(m_plcDevice, this);
 
                     IntegrateLibraries.CreateInstanceDB(this, this.ResourceManagement.MAC_use_casesFB, "CreatedDbFromMasterCopy", this.ResourceManagement.ModuleBlocksRootGroup);

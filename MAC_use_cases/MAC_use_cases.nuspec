@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MAC_use_cases</id>
-    <version>1.0.9022-pre20240913133600</version>
+    <version>1.0.9105-pre20241205114503</version>
     <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
@@ -27,9 +27,9 @@
       <frameworkAssembly assemblyName="System.Data" targetFramework=".NETFramework4.8" />
       <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.8" />
       <frameworkAssembly assemblyName="System.Drawing" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.IO.Compression" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" targetFramework=".NETFramework4.8" />
       <frameworkAssembly assemblyName="System.IO.Compression.FileSystem" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.8" />
+      <frameworkAssembly assemblyName="System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" targetFramework=".NETFramework4.8" />
       <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.8" />
       <frameworkAssembly assemblyName="System.Web.Extensions" targetFramework=".NETFramework4.8" />
       <frameworkAssembly assemblyName="System.Windows.Forms" targetFramework=".NETFramework4.8" />
