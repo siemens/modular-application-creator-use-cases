@@ -1,0 +1,6 @@
+var class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases =
+[
+    [ "GetSafetySoftwareUnit", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html#a4ec34c144eef99c43c0cf3e190c47c8d", null ],
+    [ "GetSoftwareUnitByName", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html#a40f4110fb951b2335a45231f8838a9c5", null ],
+    [ "CrateFailSafeFunctionBlock", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html#a47ccb719128dae836dd2b1e1f29b294f", null ]
+];

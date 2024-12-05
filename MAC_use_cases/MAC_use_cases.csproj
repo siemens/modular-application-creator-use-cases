@@ -86,6 +86,7 @@ where to where -->
     <Compile Include="Model\UseCases\HardwareGeneration.cs" />
     <Compile Include="Model\UseCases\IntegrateLibraries.cs" />
     <Compile Include="Model\UseCases\NonTIAProjectBased.cs" />
+    <Compile Include="Model\UseCases\SoftwareUnits\UseCases\SoftwareUnitsUseCases.cs" />
     <Compile Include="Model\UseCases\TechnologyObjectClass.cs" />
     <Compile Include="Model\MAC_use_casesEM.cs" />
     <Compile Include="Model\BaseMAC_use_casesEM.cs" />
