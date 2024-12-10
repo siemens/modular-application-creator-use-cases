@@ -9,6 +9,7 @@ using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using MAC_use_cases.Model.UseCases;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
+using Siemens.Automation.ModularApplicationCreator.Core;
 
 namespace MAC_use_cases.Model
 {
