@@ -121,6 +121,9 @@ namespace MAC_use_cases.Model
 
                     // Add equipment module specific code generation here.
 
+                    var opennessTIAPortalProject = GeneralSupport.GetOpennessProject(tiaTemplateContext.TiaProject);
+                    var opennessCPU = GeneralSupport.GetOpennessDeviceItem(tiaTemplateContext.TiaDevice);
+
                     myTO.ConfigureTO(myTO.TechnologicalObject, this);
 
                     GeneralSupport.LogMessage(LogTypes.GenerationInfo, "Generate technology objects", this);

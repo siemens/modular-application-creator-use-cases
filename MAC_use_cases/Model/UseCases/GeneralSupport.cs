@@ -1,8 +1,7 @@
+using System.Linq;
 using Siemens.Automation.ModularApplicationCreator.Core;
-using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
-using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
-using System.Xml.Linq;
+using Siemens.Engineering.HW;
 
 namespace MAC_use_cases.Model.UseCases
 {
@@ -20,6 +19,29 @@ namespace MAC_use_cases.Model.UseCases
         public static void LogMessage(LogTypes logType, string logMessage, MAC_use_casesEM equipmentModule)
         {
             MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);
+        }
+
+        /// <summary>
+        /// This call returns the openness object of the TIA Portal project CPU
+        /// </summary>
+        /// <param name="device">This object represents the TIA Portal PLC in the Modular Application Creator context</param>
+        public static Siemens.Engineering.HW.DeviceItem GetOpennessDeviceItem(Siemens.Automation.ModularApplicationCreator.Tia.Openness.Device device)
+        {
+            /// <summary>
+            /// The object tiaTemplateContext.TiaDevice gets castet to an openness object of an device. Because of that, its now posssible to navigate threw the openness objects
+            /// </summary>
+            /// 
+            var opennesDevice = (Siemens.Engineering.HW.Device)device;
+            return opennesDevice.DeviceItems.FirstOrDefault(x => x.Classification == DeviceItemClassifications.CPU);
+        }
+
+        /// <summary>
+        /// This call returns the openness object of the TIA Portal project
+        /// </summary>
+        /// <param name="tiaProject">This object represents the TIA Portal Project in the Modular Application Creator context</param>
+        public static Siemens.Engineering.Project GetOpennessProject(Siemens.Automation.ModularApplicationCreator.Tia.Openness.Project tiaProject)
+        {
+            return (Siemens.Engineering.Project)tiaProject;
         }
     }
 }
