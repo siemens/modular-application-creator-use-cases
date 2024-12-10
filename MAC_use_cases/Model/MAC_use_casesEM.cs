@@ -8,6 +8,7 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using MAC_use_cases.Model.UseCases;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
+using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
 
 namespace MAC_use_cases.Model
 {
@@ -121,6 +122,7 @@ namespace MAC_use_cases.Model
 
                     myTO.ConfigureTO(myTO.TechnologicalObject, this);
 
+                    GeneralSupport.LogMessage(LogTypes.GenerationInfo, "Generate technology objects", this);
                     TechnologyObjectClass.CreateTOs(m_plcDevice, this);
 
                     IntegrateLibraries.CreateInstanceDB(this, this.ResourceManagement.MAC_use_casesFB, "CreatedDbFromMasterCopy", this.ResourceManagement.ModuleBlocksRootGroup);
