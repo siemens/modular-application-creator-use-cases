@@ -30,6 +30,8 @@ var NAVTREEINDEX0 =
 "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html#a196e9521a76bc297ab213ef7f1b53a12":[1,0,0,0,0,1,0],
 "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html#a4b1dcd0fee94bcf523825eddf1416d58":[1,0,0,0,0,1,1],
 "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html":[1,0,0,0,0,2],
+"class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a26744e8ae9a7e1ca4b4dd4156f480219":[1,0,0,0,0,2,1],
+"class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a3f2fea29eb28d484b25b0d1999eacf11":[1,0,0,0,0,2,2],
 "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a5e4a55f6f80ee7681d5ab544ea1075b1":[1,0,0,0,0,2,0],
 "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html":[1,0,0,0,0,3],
 "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a04bfdaf6684648c9f6f02aa8203c364d":[1,0,0,0,0,3,6],
