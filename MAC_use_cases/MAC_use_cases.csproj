@@ -81,6 +81,8 @@ where to where -->
   in MPFProj12\ProjectNode.cs, ProcessFiles.
   -->
   <ItemGroup>
+    <Compile Include="Model\CustomLibraryClasses\Lib_Screen_1.cs" />
+    <Compile Include="Model\CustomLibraryClasses\Lib_MAC_use_cases_custom.cs" />
     <Compile Include="Model\UseCases\CreateVariables.cs" />
     <Compile Include="Model\UseCases\GenericBlockCreation.cs" />
     <Compile Include="Model\UseCases\HardwareGeneration.cs" />
@@ -185,6 +187,8 @@ where to where -->
     <Content Include="Images\ConfigureTO.png" />
     <Content Include="Images\CreateFB.png" />
     <Content Include="Images\CreateInstanceDB.png" />
+    <Content Include="Images\CreateInstanceDB_via_XmlInstDB.png" />
+    <Content Include="Images\CreateScreenFromMastercopy.png" />
     <Content Include="Images\CreateTag.png" />
     <Content Include="Images\CreateTagTable.png" />
     <Content Include="Images\CreateTO.png" />
@@ -194,6 +198,8 @@ where to where -->
     <Content Include="Images\GenerateOB.png" />
     <Content Include="Images\GenerateS120.png" />
     <Content Include="Images\GenerateS210.png" />
+    <Content Include="Images\GetOrCreateHMI.png" />
+    <Content Include="Images\LogMessage.png" />
     <Content Include="Images\MultiInstanceFB.png" />
     <Content Include="Images\OpenLibrary.png" />
     <Content Include="Images\OpenTiares.png" />

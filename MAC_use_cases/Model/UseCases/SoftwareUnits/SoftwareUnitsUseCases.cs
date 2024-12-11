@@ -9,46 +9,22 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block;
 using Siemens.Automation.ModularApplicationCreator.Tia.Modules;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
+using System.Xml.Linq;
 
 namespace MAC_use_cases.Model.UseCases.SoftwareUnits
 {
     public class SoftwareUnitsUseCases
     {
-        public PlcDevice PlcDevice { get; set; }
-        public TiaEquipmentModule Module { get; set; }
-
-        public SoftwareUnitsUseCases(TiaEquipmentModule module, PlcDevice plcDevice)
-        {
-            Module = module;
-            PlcDevice = plcDevice;
-        }
-
-        /// <summary>
-        /// Get the safety software unit
-        /// </summary>
-        /// <returns></returns>
-        public ISafetySoftwareUnit GetSafetySoftwareUnit()
-        {
-            return PlcDevice.SoftwareUnits.GetSafetySoftwareUnit();
-        }
-
-        /// <summary>
-        /// get the software unit by name
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="module"></param>
-        /// <returns></returns>
-        public ISoftwareUnit GetSoftwareUnitByName(string name)
-        {
-            return PlcDevice.SoftwareUnits.GetOrCreateSoftwareUnit(name, Module);
-        }
-
         /// <summary>
         /// Example how to create a failsafe function block within a safety software unit
+        /// \image html CreateInstanceDB_via_XmlInstDB.png
         /// </summary>
-        public void CrateFailSafeFunctionBlock()
+        /// <param name="name">The name of the SoftwareUnit</param>
+        /// <param name="plcDevice">The plc device</param>
+        /// <param name="equipmentModule">The corresponding equipment module</param>
+        public static void CreateFailSafeFunctionBlock(string softwareUnitName, PlcDevice plcDevice, MAC_use_casesEM module)
         {
-            var safetySoftwareUnit = GetSafetySoftwareUnit();
+            var safetySoftwareUnit = plcDevice.SoftwareUnits.GetSafetySoftwareUnit();
 
             var interfaceName = "myParameter"; //TODO name of the parameter in the function block
             var interfaceType = "\"ToEdit\""; //TODO type of the parameter in the function block
@@ -61,17 +37,6 @@ namespace MAC_use_cases.Model.UseCases.SoftwareUnits
 
             //here an example how to create a multi instance call in the function block
 
-            var nameOfTheBlockFromTheLibrary = "BlockNameToCall"; //name of the block from the library
-
-            var blockCall = new MultiInstanceCall(interfaceName, nameOfTheBlockFromTheLibrary, safetySoftwareUnit)
-            {
-                //TODO connect in and outputs of the block
-            };
-
-            var network = new BlockNetwork();
-            network.Blocks.Add(blockCall);
-
-            failSafeFb.Networks.Add(network);
             failSafeFb.GenerateXmlBlock(safetySoftwareUnit);
         }
 

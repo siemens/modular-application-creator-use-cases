@@ -7,6 +7,7 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Modules;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using MAC_use_cases.Model.UseCases;
+using MAC_use_cases.Model.UseCases.SoftwareUnits;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
 using Siemens.Automation.ModularApplicationCreator.Core;
@@ -148,6 +149,9 @@ namespace MAC_use_cases.Model
                     var myTagTable = CreateVariables.CreateTagTable(m_plcDevice, "myTagTable");
 
                     CreateVariables.CreateTagInTagTable(myTagTable, "%I", "187", "0", "myTag", "Bool", "myTagComment");
+
+                    var hmiSoftware = HardwareGeneration.GetOrCreateHMISoftware(opennessTIAPortalProject, "HMI_1");
+                    IntegrateLibraries.GenerateScreenFromMastercopy(hmiSoftware, ResourceManagement.Lib_MAC_use_cases.Lib_Screen_1);
 
                     provider.CollectAttributes(Attributes);
                     provider.WriteValues(m_plcDevice);

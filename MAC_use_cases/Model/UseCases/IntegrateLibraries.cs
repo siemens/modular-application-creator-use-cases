@@ -1,5 +1,7 @@
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
+using Siemens.Engineering.Hmi;
+using Siemens.Engineering.Library.MasterCopies;
 
 namespace MAC_use_cases.Model.UseCases
 {
@@ -34,6 +36,17 @@ namespace MAC_use_cases.Model.UseCases
         {
             XmlInstDB instance_DB_of_MAC_use_casesFB = new XmlInstDB(instanceName, masterCopy.Name);
             instance_DB_of_MAC_use_casesFB.GenerateXmlBlock(m_plcDevice, target.Blocks);
+        }
+
+        /// <summary>
+        /// This function creates the screen from a Mastercopy
+        /// \image html GenerateScreenFromMastercopy.png
+        /// </summary>
+        /// <param name="hmiSoftware">The openness object of the HMI software</param>
+        /// <param name="screen">A master copy of the screen you want to create</param>
+        public static void GenerateScreenFromMastercopy(HmiTarget hmiSoftware, LibraryMasterCopy screen)
+        {
+            hmiSoftware.ScreenFolder.Screens.CreateFrom((MasterCopy)screen);
         }
     }
 }

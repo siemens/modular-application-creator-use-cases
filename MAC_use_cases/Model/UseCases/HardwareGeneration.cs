@@ -1,7 +1,10 @@
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.TypeIdentifier;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.TypeIdentifier.Enums;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness.DO;
+using Siemens.Engineering.Hmi;
+using Siemens.Engineering.HW.Features;
 using System.Linq;
+using Siemens.Engineering;
 
 namespace MAC_use_cases.Model.UseCases
 {
@@ -64,6 +67,23 @@ namespace MAC_use_cases.Model.UseCases
 
                 module.SynchronizedCollection.HardwareInterfaces.Add(info);
             }
+        }
+
+        /// <summary>
+        /// This call returns the openness object of an HMI with the desired name. If it exists, it will be returned. If not, it will create a new one.
+        /// \image html GetOrCreateHMI.png
+        /// </summary>
+        /// <param name="project">This object is the openness object of the TIA Portal project</param>
+        /// <param name="name">Thats the desired name of the HMI Device</param>
+        public static HmiTarget GetOrCreateHMISoftware(Project project, string name)
+        {
+            var hmiDevice = project.Devices.FirstOrDefault(x => x.Name == name);
+            if (hmiDevice == null)
+            {
+                hmiDevice = project.Devices.CreateWithItem("OrderNumber:6AV2 125-2JB23-0AX0/17.0.0.0", name, name);
+            }
+            var hmiSoftwareContainer = hmiDevice.DeviceItems.FirstOrDefault(x => x.Name.Contains("HMI_RT")).GetService<SoftwareContainer>();
+            return hmiSoftwareContainer.Software as HmiTarget;
         }
     }
 }
