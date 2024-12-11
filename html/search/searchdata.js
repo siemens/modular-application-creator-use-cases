@@ -1,11 +1,11 @@
 var indexSectionsWithContent =
 {
   0: "_abcdfghilmnopstv",
-  1: "bcghimnst",
+  1: "bcghilmnst",
   2: "m",
   3: "abcgilmnst",
   4: "_dmnptv",
-  5: "mnst",
+  5: "lmnst",
   6: "o"
 };
 

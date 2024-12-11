@@ -11,6 +11,10 @@ var hierarchy =
       ] ],
       [ "MAC_use_cases.Model.BaseMAC_use_casesEM", "class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html", null ]
     ] ],
+    [ "MAC_use_cases.Lib_MAC_use_cases", "class_m_a_c__use__cases_1_1_lib___m_a_c__use__cases.html", null ],
+    [ "LibraryMasterCopy", null, [
+      [ "MAC_use_cases.Lib_Screen_1", "class_m_a_c__use__cases_1_1_lib___screen__1.html", null ]
+    ] ],
     [ "MAC_use_cases.Model.UseCases.ModelToSerialize", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html", null ],
     [ "MAC_use_cases.Model.UseCases.NonTIAProjectBased", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html", null ],
     [ "MAC_use_cases.Model.UseCases.SoftwareUnits.SafetyUnit.SoftwareUnitsUseCases", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html", null ],

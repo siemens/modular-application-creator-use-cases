@@ -121,7 +121,7 @@ Static Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This are functions that support you in different ways while using Modular Application Creator. </p>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00011">11</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00016">16</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5e4a55f6f80ee7681d5ab544ea1075b1" name="a5e4a55f6f80ee7681d5ab544ea1075b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5e4a55f6f80ee7681d5ab544ea1075b1">&#9670;&#160;</a></span>LogMessage()</h2>
@@ -156,6 +156,9 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This call generates a log message while generating a project. </p>
+<div class="image">
+<img src="LogMessage.png" alt=""/>
+</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">logType</td><td>Defines the type of the message (Info, Warning, GenerationError, GenerationInfo, ...)</td></tr>
@@ -165,10 +168,10 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00019">19</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   20</span>        {</div>
-<div class="line"><span class="lineno">   21</span>            MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);</div>
-<div class="line"><span class="lineno">   22</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00025">25</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   26</span>        {</div>
+<div class="line"><span class="lineno">   27</span>            MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);</div>
+<div class="line"><span class="lineno">   28</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -204,11 +207,11 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <p>The object tiaTemplateContext.TiaDevice gets castet to an openness object of an device. Because of that, its now posssible to navigate threw the openness objects</p>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00028">28</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   29</span>        {</div>
-<div class="line"><span class="lineno">   34</span>            var opennesDevice = (Siemens.Engineering.HW.Device)device;</div>
-<div class="line"><span class="lineno">   35</span>            <span class="keywordflow">return</span> opennesDevice.DeviceItems.FirstOrDefault(x =&gt; x.Classification == DeviceItemClassifications.CPU);</div>
-<div class="line"><span class="lineno">   36</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00034">34</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>        {</div>
+<div class="line"><span class="lineno">   40</span>            var opennesDevice = (Siemens.Engineering.HW.Device)device;</div>
+<div class="line"><span class="lineno">   41</span>            <span class="keywordflow">return</span> opennesDevice.DeviceItems.FirstOrDefault(x =&gt; x.Classification == DeviceItemClassifications.CPU);</div>
+<div class="line"><span class="lineno">   42</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -243,10 +246,10 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00042">42</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   43</span>        {</div>
-<div class="line"><span class="lineno">   44</span>            <span class="keywordflow">return</span> (Siemens.Engineering.Project)tiaProject;</div>
-<div class="line"><span class="lineno">   45</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00048">48</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>        {</div>
+<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">return</span> (Siemens.Engineering.Project)tiaProject;</div>
+<div class="line"><span class="lineno">   51</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>

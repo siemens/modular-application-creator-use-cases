@@ -20,6 +20,8 @@ var annotated_dup =
         ] ],
         [ "BaseMAC_use_casesEM", "class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html", "class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m" ],
         [ "MAC_use_casesEM", "class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html", "class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m" ]
-      ] ]
+      ] ],
+      [ "Lib_MAC_use_cases", "class_m_a_c__use__cases_1_1_lib___m_a_c__use__cases.html", "class_m_a_c__use__cases_1_1_lib___m_a_c__use__cases" ],
+      [ "Lib_Screen_1", "class_m_a_c__use__cases_1_1_lib___screen__1.html", null ]
     ] ]
 ];
