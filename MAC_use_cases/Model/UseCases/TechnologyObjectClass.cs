@@ -12,7 +12,7 @@ namespace MAC_use_cases.Model.UseCases
         /// <summary>
         /// This attribute is the used MotionControlVersion
         /// </summary>
-        public const string MotionControlVersion = "7.0";
+        public const string MotionControlVersion = "8.0";
 
         /// <summary>
         /// This attribute is the used MainTelegramNumber
