@@ -40,7 +40,7 @@ namespace MAC_use_cases.Model.UseCases
 
         /// <summary>
         /// This function creates the screen from a Mastercopy
-        /// \image html GenerateScreenFromMastercopy.png
+        /// \image html CreateScreenFromMastercopy.png
         /// </summary>
         /// <param name="hmiSoftware">The openness object of the HMI software</param>
         /// <param name="screen">A master copy of the screen you want to create</param>

@@ -11,6 +11,7 @@ using MAC_use_cases.Model.UseCases.SoftwareUnits;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
 using Siemens.Automation.ModularApplicationCreator.Core;
+using Siemens.Automation.ModularApplicationCreator.Tia.Openness.DO;
 
 namespace MAC_use_cases.Model
 {
@@ -113,9 +114,13 @@ namespace MAC_use_cases.Model
                 case TiaGenerationPhases.Init:
 
                     //Hardware config has to be in the Init phase. Otherwise it can't be used in the MAC.
-                    HardwareGeneration.GenerateS120(this, "S120MACTest", "S120DeviceTest", "this drive is generated with MAC");
+                    var s120 = HardwareGeneration.GenerateS120(this, "S120MACTest", "S120DeviceTest", "this drive is generated with MAC");
 
-                    HardwareGeneration.GenerateS210(this, "S210MACTest", "S210DeviceTest", "this drive is generated with MAC");
+                    var s210 = HardwareGeneration.GenerateS210(this, "S210MACTest", "S210DeviceTest", "this drive is generated with MAC");
+                    var subnet1 = HardwareGeneration.GetOrCreateSubnet(SubnetsManager, "NewSubnet1");
+
+                    HardwareGeneration.ConnectDriveToSubnet(s120, subnet1, this);
+                    HardwareGeneration.ConnectDriveToSubnet(s210, subnet1, this);
 
                     break;
                 case TiaGenerationPhases.Build:
