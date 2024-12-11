@@ -4,6 +4,7 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Openness.DO;
 using Siemens.Engineering.Hmi;
 using Siemens.Engineering.HW.Features;
 using System.Linq;
+using Siemens.Automation.ModularApplicationCreator.MacPublishedObjects.Subnet;
 using Siemens.Engineering;
 
 namespace MAC_use_cases.Model.UseCases
@@ -22,7 +23,7 @@ namespace MAC_use_cases.Model.UseCases
         /// <param name="deviceName">The name of the device</param>
         /// <param name="path">Path if necessary</param>
         /// <param name="comment">Comment if necessary</param>
-        public static void GenerateS120(MAC_use_casesEM module, string name, string deviceName,
+        public static S120PNDriveInfo GenerateS120(MAC_use_casesEM module, string name, string deviceName,
             string path = null, string comment = null)
         {
             if (!module.SynchronizedCollection.HardwareInterfaces.OfType<ProfiDriveObjectInfo>()
@@ -40,7 +41,11 @@ namespace MAC_use_cases.Model.UseCases
                 info.GetAxis("SingleAxis").PlcName = module.ParentDevice.Name;
 
                 module.SynchronizedCollection.HardwareInterfaces.Add(info);
+
+                return info;
             }
+
+            return null;
         }
 
         /// <summary>
@@ -52,7 +57,7 @@ namespace MAC_use_cases.Model.UseCases
         /// <param name="deviceName">The name of the device</param>
         /// <param name="path">Path if necessary</param>
         /// <param name="comment">Comment if necessary</param>
-        public static void GenerateS210(MAC_use_casesEM module, string name, string deviceName,
+        public static S210DriveInfo GenerateS210(MAC_use_casesEM module, string name, string deviceName,
             string path = null, string comment = null)
         {
             if (!module.SynchronizedCollection.HardwareInterfaces.OfType<ProfiDriveObjectInfo>()
@@ -66,7 +71,10 @@ namespace MAC_use_cases.Model.UseCases
                 info.PlcName = module.ParentDevice.Name;
 
                 module.SynchronizedCollection.HardwareInterfaces.Add(info);
+
+                return info;
             }
+            return null;
         }
 
         /// <summary>
@@ -84,6 +92,51 @@ namespace MAC_use_cases.Model.UseCases
             }
             var hmiSoftwareContainer = hmiDevice.DeviceItems.FirstOrDefault(x => x.Name.Contains("HMI_RT")).GetService<SoftwareContainer>();
             return hmiSoftwareContainer.Software as HmiTarget;
+        }
+
+        /// <summary>
+        /// Gets or creates a subnet with the desired name
+        /// \image html GetOrCreateSubnet.png
+        /// </summary>
+        /// <param name="subnetsManager">The Modular Application Creator helper object</param>
+        /// <param name="name">The name of the subnet</param>
+        public static ISubnetInfo GetOrCreateSubnet(ISubnetsManager subnetsManager, string name)
+        {
+            return subnetsManager.GetOrCreateProfinet(name);
+        }
+
+        /// <summary>
+        /// Connectes the desired drive to the desired subnet
+        /// \image html ConnectDriveToSubnet.png
+        /// </summary>
+        /// <param name="drive">The desired drive</param>
+        /// <param name="subnet">The desired subnet</param>
+        /// <param name="module">The module</param>
+        public static void ConnectDriveToSubnet(ProfiDriveObjectInfo drive, ISubnetInfo subnet, MAC_use_casesEM module)
+        {
+            var device = module.SynchronizedCollection.HardwareInterfaces.OfType<ProfiDriveObjectInfo>().FirstOrDefault(x => x.Name.Equals(drive.Name));
+
+            var plcNwItf = module.ParentDeviceAsHardwareInfo.ControllerProfinetInterfaces.First();
+            plcNwItf.ConnectedSubnetInfo = subnet;
+
+            if (device.GetType() == typeof(S120PNDriveInfo))
+            {
+                (device as S120PNDriveInfo).ProfinetInterface.ConnectedSubnetInfo = subnet;
+                var ioSystem = plcNwItf.ConnectedSubnetInfo.GetOrCreateIoSystem(plcNwItf, "NewIoSystem");
+                ioSystem.ConnectIoDevice((device as S120PNDriveInfo).ProfinetInterface.IoConnectors.First().Value);
+
+                plcNwItf.Ports.First().Connect((device as S120PNDriveInfo).ProfinetInterface.Ports.First());
+            }
+            if (device.GetType() == typeof(S210DriveInfo))
+            {
+                (device as S210DriveInfo).ProfinetInterface.ConnectedSubnetInfo = subnet;
+                var ioSystem = plcNwItf.ConnectedSubnetInfo.GetOrCreateIoSystem(plcNwItf, "NewIoSystem");
+                ioSystem.ConnectIoDevice((device as S210DriveInfo).ProfinetInterface.IoConnectors.First().Value);
+
+                plcNwItf.Ports.First().Connect((device as S210DriveInfo).ProfinetInterface.Ports.First());
+            }
+
+
         }
     }
 }
