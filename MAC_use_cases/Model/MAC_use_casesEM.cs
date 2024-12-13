@@ -117,7 +117,7 @@ namespace MAC_use_cases.Model
                     var s120 = HardwareGeneration.GenerateS120(this, "S120MACTest", "S120DeviceTest", "this drive is generated with MAC");
 
                     var s210 = HardwareGeneration.GenerateS210(this, "S210MACTest", "S210DeviceTest", "this drive is generated with MAC");
-                    var subnet1 = HardwareGeneration.GetOrCreateSubnet(SubnetsManager, "NewSubnet1");
+                    var subnet1 = HardwareGeneration.GetOrCreateSubnet(SubnetsManager, "PN/IE_1");
 
                     HardwareGeneration.ConnectDriveToSubnet(s120, subnet1, this);
                     HardwareGeneration.ConnectDriveToSubnet(s210, subnet1, this);

@@ -119,20 +119,18 @@ namespace MAC_use_cases.Model.UseCases
             var plcNwItf = module.ParentDeviceAsHardwareInfo.ControllerProfinetInterfaces.First();
             plcNwItf.ConnectedSubnetInfo = subnet;
 
+            var ioSystem = plcNwItf.ConnectedSubnetInfo.GetOrCreateIoSystem(plcNwItf, "PROFINET IO-System");
+
             if (device.GetType() == typeof(S120PNDriveInfo))
             {
                 (device as S120PNDriveInfo).ProfinetInterface.ConnectedSubnetInfo = subnet;
-                var ioSystem = plcNwItf.ConnectedSubnetInfo.GetOrCreateIoSystem(plcNwItf, "NewIoSystem");
                 ioSystem.ConnectIoDevice((device as S120PNDriveInfo).ProfinetInterface.IoConnectors.First().Value);
-
                 plcNwItf.Ports.First().Connect((device as S120PNDriveInfo).ProfinetInterface.Ports.First());
             }
             if (device.GetType() == typeof(S210DriveInfo))
             {
                 (device as S210DriveInfo).ProfinetInterface.ConnectedSubnetInfo = subnet;
-                var ioSystem = plcNwItf.ConnectedSubnetInfo.GetOrCreateIoSystem(plcNwItf, "NewIoSystem");
                 ioSystem.ConnectIoDevice((device as S210DriveInfo).ProfinetInterface.IoConnectors.First().Value);
-
                 plcNwItf.Ports.First().Connect((device as S210DriveInfo).ProfinetInterface.Ports.First());
             }
 
