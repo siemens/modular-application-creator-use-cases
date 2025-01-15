@@ -7,8 +7,8 @@ This repository demonstrates how to use the comfort functions of the Modular App
 We just updated our [Modular Application Creator Use Case Based Documentation](https://siemens.github.io/modular-application-creator-use-cases/html/index.html).
 
 ## Prerequisites
-- TIA-Portal 19 installed on Windows PC
-- Download the [Modular Application Creator 19.1](https://support.industry.siemens.com/cs/de/en/view/109762852)
+- TIA-Portal installed on Windows PC
+- Download the same major version of the [Modular Application Creator](https://support.industry.siemens.com/cs/de/en/view/109762852)
 - Microsoft Visual Studio with [Modular Application Creator Module Builder](https://support.industry.siemens.com/cs/de/en/view/109762852) installed
 
 ## First steps
