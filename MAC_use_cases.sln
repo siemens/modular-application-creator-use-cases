@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAC_use_cases", "MAC_use_cases\MAC_use_cases.csproj", "{095C4C93-44FA-4E9A-A2A5-E9D015355826}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAC_use_cases.Tests", "MAC_use_cases.Tests\MAC_use_cases.Tests.csproj", "{4C3974F2-4EFF-4168-A68E-EC9E5CACCDA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{095C4C93-44FA-4E9A-A2A5-E9D015355826}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{095C4C93-44FA-4E9A-A2A5-E9D015355826}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{095C4C93-44FA-4E9A-A2A5-E9D015355826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C3974F2-4EFF-4168-A68E-EC9E5CACCDA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C3974F2-4EFF-4168-A68E-EC9E5CACCDA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C3974F2-4EFF-4168-A68E-EC9E5CACCDA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C3974F2-4EFF-4168-A68E-EC9E5CACCDA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
