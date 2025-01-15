@@ -48,5 +48,5 @@ var NAVTREEINDEX =
 "_base_m_a_c__use__cases_e_m_8cs_source.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
