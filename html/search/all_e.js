@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['safetyfb_0',['SafetyFb',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#ac42b9dd55104bf666cac8a1a5e3e3f9f',1,'MAC_use_cases::Model::MAC_use_casesEM']]],
-  ['setdefaultvalue_1',['SetDefaultValue',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a31997b7cf0dfa6f6e5249e3135cee7aa',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
-  ['softwareunitsusecases_2',['SoftwareUnitsUseCases',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html',1,'MAC_use_cases.Model.UseCases.SoftwareUnits.SafetyUnit.SoftwareUnitsUseCases'],['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_software_units_use_cases.html',1,'MAC_use_cases.Model.UseCases.SoftwareUnits.SoftwareUnitsUseCases']]],
-  ['stringofallnames_3',['StringOfAllNames',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html#a179b471e98607edaf83784b3a3bc8ba4',1,'MAC_use_cases::Model::UseCases::NonTIAProjectBased']]]
+  ['technologicalobject_0',['TechnologicalObject',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#a82970cf92f68c4c1e13e1d1872f53899',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
+  ['technologyobjectclass_1',['TechnologyObjectClass',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html',1,'MAC_use_cases.Model.UseCases.TechnologyObjectClass'],['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#abf7bb89b946ff41183f2a539c6447be3',1,'MAC_use_cases.Model.UseCases.TechnologyObjectClass.TechnologyObjectClass(MAC_use_casesEM myModule)'],['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#a725a28965b914fac7344d09b7b1617f0',1,'MAC_use_cases.Model.UseCases.TechnologyObjectClass.TechnologyObjectClass()']]],
+  ['totype_2',['TOType',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#a5b56ad180aacb6edf3c23cac17211522',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]]
 ];
