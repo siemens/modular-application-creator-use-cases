@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using MAC_use_cases.TiaImports;
@@ -17,53 +18,56 @@ namespace MAC_use_cases.Model.UseCases
     public class GenericBlockCreation
     {
         /// <summary>
-        ///     This is the name of the generated DB
-        /// </summary>
-        public static string dbName = "myDB";
-
-        /// <summary>
         ///     This is the name of the generated parameter
         /// </summary>
-        public static string parameterName = "myParameterName";
+        public static string ParameterName = "myParameterName";
 
         /// <summary>
-        ///     This is the name of the generated datatype
-        /// </summary>
-        public static string dataType = "myDataType";
-
-        /// <summary>
-        ///     This function creates a FB in the target plc (folder under program blocks). Additional titles or comments can be
+        ///     This function creates a FB in the target plc (folder under program blocks) with the selected programming language.
+        ///     Additional titles or comments can be
         ///     added here too.
         ///     \image html CreateFB.png
         /// </summary>
         /// <param name="blockName">The desired name</param>
         /// <param name="instanceDbName">Name of the instanceDB</param>
+        /// <param name="programmingLanguage">The programming language used for the FB</param>
         /// <param name="plcDevice">The Plc in which it should be created</param>
-        public static void CreateFB(string blockName, string instanceDbName, PlcDevice plcDevice)
+        public static void CreateFB(string blockName, string instanceDbName, ProgrammingLanguage programmingLanguage,
+            PlcDevice plcDevice)
         {
-            var myFB = new XmlFB(blockName);
+            var myFbCall = new BlockCall(instanceDbName, plcDevice) { ["Input1"] = "1", ["Input2"] = "0" };
 
-            var myFBCall = new BlockCall(instanceDbName, plcDevice)
+            var myFbBlockNetwork = new BlockNetwork
             {
-                ["Input1"] = "1", // inputVariable1
-                ["Input2"] = "0" // inputVariable1
-                //["Input2"] = "inputVariable1", 
-
-                //["Output1"] = "outputVariable1", 
+                NetworkTitles =
+                {
+                    [TypeMapper.BaseCulture.Name] = "myFB Network Title" // If necessary
+                }
             };
 
-            var myFbBlockNetwork = new BlockNetwork();
-
-            myFbBlockNetwork.NetworkTitles[TypeMapper.BaseCulture.Name] = "myFB Network Title"; // If necessary
-
-            myFbBlockNetwork.Blocks.Add(myFBCall);
-            myFB.Networks.Add(myFbBlockNetwork);
-            myFB.BlockAttributes.ProgrammingLanguage = ProgrammingLanguage.FBD;
-
-            myFB.BlockComments[TypeMapper.BaseCulture.Name] = "myFB Block Comment"; // If necessary
-            myFB.BlockTitles[TypeMapper.BaseCulture.Name] = "myFB Block Title"; // If necessary
-
-            myFB.GenerateXmlBlock(plcDevice);
+            myFbBlockNetwork.Blocks.Add(myFbCall);
+            var myFb = new XmlFB(blockName);
+            myFb.Networks.Add(myFbBlockNetwork);
+            myFb.BlockAttributes.ProgrammingLanguage = programmingLanguage;
+            myFb.BlockComments[TypeMapper.BaseCulture.Name] = "myFB Block Comment"; // If necessary
+            myFb.BlockTitles[TypeMapper.BaseCulture.Name] = "myFB Block Title"; // If necessary
+            switch (programmingLanguage)
+            {
+                case ProgrammingLanguage.LAD:
+                case ProgrammingLanguage.FBD:
+                case ProgrammingLanguage.DB:
+                case ProgrammingLanguage.UNDEFINED:
+                case ProgrammingLanguage.F_LAD:
+                case ProgrammingLanguage.F_FBD:
+                case ProgrammingLanguage.F_DB:
+                    myFb.GenerateXmlBlock(plcDevice);
+                    break;
+                case ProgrammingLanguage.SCL:
+                    myFb.GenerateSclBlock(plcDevice);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(programmingLanguage), programmingLanguage, null);
+            }
         }
 
 
@@ -72,6 +76,7 @@ namespace MAC_use_cases.Model.UseCases
         ///     interface can have a standard data types or a data type defined in the project.
         ///     \image html GenerateDB.png
         /// </summary>
+        /// <param name="dbName"></param>
         /// <param name="plcDevice">The PLC on which the equipment module is implemented</param>
         /// <param name="module">The corresponding equipment module</param>
         public static void GenerateDB(string dbName, PlcDevice plcDevice, MAC_use_casesEM module)
@@ -80,7 +85,7 @@ namespace MAC_use_cases.Model.UseCases
             var itf = axesDataDB.Interface[InterfaceSections.Static];
 
             //Create new parameters. The custom parameter means you are using your own user defined data type.
-            var standardParam = new InterfaceParameter(parameterName, "Int");
+            var standardParam = new InterfaceParameter(ParameterName, "Int");
             var customParam1 = new InterfaceParameter("var_struct", "Struct");
             customParam1.SubParameter.Add(new InterfaceParameter("Var1", "Bool"));
             customParam1.SubParameter.Add(new InterfaceParameter("Var2", "Int"));
