@@ -1,37 +1,40 @@
-using Siemens.Automation.ModularApplicationCreator.Tia;
+using System.IO;
+using System.Linq;
+using MAC_use_cases.TiaImports;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
-using System.IO;
-using MAC_use_cases.TiaImports;
-using ProgrammingLanguage = Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.ProgrammingLanguage;
-using System.Linq;
+using ProgrammingLanguage =
+    Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.ProgrammingLanguage;
 
 namespace MAC_use_cases.Model.UseCases
 {
     /// <summary>
-    /// All the functions to configure and generate Blocks are defined here.
+    ///     All the functions to configure and generate Blocks are defined here.
     /// </summary>
     public class GenericBlockCreation
     {
         /// <summary>
-        /// This is the name of the generated DB 
+        ///     This is the name of the generated DB
         /// </summary>
         public static string dbName = "myDB";
+
         /// <summary>
-        /// This is the name of the generated parameter
+        ///     This is the name of the generated parameter
         /// </summary>
         public static string parameterName = "myParameterName";
+
         /// <summary>
-        /// This is the name of the generated datatype
+        ///     This is the name of the generated datatype
         /// </summary>
         public static string dataType = "myDataType";
 
         /// <summary>
-        /// This function creates a FB in the target plc (folder under program blocks). Additional titles or comments can be added here too.
-        /// \image html CreateFB.png
+        ///     This function creates a FB in the target plc (folder under program blocks). Additional titles or comments can be
+        ///     added here too.
+        ///     \image html CreateFB.png
         /// </summary>
         /// <param name="blockName">The desired name</param>
         /// <param name="instanceDbName">Name of the instanceDB</param>
@@ -40,16 +43,16 @@ namespace MAC_use_cases.Model.UseCases
         {
             var myFB = new XmlFB(blockName);
 
-            BlockCall myFBCall = new BlockCall(instanceDbName, plcDevice)
+            var myFBCall = new BlockCall(instanceDbName, plcDevice)
             {
                 ["Input1"] = "1", // inputVariable1
-                ["Input2"] = "0", // inputVariable1
+                ["Input2"] = "0" // inputVariable1
                 //["Input2"] = "inputVariable1", 
 
                 //["Output1"] = "outputVariable1", 
             };
 
-            BlockNetwork myFbBlockNetwork = new BlockNetwork();
+            var myFbBlockNetwork = new BlockNetwork();
 
             myFbBlockNetwork.NetworkTitles[TypeMapper.BaseCulture.Name] = "myFB Network Title"; // If necessary
 
@@ -58,15 +61,16 @@ namespace MAC_use_cases.Model.UseCases
             myFB.BlockAttributes.ProgrammingLanguage = ProgrammingLanguage.FBD;
 
             myFB.BlockComments[TypeMapper.BaseCulture.Name] = "myFB Block Comment"; // If necessary
-            myFB.BlockTitles[TypeMapper.BaseCulture.Name] = "myFB Block Title";     // If necessary
+            myFB.BlockTitles[TypeMapper.BaseCulture.Name] = "myFB Block Title"; // If necessary
 
             myFB.GenerateXmlBlock(plcDevice);
         }
 
 
         /// <summary>
-        /// This function creates a Data Block with interface (sub-)parameters in a desired folder. The variables in the interface can have a standard data types or a data type defined in the project.
-        /// \image html GenerateDB.png
+        ///     This function creates a Data Block with interface (sub-)parameters in a desired folder. The variables in the
+        ///     interface can have a standard data types or a data type defined in the project.
+        ///     \image html GenerateDB.png
         /// </summary>
         /// <param name="plcDevice">The PLC on which the equipment module is implemented</param>
         /// <param name="module">The corresponding equipment module</param>
@@ -91,20 +95,18 @@ namespace MAC_use_cases.Model.UseCases
         }
 
         /// <summary>
-        /// This function creates a Block on the targetDevice in the targetContainer (folder under program blocks)
+        ///     This function creates a Block on the targetDevice in the targetContainer (folder under program blocks)
         /// </summary>
         /// <param name="code">The Block code as .scl or .xml </param>
         /// <param name="targetDevice">The PLC on which the equipment module is implemented</param>
         /// <param name="targetContainer">The corresponding equipment module</param>
         /// <param name="isScl">true: code string represents a scl block</param>
-        private static void GenerateBlock(string code, PlcDevice targetDevice, ITarget targetContainer = null, bool isScl = true)
+        private static void GenerateBlock(string code, PlcDevice targetDevice, ITarget targetContainer = null,
+            bool isScl = true)
         {
             //Get the right file extension depending on the block language
-            string extension = ".scl";
-            if (!isScl)
-            {
-                extension = ".xml";
-            }
+            var extension = ".scl";
+            if (!isScl) extension = ".xml";
             //Create a temporary file
             var filePath = Path.ChangeExtension(Path.GetTempFileName(), extension);
 
@@ -119,37 +121,38 @@ namespace MAC_use_cases.Model.UseCases
         }
 
         /// <summary>
-        /// This function sets the default value of a parameter in a DB
-        /// \image html SetDefaultValue.png
+        ///     This function sets the default value of a parameter in a DB
+        ///     \image html SetDefaultValue.png
         /// </summary>
         /// <param name="dbName">The DB in which the value should be set</param>
         /// <param name="parameterName">The name of the parameter</param>
         /// <param name="dataType">DataType of the parameter</param>
         /// <param name="value">Value that should be set</param>
         /// <param name="parent">The module</param>
-        public static void SetDefaultValue(string dbName, string parameterName, TIATYPE dataType, string value, MAC_use_casesEM parent)
+        public static void SetDefaultValue(string dbName, string parameterName, TIATYPE dataType, string value,
+            MAC_use_casesEM parent)
         {
-            TiaAttribute myParameterNameAttribute = TiaAttributeProvider.CreateAttribute(dataType, SOURCETYPE.BLOCKVAR,
+            var myParameterNameAttribute = TiaAttributeProvider.CreateAttribute(dataType, SOURCETYPE.BLOCKVAR,
                 dbName, parameterName, parent);
             myParameterNameAttribute.Value = value;
         }
 
         /// <summary>
-        /// This function creates an multiInstanceFB
-        /// \image html MultiInstanceFB.png
+        ///     This function creates an multiInstanceFB
+        ///     \image html MultiInstanceFB.png
         /// </summary>
         /// <param name="plcDevice">The plcDevice</param>
-        /// <param name="tiaTemplateContext">The tiaTemplateContext</param>
+        /// <param name="languageSettings">The tiaTemplateContext language key</param>
         /// <param name="module">The Module</param>
-        public static void GenerateMultiInstanceFB(PlcDevice plcDevice, string languagesettings, MAC_use_casesEM module)
+        public static void GenerateMultiInstanceFB(PlcDevice plcDevice, string languageSettings, MAC_use_casesEM module)
         {
-            var MyFB = new XmlFB("MyMultiInstanceFB");
-            MyFB.BlockAttributes.ProgrammingLanguage = ProgrammingLanguage.LAD;
+            var myFb = new XmlFB("MyMultiInstanceFB");
+            myFb.BlockAttributes.ProgrammingLanguage = ProgrammingLanguage.LAD;
 
-            MultiInstanceCall myMultiInstanceFBCall = new MultiInstanceCall("MyMultiInstanceDbName", "MAC_use_casesFB", plcDevice)
+            var myMultiInstanceFBCall = new MultiInstanceCall("MyMultiInstanceDbName", "MAC_use_casesFB", plcDevice)
             {
                 ["Input1"] = "1", // inputVariable1
-                ["Input2"] = "0", // inputVariable1
+                ["Input2"] = "0" // inputVariable1
                 //["Input2"] = "inputVariable1", 
 
                 //["Output1"] = "outputVariable1", 
@@ -157,58 +160,65 @@ namespace MAC_use_cases.Model.UseCases
 
             //manipulate interface
             //var axesDataDB = new XmlFB (dbName);
-            var itf = MyFB.Interface[InterfaceSections.Static];
+            var itf = myFb.Interface[InterfaceSections.Static];
 
             //Define two interface parameters
             InterfaceParameter customParam;
 
             //Create new parameters. The custom parameter means you are using your own user defined data type.
 
-            customParam = new InterfaceParameter("MyMultiInstanceDbName", "\"" + "MAC_use_casesFB" + "\"") { Remanence = RemanenceSettings.IgnoreRemanence };
+            customParam =
+                new InterfaceParameter("MyMultiInstanceDbName", "\"" + "MAC_use_casesFB" + "\"")
+                {
+                    Remanence = RemanenceSettings.IgnoreRemanence
+                };
 
             //Add your parameters 
             itf.Add(customParam);
 
-            BlockNetwork Network_Multiinstance = new BlockNetwork();
-            Network_Multiinstance.Blocks.Add(myMultiInstanceFBCall);
-            Network_Multiinstance.GenerationLabel = new GenerationLabel(module.Name, "Generated by MAC2", module.ModuleID.ToString());
-            MyFB.Networks.Add(Network_Multiinstance);
-            AddCodeBlockToOB(MyFB, module.ResourceManagement,languagesettings, plcDevice);
+            var networkMultiInstance = new BlockNetwork();
+            networkMultiInstance.Blocks.Add(myMultiInstanceFBCall);
+            networkMultiInstance.GenerationLabel =
+                new GenerationLabel(module.Name, "Generated by MAC2", module.ModuleID.ToString());
+            myFb.Networks.Add(networkMultiInstance);
+            AddCodeBlockToOB(myFb, module.ResourceManagement, languageSettings, plcDevice);
         }
 
         /// <summary>
-        /// This function generates an OB and creates an block call in FBD and SCL
-        /// \image html GenerateOB.png
+        ///     This function generates an OB and creates a block call in FBD and SCL
+        ///     \image html GenerateOB.png
         /// </summary>
         /// <param name="instanceDbName">The name of the generated OB</param>
         /// <param name="module">The Module</param>
-        /// <param name="tiaTemplateContext">The tiaTemplateContext</param>
+        /// <param name="languageSettings">The tiaTemplateContext language key</param>
         /// <param name="plcDevice">The plcDevice</param>
-        public static void GenerateOB_Main(string instanceDbName, MAC_use_casesEM module, string languagesettings, PlcDevice plcDevice)
+        public static void GenerateOB_Main(string instanceDbName, MAC_use_casesEM module, string languageSettings,
+            PlcDevice plcDevice)
         {
-            var Main = new XmlOB("Main");
-            Main.BlockAttributes.ProgrammingLanguage = ProgrammingLanguage.LAD;
-            ((OB_BlockAttributes)Main.BlockAttributes).BlockSecondaryType = "ProgramCycle";
+            var mainOb = new XmlOB("Main");
+            mainOb.BlockAttributes.ProgrammingLanguage = ProgrammingLanguage.LAD;
+            ((OB_BlockAttributes)mainOb.BlockAttributes).BlockSecondaryType = "ProgramCycle";
 
-            var itf = Main.Interface[InterfaceSections.Temp];
-            var temp    = new InterfaceParameter("Temp", "Bool");
-            var tempint = new InterfaceParameter("TempInt", "Int");
+            var itf = mainOb.Interface[InterfaceSections.Temp];
+            var temp = new InterfaceParameter("Temp", "Bool");
+            var tempInt = new InterfaceParameter("TempInt", "Int");
             itf.Add(temp);
-            itf.Add(tempint);
+            itf.Add(tempInt);
 
             //create block call of instance DB 
-            BlockCall myFBCall = new BlockCall(instanceDbName, plcDevice)
+            var myFBCall = new BlockCall(instanceDbName, plcDevice)
             {
                 ["Input1"] = "#Temp", // inputVariable1
-                ["Input2"] = "0", // inputVariable1
+                ["Input2"] = "0" // inputVariable1
                 //["Input2"] = "inputVariable1", 
 
                 //["Output1"] = "outputVariable1", 
             };
-            BlockNetwork Network = new BlockNetwork();
-            Network.Blocks.Add(myFBCall);
-            Network.GenerationLabel = new GenerationLabel(module.Name, "Generated by MAC", module.ModuleID.ToString());
-            Main.Networks.Add(Network);
+            var blockNetwork = new BlockNetwork();
+            blockNetwork.Blocks.Add(myFBCall);
+            blockNetwork.GenerationLabel =
+                new GenerationLabel(module.Name, "Generated by MAC", module.ModuleID.ToString());
+            mainOb.Networks.Add(blockNetwork);
 
             ///Create a SCL-network with IF and ELSE Statements
             var content = "\"myDB\".myParameterName := 100;\n";
@@ -217,100 +227,96 @@ namespace MAC_use_cases.Model.UseCases
             content += "ELSE\n";
             content += "TempInt := 1;\n";
             content += "END_IF;\n\n";
-            string sclContent = content;
-            var sclcode_network = parseSingleSCLCall(sclContent, plcDevice, Main);
-            sclcode_network.GenerationLabel = new GenerationLabel(module.Name, "Virtual_Master_scl_code", module.ModuleID.ToString());
-            Main.Networks.Add(sclcode_network);
+            var sclContent = content;
+            var sclcode_network = ParseSingleSCLCall(sclContent, plcDevice, mainOb);
+            sclcode_network.GenerationLabel =
+                new GenerationLabel(module.Name, "Virtual_Master_scl_code", module.ModuleID.ToString());
+            mainOb.Networks.Add(sclcode_network);
 
-            AddCodeBlockToOB(Main, module.ResourceManagement, languagesettings, plcDevice);
+            AddCodeBlockToOB(mainOb, module.ResourceManagement, languageSettings, plcDevice);
         }
 
         /// <summary>
-        /// This function checks if OB is already in TIA Project and merge the new one into the existing one depending to the language.
+        ///     This function checks if OB is already in TIA Project and merge the new one into the existing one depending on the
+        ///     language.
         /// </summary>
         /// <param name="codeBlock">The new OB</param>
         /// <param name="resourceManagement">The resourceManagement</param>
-        /// <param name="tiaTemplateContext">The tiaTemplateContext</param>
+        /// <param name="languageSettings">The tiaTemplateContext language key</param>
         /// <param name="plcDevice">The plcDevice</param>
-        public static void AddCodeBlockToOB(XmlLogicalBlock codeBlock, ResourceManagement resourceManagement, string languagesettings, PlcDevice plcDevice)
+        public static void AddCodeBlockToOB(XmlLogicalBlock codeBlock, ResourceManagement resourceManagement,
+            string languageSettings, PlcDevice plcDevice)
         {
             var existingOB = OpennessFuncs.TryGetOBFromPlcDevice(plcDevice, codeBlock.Name);
             //Create new OB in SCL with calling code
             if (existingOB == null)
             {
                 if (codeBlock.BlockAttributes.ProgrammingLanguage == ProgrammingLanguage.SCL)
-                {
                     codeBlock.GenerateSclBlock(plcDevice);
-                }
                 else //insert networks to KOP/FUP
-                {
-                    codeBlock.GenerateXmlBlock(plcDevice, null, languagesettings);
-                }
+                    codeBlock.GenerateXmlBlock(plcDevice, null, languageSettings);
             }
             else
-            //Insert Code to existing OB
+                //Insert Code to existing OB
             {
-                var blockAsDoc = OpennessFuncs.ExportBlockAsXml(existingOB.Name, plcDevice, OpennessFuncs.CachingOptions.DISABLED);
-                Parser parser = new Parser();
+                var blockAsDoc =
+                    OpennessFuncs.ExportBlockAsXml(existingOB.Name, plcDevice, OpennessFuncs.CachingOptions.DISABLED);
+                var parser = new Parser();
                 var xmlOB = parser.ParseXml(blockAsDoc);
                 xmlOB.MergeBlock(codeBlock);
                 //add SCL-Code
                 if (xmlOB.BlockAttributes.ProgrammingLanguage == ProgrammingLanguage.SCL)
-                {
                     xmlOB.GenerateSclBlock(plcDevice);
-                }
                 else //insert networks to KOP/FUP
-                {
-                    xmlOB.GenerateXmlBlock(plcDevice, null, languagesettings);
-                }
+                    xmlOB.GenerateXmlBlock(plcDevice, null, languageSettings);
             }
         }
 
         /// <summary>
-        /// This function Generates the OB with the given number of calls
+        ///     This function Generates the OB with the given number of calls
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="numberOfCalls">The number of calls in the OB</param>
-        /// <param name="tiaTemplateContext">The tiaTemplateContext</param>
-        // Hauptfunktion, die alle oben definierten Funktionen aufruft
-        public static void GenerateMainOBWithMultipleCalls(string name, int numberOfCalls, string languagesettings, PlcDevice plcDevice, MAC_use_casesEM Module)
+        /// <param name="languageSettings">The tiaTemplateContext language key</param>
+        /// <param name="plcDevice"></param>
+        /// <param name="module"></param>
+        /// //TODO params are wrong
+        public static void GenerateMainOBWithMultipleCalls(string name, int numberOfCalls, string languageSettings,
+            PlcDevice plcDevice, MAC_use_casesEM module)
         {
-            var myOB = new XmlOB(name);
-            myOB.BlockAttributes.BlockAutoNumber = false;
-            myOB.BlockAttributes.BlockNumber = 555.ToString();
+            var myOb = new XmlOB(name);
+            myOb.BlockAttributes.BlockAutoNumber = false;
+            myOb.BlockAttributes.BlockNumber = 555.ToString();
 
-            for (int i = 1; i <= numberOfCalls; i++)
+            for (var i = 1; i <= numberOfCalls; i++)
             {
-                IntegrateLibraries.CreateInstanceDB(Module, Module.ResourceManagement.MAC_use_casesFB, "CreatedDbFromMasterCopy" + i.ToString(), Module.ResourceManagement.ModuleBlocksRootGroup);
-                var blockname = "CreatedDbFromMasterCopy" + i.ToString();
+                IntegrateLibraries.CreateInstanceDB(module, module.ResourceManagement.MAC_use_casesFB,
+                    "CreatedDbFromMasterCopy" + i, module.ResourceManagement.ModuleBlocksRootGroup);
+                var blockname = "CreatedDbFromMasterCopy" + i;
                 var myOBCall = new BlockCall(blockname, plcDevice)
                 {
                     ["Input1"] = "1", // inputVariable1
-                    ["Input2"] = "0", // inputVariable1
+                    ["Input2"] = "0" // inputVariable1
                 };
 
                 var myObBlockNetwork = new BlockNetwork();
                 myObBlockNetwork.Blocks.Add(myOBCall);
-                myObBlockNetwork.GenerationLabel = new GenerationLabel(blockname, "Generated by MAC. Blockname: \"" + blockname+ "\"", Module.ModuleID.ToString());
-                myOB.Networks.Add(myObBlockNetwork);
+                myObBlockNetwork.GenerationLabel = new GenerationLabel(blockname,
+                    "Generated by MAC. Blockname: \"" + blockname + "\"", module.ModuleID.ToString());
+                myOb.Networks.Add(myObBlockNetwork);
             }
 
-            AddCodeBlockToOB(myOB, Module.ResourceManagement, languagesettings, plcDevice);
+            AddCodeBlockToOB(myOb, module.ResourceManagement, languageSettings, plcDevice);
         }
 
-        private static INetwork parseSingleSCLCall(string sclCall, PlcDevice plc, XmlBlock xmlBlock)
+        private static INetwork ParseSingleSCLCall(string sclCall, PlcDevice plc, XmlBlock xmlBlock)
         {
-            //var parsed = new Parser().ParseSclSnippet(sclCall, plc, Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.BlockType.OB, GroupBlockCalls.NOGROUPING).FirstOrDefault();
-            var parsed = new Parser().ParseSclSnippet(sclCall, xmlBlock, plc, GroupBlockCalls.NOGROUPING).FirstOrDefault();
-            if (parsed is BlockNetwork blockNetwork)
-            {
-                return blockNetwork;
-            }
-            else if (parsed is FixNetwork fixNetwork)
-            {
-                return fixNetwork;
-            }
+            var parsed = new Parser().ParseSclSnippet(sclCall, xmlBlock, plc, GroupBlockCalls.NOGROUPING)
+                .FirstOrDefault();
+            if (parsed is BlockNetwork blockNetwork) return blockNetwork;
+
+            if (parsed is FixNetwork fixNetwork) return fixNetwork;
             return null;
         }
-
     }
 }
