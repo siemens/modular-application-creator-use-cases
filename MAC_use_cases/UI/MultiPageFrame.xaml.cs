@@ -1,17 +1,18 @@
-﻿using Siemens.Automation.ModularApplicationCreator.Core;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using Siemens.Automation.ModularApplicationCreator.Core;
 using Siemens.Automation.ModularApplicationCreator.Modules;
 using Siemens.Automation.ModularApplicationCreator.Modules.UI;
 using Siemens.Automation.ModularApplicationCreator.Tia.Modules;
 using Siemens.Automation.ModularApplicationCreator.UI.UserControls;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace MAC_use_cases.UI
 {
     public partial class MultiPageFrame : BaseEditor
     {
-
-        int _lastSelectedTabIndex;
+        private int _lastSelectedTabIndex;
 
         public MultiPageFrame(Module module) : base(module)
         {
@@ -20,7 +21,7 @@ namespace MAC_use_cases.UI
 
             CreatePages();
 
-            NavigateTab.SelectedIndex = (NavigateTab.Items.Count == 0 ? -1 : 0);
+            NavigateTab.SelectedIndex = NavigateTab.Items.Count == 0 ? -1 : 0;
             LoadNewPage();
             MacManagement.LanguageService.LanguageChanged += LanguageService_LanguageChanged;
             ValidatePages();
@@ -38,7 +39,7 @@ namespace MAC_use_cases.UI
 
         #region UI events
 
-        private void LanguageService_LanguageChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void LanguageService_LanguageChanged(object sender, PropertyChangedEventArgs e)
         {
             ValidatePages();
         }
@@ -52,25 +53,22 @@ namespace MAC_use_cases.UI
         {
             var item = new ValidatedTabItem();
             if (NavigateTab.Items.Count == 0)
-            {
                 item.Style = FindResource("Nav_big_default_left") as Style;
-            }
             else
-            {
                 item.Style = FindResource("Nav_big_default") as Style;
-            }
 
             item.Content = editor;
             item.Header = CreateHeader(headerKey);
-            item.SetValue(System.Windows.Automation.AutomationProperties.AutomationIdProperty, "MultiPageFrame_Em" + (NavigateTab.Items.Count + 1) + "_TabItem");
+            item.SetValue(AutomationProperties.AutomationIdProperty,
+                "MultiPageFrame_Em" + (NavigateTab.Items.Count + 1) + "_TabItem");
             NavigateTab.Items.Add(item);
         }
 
         private StackPanel CreateHeader(string headerKey)
         {
-            StackPanel panel = new StackPanel();
+            var panel = new StackPanel();
             panel.Orientation = Orientation.Horizontal;
-            TextBlock headerText = new TextBlock();
+            var headerText = new TextBlock();
             headerText.Name = "HeaderText";
             headerText.SetResourceReference(TextBlock.TextProperty, headerKey);
             panel.Children.Add(headerText);
@@ -80,30 +78,25 @@ namespace MAC_use_cases.UI
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
-            if (NavigateTab.SelectedIndex > 0)
-            {
-                NavigateTab.SelectedIndex--;
-            }
+            if (NavigateTab.SelectedIndex > 0) NavigateTab.SelectedIndex--;
         }
 
         private void NavigateTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabControl tabControl = sender as TabControl;
-            if (tabControl == null || _lastSelectedTabIndex == tabControl.SelectedIndex)
-            {
-                return;
-            }
+            var tabControl = sender as TabControl;
+            if (tabControl == null || _lastSelectedTabIndex == tabControl.SelectedIndex) return;
             _lastSelectedTabIndex = tabControl.SelectedIndex;
 
             foreach (var removedItem in e.RemovedItems)
             {
-                TabItem tab = removedItem as TabItem;
+                var tab = removedItem as TabItem;
                 if (tab != null && NavigateTab.Items.Contains(tab))
                 {
-                    BaseEditor editor = tab.Content as BaseEditor;
+                    var editor = tab.Content as BaseEditor;
                     editor.Finish(true);
                 }
             }
+
             LoadNewPage();
         }
 
@@ -111,29 +104,24 @@ namespace MAC_use_cases.UI
         {
             Dispatcher.Invoke(() =>
             {
-                foreach (ValidatedTabItem item in NavigateTab.Items)
-                {
-                    item.Validate();
-                }
+                foreach (ValidatedTabItem item in NavigateTab.Items) item.Validate();
             });
         }
 
         #endregion UI events
 
         #region public Methods
+
         public void GoNext()
         {
-            if (NavigateTab.SelectedIndex + 1 < NavigateTab.Items.Count)
-            {
-                NavigateTab.SelectedIndex++;
-            }
+            if (NavigateTab.SelectedIndex + 1 < NavigateTab.Items.Count) NavigateTab.SelectedIndex++;
         }
 
         public override void Finish(bool save)
         {
             foreach (TabItem tab in NavigateTab.Items)
             {
-                BaseEditor editor = tab.Content as BaseEditor;
+                var editor = tab.Content as BaseEditor;
                 editor.Finish(true);
             }
         }
@@ -145,31 +133,21 @@ namespace MAC_use_cases.UI
 
         protected void LoadNewPage()
         {
-
-            TabItem currentTab = NavigateTab.SelectedItem as TabItem;
+            var currentTab = NavigateTab.SelectedItem as TabItem;
             if (currentTab != null)
             {
-                BaseEditor editor = currentTab.Content as BaseEditor;
+                var editor = currentTab.Content as BaseEditor;
                 if (editor != null)
                 {
-                    TiaEquipmentModuleBase tiaEM = Module as TiaEquipmentModuleBase;
-                    if (tiaEM != null)
-                    {
-                        tiaEM.SetOnlineHelp(editor.Name);
-                    }
+                    var tiaEM = Module as TiaEquipmentModuleBase;
+                    if (tiaEM != null) tiaEM.SetOnlineHelp(editor.Name);
 
                     BackButton.Visibility = Visibility.Visible;
                     NextButton.Visibility = Visibility.Visible;
 
-                    if (NavigateTab.SelectedIndex == 0)
-                    {
-                        BackButton.Visibility = Visibility.Hidden;
-
-                    }
+                    if (NavigateTab.SelectedIndex == 0) BackButton.Visibility = Visibility.Hidden;
                     if (NavigateTab.SelectedIndex == NavigateTab.Items.Count - 1)
-                    {
                         NextButton.Visibility = Visibility.Hidden;
-                    }
                 }
             }
             else
@@ -183,7 +161,7 @@ namespace MAC_use_cases.UI
         {
             Module.Validate();
         }
-        #endregion public Methods
 
+        #endregion public Methods
     }
 }

@@ -1,20 +1,22 @@
-﻿<modulesUI:BaseEditor   x:Class="MAC_use_cases.UI.FirstPage"
-                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                        xmlns:modulesUI="clr-namespace:Siemens.Automation.ModularApplicationCreator.Modules.UI;assembly=Siemens.Automation.ModAppCreator.Core"
-                        xmlns:helper="clr-namespace:Siemens.Automation.ModularApplicationCreator.Tia.Helper;assembly=Siemens.Automation.ModAppCreator.Core"
-                        mc:Ignorable="d">
+<modulesUI:BaseEditor x:Class="MAC_use_cases.UI.FirstPage"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:modulesUI="clr-namespace:Siemens.Automation.ModularApplicationCreator.Modules.UI;assembly=Siemens.Automation.ModAppCreator.Core"
+                      xmlns:model="clr-namespace:MAC_use_cases.Model"
+                      xmlns:helper="clr-namespace:Siemens.Automation.ModularApplicationCreator.Tia.Helper;assembly=Siemens.Automation.ModAppCreator.Core"
+                      mc:Ignorable="d"
+                      d:Background="White">
 
-    <StackPanel VerticalAlignment="Top" Margin="30">
-        <TextBlock Text="{DynamicResource SampleText}"></TextBlock>
-        <helper:DOBrowser  TOInfo="{Binding myTO.TechnologicalObject}" HorizontalAlignment="Left" Margin="80 15 0 0 "/>
-
-        <TextBlock Text="{Binding NonTiaProjectBased.StringOfAllNames}" Margin="0 30 0 0"></TextBlock>
-        <StackPanel Orientation="Horizontal"  >
-            <TextBlock Text="Name FB:" Margin="0 30 15 0"></TextBlock>
-            <TextBox Text="{Binding NameOfMyFb}" Width="400" Margin="0 30 0 0"></TextBox>
+    <StackPanel VerticalAlignment="Top" Margin="30"
+                d:DataContext="{d:DesignInstance Type=model:MAC_use_casesEM, IsDesignTimeCreatable=True}">
+        <TextBlock Text="{DynamicResource SampleText}" />
+        <helper:DOBrowser TOInfo="{Binding myTO.TechnologicalObject}" HorizontalAlignment="Left" Margin="80 15 0 0 " />
+        <TextBlock Text="{Binding NonTiaProjectBased.StringOfAllNames}" Margin="0 30 0 0" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Name FB:" Margin="0 30 15 0" />
+            <TextBox Text="{Binding NameOfMyFb}" Width="400" Margin="0 30 0 0" />
         </StackPanel>
 
     </StackPanel>

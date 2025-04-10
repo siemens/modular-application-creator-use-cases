@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MAC_use_cases</id>
-    <version>1.0.9229-pre20250408121600</version>
+    <version>1.0.9231-pre20250410122937</version>
     <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
@@ -60,6 +60,7 @@
       <files include="any/net48/Images/GenerateS210.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GetOrCreateHMI.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GetOrCreateSubnet.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/LocalizationXamlResourceDictionary.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/LogMessage.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/MultiInstanceFB.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/OpenLibrary.png" buildAction="Content" copyToOutput="false" />
