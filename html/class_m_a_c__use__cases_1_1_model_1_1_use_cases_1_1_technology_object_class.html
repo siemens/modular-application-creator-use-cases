@@ -130,12 +130,12 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a4569971ee2cf3b240c0708cbc654a72d" id="r_a4569971ee2cf3b240c0708cbc654a72d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4569971ee2cf3b240c0708cbc654a72d">Name</a> = &quot;myTO&quot;</td></tr>
-<tr class="memdesc:a4569971ee2cf3b240c0708cbc654a72d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This attribute is the used name of the TechnologyObject.  <br /></td></tr>
-<tr class="separator:a4569971ee2cf3b240c0708cbc654a72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33884cfbed1894671bda77459cc196a4" id="r_a33884cfbed1894671bda77459cc196a4"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33884cfbed1894671bda77459cc196a4">MaximumVelocity</a> = &quot;999.0&quot;</td></tr>
 <tr class="memdesc:a33884cfbed1894671bda77459cc196a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This attribute is the used MaximumVelocity of the TechnologyObject.  <br /></td></tr>
 <tr class="separator:a33884cfbed1894671bda77459cc196a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4569971ee2cf3b240c0708cbc654a72d" id="r_a4569971ee2cf3b240c0708cbc654a72d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4569971ee2cf3b240c0708cbc654a72d">Name</a> = &quot;myTO&quot;</td></tr>
+<tr class="memdesc:a4569971ee2cf3b240c0708cbc654a72d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This attribute is the used name of the TechnologyObject.  <br /></td></tr>
+<tr class="separator:a4569971ee2cf3b240c0708cbc654a72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afaacd6bae58611be5b97b66d6a606450" id="r_afaacd6bae58611be5b97b66d6a606450"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afaacd6bae58611be5b97b66d6a606450">VirtualAxisMode</a> = &quot;1&quot;</td></tr>
 <tr class="memdesc:afaacd6bae58611be5b97b66d6a606450"><td class="mdescLeft">&#160;</td><td class="mdescRight">This attribute is the used VirtualAxisMode of the TechnologyObject.  <br /></td></tr>
 <tr class="separator:afaacd6bae58611be5b97b66d6a606450"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,16 +194,16 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00051">51</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   52</span>        {</div>
-<div class="line"><span class="lineno">   53</span>            TechnologicalObject = <span class="keyword">new</span> TechnologicalObjectInfo(Name, TOType, MotionControlVersion, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>            <span class="comment">//Add the main telegram number to the TechnologicalObjectInfo Object</span></div>
-<div class="line"><span class="lineno">   56</span>            TechnologicalObject.MainTelegramNumber = MainTelegramNumber;</div>
-<div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span>            <span class="comment">//Add the TechnologicalObjectInfo Object to the list of ProvidedTechnologicalObjects of the module</span></div>
-<div class="line"><span class="lineno">   59</span>            myModule.ProvidedTechnologicalObjects.Add(TechnologicalObject);</div>
-<div class="line"><span class="lineno">   60</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00047">47</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   48</span>        {</div>
+<div class="line"><span class="lineno">   49</span>            TechnologicalObject = <span class="keyword">new</span> TechnologicalObjectInfo(Name, TOType, MotionControlVersion, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span>            <span class="comment">//Add the main telegram number to the TechnologicalObjectInfo Object</span></div>
+<div class="line"><span class="lineno">   52</span>            TechnologicalObject.MainTelegramNumber = MainTelegramNumber;</div>
+<div class="line"><span class="lineno">   53</span> </div>
+<div class="line"><span class="lineno">   54</span>            <span class="comment">//Add the TechnologicalObjectInfo Object to the list of ProvidedTechnologicalObjects of the module</span></div>
+<div class="line"><span class="lineno">   55</span>            myModule.ProvidedTechnologicalObjects.Add(TechnologicalObject);</div>
+<div class="line"><span class="lineno">   56</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -238,10 +238,9 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00067">67</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   68</span>        {</div>
-<div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00063">63</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>        {</div>
+<div class="line"><span class="lineno">   65</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -292,8 +291,7 @@ Properties</h2></td></tr>
 <div class="line"><span class="lineno">   83</span>                <span class="comment">//GetOrCreateRootTO will create a TO in the TO root folder. If a TO with the same name already exists, this TO is returned.</span></div>
 <div class="line"><span class="lineno">   84</span>                var generatedTO = plcDevice.TechnologicalObjects.GetOrCreateRootTO(toInfo, module);</div>
 <div class="line"><span class="lineno">   85</span>            }</div>
-<div class="line"><span class="lineno">   86</span> </div>
-<div class="line"><span class="lineno">   87</span>        }</div>
+<div class="line"><span class="lineno">   86</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -339,7 +337,7 @@ Properties</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00095">95</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   96</span>        {</div>
 <div class="line"><span class="lineno">   97</span>            <span class="comment">//Add the additional parameters to the TechnologicalObjectInfo Object</span></div>
-<div class="line"><span class="lineno">   98</span>            <span class="keywordtype">string</span> toPath = <span class="stringliteral">&quot;DynamicLimits.MaxVelocity&quot;</span>;</div>
+<div class="line"><span class="lineno">   98</span>            var toPath = <span class="stringliteral">&quot;DynamicLimits.MaxVelocity&quot;</span>;</div>
 <div class="line"><span class="lineno">   99</span>            TechnologicalObject.AdditionalParameter[toPath] = MaximumVelocity;</div>
 <div class="line"><span class="lineno">  100</span> </div>
 <div class="line"><span class="lineno">  101</span>            toPath = <span class="stringliteral">&quot;VirtualAxis.Mode&quot;</span>;</div>
@@ -348,8 +346,7 @@ Properties</h2></td></tr>
 <div class="line"><span class="lineno">  104</span>            <span class="comment">//Change parameter of TO</span></div>
 <div class="line"><span class="lineno">  105</span>            toPath = <span class="stringliteral">&quot;DynamicDefaults.Velocity&quot;</span>;</div>
 <div class="line"><span class="lineno">  106</span>            TechnologicalObject.AdditionalParameter[toPath] = <span class="stringliteral">&quot;50.0&quot;</span>;</div>
-<div class="line"><span class="lineno">  107</span> </div>
-<div class="line"><span class="lineno">  108</span>        }</div>
+<div class="line"><span class="lineno">  107</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -406,24 +403,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a4569971ee2cf3b240c0708cbc654a72d" name="a4569971ee2cf3b240c0708cbc654a72d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4569971ee2cf3b240c0708cbc654a72d">&#9670;&#160;</a></span>Name</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">string MAC_use_cases.Model.UseCases.TechnologyObjectClass.Name = &quot;myTO&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This attribute is the used name of the TechnologyObject. </p>
-
-<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00025">25</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
-
-</div>
-</div>
 <a id="a5b56ad180aacb6edf3c23cac17211522" name="a5b56ad180aacb6edf3c23cac17211522"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5b56ad180aacb6edf3c23cac17211522">&#9670;&#160;</a></span>TOType</h2>
 
@@ -446,7 +425,7 @@ Properties</h2></td></tr>
 
 <p>This attribute is the used Type of the TechnologyObject. </p>
 
-<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00035">35</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00025">25</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
 
 </div>
 </div>
@@ -464,7 +443,25 @@ Properties</h2></td></tr>
 
 <p>This attribute is the used MaximumVelocity of the TechnologyObject. </p>
 
-<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00040">40</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00030">30</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
+
+</div>
+</div>
+<a id="a4569971ee2cf3b240c0708cbc654a72d" name="a4569971ee2cf3b240c0708cbc654a72d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4569971ee2cf3b240c0708cbc654a72d">&#9670;&#160;</a></span>Name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string MAC_use_cases.Model.UseCases.TechnologyObjectClass.Name = &quot;myTO&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This attribute is the used name of the TechnologyObject. </p>
+
+<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00035">35</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
 
 </div>
 </div>
@@ -482,7 +479,7 @@ Properties</h2></td></tr>
 
 <p>This attribute is the used VirtualAxisMode of the TechnologyObject. </p>
 
-<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00045">45</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00040">40</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
 
 </div>
 </div>
@@ -509,8 +506,8 @@ Properties</h2></td></tr>
 
 <p>This object property is the used instance of the class TechnologyObjectInfo. </p>
 
-<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00030">30</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   30</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; }</div>
+<p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00070">70</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   70</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; }</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -1,4 +1,20 @@
 var searchData=
 [
-  ['hardwaregeneration_0',['HardwareGeneration',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html',1,'MAC_use_cases::Model::UseCases']]]
+  ['generalsupport_0',['GeneralSupport',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html',1,'MAC_use_cases::Model::UseCases']]],
+  ['generateblock_1',['GenerateBlock',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#aedce987a76e148aaf68d196ab91327d4',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generatedb_2',['GenerateDB',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a28ba56a459c7a46496f9ee8698e9974c',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generatemainobwithmultiplecalls_3',['GenerateMainOBWithMultipleCalls',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a983c38766545b6b171adf473cfb04d18',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generatemultiinstancefb_4',['GenerateMultiInstanceFB',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a17a82e9f89386b2646840fc5b8d3f048',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generateob_5fmain_5',['GenerateOB_Main',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a402cc20191963a0871d53273afbf909d',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generates120_6',['GenerateS120',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a7d5006c4913789ae5058a3e5509d0203',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['generates210_7',['GenerateS210',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a782897c3d537e943b5d7a1dfb57c812d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['generatescreenfrommastercopy_8',['GenerateScreenFromMastercopy',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html#a3315703cfbf49ca6581c56508e99aec9',1,'MAC_use_cases::Model::UseCases::IntegrateLibraries']]],
+  ['genericblockcreation_9',['GenericBlockCreation',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html',1,'MAC_use_cases::Model::UseCases']]],
+  ['getlocalizedstring_10',['GetLocalizedString',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#aff97a98b46f419847390811bd027b05d',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getopennessdeviceitem_11',['GetOpennessDeviceItem',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a489cbf03993600d0c9fde73637efb946',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getopennessproject_12',['GetOpennessProject',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a5463d99c4c5089045b15a2c12f19496d',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getorcreatehmisoftware_13',['GetOrCreateHMISoftware',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#aff273d38f036f9f1b8b1c603a5422efb',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['getorcreatesubnet_14',['GetOrCreateSubnet',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#af53a3919d93de83d94c0b58213a9339d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['getsafetysoftwareunit_15',['GetSafetySoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html#a4ec34c144eef99c43c0cf3e190c47c8d',1,'MAC_use_cases::Model::UseCases::SoftwareUnits::SafetyUnit::SoftwareUnitsUseCases']]],
+  ['getsoftwareunitbyname_16',['GetSoftwareUnitByName',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html#a40f4110fb951b2335a45231f8838a9c5',1,'MAC_use_cases::Model::UseCases::SoftwareUnits::SafetyUnit::SoftwareUnitsUseCases']]]
 ];

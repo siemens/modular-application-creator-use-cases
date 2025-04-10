@@ -165,11 +165,11 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00034">34</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   35</span>        {</div>
-<div class="line"><span class="lineno">   36</span>            ModelList.Add(<span class="keyword">new</span> ModelToSerialize(name));</div>
-<div class="line"><span class="lineno">   37</span>            CopyModel();</div>
-<div class="line"><span class="lineno">   38</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00022">22</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>        {</div>
+<div class="line"><span class="lineno">   24</span>            ModelList.Add(<span class="keyword">new</span> ModelToSerialize(name));</div>
+<div class="line"><span class="lineno">   25</span>            CopyModel();</div>
+<div class="line"><span class="lineno">   26</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -199,13 +199,14 @@ Properties</h2></td></tr>
 
 <p>This function gets the first element of the ModelList. Serialize the object, deserialize an object of the specific type and add it to ModelList This function is called to display the process of a typical MAC serialization. </p>
 
-<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00044">44</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>        {</div>
-<div class="line"><span class="lineno">   46</span>            var currentModel = ModelList.FirstOrDefault();</div>
-<div class="line"><span class="lineno">   47</span>            var jsonOfChannel = JsonConvert.SerializeObject(currentModel, <span class="keyword">new</span> JsonSerializerSettings());</div>
-<div class="line"><span class="lineno">   48</span>            var copyOfChannel = JsonConvert.DeserializeObject&lt;ModelToSerialize&gt;(jsonOfChannel, <span class="keyword">new</span> JsonSerializerSettings());</div>
-<div class="line"><span class="lineno">   49</span>            ModelList.Add(copyOfChannel);</div>
-<div class="line"><span class="lineno">   50</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00046">46</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>        {</div>
+<div class="line"><span class="lineno">   48</span>            var currentModel = ModelList.FirstOrDefault();</div>
+<div class="line"><span class="lineno">   49</span>            var jsonOfChannel = JsonConvert.SerializeObject(currentModel, <span class="keyword">new</span> JsonSerializerSettings());</div>
+<div class="line"><span class="lineno">   50</span>            var copyOfChannel =</div>
+<div class="line"><span class="lineno">   51</span>                JsonConvert.DeserializeObject&lt;ModelToSerialize&gt;(jsonOfChannel, <span class="keyword">new</span> JsonSerializerSettings());</div>
+<div class="line"><span class="lineno">   52</span>            ModelList.Add(copyOfChannel);</div>
+<div class="line"><span class="lineno">   53</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -251,15 +252,15 @@ Properties</h2></td></tr>
 
 <p>This is the string which will be displayed in the View. </p>
 
-<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00020">20</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   21</span>        {</div>
-<div class="line"><span class="lineno">   22</span>            <span class="keyword">get</span></div>
-<div class="line"><span class="lineno">   23</span>            {</div>
-<div class="line"><span class="lineno">   24</span>                <span class="keywordtype">string</span> stringOfAllNames = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">   25</span>                ModelList.ForEach(x =&gt; stringOfAllNames += x.Name);</div>
-<div class="line"><span class="lineno">   26</span>                <span class="keywordflow">return</span> stringOfAllNames;</div>
-<div class="line"><span class="lineno">   27</span>            }</div>
-<div class="line"><span class="lineno">   28</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00031">31</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>        {</div>
+<div class="line"><span class="lineno">   33</span>            <span class="keyword">get</span></div>
+<div class="line"><span class="lineno">   34</span>            {</div>
+<div class="line"><span class="lineno">   35</span>                var stringOfAllNames = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">   36</span>                ModelList.ForEach(x =&gt; stringOfAllNames += x.Name);</div>
+<div class="line"><span class="lineno">   37</span>                <span class="keywordflow">return</span> stringOfAllNames;</div>
+<div class="line"><span class="lineno">   38</span>            }</div>
+<div class="line"><span class="lineno">   39</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>

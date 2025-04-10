@@ -129,16 +129,13 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is an exemplary model, which is used to demonstrate the MAC serialization process. </p>
 
-<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00056">56</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00059">59</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8edb7fb028a11f369fb619ba3112d402" name="a8edb7fb028a11f369fb619ba3112d402"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8edb7fb028a11f369fb619ba3112d402">&#9670;&#160;</a></span>ModelToSerialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">MAC_use_cases.Model.UseCases.ModelToSerialize.ModelToSerialize </td>
@@ -147,11 +144,6 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Creates a new object of the class and set the name. </p>
@@ -162,11 +154,6 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00086">86</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   87</span>        {</div>
-<div class="line"><span class="lineno">   88</span>            Name = name;</div>
-<div class="line"><span class="lineno">   89</span>        }</div>
-</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -192,7 +179,7 @@ Private Attributes</h2></td></tr>
 
 <p>[JsonProperty] means that this attribute will be serialized with its value to get the value again after serialization. This attribute is en exemplary string which gets serialized </p>
 
-<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00063">63</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00066">66</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
 
 </div>
 </div>
@@ -219,17 +206,11 @@ Private Attributes</h2></td></tr>
 
 <p>[JsonIgnore] means that this attribute will not be serialized. This property gets and sets the "_name" attribute which gets serialized </p>
 
-<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00070">70</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   71</span>        {</div>
-<div class="line"><span class="lineno">   72</span>            <span class="keyword">get</span></div>
-<div class="line"><span class="lineno">   73</span>            {</div>
-<div class="line"><span class="lineno">   74</span>                <span class="keywordflow">return</span> _name;</div>
-<div class="line"><span class="lineno">   75</span>            }</div>
-<div class="line"><span class="lineno">   76</span>            <span class="keyword">set</span></div>
-<div class="line"><span class="lineno">   77</span>            {</div>
-<div class="line"><span class="lineno">   78</span>                _name = value;</div>
-<div class="line"><span class="lineno">   79</span>            }</div>
-<div class="line"><span class="lineno">   80</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00079">79</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   80</span>        {</div>
+<div class="line"><span class="lineno">   81</span>            <span class="keyword">get</span> =&gt; _name;</div>
+<div class="line"><span class="lineno">   82</span>            <span class="keyword">set</span> =&gt; _name = value;</div>
+<div class="line"><span class="lineno">   83</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['files_0',['Files',['../index.html#files_sec',1,'']]]
+  ['different_20lanugages_0',['How to use different lanugages',['../index.html#localization-id',1,'']]],
+  ['documentation_1',['Help for this documentation',['../index.html#help-id',1,'']]]
 ];
