@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IsPackable>true</IsPackable>
@@ -14,10 +14,11 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -37,9 +38,10 @@ where to where -->
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -81,8 +83,8 @@ where to where -->
   in MPFProj12\ProjectNode.cs, ProcessFiles.
   -->
   <ItemGroup>
-    <Compile Include="Model\CustomLibraryClasses\Lib_Screen_1.cs" />
-    <Compile Include="Model\CustomLibraryClasses\Lib_MAC_use_cases_custom.cs" />
+    <Compile Include="TiaImports\CustomLibraryClasses\Lib_Screen_1.cs" />
+    <Compile Include="TiaImports\CustomLibraryClasses\Lib_MAC_use_cases_custom.cs" />
     <Compile Include="Model\UseCases\CreateVariables.cs" />
     <Compile Include="Model\UseCases\GenericBlockCreation.cs" />
     <Compile Include="Model\UseCases\HardwareGeneration.cs" />
@@ -181,31 +183,7 @@ where to where -->
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\AddLibrary.png" />
-    <Content Include="Images\ClassExplanation.PNG" />
-    <Content Include="Images\CodeExplanation.PNG" />
-    <Content Include="Images\ConfigureTO.png" />
-    <Content Include="Images\ConnectDriveToSubnet.png" />
-    <Content Include="Images\CreateFB.png" />
-    <Content Include="Images\CreateInstanceDB.png" />
-    <Content Include="Images\CreateInstanceDB_via_XmlInstDB.png" />
-    <Content Include="Images\CreateScreenFromMastercopy.png" />
-    <Content Include="Images\CreateTag.png" />
-    <Content Include="Images\CreateTagTable.png" />
-    <Content Include="Images\CreateTO.png" />
-    <Content Include="Images\DynamicCall.png" />
-    <Content Include="Images\FunctionExplanation.PNG" />
-    <Content Include="Images\GenerateDB.png" />
-    <Content Include="Images\GenerateOB.png" />
-    <Content Include="Images\GenerateS120.png" />
-    <Content Include="Images\GenerateS210.png" />
-    <Content Include="Images\GetOrCreateHMI.png" />
-    <Content Include="Images\GetOrCreateSubnet.png" />
-    <Content Include="Images\LogMessage.png" />
-    <Content Include="Images\MultiInstanceFB.png" />
-    <Content Include="Images\OpenLibrary.png" />
-    <Content Include="Images\OpenTiares.png" />
-    <Content Include="Images\SetDefaultValue.png" />
+    <Content Include="Images\*" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TiaResources\" />
