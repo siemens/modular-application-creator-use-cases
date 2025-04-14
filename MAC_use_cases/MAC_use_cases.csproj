@@ -13,6 +13,7 @@
     <AssemblyName>MAC_use_cases</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <langVersion>latest</langVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,13 +92,14 @@ where to where -->
     <Compile Include="Model\UseCases\GeneralSupport.cs" />
     <Compile Include="Model\UseCases\IntegrateLibraries.cs" />
     <Compile Include="Model\UseCases\NonTIAProjectBased.cs" />
-    <Compile Include="Model\UseCases\SoftwareUnits\SoftwareUnitsUseCases.cs" />
+    <Compile Include="Model\UseCases\SoftwareUnits.cs" />
     <Compile Include="Model\UseCases\TechnologyObjectClass.cs" />
     <Compile Include="Model\MAC_use_casesEM.cs" />
     <Compile Include="Model\BaseMAC_use_casesEM.cs" />
     <Compile Include="Model\BaseMAC_use_casesEMGeneratedItems.cs" />
     <Compile Include="TiaImports\GeneratedClasses\Lib_MAC_use_cases.cs" />
     <Compile Include="TiaImports\GeneratedClasses\MAC_use_casesFB.cs" />
+    <Compile Include="TiaImports\GeneratedClasses\MAC_use_casesFB_FailSafe.cs" />
     <Compile Include="TiaImports\GeneratedClasses\myDataType.cs" />
     <Compile Include="TiaImports\ResourceManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

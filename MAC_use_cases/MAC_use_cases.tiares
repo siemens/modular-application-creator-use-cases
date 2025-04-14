@@ -17,6 +17,7 @@
         <Group Name="Lib_MAC_use_cases_Blocks" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;]" />
       </Group>
       <Blocks Name="MAC_use_casesFB" GroupPath="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;].Blocks" BlockType="FB" allowRename="true" createOnlyOnce="false" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="MAC_use_casesFB" LibraryType="False" />
+      <Blocks Name="MAC_use_casesFB_FailSafe" GroupPath="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;].Blocks" BlockType="FB" allowRename="true" createOnlyOnce="false" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="MAC_use_casesFB_FailSafe" LibraryType="False" />
     </ResourceCategory>
     <ResourceCategory Name="TOs" />
     <ResourceCategory Name="WatchTables" GenerationName="WatchTables.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_WatchTables&quot;]">
