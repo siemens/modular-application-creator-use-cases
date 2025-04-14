@@ -14,7 +14,5 @@ var searchData=
   ['getopennessdeviceitem_11',['GetOpennessDeviceItem',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a489cbf03993600d0c9fde73637efb946',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
   ['getopennessproject_12',['GetOpennessProject',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a5463d99c4c5089045b15a2c12f19496d',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
   ['getorcreatehmisoftware_13',['GetOrCreateHMISoftware',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#aff273d38f036f9f1b8b1c603a5422efb',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
-  ['getorcreatesubnet_14',['GetOrCreateSubnet',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#af53a3919d93de83d94c0b58213a9339d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
-  ['getsafetysoftwareunit_15',['GetSafetySoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html#a4ec34c144eef99c43c0cf3e190c47c8d',1,'MAC_use_cases::Model::UseCases::SoftwareUnits::SafetyUnit::SoftwareUnitsUseCases']]],
-  ['getsoftwareunitbyname_16',['GetSoftwareUnitByName',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units_1_1_safety_unit_1_1_software_units_use_cases.html#a40f4110fb951b2335a45231f8838a9c5',1,'MAC_use_cases::Model::UseCases::SoftwareUnits::SafetyUnit::SoftwareUnitsUseCases']]]
+  ['getorcreatesubnet_14',['GetOrCreateSubnet',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#af53a3919d93de83d94c0b58213a9339d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]]
 ];

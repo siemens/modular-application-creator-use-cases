@@ -119,7 +119,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a8553b55cc39aab35c1e9a0d3d1abea4e" id="r_a8553b55cc39aab35c1e9a0d3d1abea4e"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html">ModelToSerialize</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8553b55cc39aab35c1e9a0d3d1abea4e">ModelList</a> = new List&lt;<a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html">ModelToSerialize</a>&gt;()</td></tr>
+<tr class="memitem:a8553b55cc39aab35c1e9a0d3d1abea4e" id="r_a8553b55cc39aab35c1e9a0d3d1abea4e"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html">ModelToSerialize</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8553b55cc39aab35c1e9a0d3d1abea4e">ModelList</a> = new()</td></tr>
 <tr class="memdesc:a8553b55cc39aab35c1e9a0d3d1abea4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of models for serialization.  <br /></td></tr>
 <tr class="separator:a8553b55cc39aab35c1e9a0d3d1abea4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -166,10 +166,10 @@ Properties</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00022">22</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span>        {</div>
-<div class="line"><span class="lineno">   24</span>            ModelList.Add(<span class="keyword">new</span> ModelToSerialize(name));</div>
-<div class="line"><span class="lineno">   25</span>            CopyModel();</div>
-<div class="line"><span class="lineno">   26</span>        }</div>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>    {</div>
+<div class="line"><span class="lineno">   24</span>        ModelList.Add(<span class="keyword">new</span> ModelToSerialize(name));</div>
+<div class="line"><span class="lineno">   25</span>        CopyModel();</div>
+<div class="line"><span class="lineno">   26</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -199,14 +199,14 @@ Properties</h2></td></tr>
 
 <p>This function gets the first element of the ModelList. Serialize the object, deserialize an object of the specific type and add it to ModelList This function is called to display the process of a typical MAC serialization. </p>
 
-<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00046">46</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span>        {</div>
-<div class="line"><span class="lineno">   48</span>            var currentModel = ModelList.FirstOrDefault();</div>
-<div class="line"><span class="lineno">   49</span>            var jsonOfChannel = JsonConvert.SerializeObject(currentModel, <span class="keyword">new</span> JsonSerializerSettings());</div>
-<div class="line"><span class="lineno">   50</span>            var copyOfChannel =</div>
-<div class="line"><span class="lineno">   51</span>                JsonConvert.DeserializeObject&lt;ModelToSerialize&gt;(jsonOfChannel, <span class="keyword">new</span> JsonSerializerSettings());</div>
-<div class="line"><span class="lineno">   52</span>            ModelList.Add(copyOfChannel);</div>
-<div class="line"><span class="lineno">   53</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00041">41</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>    {</div>
+<div class="line"><span class="lineno">   43</span>        var currentModel = ModelList.FirstOrDefault();</div>
+<div class="line"><span class="lineno">   44</span>        var jsonOfChannel = JsonConvert.SerializeObject(currentModel, <span class="keyword">new</span> JsonSerializerSettings());</div>
+<div class="line"><span class="lineno">   45</span>        var copyOfChannel =</div>
+<div class="line"><span class="lineno">   46</span>            JsonConvert.DeserializeObject&lt;ModelToSerialize&gt;(jsonOfChannel, <span class="keyword">new</span> JsonSerializerSettings());</div>
+<div class="line"><span class="lineno">   47</span>        ModelList.Add(copyOfChannel);</div>
+<div class="line"><span class="lineno">   48</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -218,7 +218,7 @@ Properties</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html">ModelToSerialize</a>&gt; MAC_use_cases.Model.UseCases.NonTIAProjectBased.ModelList = new List&lt;<a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html">ModelToSerialize</a>&gt;()</td>
+          <td class="memname">List&lt;<a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html">ModelToSerialize</a>&gt; MAC_use_cases.Model.UseCases.NonTIAProjectBased.ModelList = new()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -253,14 +253,9 @@ Properties</h2></td></tr>
 <p>This is the string which will be displayed in the View. </p>
 
 <p class="definition">Definition at line <a class="el" href="_non_t_i_a_project_based_8cs_source.html#l00031">31</a> of file <a class="el" href="_non_t_i_a_project_based_8cs_source.html">NonTIAProjectBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   32</span>        {</div>
-<div class="line"><span class="lineno">   33</span>            <span class="keyword">get</span></div>
-<div class="line"><span class="lineno">   34</span>            {</div>
-<div class="line"><span class="lineno">   35</span>                var stringOfAllNames = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">   36</span>                ModelList.ForEach(x =&gt; stringOfAllNames += x.Name);</div>
-<div class="line"><span class="lineno">   37</span>                <span class="keywordflow">return</span> stringOfAllNames;</div>
-<div class="line"><span class="lineno">   38</span>            }</div>
-<div class="line"><span class="lineno">   39</span>        }</div>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>    {</div>
+<div class="line"><span class="lineno">   33</span>        <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keywordtype">string</span>.Join(<span class="stringliteral">&quot;, &quot;</span>, ModelList.Select(x =&gt; x.Name)); }</div>
+<div class="line"><span class="lineno">   34</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
