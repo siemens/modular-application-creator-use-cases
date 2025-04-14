@@ -11,6 +11,7 @@
     6. [Model Serialization](class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html)
     7. [Non Tia Portal Bases Operations](class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html)
     8. [Technology Object Handling](class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html)
+    9. [Software Units](class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html)
 2. [How to integrate libraries](@ref section-id)
 3. [How to use different lanugages](@ref localization-id)
 4. [Help for this documentation](@ref help-id)

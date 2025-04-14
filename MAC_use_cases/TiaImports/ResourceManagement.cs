@@ -35,6 +35,7 @@ namespace MAC_use_cases.TiaImports
         public Dictionary<object, object> __created_block_list = new Dictionary<object, object>();
         public Lib_MAC_use_cases Lib_MAC_use_cases { get; set; }
         public MAC_use_casesFB MAC_use_casesFB { get { return Lib_MAC_use_cases.MAC_use_casesFB as MAC_use_casesFB; } }
+        public MAC_use_casesFB_FailSafe MAC_use_casesFB_FailSafe { get { return Lib_MAC_use_cases.MAC_use_casesFB_FailSafe as MAC_use_casesFB_FailSafe; } }
         public myDataType myDataType { get { return Lib_MAC_use_cases.myDataType as myDataType; } }
         public List<string> LibraryTagsRootGroupPath { get; set; } = new List<string>();
         public TagGroup LibraryTagsRootGroup { get; private set; }
@@ -284,6 +285,7 @@ namespace MAC_use_cases.TiaImports
         private void PostInit(TiaTemplateContext tiaTemplateContext, MAC_use_casesEM module)
         {
             MAC_use_casesFB.ParentDevice = null;
+            MAC_use_casesFB_FailSafe.ParentDevice = null;
         }
 
         private void AddResourcesToTiaProject(TiaTemplateContext tiaTemplateContext, MAC_use_casesEM module)
@@ -334,6 +336,18 @@ namespace MAC_use_cases.TiaImports
                 Lib_MAC_use_cases.MAC_use_casesFB.CreateOnlyOnce = false;
                 __created_block_list[MAC_use_casesFB] = LibraryBlocksRootGroup["Lib_MAC_use_cases_Blocks"].Blocks.Add(MAC_use_casesFB);
                 CollectLibraryTypeCreationInfo(MAC_use_casesFB);
+            }
+
+            if (MAC_use_casesFB_FailSafe.IsIncludedInTiaProject)
+            {
+                if (MAC_use_casesFB_FailSafe.ParentDevice == null)
+                {
+                    MAC_use_casesFB_FailSafe.ParentDevice = targetDevice;
+                }
+
+                Lib_MAC_use_cases.MAC_use_casesFB_FailSafe.CreateOnlyOnce = false;
+                __created_block_list[MAC_use_casesFB_FailSafe] = LibraryBlocksRootGroup["Lib_MAC_use_cases_Blocks"].Blocks.Add(MAC_use_casesFB_FailSafe);
+                CollectLibraryTypeCreationInfo(MAC_use_casesFB_FailSafe);
             }
         }
 
