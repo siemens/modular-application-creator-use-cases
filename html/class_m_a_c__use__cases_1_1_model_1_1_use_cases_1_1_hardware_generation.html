@@ -121,7 +121,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:af53a3919d93de83d94c0b58213a9339d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or creates a subnet with the desired name.  <br /></td></tr>
 <tr class="separator:af53a3919d93de83d94c0b58213a9339d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe88e524c8380dba5f0829ec093461e2" id="r_abe88e524c8380dba5f0829ec093461e2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe88e524c8380dba5f0829ec093461e2">ConnectDriveToSubnet</a> (ProfiDriveObjectInfo drive, ISubnetInfo subnet, <a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html">MAC_use_casesEM</a> module)</td></tr>
-<tr class="memdesc:abe88e524c8380dba5f0829ec093461e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connectes the desired drive to the desired subnet.  <br /></td></tr>
+<tr class="memdesc:abe88e524c8380dba5f0829ec093461e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects the desired drive to the desired subnet.  <br /></td></tr>
 <tr class="separator:abe88e524c8380dba5f0829ec093461e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -187,28 +187,28 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_hardware_generation_8cs_source.html#l00026">26</a> of file <a class="el" href="_hardware_generation_8cs_source.html">HardwareGeneration.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   28</span>        {</div>
-<div class="line"><span class="lineno">   29</span>            <span class="keywordflow">if</span> (!module.SynchronizedCollection.HardwareInterfaces.OfType&lt;ProfiDriveObjectInfo&gt;()</div>
-<div class="line"><span class="lineno">   30</span>                    .Any(x =&gt; x.DriveDevice.Equals(name)))</div>
-<div class="line"><span class="lineno">   31</span>            {</div>
-<div class="line"><span class="lineno">   32</span>                var info = HardwareBlueprintFactory.CreateDrive(S120PNOrderNumbers.S120_CU_320_2_PN).LatestFirmware()</div>
-<div class="line"><span class="lineno">   33</span>                    .CreateBlueprint(name, deviceName);</div>
+<div class="fragment"><div class="line"><span class="lineno">   28</span>    {</div>
+<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">if</span> (!module.SynchronizedCollection.HardwareInterfaces.OfType&lt;ProfiDriveObjectInfo&gt;()</div>
+<div class="line"><span class="lineno">   30</span>                .Any(x =&gt; x.DriveDevice.Equals(name)))</div>
+<div class="line"><span class="lineno">   31</span>        {</div>
+<div class="line"><span class="lineno">   32</span>            var info = HardwareBlueprintFactory.CreateDrive(S120PNOrderNumbers.S120_CU_320_2_PN).LatestFirmware()</div>
+<div class="line"><span class="lineno">   33</span>                .CreateBlueprint(name, deviceName);</div>
 <div class="line"><span class="lineno">   34</span> </div>
-<div class="line"><span class="lineno">   35</span>                info.DevicePath = path;</div>
-<div class="line"><span class="lineno">   36</span>                info.Comment = comment;</div>
-<div class="line"><span class="lineno">   37</span>                info.PlcName = module.ParentDevice.Name;</div>
-<div class="line"><span class="lineno">   38</span>                info.CreateSingleAxis(<span class="stringliteral">&quot;SingleAxis&quot;</span>, <span class="stringliteral">&quot;OrderNumber:6SL3310-1TE32-1AAx&quot;</span>, out _,</div>
-<div class="line"><span class="lineno">   39</span>                    AxisDriveObjectType.Vector);</div>
+<div class="line"><span class="lineno">   35</span>            info.DevicePath = path;</div>
+<div class="line"><span class="lineno">   36</span>            info.Comment = comment;</div>
+<div class="line"><span class="lineno">   37</span>            info.PlcName = module.ParentDevice.Name;</div>
+<div class="line"><span class="lineno">   38</span>            info.CreateSingleAxis(<span class="stringliteral">&quot;SingleAxis&quot;</span>, <span class="stringliteral">&quot;OrderNumber:6SL3310-1TE32-1AAx&quot;</span>, out _,</div>
+<div class="line"><span class="lineno">   39</span>                AxisDriveObjectType.Vector);</div>
 <div class="line"><span class="lineno">   40</span> </div>
-<div class="line"><span class="lineno">   41</span>                info.GetAxis(<span class="stringliteral">&quot;SingleAxis&quot;</span>).PlcName = module.ParentDevice.Name;</div>
+<div class="line"><span class="lineno">   41</span>            info.GetAxis(<span class="stringliteral">&quot;SingleAxis&quot;</span>).PlcName = module.ParentDevice.Name;</div>
 <div class="line"><span class="lineno">   42</span> </div>
-<div class="line"><span class="lineno">   43</span>                module.SynchronizedCollection.HardwareInterfaces.Add(info);</div>
+<div class="line"><span class="lineno">   43</span>            module.SynchronizedCollection.HardwareInterfaces.Add(info);</div>
 <div class="line"><span class="lineno">   44</span> </div>
-<div class="line"><span class="lineno">   45</span>                <span class="keywordflow">return</span> info;</div>
-<div class="line"><span class="lineno">   46</span>            }</div>
+<div class="line"><span class="lineno">   45</span>            <span class="keywordflow">return</span> info;</div>
+<div class="line"><span class="lineno">   46</span>        }</div>
 <div class="line"><span class="lineno">   47</span> </div>
-<div class="line"><span class="lineno">   48</span>            <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
-<div class="line"><span class="lineno">   49</span>        }</div>
+<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
+<div class="line"><span class="lineno">   49</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -270,23 +270,24 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_hardware_generation_8cs_source.html#l00060">60</a> of file <a class="el" href="_hardware_generation_8cs_source.html">HardwareGeneration.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>        {</div>
-<div class="line"><span class="lineno">   63</span>            <span class="keywordflow">if</span> (!module.SynchronizedCollection.HardwareInterfaces.OfType&lt;ProfiDriveObjectInfo&gt;()</div>
-<div class="line"><span class="lineno">   64</span>                    .Any(x =&gt; x.DriveDevice.Equals(name)))</div>
-<div class="line"><span class="lineno">   65</span>            {</div>
-<div class="line"><span class="lineno">   66</span>                var info = HardwareBlueprintFactory.CreateDrive(S210OrderNumbers.S210_PN_3AC_7_kW).LatestFirmware()</div>
-<div class="line"><span class="lineno">   67</span>                    .CreateBlueprint(name, deviceName);</div>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>    {</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">if</span> (!module.SynchronizedCollection.HardwareInterfaces.OfType&lt;ProfiDriveObjectInfo&gt;()</div>
+<div class="line"><span class="lineno">   64</span>                .Any(x =&gt; x.DriveDevice.Equals(name)))</div>
+<div class="line"><span class="lineno">   65</span>        {</div>
+<div class="line"><span class="lineno">   66</span>            var info = HardwareBlueprintFactory.CreateDrive(S210OrderNumbers.S210_PN_3AC_7_kW).LatestFirmware()</div>
+<div class="line"><span class="lineno">   67</span>                .CreateBlueprint(name, deviceName);</div>
 <div class="line"><span class="lineno">   68</span> </div>
-<div class="line"><span class="lineno">   69</span>                info.DevicePath = path;</div>
-<div class="line"><span class="lineno">   70</span>                info.Comment = comment;</div>
-<div class="line"><span class="lineno">   71</span>                info.PlcName = module.ParentDevice.Name;</div>
+<div class="line"><span class="lineno">   69</span>            info.DevicePath = path;</div>
+<div class="line"><span class="lineno">   70</span>            info.Comment = comment;</div>
+<div class="line"><span class="lineno">   71</span>            info.PlcName = module.ParentDevice.Name;</div>
 <div class="line"><span class="lineno">   72</span> </div>
-<div class="line"><span class="lineno">   73</span>                module.SynchronizedCollection.HardwareInterfaces.Add(info);</div>
+<div class="line"><span class="lineno">   73</span>            module.SynchronizedCollection.HardwareInterfaces.Add(info);</div>
 <div class="line"><span class="lineno">   74</span> </div>
-<div class="line"><span class="lineno">   75</span>                <span class="keywordflow">return</span> info;</div>
-<div class="line"><span class="lineno">   76</span>            }</div>
-<div class="line"><span class="lineno">   77</span>            <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
-<div class="line"><span class="lineno">   78</span>        }</div>
+<div class="line"><span class="lineno">   75</span>            <span class="keywordflow">return</span> info;</div>
+<div class="line"><span class="lineno">   76</span>        }</div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
+<div class="line"><span class="lineno">   79</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -324,21 +325,20 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">project</td><td>This object is the openness object of the TIA Portal project</td></tr>
-    <tr><td class="paramname">name</td><td>Thats the desired name of the HMI Device</td></tr>
+    <tr><td class="paramname">name</td><td>That's the desired name of the HMI Device</td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_hardware_generation_8cs_source.html#l00086">86</a> of file <a class="el" href="_hardware_generation_8cs_source.html">HardwareGeneration.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   87</span>        {</div>
-<div class="line"><span class="lineno">   88</span>            var hmiDevice = project.Devices.FirstOrDefault(x =&gt; x.Name == name);</div>
-<div class="line"><span class="lineno">   89</span>            <span class="keywordflow">if</span> (hmiDevice == <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">   90</span>            {</div>
-<div class="line"><span class="lineno">   91</span>                hmiDevice = project.Devices.CreateWithItem(<span class="stringliteral">&quot;OrderNumber:6AV2 125-2JB23-0AX0/17.0.0.0&quot;</span>, name, name);</div>
-<div class="line"><span class="lineno">   92</span>            }</div>
-<div class="line"><span class="lineno">   93</span>            var hmiSoftwareContainer = hmiDevice.DeviceItems.FirstOrDefault(x =&gt; x.Name.Contains(<span class="stringliteral">&quot;HMI_RT&quot;</span>)).GetService&lt;SoftwareContainer&gt;();</div>
-<div class="line"><span class="lineno">   94</span>            <span class="keywordflow">return</span> hmiSoftwareContainer.Software as HmiTarget;</div>
-<div class="line"><span class="lineno">   95</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_hardware_generation_8cs_source.html#l00088">88</a> of file <a class="el" href="_hardware_generation_8cs_source.html">HardwareGeneration.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   89</span>    {</div>
+<div class="line"><span class="lineno">   90</span>        var hmiDevice = project.Devices.FirstOrDefault(x =&gt; x.Name == name);</div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">if</span> (hmiDevice == <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">   92</span>            hmiDevice = project.Devices.CreateWithItem(<span class="stringliteral">&quot;OrderNumber:6AV2 125-2JB23-0AX0/17.0.0.0&quot;</span>, name, name);</div>
+<div class="line"><span class="lineno">   93</span>        var hmiSoftwareContainer = hmiDevice.DeviceItems.FirstOrDefault(x =&gt; x.Name.Contains(<span class="stringliteral">&quot;HMI_RT&quot;</span>))</div>
+<div class="line"><span class="lineno">   94</span>            .GetService&lt;SoftwareContainer&gt;();</div>
+<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">return</span> hmiSoftwareContainer.Software as HmiTarget;</div>
+<div class="line"><span class="lineno">   96</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -381,10 +381,10 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_hardware_generation_8cs_source.html#l00103">103</a> of file <a class="el" href="_hardware_generation_8cs_source.html">HardwareGeneration.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  104</span>        {</div>
-<div class="line"><span class="lineno">  105</span>            <span class="keywordflow">return</span> subnetsManager.GetOrCreateProfinet(name);</div>
-<div class="line"><span class="lineno">  106</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_hardware_generation_8cs_source.html#l00104">104</a> of file <a class="el" href="_hardware_generation_8cs_source.html">HardwareGeneration.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  105</span>    {</div>
+<div class="line"><span class="lineno">  106</span>        <span class="keywordflow">return</span> subnetsManager.GetOrCreateProfinet(name);</div>
+<div class="line"><span class="lineno">  107</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -420,7 +420,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Connectes the desired drive to the desired subnet. </p>
+<p>Connects the desired drive to the desired subnet. </p>
 <div class="image">
 <img src="ConnectDriveToSubnet.png" alt=""/>
 </div>
@@ -433,30 +433,30 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_hardware_generation_8cs_source.html#l00115">115</a> of file <a class="el" href="_hardware_generation_8cs_source.html">HardwareGeneration.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>        {</div>
-<div class="line"><span class="lineno">  117</span>            var device = module.SynchronizedCollection.HardwareInterfaces.OfType&lt;ProfiDriveObjectInfo&gt;().FirstOrDefault(x =&gt; x.Name.Equals(drive.Name));</div>
-<div class="line"><span class="lineno">  118</span> </div>
-<div class="line"><span class="lineno">  119</span>            var plcNwItf = module.ParentDeviceAsHardwareInfo.ControllerProfinetInterfaces.First();</div>
-<div class="line"><span class="lineno">  120</span>            plcNwItf.ConnectedSubnetInfo = subnet;</div>
-<div class="line"><span class="lineno">  121</span> </div>
-<div class="line"><span class="lineno">  122</span>            var ioSystem = plcNwItf.ConnectedSubnetInfo.GetOrCreateIoSystem(plcNwItf, <span class="stringliteral">&quot;PROFINET IO-System&quot;</span>);</div>
+<p class="definition">Definition at line <a class="el" href="_hardware_generation_8cs_source.html#l00116">116</a> of file <a class="el" href="_hardware_generation_8cs_source.html">HardwareGeneration.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>    {</div>
+<div class="line"><span class="lineno">  118</span>        var device = module.SynchronizedCollection.HardwareInterfaces.OfType&lt;ProfiDriveObjectInfo&gt;()</div>
+<div class="line"><span class="lineno">  119</span>            .FirstOrDefault(x =&gt; x.Name.Equals(drive.Name));</div>
+<div class="line"><span class="lineno">  120</span> </div>
+<div class="line"><span class="lineno">  121</span>        var plcNwItf = module.ParentDeviceAsHardwareInfo.ControllerProfinetInterfaces.First();</div>
+<div class="line"><span class="lineno">  122</span>        plcNwItf.ConnectedSubnetInfo = subnet;</div>
 <div class="line"><span class="lineno">  123</span> </div>
-<div class="line"><span class="lineno">  124</span>            <span class="keywordflow">if</span> (device.GetType() == typeof(S120PNDriveInfo))</div>
-<div class="line"><span class="lineno">  125</span>            {</div>
-<div class="line"><span class="lineno">  126</span>                (device as S120PNDriveInfo).ProfinetInterface.ConnectedSubnetInfo = subnet;</div>
-<div class="line"><span class="lineno">  127</span>                ioSystem.ConnectIoDevice((device as S120PNDriveInfo).ProfinetInterface.IoConnectors.First().Value);</div>
-<div class="line"><span class="lineno">  128</span>                plcNwItf.Ports.First().Connect((device as S120PNDriveInfo).ProfinetInterface.Ports.First());</div>
-<div class="line"><span class="lineno">  129</span>            }</div>
-<div class="line"><span class="lineno">  130</span>            <span class="keywordflow">if</span> (device.GetType() == typeof(S210DriveInfo))</div>
-<div class="line"><span class="lineno">  131</span>            {</div>
-<div class="line"><span class="lineno">  132</span>                (device as S210DriveInfo).ProfinetInterface.ConnectedSubnetInfo = subnet;</div>
-<div class="line"><span class="lineno">  133</span>                ioSystem.ConnectIoDevice((device as S210DriveInfo).ProfinetInterface.IoConnectors.First().Value);</div>
-<div class="line"><span class="lineno">  134</span>                plcNwItf.Ports.First().Connect((device as S210DriveInfo).ProfinetInterface.Ports.First());</div>
-<div class="line"><span class="lineno">  135</span>            }</div>
-<div class="line"><span class="lineno">  136</span> </div>
-<div class="line"><span class="lineno">  137</span> </div>
+<div class="line"><span class="lineno">  124</span>        var ioSystem = plcNwItf.ConnectedSubnetInfo.GetOrCreateIoSystem(plcNwItf, <span class="stringliteral">&quot;PROFINET IO-System&quot;</span>);</div>
+<div class="line"><span class="lineno">  125</span> </div>
+<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">if</span> (device.GetType() == typeof(S120PNDriveInfo))</div>
+<div class="line"><span class="lineno">  127</span>        {</div>
+<div class="line"><span class="lineno">  128</span>            (device as S120PNDriveInfo).ProfinetInterface.ConnectedSubnetInfo = subnet;</div>
+<div class="line"><span class="lineno">  129</span>            ioSystem.ConnectIoDevice((device as S120PNDriveInfo).ProfinetInterface.IoConnectors.First().Value);</div>
+<div class="line"><span class="lineno">  130</span>            plcNwItf.Ports.First().Connect((device as S120PNDriveInfo).ProfinetInterface.Ports.First());</div>
+<div class="line"><span class="lineno">  131</span>        }</div>
+<div class="line"><span class="lineno">  132</span> </div>
+<div class="line"><span class="lineno">  133</span>        <span class="keywordflow">if</span> (device.GetType() == typeof(S210DriveInfo))</div>
+<div class="line"><span class="lineno">  134</span>        {</div>
+<div class="line"><span class="lineno">  135</span>            (device as S210DriveInfo).ProfinetInterface.ConnectedSubnetInfo = subnet;</div>
+<div class="line"><span class="lineno">  136</span>            ioSystem.ConnectIoDevice((device as S210DriveInfo).ProfinetInterface.IoConnectors.First().Value);</div>
+<div class="line"><span class="lineno">  137</span>            plcNwItf.Ports.First().Connect((device as S210DriveInfo).ProfinetInterface.Ports.First());</div>
 <div class="line"><span class="lineno">  138</span>        }</div>
+<div class="line"><span class="lineno">  139</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
