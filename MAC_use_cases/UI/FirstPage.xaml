@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -63,5 +64,14 @@
                  Width="400"
                  HorizontalAlignment="Left"
                  Margin="5" />
+
+        <!-- Row 5 -->
+        <TextBlock Grid.Row="5" Grid.Column="0"
+                   Text="Generate Hardware:"
+                   Margin="5" />
+        <CheckBox Grid.Row="5" Grid.Column="1"
+                 HorizontalAlignment="Left"
+                 Margin="5"
+                 IsChecked="{Binding IsGenerateHardwareChecked}"/>
     </Grid>
 </modulesUI:BaseEditor>
