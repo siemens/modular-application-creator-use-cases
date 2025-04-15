@@ -6,6 +6,7 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Helper;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
+using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
 using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using ProgrammingLanguage =
     Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.ProgrammingLanguage;
@@ -161,6 +162,50 @@ public class GenericBlockCreation
         itf.Add(customParam2);
 
         axesDataDB.GenerateXmlBlock(plcDevice);
+    }
+
+    /// <summary>
+    ///     Creates a new Function Block (FB) within the specified software unit with predefined interface parameters.
+    ///     The FB will contain two boolean inputs and one boolean output, all with remanence ignored.
+    /// </summary>
+    /// <param name="softwareUnitBase">The base software unit where the Function Block will be created</param>
+    /// <param name="fbName">The name for the new Function Block</param>
+    /// <param name="programmingLanguage">The programming language to be used for the Function Block</param>
+    /// <remarks>
+    ///     The created Function Block will have the following interface:
+    ///     - Inputs:
+    ///     - Input_1 (Bool)
+    ///     - Input_2 (Bool)
+    ///     - Output:
+    ///     - Output (Bool)
+    ///     All parameters are configured with IgnoreRemanence setting.
+    /// </remarks>
+    /// <example>
+    ///     <code>
+    /// CreateFunctionBlockInSoftwareUnit(mySoftwareUnit, "MyNewFB", ProgrammingLanguage.LAD);
+    /// </code>
+    /// </example>
+    public static void CreateFunctionBlockInSoftwareUnit(ISoftwareUnitBase softwareUnitBase, string fbName,
+        ProgrammingLanguage programmingLanguage)
+    {
+        var fb = new XmlFB(fbName);
+
+        fb.Interface[InterfaceSections.Input].Add(new InterfaceParameter("Input_1", "Bool")
+        {
+            Remanence = RemanenceSettings.IgnoreRemanence
+        });
+        fb.Interface[InterfaceSections.Input].Add(new InterfaceParameter("Input_2", "Bool")
+        {
+            Remanence = RemanenceSettings.IgnoreRemanence
+        });
+        fb.Interface[InterfaceSections.Output].Add(new InterfaceParameter("Output", "Bool")
+        {
+            Remanence = RemanenceSettings.IgnoreRemanence
+        });
+
+
+        //here an example how to create a multi instance call in the function block
+        fb.GenerateXmlBlock(softwareUnitBase, programmingLanguage);
     }
 
     /// <summary>
