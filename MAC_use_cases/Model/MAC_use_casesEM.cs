@@ -69,6 +69,8 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
     /// </summary>
     public TechnologyObjectClass myTO { get; set; }
 
+    public bool IsGenerateHardwareChecked { get; set; } = false;
+
     /// <summary>
     ///     This attribute is the instance for the serialization
     /// </summary>
@@ -97,8 +99,8 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
                 m_plcDevice = GetPlcDevice(tiaTemplateContext);
                 break;
 
-            // Add equipment module specific code for each generation phase here, which is
-            // necessary before the ResourceManagement is called.
+                // Add equipment module specific code for each generation phase here, which is
+                // necessary before the ResourceManagement is called.
         }
 
         ResourceManagement.Generate(tiaTemplateContext, this, generationPhaseName);
@@ -110,7 +112,10 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
         switch (generationPhaseName)
         {
             case TiaGenerationPhases.Init:
-
+                if (!IsGenerateHardwareChecked)
+                {
+                    break;
+                }
                 //Hardware config has to be in the Init phase.Otherwise, it can't be used in the MAC.
                 var s120 = HardwareGeneration.GenerateS120(this, "S120MACTest", "S120DeviceTest",
                     "this drive is generated with MAC");
@@ -175,9 +180,12 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
 
                 CreateVariables.CreateTagInTagTable(myTagTable, "%I", "187", "0", "myTag", "Bool", "myTagComment");
 
-                var hmiSoftware = HardwareGeneration.GetOrCreateHMISoftware(opennessTIAPortalProject, "HMI_1");
-                IntegrateLibraries.GenerateScreenFromMastercopy(hmiSoftware,
-                    ResourceManagement.Lib_MAC_use_cases.Lib_Screen_1);
+                if (IsGenerateHardwareChecked)
+                {
+                    var hmiSoftware = HardwareGeneration.GetOrCreateHMISoftware(opennessTIAPortalProject, "HMI_1");
+                    IntegrateLibraries.GenerateScreenFromMastercopy(hmiSoftware,
+                        ResourceManagement.Lib_MAC_use_cases.Lib_Screen_1);
+                }
 
                 provider.CollectAttributes(Attributes);
                 provider.WriteValues(m_plcDevice);
