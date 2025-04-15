@@ -109,8 +109,11 @@ $(function(){initNavTree('class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_cr
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a196e9521a76bc297ab213ef7f1b53a12" id="r_a196e9521a76bc297ab213ef7f1b53a12"><td class="memItemLeft" align="right" valign="top">static ControllerTags&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a196e9521a76bc297ab213ef7f1b53a12">CreateTagTable</a> (PlcDevice plcDevice, string tableName)</td></tr>
-<tr class="memdesc:a196e9521a76bc297ab213ef7f1b53a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">This Function creates a Tag Table.  <br /></td></tr>
+<tr class="memdesc:a196e9521a76bc297ab213ef7f1b53a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new tag table or retrieves an existing one in the specified PLC device.  <br /></td></tr>
 <tr class="separator:a196e9521a76bc297ab213ef7f1b53a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc410f9ded76c97fb2f383c43ab6e3e" id="r_aefc410f9ded76c97fb2f383c43ab6e3e"><td class="memItemLeft" align="right" valign="top">static ControllerTags&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefc410f9ded76c97fb2f383c43ab6e3e">CreateTagTable</a> (ISoftwareUnitBase softwareUnit, string tableName)</td></tr>
+<tr class="memdesc:aefc410f9ded76c97fb2f383c43ab6e3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new tag table or retrieves an existing one in the specified software unit.  <br /></td></tr>
+<tr class="separator:aefc410f9ded76c97fb2f383c43ab6e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b1dcd0fee94bcf523825eddf1416d58" id="r_a4b1dcd0fee94bcf523825eddf1416d58"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b1dcd0fee94bcf523825eddf1416d58">CreateTagInTagTable</a> (ControllerTags tagTable, string addressType, string addressByte, string addressBit, string tagName, string dataType, string tagComment)</td></tr>
 <tr class="memdesc:a4b1dcd0fee94bcf523825eddf1416d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">This Function creates a Tag in a Tag Table.  <br /></td></tr>
 <tr class="separator:a4b1dcd0fee94bcf523825eddf1416d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,7 +124,7 @@ Static Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00009">9</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a196e9521a76bc297ab213ef7f1b53a12" name="a196e9521a76bc297ab213ef7f1b53a12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a196e9521a76bc297ab213ef7f1b53a12">&#9670;&#160;</a></span>CreateTagTable()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a196e9521a76bc297ab213ef7f1b53a12">&#9670;&#160;</a></span>CreateTagTable() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,25 +150,72 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This Function creates a Tag Table. </p>
+<p>Creates a new tag table or retrieves an existing one in the specified PLC device. </p>
 <div class="image">
 <img src="CreateTagTable.png" alt=""/>
 </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">plcDevice</td><td>The PLC on which the equipment module is implemented</td></tr>
-    <tr><td class="paramname">tableName</td><td>The Name of the tag table</td></tr>
+    <tr><td class="paramname">plcDevice</td><td>The PLC device where the tag table should be created or retrieved</td></tr>
+    <tr><td class="paramname">tableName</td><td>The name for the tag table</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>newTable -&gt; the created tag table (empty)</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A ControllerTags object representing the new or existing tag table</dd></dl>
+<p>If a tag table with the specified name already exists, it will be returned instead of creating a new one. The returned tag table can be used to add, modify, or remove tags. </p>
+<div class="fragment"><div class="line">var tagTable = <a class="code hl_function" href="#a196e9521a76bc297ab213ef7f1b53a12">CreateTagTable</a>(myPlcDevice, <span class="stringliteral">&quot;ProcessTags&quot;</span>);</div>
+<div class="ttc" id="aclass_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables_html_a196e9521a76bc297ab213ef7f1b53a12"><div class="ttname"><a href="#a196e9521a76bc297ab213ef7f1b53a12">MAC_use_cases.Model.UseCases.CreateVariables.CreateTagTable</a></div><div class="ttdeci">static ControllerTags CreateTagTable(PlcDevice plcDevice, string tableName)</div><div class="ttdoc">Creates a new tag table or retrieves an existing one in the specified PLC device.</div><div class="ttdef"><b>Definition</b> <a href="_create_variables_8cs_source.html#l00027">CreateVariables.cs:27</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00027">27</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   28</span>    {</div>
+<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">return</span> plcDevice.Tags.GetOrCreateGlobalTagTable(tableName);</div>
+<div class="line"><span class="lineno">   30</span>    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aefc410f9ded76c97fb2f383c43ab6e3e" name="aefc410f9ded76c97fb2f383c43ab6e3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc410f9ded76c97fb2f383c43ab6e3e">&#9670;&#160;</a></span>CreateTagTable() <span class="overload">[2/2]</span></h2>
 
-<p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00020">20</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   21</span>        {</div>
-<div class="line"><span class="lineno">   22</span>            var newTable = plcDevice.Tags.GetOrCreateGlobalTagTable(tableName);</div>
-<div class="line"><span class="lineno">   23</span> </div>
-<div class="line"><span class="lineno">   24</span>            <span class="keywordflow">return</span> newTable;</div>
-<div class="line"><span class="lineno">   25</span>        }</div>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static ControllerTags MAC_use_cases.Model.UseCases.CreateVariables.CreateTagTable </td>
+          <td>(</td>
+          <td class="paramtype">ISoftwareUnitBase</td>          <td class="paramname"><span class="paramname"><em>softwareUnit</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>tableName</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new tag table or retrieves an existing one in the specified software unit. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">softwareUnit</td><td>The software unit where the tag table should be created or retrieved</td></tr>
+    <tr><td class="paramname">tableName</td><td>The name for the tag table</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A ControllerTags object representing the new or existing tag table</dd></dl>
+<p>This overload creates/retrieves a tag table within a specific software unit rather than at the PLC device level. If a tag table with the specified name already exists in the software unit, it will be returned instead of creating a new one. </p>
+<div class="fragment"><div class="line">var tagTable = <a class="code hl_function" href="#a196e9521a76bc297ab213ef7f1b53a12">CreateTagTable</a>(mySoftwareUnit, <span class="stringliteral">&quot;ModuleSpecificTags&quot;</span>);</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00048">48</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>    {</div>
+<div class="line"><span class="lineno">   50</span>        <span class="keywordflow">return</span> softwareUnit.Tags.GetOrCreateGlobalTagTable(tableName);</div>
+<div class="line"><span class="lineno">   51</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -238,20 +288,17 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00039">39</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   40</span>        {</div>
-<div class="line"><span class="lineno">   41</span>            <span class="keywordtype">string</span> tagAddress = addressType + addressByte.ToString() + <span class="stringliteral">&quot;.&quot;</span> + addressBit.ToString();</div>
-<div class="line"><span class="lineno">   42</span> </div>
-<div class="line"><span class="lineno">   43</span>            var tag = tagTable[tagName];</div>
-<div class="line"><span class="lineno">   44</span> </div>
-<div class="line"><span class="lineno">   45</span>            <span class="keywordflow">if</span> (tag != <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">   46</span>            {</div>
-<div class="line"><span class="lineno">   47</span>                tag.Delete();</div>
-<div class="line"><span class="lineno">   48</span>            }</div>
-<div class="line"><span class="lineno">   49</span> </div>
-<div class="line"><span class="lineno">   50</span>            tag = tagTable.AddTag(tagName, dataType, tagAddress);</div>
-<div class="line"><span class="lineno">   51</span>            tag.SetComment(<span class="stringliteral">&quot;en-EN&quot;</span>, tagComment);</div>
-<div class="line"><span class="lineno">   52</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00065">65</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>    {</div>
+<div class="line"><span class="lineno">   68</span>        var tagAddress = addressType + addressByte + <span class="stringliteral">&quot;.&quot;</span> + addressBit;</div>
+<div class="line"><span class="lineno">   69</span> </div>
+<div class="line"><span class="lineno">   70</span>        var tag = tagTable[tagName];</div>
+<div class="line"><span class="lineno">   71</span> </div>
+<div class="line"><span class="lineno">   72</span>        tag?.Delete();</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>        tag = tagTable.AddTag(tagName, dataType, tagAddress);</div>
+<div class="line"><span class="lineno">   75</span>        tag.SetComment(<span class="stringliteral">&quot;en-EN&quot;</span>, tagComment);</div>
+<div class="line"><span class="lineno">   76</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
