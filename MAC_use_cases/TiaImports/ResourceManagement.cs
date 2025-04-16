@@ -34,9 +34,10 @@ namespace MAC_use_cases.TiaImports
         // List of generated blocks
         public Dictionary<object, object> __created_block_list = new Dictionary<object, object>();
         public Lib_MAC_use_cases Lib_MAC_use_cases { get; set; }
-        public MAC_use_casesFB MAC_use_casesFB { get { return Lib_MAC_use_cases.MAC_use_casesFB as MAC_use_casesFB; } }
-        public MAC_use_casesFB_FailSafe MAC_use_casesFB_FailSafe { get { return Lib_MAC_use_cases.MAC_use_casesFB_FailSafe as MAC_use_casesFB_FailSafe; } }
-        public myDataType myDataType { get { return Lib_MAC_use_cases.myDataType as myDataType; } }
+        public MyFunctionBlock MyFunctionBlock { get { return Lib_MAC_use_cases.MyFunctionBlock as MyFunctionBlock; } }
+        public MyFunctionBlock_FailSafe MyFunctionBlock_FailSafe { get { return Lib_MAC_use_cases.MyFunctionBlock_FailSafe as MyFunctionBlock_FailSafe; } }
+        public MyFunctionBlock_Typed MyFunctionBlock_Typed { get { return Lib_MAC_use_cases.MyFunctionBlock_Typed as MyFunctionBlock_Typed; } }
+        public MyDataType MyDataType { get { return Lib_MAC_use_cases.MyDataType as MyDataType; } }
         public List<string> LibraryTagsRootGroupPath { get; set; } = new List<string>();
         public TagGroup LibraryTagsRootGroup { get; private set; }
         public List<string> LibraryTypesRootGroupPath { get; set; } = new List<string>();
@@ -284,8 +285,9 @@ namespace MAC_use_cases.TiaImports
 
         private void PostInit(TiaTemplateContext tiaTemplateContext, MAC_use_casesEM module)
         {
-            MAC_use_casesFB.ParentDevice = null;
-            MAC_use_casesFB_FailSafe.ParentDevice = null;
+            MyFunctionBlock.ParentDevice = null;
+            MyFunctionBlock_FailSafe.ParentDevice = null;
+            MyFunctionBlock_Typed.ParentDevice = null;
         }
 
         private void AddResourcesToTiaProject(TiaTemplateContext tiaTemplateContext, MAC_use_casesEM module)
@@ -316,38 +318,53 @@ namespace MAC_use_cases.TiaImports
             // Create tag lists
 
             // Create types
-            if (myDataType.IsIncludedInTiaProject)
+            if (MyDataType.IsIncludedInTiaProject)
             {
-                Lib_MAC_use_cases.myDataType.CreateOnlyOnce = true;
-                __created_block_list[Lib_MAC_use_cases.myDataType] = LibraryTypesRootGroup["Lib_MAC_use_cases_Types"].Types.Add(Lib_MAC_use_cases.myDataType);
-                CollectLibraryTypeCreationInfo(Lib_MAC_use_cases.myDataType);
+                Lib_MAC_use_cases.MyDataType.CreateOnlyOnce = true;
+                __created_block_list[Lib_MAC_use_cases.MyDataType] = LibraryTypesRootGroup["Lib_MAC_use_cases_Types"].Types.Add(Lib_MAC_use_cases.MyDataType);
+                CollectLibraryTypeCreationInfo(Lib_MAC_use_cases.MyDataType);
             }
 
             // Create technological objects
 
             // Create blocks
-            if (MAC_use_casesFB.IsIncludedInTiaProject)
+            if (MyFunctionBlock.IsIncludedInTiaProject)
             {
-                if (MAC_use_casesFB.ParentDevice == null)
+                if (MyFunctionBlock.ParentDevice == null)
                 {
-                    MAC_use_casesFB.ParentDevice = targetDevice;
+                    MyFunctionBlock.ParentDevice = targetDevice;
                 }
 
-                Lib_MAC_use_cases.MAC_use_casesFB.CreateOnlyOnce = false;
-                __created_block_list[MAC_use_casesFB] = LibraryBlocksRootGroup["Lib_MAC_use_cases_Blocks"].Blocks.Add(MAC_use_casesFB);
-                CollectLibraryTypeCreationInfo(MAC_use_casesFB);
+                Lib_MAC_use_cases.MyFunctionBlock.CreateOnlyOnce = false;
+                __created_block_list[MyFunctionBlock] = LibraryBlocksRootGroup["Lib_MAC_use_cases_Blocks"].Blocks.Add(MyFunctionBlock);
+                CollectLibraryTypeCreationInfo(MyFunctionBlock);
             }
 
-            if (MAC_use_casesFB_FailSafe.IsIncludedInTiaProject)
+            if (MyFunctionBlock_FailSafe.IsIncludedInTiaProject)
             {
-                if (MAC_use_casesFB_FailSafe.ParentDevice == null)
+                if (MyFunctionBlock_FailSafe.ParentDevice == null)
                 {
-                    MAC_use_casesFB_FailSafe.ParentDevice = targetDevice;
+                    MyFunctionBlock_FailSafe.ParentDevice = targetDevice;
                 }
 
-                Lib_MAC_use_cases.MAC_use_casesFB_FailSafe.CreateOnlyOnce = false;
-                __created_block_list[MAC_use_casesFB_FailSafe] = LibraryBlocksRootGroup["Lib_MAC_use_cases_Blocks"].Blocks.Add(MAC_use_casesFB_FailSafe);
-                CollectLibraryTypeCreationInfo(MAC_use_casesFB_FailSafe);
+                Lib_MAC_use_cases.MyFunctionBlock_FailSafe.CreateOnlyOnce = false;
+                __created_block_list[MyFunctionBlock_FailSafe] = LibraryBlocksRootGroup["Lib_MAC_use_cases_Blocks"].Blocks.Add(MyFunctionBlock_FailSafe);
+                CollectLibraryTypeCreationInfo(MyFunctionBlock_FailSafe);
+            }
+
+            if (MyFunctionBlock_Typed.IsIncludedInTiaProject)
+            {
+                if (MyFunctionBlock_Typed.ParentDevice == null)
+                {
+                    MyFunctionBlock_Typed.ParentDevice = targetDevice;
+                }
+
+                __created_block_list[MyFunctionBlock_Typed] = targetDevice.Blocks.Add(MyFunctionBlock_Typed);
+                CollectLibraryTypeCreationInfo(MyFunctionBlock_Typed);
+            }
+            else
+            {
+                Lib_MAC_use_cases.MyFunctionBlock_Typed.InstanceTargetFolder = targetDevice.Blocks;
             }
         }
 
