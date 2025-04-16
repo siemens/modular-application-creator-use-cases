@@ -98,9 +98,10 @@ where to where -->
     <Compile Include="Model\BaseMAC_use_casesEM.cs" />
     <Compile Include="Model\BaseMAC_use_casesEMGeneratedItems.cs" />
     <Compile Include="TiaImports\GeneratedClasses\Lib_MAC_use_cases.cs" />
-    <Compile Include="TiaImports\GeneratedClasses\MAC_use_casesFB.cs" />
-    <Compile Include="TiaImports\GeneratedClasses\MAC_use_casesFB_FailSafe.cs" />
-    <Compile Include="TiaImports\GeneratedClasses\myDataType.cs" />
+    <Compile Include="TiaImports\GeneratedClasses\MyDataType.cs" />
+    <Compile Include="TiaImports\GeneratedClasses\MyFunctionBlock.cs" />
+    <Compile Include="TiaImports\GeneratedClasses\MyFunctionBlock_FailSafe.cs" />
+    <Compile Include="TiaImports\GeneratedClasses\MyFunctionBlock_Typed.cs" />
     <Compile Include="TiaImports\ResourceManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\MultiPageFrame.xaml.cs">

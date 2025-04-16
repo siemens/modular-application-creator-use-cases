@@ -19,30 +19,26 @@ namespace MAC_use_cases
     public partial class Lib_MAC_use_cases : LibraryBase
     {
         
-        public virtual ProgramMasterCopy MyDataType
+        public virtual FBLibraryType MyFunctionBlock_Typed
         {
             get
             {
-                ProgramMasterCopy returnValue = ((ProgramMasterCopy)(MasterCopies["MyDataType"]));
+                FBLibraryType returnValue = ((FBLibraryType)(Types["MyFunctionBlock_Typed"]));
                 return returnValue;
             }
         }
     }
     
-    [OriginalTypeName("MyDataType")]
-    public class MyDataType : ProgramMasterCopy, ITiaResource
+    [DefaultVersionGuid("37350dd3-dc9a-4954-a0dd-22084d7f0321")]
+    [DefaultVersionIsIndependent(true)]
+    [OriginalTypeName("MyFunctionBlock_Typed")]
+    public class MyFunctionBlock_Typed : FBLibraryType, ITiaResource, ITiaProjectLibraryResource
     {
         
         public Siemens.Automation.ModularApplicationCreator.Tia.Openness.PlcDevice ParentDevice{get;set;}=null;
         
         public bool IsIncludedInTiaProject{get;set;}=true;
         
-        public override string TiaProjectRootGroupName
-        {
-            get
-            {
-                return TiaDynamicProperties.PlcDataTypesRootGroupName;
-            }
-        }
+        public bool IsIncludedInProjectLibrary{get;set;}=true;
     }
 }

@@ -19,18 +19,18 @@ namespace MAC_use_cases
     public partial class Lib_MAC_use_cases : LibraryBase
     {
         
-        public virtual FBMasterCopy MAC_use_casesFB_FailSafe
+        public virtual FBMasterCopy MyFunctionBlock
         {
             get
             {
-                FBMasterCopy returnValue = ((FBMasterCopy)(MasterCopies["MAC_use_casesFB_FailSafe"]));
+                FBMasterCopy returnValue = ((FBMasterCopy)(MasterCopies["MyFunctionBlock"]));
                 return returnValue;
             }
         }
     }
     
-    [OriginalTypeName("MAC_use_casesFB_FailSafe")]
-    public class MAC_use_casesFB_FailSafe : FBMasterCopy, ITiaResource
+    [OriginalTypeName("MyFunctionBlock")]
+    public class MyFunctionBlock : FBMasterCopy, ITiaResource
     {
         
         public Siemens.Automation.ModularApplicationCreator.Tia.Openness.PlcDevice ParentDevice{get;set;}=null;

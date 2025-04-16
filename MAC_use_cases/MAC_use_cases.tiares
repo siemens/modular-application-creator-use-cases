@@ -9,15 +9,16 @@
       <Group Name="LibraryRoot" GenerationName="Types.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryTypesRootGroup">
         <Group Name="Lib_MAC_use_cases_Types" GenerationName="Types.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Types&quot;]" />
       </Group>
-      <Types Name="myDataType" GroupPath="Types.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Types&quot;].Types" allowRename="false" createOnlyOnce="true" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="myDataType" LibraryType="False" />
+      <Types Name="MyDataType" GroupPath="Types.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Types&quot;].Types" allowRename="false" createOnlyOnce="true" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="MyDataType" LibraryType="False" />
     </ResourceCategory>
     <ResourceCategory Name="SoftwareUnits" />
     <ResourceCategory Name="Blocks" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;]">
       <Group Name="LibraryRoot" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;]" RootGroupMemberName="LibraryBlocksRootGroup">
         <Group Name="Lib_MAC_use_cases_Blocks" GenerationName="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;]" />
       </Group>
-      <Blocks Name="MAC_use_casesFB" GroupPath="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;].Blocks" BlockType="FB" allowRename="true" createOnlyOnce="false" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="MAC_use_casesFB" LibraryType="False" />
-      <Blocks Name="MAC_use_casesFB_FailSafe" GroupPath="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;].Blocks" BlockType="FB" allowRename="true" createOnlyOnce="false" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="MAC_use_casesFB_FailSafe" LibraryType="False" />
+      <Blocks Name="MyFunctionBlock" GroupPath="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;].Blocks" BlockType="FB" allowRename="true" createOnlyOnce="false" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="MyFunctionBlock" LibraryType="False" />
+      <Blocks Name="MyFunctionBlock_FailSafe" GroupPath="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;].Blocks" BlockType="FB" allowRename="true" createOnlyOnce="false" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="MyFunctionBlock_FailSafe" LibraryType="False" />
+      <Blocks Name="MyFunctionBlock_Typed" GroupPath="Blocks.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_Blocks&quot;].Blocks" BlockType="FB" allowRename="true" createOnlyOnce="false" ContainingLibrary="Lib_MAC_use_cases" OriginalTypeName="MyFunctionBlock_Typed" DefaultVersionGuid="37350dd3-dc9a-4954-a0dd-22084d7f0321" DefaultVersionIsIndependent="True" LibraryType="True" />
     </ResourceCategory>
     <ResourceCategory Name="TOs" />
     <ResourceCategory Name="WatchTables" GenerationName="WatchTables.Groups[&quot;LibraryRoot&quot;][&quot;Lib_MAC_use_cases_WatchTables&quot;]">

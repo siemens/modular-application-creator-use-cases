@@ -83,13 +83,13 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
     ///     This attribute is the string which is used for the renaming of the FB.
     ///     This string can be changed in the View
     /// </summary>
-    public string NameOfMyFb { get; set; } = "myFB";
+    public string NameOfMyFb { get; set; } = "MyFunctionBlock";
 
     /// <summary>
     ///     This attribute is the string which is used for the renaming of the safety-FB.
     ///     This string can be changed in the View
     /// </summary>
-    public string NameOfMyFailSafeFb { get; set; } = "myFailSafeFB";
+    public string NameOfMyFailSafeFb { get; set; } = "MyFunctionBlock_FailSafe";
 
     [JsonIgnore]
     public string NameAndType => NamingConventions.CreateModuleNameAndTypeForEM("MAC_use_cases", this);
@@ -131,53 +131,69 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
             case TiaGenerationPhases.Build:
 
                 // Add equipment module specific code generation here.
-
                 var opennessTIAPortalProject = GeneralSupport.GetOpennessProject(tiaTemplateContext.TiaProject);
                 var opennessCPU = GeneralSupport.GetOpennessDeviceItem(tiaTemplateContext.TiaDevice);
                 m_softwareUnit = SoftwareUnits.GetOrCreateSoftwareUnit(m_plcDevice, "MyUnit", this);
 
+                // Configure a Technology Object
                 myTO.ConfigureTO(myTO.TechnologicalObject, this);
-
+                // Log messages
                 GeneralSupport.LogMessage(LogTypes.GenerationInfo, "Generate technology objects", this);
+                // Create Technology Object
                 TechnologyObjectClass.CreateTOs(m_plcDevice, this);
 
-                IntegrateLibraries.CreateInstanceDB(this, ResourceManagement.MAC_use_casesFB,
-                    "CreatedDbFromMasterCopy", ResourceManagement.ModuleBlocksRootGroup);
-
-                IntegrateLibraries.CreateInstanceDB(this, ResourceManagement.MAC_use_casesFB_FailSafe,
-                    "CreatedDbFromFailSafeFbMasterCopy", ResourceManagement.ModuleBlocksRootGroup);
-
-                IntegrateLibraries.CreateInstanceDB_via_XmlInstDB(this, ResourceManagement.MAC_use_casesFB,
+                IntegrateLibraries.CreateInstanceDB_via_XmlInstDB(this, ResourceManagement.MyFunctionBlock,
                     "CreatedDbFromMasterCopy_XmlInstDB", ResourceManagement.ModuleBlocksRootGroup, m_plcDevice);
 
-                GenericBlockCreation.GenerateDB("myDB", m_plcDevice, this);
+                var myDataBlockGlobal =
+                    GenericBlockCreation.GenerateGlobalDataBlock("MyDataBlock_Global", m_plcDevice, this);
 
-                GenericBlockCreation.SetDefaultValue("myDB", "myParameterName", TIATYPE.INT, "99", this);
+                GenericBlockCreation.SetDefaultValue(myDataBlockGlobal.Name, "myParameterName", TIATYPE.INT, "99",
+                    this);
 
                 GenericBlockCreation.GenerateMultiInstanceFB(m_plcDevice,
                     tiaTemplateContext.TiaProject.GetEditingLanguage(), this);
 
-                GenericBlockCreation.GenerateOB_Main("CreatedDbFromMasterCopy", this,
+                var dbFromMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(this,
+                    ResourceManagement.MyFunctionBlock,
+                    $"{nameof(ResourceManagement.MyFunctionBlock)}Db", ResourceManagement.ModuleBlocksRootGroup);
+
+                GenericBlockCreation.GenerateOB_Main(dbFromMasterCopy.Name, this,
                     tiaTemplateContext.TiaProject.GetEditingLanguage(), m_plcDevice);
 
                 GenericBlockCreation.GenerateMainOBWithMultipleCalls("myOB", 10,
                     tiaTemplateContext.TiaProject.GetEditingLanguage(), m_plcDevice, this);
 
-                GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_FBD", "CreatedDbFromMasterCopy",
+                GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_FBD", dbFromMasterCopy.Name,
                     ProgrammingLanguage.FBD,
                     m_plcDevice);
-                GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_LAD", "CreatedDbFromMasterCopy",
+                GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_LAD", dbFromMasterCopy.Name,
                     ProgrammingLanguage.LAD,
                     m_plcDevice);
-                GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_SCL", "CreatedDbFromMasterCopy",
+                GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_SCL", dbFromMasterCopy.Name,
                     ProgrammingLanguage.SCL,
                     m_plcDevice);
+
+                var dbFromFailSafeFbMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(this,
+                    ResourceManagement.MyFunctionBlock_FailSafe,
+                    $"{nameof(ResourceManagement.MyFunctionBlock_FailSafe)}Db",
+                    ResourceManagement.ModuleBlocksRootGroup);
+
                 GenericBlockCreation.CreateFailSafeFunctionBlock($"{NameOfMyFailSafeFb}_F_LAD",
-                    "CreatedDbFromFailSafeFbMasterCopy",
+                    dbFromFailSafeFbMasterCopy.Name,
                     ProgrammingLanguage.F_LAD,
                     m_plcDevice);
                 GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(m_softwareUnit, "MyFb_FBD",
                     ProgrammingLanguage.FBD);
+
+                var dbFromTypedMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(this,
+                    ResourceManagement.MyFunctionBlock_Typed,
+                    $"{nameof(ResourceManagement.MyFunctionBlock_Typed)}Db", ResourceManagement.ModuleBlocksRootGroup);
+
+                GenericBlockCreation.CreateFunctionBlock($"{nameof(ResourceManagement.MyFunctionBlock_Typed)}_FBD",
+                    dbFromTypedMasterCopy.Name,
+                    ProgrammingLanguage.FBD,
+                    m_plcDevice);
 
                 var myTagTable = CreateVariables.CreateTagTable(m_plcDevice, "myTagTable");
                 var mySoftwareUnitTagTable = CreateVariables.CreateTagTable(m_softwareUnit, "mySoftwareUnitTagTable");
