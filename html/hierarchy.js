@@ -1,9 +1,11 @@
 var hierarchy =
 [
     [ "MAC_use_cases.Model.UseCases.CreateVariables", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html", null ],
+    [ "MAC_use_cases.Model.UseCases.HardwareGenerationExcelBased.DeviceInfo", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation_excel_based_1_1_device_info.html", null ],
     [ "MAC_use_cases.Model.UseCases.GeneralSupport", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html", null ],
     [ "MAC_use_cases.Model.UseCases.GenericBlockCreation", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html", null ],
     [ "MAC_use_cases.Model.UseCases.HardwareGeneration", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html", null ],
+    [ "MAC_use_cases.Model.UseCases.HardwareGenerationExcelBased", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation_excel_based.html", null ],
     [ "MAC_use_cases.Model.UseCases.IntegrateLibraries", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html", null ],
     [ "ITiaAttributeUser", null, [
       [ "MAC_use_cases.Model.BaseMAC_use_casesEM", "class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html", [

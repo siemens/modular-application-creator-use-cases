@@ -172,9 +172,9 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00022">22</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span>        {</div>
-<div class="line"><span class="lineno">   24</span>            MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);</div>
-<div class="line"><span class="lineno">   25</span>        }</div>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>    {</div>
+<div class="line"><span class="lineno">   24</span>        MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);</div>
+<div class="line"><span class="lineno">   25</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -211,9 +211,9 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The localized string value corresponding to the specified key. If the key is not found, returns an empty string or the key itself (depending on the LanguageService implementation) </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00036">36</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span>        {</div>
-<div class="line"><span class="lineno">   38</span>            <span class="keywordflow">return</span> MacManagement.LanguageService.GetString(key);</div>
-<div class="line"><span class="lineno">   39</span>        }</div>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>    {</div>
+<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">return</span> MacManagement.LanguageService.GetString(key);</div>
+<div class="line"><span class="lineno">   39</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -251,10 +251,10 @@ Static Public Member Functions</h2></td></tr>
 <p>This method performs a type conversion from the internal Device type to the Openness API Device type, allowing access to the Openness object model for device navigation. </p>
 
 <p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00050">50</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>        {</div>
-<div class="line"><span class="lineno">   52</span>            var opennessDevice = (Siemens.Engineering.HW.Device)device;</div>
-<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">return</span> opennessDevice.DeviceItems.FirstOrDefault(x =&gt; x.Classification == DeviceItemClassifications.CPU);</div>
-<div class="line"><span class="lineno">   54</span>        }</div>
+<div class="fragment"><div class="line"><span class="lineno">   51</span>    {</div>
+<div class="line"><span class="lineno">   52</span>        var opennessDevice = (Siemens.Engineering.HW.Device)device;</div>
+<div class="line"><span class="lineno">   53</span>        <span class="keywordflow">return</span> opennessDevice.DeviceItems.FirstOrDefault(x =&gt; x.Classification == DeviceItemClassifications.CPU);</div>
+<div class="line"><span class="lineno">   54</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -290,9 +290,9 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00060">60</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   61</span>        {</div>
-<div class="line"><span class="lineno">   62</span>            <span class="keywordflow">return</span> (Project)tiaProject;</div>
-<div class="line"><span class="lineno">   63</span>        }</div>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>    {</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> (Project)tiaProject;</div>
+<div class="line"><span class="lineno">   64</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
