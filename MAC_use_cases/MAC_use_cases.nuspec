@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MAC_use_cases</id>
-    <version>1.0.9237-pre20250416105728</version>
+    <version>1.0.9238-pre20250417091804</version>
     <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
@@ -40,6 +40,7 @@
       <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework4.8" />
     </frameworkAssemblies>
     <contentFiles>
+      <files include="any/net48/AdditionalContent/HardwareGenerationExcelBased.xlsx" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/AddLibrary.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/ClassExplanation.PNG" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CodeExplanation.PNG" buildAction="Content" copyToOutput="false" />
