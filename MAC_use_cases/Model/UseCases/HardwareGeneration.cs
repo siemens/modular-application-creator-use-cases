@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Siemens.Automation.ModularApplicationCreator.MacPublishedObjects.Subnet;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.TypeIdentifier;
@@ -5,6 +6,7 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Helper.TypeIdentifier.Enu
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness.DO;
 using Siemens.Engineering;
 using Siemens.Engineering.Hmi;
+using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
 
 namespace MAC_use_cases.Model.UseCases;
@@ -79,20 +81,50 @@ public class HardwareGeneration
     }
 
     /// <summary>
-    ///     This call returns the openness object of an HMI with the desired name. If it exists, it will be returned. If not,
-    ///     it will create a new one.
+    ///     Creates or retrieves an HMI device in the TIA Portal project.
     ///     \image html GetOrCreateHMI.png
     /// </summary>
-    /// <param name="project">This object is the openness object of the TIA Portal project</param>
-    /// <param name="name">That's the desired name of the HMI Device</param>
+    /// <param name="project">The TIA Portal project object where the HMI device should be created or found.</param>
+    /// <param name="name">The name identifier for the HMI device.</param>
+    /// <returns>The HmiTarget object representing the software container of the HMI device.</returns>
+    /// <remarks>
+    ///     This method performs the following steps:
+    ///     - Searches for an existing HMI device with the specified name
+    ///     - If not found, creates a new HMI device with default configuration (6AV2 125-2JB23-0AX0/17.0.0.0)
+    ///     - Retrieves the software container for the HMI Runtime
+    ///     - Returns the HMI target software object
+    /// </remarks>
+    /// <exception cref="Exception">Thrown when the HMI software container cannot be accessed or created.</exception>
     public static HmiTarget GetOrCreateHMISoftware(Project project, string name)
     {
-        var hmiDevice = project.Devices.FirstOrDefault(x => x.Name == name);
-        if (hmiDevice == null)
-            hmiDevice = project.Devices.CreateWithItem("OrderNumber:6AV2 125-2JB23-0AX0/17.0.0.0", name, name);
+        var hmiDevice = project.Devices.FirstOrDefault(x => x.Name == name) ??
+                        project.Devices.CreateWithItem("OrderNumber:6AV2 125-2JB23-0AX0/17.0.0.0", name, name);
         var hmiSoftwareContainer = hmiDevice.DeviceItems.FirstOrDefault(x => x.Name.Contains("HMI_RT"))
             .GetService<SoftwareContainer>();
         return hmiSoftwareContainer.Software as HmiTarget;
+    }
+
+    /// <summary>
+    ///     Creates or retrieves a device in the TIA Portal project based on the specified parameters.
+    /// </summary>
+    /// <param name="project">The TIA Portal project object where the device should be created or found.</param>
+    /// <param name="typeIdentifier">The device type identifier in the format "OrderNumber:XXXX/Version[/Type]".</param>
+    /// <param name="name">The unique identifier name for the device within the project.</param>
+    /// <param name="deviceName">The display name of the device in the TIA Portal.</param>
+    /// <returns>The Device object representing the created or retrieved device.</returns>
+    /// <remarks>
+    ///     The typeIdentifier parameter should follow the format:
+    ///     - For standard devices: "OrderNumber:1234567-1AX00/V1.0"
+    ///     - For typed devices: "OrderNumber:1234567-1AX00/V1.0/Type1"
+    ///     If a device with the specified name already exists, it will be returned.
+    ///     Otherwise, a new device will be created with the specified parameters.
+    /// </remarks>
+    /// <exception cref="Exception">Thrown when the device cannot be created with the specified parameters.</exception>
+    public static Device GetOrCreateDevice(Project project, string typeIdentifier, string name, string deviceName)
+    {
+        var device = project.Devices.FirstOrDefault(x => x.Name == name) ??
+                     project.Devices.CreateWithItem(typeIdentifier, name, deviceName);
+        return device;
     }
 
     /// <summary>

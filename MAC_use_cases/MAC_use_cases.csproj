@@ -52,6 +52,11 @@ where to where -->
     <TiaPortalLocation Condition="'$(TiaPortalLocation)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\_InstalledSW\TIAP19\Global@Path)</TiaPortalLocation>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -84,6 +89,7 @@ where to where -->
   in MPFProj12\ProjectNode.cs, ProcessFiles.
   -->
   <ItemGroup>
+    <Compile Include="Model\UseCases\HardwareGenerationExcelBased.cs" />
     <Compile Include="TiaImports\CustomLibraryClasses\Lib_Screen_1.cs" />
     <Compile Include="TiaImports\CustomLibraryClasses\Lib_MAC_use_cases_custom.cs" />
     <Compile Include="Model\UseCases\CreateVariables.cs" />
@@ -113,6 +119,7 @@ where to where -->
     <Compile Include="UI\SecondPage.xaml.cs">
       <DependentUpon>SecondPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\HardwareGenerationExcelBasedViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MAC_use_cases.nuspec">
@@ -130,6 +137,7 @@ where to where -->
     <None Include="Helpfiles\OnlineHelpTopics.xml">
       <SubType>Content</SubType>
     </None>
+    <Content Include="AdditionalContent\HardwareGenerationExcelBased.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\Lang_en.xaml">

@@ -53,12 +53,26 @@ public class GenericBlockCreation
         PlcDevice plcDevice)
     {
         // Input validation
-        if (string.IsNullOrEmpty(blockName)) throw new ArgumentNullException(nameof(blockName));
-        if (string.IsNullOrEmpty(instanceDbName)) throw new ArgumentNullException(nameof(instanceDbName));
-        if (plcDevice == null) throw new ArgumentNullException(nameof(plcDevice));
+        if (string.IsNullOrEmpty(blockName))
+        {
+            throw new ArgumentNullException(nameof(blockName));
+        }
+
+        if (string.IsNullOrEmpty(instanceDbName))
+        {
+            throw new ArgumentNullException(nameof(instanceDbName));
+        }
+
+        if (plcDevice == null)
+        {
+            throw new ArgumentNullException(nameof(plcDevice));
+        }
+
         if (programmingLanguage != ProgrammingLanguage.LAD && programmingLanguage != ProgrammingLanguage.FBD &&
             programmingLanguage != ProgrammingLanguage.SCL)
+        {
             throw new ArgumentException(nameof(programmingLanguage));
+        }
 
         // Create block call with default values
         var fbCall = new BlockCall(instanceDbName, plcDevice) { ["Input1"] = "1", ["Input2"] = "0" };
@@ -76,9 +90,13 @@ public class GenericBlockCreation
 
         // Generate the block in appropriate format
         if (programmingLanguage == ProgrammingLanguage.SCL)
+        {
             fb.GenerateSclBlock(plcDevice);
+        }
         else
+        {
             fb.GenerateXmlBlock(plcDevice);
+        }
     }
 
     /// <summary>
@@ -111,11 +129,25 @@ public class GenericBlockCreation
         PlcDevice plcDevice)
     {
         // Input validation
-        if (string.IsNullOrEmpty(blockName)) throw new ArgumentNullException(nameof(blockName));
-        if (string.IsNullOrEmpty(instanceDbName)) throw new ArgumentNullException(nameof(instanceDbName));
-        if (plcDevice == null) throw new ArgumentNullException(nameof(plcDevice));
+        if (string.IsNullOrEmpty(blockName))
+        {
+            throw new ArgumentNullException(nameof(blockName));
+        }
+
+        if (string.IsNullOrEmpty(instanceDbName))
+        {
+            throw new ArgumentNullException(nameof(instanceDbName));
+        }
+
+        if (plcDevice == null)
+        {
+            throw new ArgumentNullException(nameof(plcDevice));
+        }
+
         if (programmingLanguage != ProgrammingLanguage.F_LAD && programmingLanguage != ProgrammingLanguage.F_FBD)
+        {
             throw new ArgumentException(nameof(programmingLanguage));
+        }
 
         // Create block call with default values
         var fbCall = new BlockCall(instanceDbName, plcDevice) { ["Input1"] = "1", ["Input2"] = "0" };
@@ -221,7 +253,11 @@ public class GenericBlockCreation
     {
         //Get the right file extension depending on the block language
         var extension = ".scl";
-        if (!isScl) extension = ".xml";
+        if (!isScl)
+        {
+            extension = ".xml";
+        }
+
         //Create a temporary file
         var filePath = Path.ChangeExtension(Path.GetTempFileName(), extension);
 
@@ -361,9 +397,13 @@ public class GenericBlockCreation
         if (existingOB == null)
         {
             if (codeBlock.BlockAttributes.ProgrammingLanguage == ProgrammingLanguage.SCL)
+            {
                 codeBlock.GenerateSclBlock(plcDevice);
+            }
             else //insert networks to KOP/FUP
+            {
                 codeBlock.GenerateXmlBlock(plcDevice, null, languageSettings);
+            }
         }
         else
             //Insert Code to existing OB
@@ -375,9 +415,13 @@ public class GenericBlockCreation
             xmlOB.MergeBlock(codeBlock);
             //add SCL-Code
             if (xmlOB.BlockAttributes.ProgrammingLanguage == ProgrammingLanguage.SCL)
+            {
                 xmlOB.GenerateSclBlock(plcDevice);
+            }
             else //insert networks to KOP/FUP
+            {
                 xmlOB.GenerateXmlBlock(plcDevice, null, languageSettings);
+            }
         }
     }
 
@@ -422,9 +466,16 @@ public class GenericBlockCreation
     {
         var parsed = new Parser().ParseSclSnippet(sclCall, xmlBlock, plc, GroupBlockCalls.NOGROUPING)
             .FirstOrDefault();
-        if (parsed is BlockNetwork blockNetwork) return blockNetwork;
+        if (parsed is BlockNetwork blockNetwork)
+        {
+            return blockNetwork;
+        }
 
-        if (parsed is FixNetwork fixNetwork) return fixNetwork;
+        if (parsed is FixNetwork fixNetwork)
+        {
+            return fixNetwork;
+        }
+
         return null;
     }
 }

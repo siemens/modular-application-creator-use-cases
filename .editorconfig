@@ -1,17 +1,119 @@
-root = true
 # EditorConfig is awesome: https://EditorConfig.org
 
+# top-most EditorConfig file
+root = true
 
+# Don't use tabs for indentation.
 [*]
-insert_final_newline = true
-trim_trailing_whitespace = true
-charset = utf-8
 indent_style = space
-indent_size = 4
+# (Please don't specify an indent_size here; that has too many unintended consequences.)
+spelling_exclusion_path = SpellingExclusions.dic
 
+# Code files
+[*.{cs,csx,vb,vbx}]
+indent_size = 4
+insert_final_newline = true
+charset = utf-8-bom
+
+# XML project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size = 2
+
+# XML config files
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# Powershell files
+[*.ps1]
+indent_size = 2
+
+# Shell script files
+[*.sh]
+end_of_line = lf
+indent_size = 2
+
+# Dotnet code style settings:
+[*.{cs,vb}]
+
+# Sort using and Import directives with System.* appearing first
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+# Avoid "this." and "Me." if not necessary
+dotnet_style_qualification_for_field = false:refactoring
+dotnet_style_qualification_for_property = false:refactoring
+dotnet_style_qualification_for_method = false:refactoring
+dotnet_style_qualification_for_event = false:refactoring
+
+# Use language keywords instead of framework type names for type references
+dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
+dotnet_style_predefined_type_for_member_access = true:suggestion
+
+# Suggest more modern language features when available
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion
+
+# Whitespace options
 dotnet_style_allow_multiple_blank_lines_experimental = false
-dotnet_diagnostic.cs8019.severity = suggestion
-dotnet_diagnostic.cs8933.severity = suggestion
+
+# Non-private static fields are PascalCase
+dotnet_naming_rule.non_private_static_fields_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.non_private_static_fields_should_be_pascal_case.symbols = non_private_static_fields
+dotnet_naming_rule.non_private_static_fields_should_be_pascal_case.style = non_private_static_field_style
+
+dotnet_naming_symbols.non_private_static_fields.applicable_kinds = field
+dotnet_naming_symbols.non_private_static_fields.applicable_accessibilities = public, protected, internal, protected_internal, private_protected
+dotnet_naming_symbols.non_private_static_fields.required_modifiers = static
+
+dotnet_naming_style.non_private_static_field_style.capitalization = pascal_case
+
+# Non-private readonly fields are PascalCase
+dotnet_naming_rule.non_private_readonly_fields_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.non_private_readonly_fields_should_be_pascal_case.symbols = non_private_readonly_fields
+dotnet_naming_rule.non_private_readonly_fields_should_be_pascal_case.style = non_private_readonly_field_style
+
+dotnet_naming_symbols.non_private_readonly_fields.applicable_kinds = field
+dotnet_naming_symbols.non_private_readonly_fields.applicable_accessibilities = public, protected, internal, protected_internal, private_protected
+dotnet_naming_symbols.non_private_readonly_fields.required_modifiers = readonly
+
+dotnet_naming_style.non_private_readonly_field_style.capitalization = pascal_case
+
+# Constants are PascalCase
+dotnet_naming_rule.constants_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.constants_should_be_pascal_case.symbols = constants
+dotnet_naming_rule.constants_should_be_pascal_case.style = constant_style
+
+dotnet_naming_symbols.constants.applicable_kinds = field, local
+dotnet_naming_symbols.constants.required_modifiers = const
+
+dotnet_naming_style.constant_style.capitalization = pascal_case
+
+# Static fields are camelCase and start with s_
+dotnet_naming_rule.static_fields_should_be_camel_case.severity = suggestion
+dotnet_naming_rule.static_fields_should_be_camel_case.symbols = static_fields
+dotnet_naming_rule.static_fields_should_be_camel_case.style = static_field_style
+
+dotnet_naming_symbols.static_fields.applicable_kinds = field
+dotnet_naming_symbols.static_fields.required_modifiers = static
+
+dotnet_naming_style.static_field_style.capitalization = camel_case
+dotnet_naming_style.static_field_style.required_prefix = s_
+
+# Instance fields are camelCase and start with _
+dotnet_naming_rule.instance_fields_should_be_camel_case.severity = suggestion
+dotnet_naming_rule.instance_fields_should_be_camel_case.symbols = instance_fields
+dotnet_naming_rule.instance_fields_should_be_camel_case.style = instance_field_style
+
+dotnet_naming_symbols.instance_fields.applicable_kinds = field
+
+dotnet_naming_style.instance_field_style.capitalization = camel_case
+dotnet_naming_style.instance_field_style.required_prefix = _
 
 # Locals and parameters are camelCase
 dotnet_naming_rule.locals_should_be_camel_case.severity = suggestion
@@ -40,168 +142,30 @@ dotnet_naming_symbols.all_members.applicable_kinds = *
 
 dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 
-# Microsoft .NET properties
-csharp_preferred_modifier_order = public, private, protected, internal, file, new, static, abstract, virtual, sealed, readonly, override, extern, unsafe, volatile, async, required:suggestion
-csharp_style_prefer_utf8_string_literals = true:suggestion
-csharp_style_var_elsewhere = true:suggestion
-csharp_style_var_for_built_in_types = true:suggestion
-csharp_style_var_when_type_is_apparent = true:suggestion
-dotnet_naming_rule.constants_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.constants_rule.severity = suggestion
-dotnet_naming_rule.constants_rule.style = local_function_style
-dotnet_naming_rule.constants_rule.symbols = constants_symbols
-dotnet_naming_rule.event_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.event_rule.severity = suggestion
-dotnet_naming_rule.event_rule.style = local_function_style
-dotnet_naming_rule.event_rule.symbols = event_symbols
-dotnet_naming_rule.interfaces_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.interfaces_rule.severity = suggestion
-dotnet_naming_rule.interfaces_rule.style = local_function_style
-dotnet_naming_rule.interfaces_rule.symbols = interfaces_symbols
-dotnet_naming_rule.locals_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.locals_rule.severity = suggestion
-dotnet_naming_rule.locals_rule.style = camel_case_style
-dotnet_naming_rule.locals_rule.symbols = locals_symbols
-dotnet_naming_rule.locals_should_be_camel_case.import_to_resharper = True
-dotnet_naming_rule.locals_should_be_camel_case.resharper_description = locals_should_be_camel_case
-dotnet_naming_rule.locals_should_be_camel_case.resharper_guid = 7bb055a0-54a2-4d38-b5d5-9f58ffb16401
-dotnet_naming_rule.local_constants_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.local_constants_rule.severity = suggestion
-dotnet_naming_rule.local_constants_rule.style = camel_case_style
-dotnet_naming_rule.local_constants_rule.symbols = local_constants_symbols
-dotnet_naming_rule.local_functions_should_be_pascal_case.import_to_resharper = as_predefined
-dotnet_naming_rule.members_should_be_pascal_case.import_to_resharper = True
-dotnet_naming_rule.members_should_be_pascal_case.resharper_description = members_should_be_pascal_case
-dotnet_naming_rule.members_should_be_pascal_case.resharper_guid = 8d255763-6bf9-4d8a-93d6-ea9934bae641
-dotnet_naming_rule.method_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.method_rule.severity = suggestion
-dotnet_naming_rule.method_rule.style = local_function_style
-dotnet_naming_rule.method_rule.symbols = method_symbols
-dotnet_naming_rule.parameters_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.parameters_rule.severity = suggestion
-dotnet_naming_rule.parameters_rule.style = camel_case_style
-dotnet_naming_rule.parameters_rule.symbols = parameters_symbols
-dotnet_naming_rule.private_constants_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.private_constants_rule.severity = suggestion
-dotnet_naming_rule.private_constants_rule.style = local_function_style
-dotnet_naming_rule.private_constants_rule.symbols = private_constants_symbols
-dotnet_naming_rule.private_instance_fields_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.private_instance_fields_rule.severity = suggestion
-dotnet_naming_rule.private_instance_fields_rule.style = local_function_style
-dotnet_naming_rule.private_instance_fields_rule.symbols = private_instance_fields_symbols
-dotnet_naming_rule.private_static_fields_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.private_static_fields_rule.severity = suggestion
-dotnet_naming_rule.private_static_fields_rule.style = local_function_style
-dotnet_naming_rule.private_static_fields_rule.symbols = private_static_fields_symbols
-dotnet_naming_rule.private_static_readonly_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.private_static_readonly_rule.severity = suggestion
-dotnet_naming_rule.private_static_readonly_rule.style = local_function_style
-dotnet_naming_rule.private_static_readonly_rule.symbols = private_static_readonly_symbols
-dotnet_naming_rule.property_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.property_rule.severity = suggestion
-dotnet_naming_rule.property_rule.style = local_function_style
-dotnet_naming_rule.property_rule.symbols = property_symbols
-dotnet_naming_rule.public_fields_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.public_fields_rule.severity = suggestion
-dotnet_naming_rule.public_fields_rule.style = local_function_style
-dotnet_naming_rule.public_fields_rule.symbols = public_fields_symbols
-dotnet_naming_rule.static_readonly_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.static_readonly_rule.severity = suggestion
-dotnet_naming_rule.static_readonly_rule.style = local_function_style
-dotnet_naming_rule.static_readonly_rule.symbols = static_readonly_symbols
-dotnet_naming_rule.types_and_namespaces_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.types_and_namespaces_rule.severity = suggestion
-dotnet_naming_rule.types_and_namespaces_rule.style = local_function_style
-dotnet_naming_rule.types_and_namespaces_rule.symbols = types_and_namespaces_symbols
-dotnet_naming_rule.type_parameters_rule.import_to_resharper = as_predefined
-dotnet_naming_rule.type_parameters_rule.severity = suggestion
-dotnet_naming_rule.type_parameters_rule.style = local_function_style
-dotnet_naming_rule.type_parameters_rule.symbols = type_parameters_symbols
-dotnet_naming_symbols.constants_symbols.applicable_accessibilities = public,internal,protected,protected_internal,private_protected
-dotnet_naming_symbols.constants_symbols.applicable_kinds = field
-dotnet_naming_symbols.constants_symbols.required_modifiers = const
-dotnet_naming_symbols.event_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.event_symbols.applicable_kinds = event
-dotnet_naming_symbols.interfaces_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.interfaces_symbols.applicable_kinds = interface
-dotnet_naming_symbols.locals_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.locals_symbols.applicable_kinds = local
-dotnet_naming_symbols.local_constants_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.local_constants_symbols.applicable_kinds = local
-dotnet_naming_symbols.local_constants_symbols.required_modifiers = const
-dotnet_naming_symbols.method_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.method_symbols.applicable_kinds = method
-dotnet_naming_symbols.parameters_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.parameters_symbols.applicable_kinds = parameter
-dotnet_naming_symbols.private_constants_symbols.applicable_accessibilities = private
-dotnet_naming_symbols.private_constants_symbols.applicable_kinds = field
-dotnet_naming_symbols.private_constants_symbols.required_modifiers = const
-dotnet_naming_symbols.private_instance_fields_symbols.applicable_accessibilities = private
-dotnet_naming_symbols.private_instance_fields_symbols.applicable_kinds = field
-dotnet_naming_symbols.private_static_fields_symbols.applicable_accessibilities = private
-dotnet_naming_symbols.private_static_fields_symbols.applicable_kinds = field
-dotnet_naming_symbols.private_static_fields_symbols.required_modifiers = static
-dotnet_naming_symbols.private_static_readonly_symbols.applicable_accessibilities = private
-dotnet_naming_symbols.private_static_readonly_symbols.applicable_kinds = field
-dotnet_naming_symbols.private_static_readonly_symbols.required_modifiers = static,readonly
-dotnet_naming_symbols.property_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.property_symbols.applicable_kinds = property
-dotnet_naming_symbols.public_fields_symbols.applicable_accessibilities = public,internal,protected,protected_internal,private_protected
-dotnet_naming_symbols.public_fields_symbols.applicable_kinds = field
-dotnet_naming_symbols.static_readonly_symbols.applicable_accessibilities = public,internal,protected,protected_internal,private_protected
-dotnet_naming_symbols.static_readonly_symbols.applicable_kinds = field
-dotnet_naming_symbols.static_readonly_symbols.required_modifiers = static,readonly
-dotnet_naming_symbols.types_and_namespaces_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.types_and_namespaces_symbols.applicable_kinds = namespace,class,struct,enum,delegate
-dotnet_naming_symbols.type_parameters_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.type_parameters_symbols.applicable_kinds = type_parameter
-dotnet_style_parentheses_in_arithmetic_binary_operators = never_if_unnecessary:none
-dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:none
-dotnet_style_parentheses_in_relational_binary_operators = never_if_unnecessary:none
-dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
-dotnet_style_predefined_type_for_member_access = true:suggestion
-dotnet_style_qualification_for_event = false:suggestion
-dotnet_style_qualification_for_field = false:suggestion
-dotnet_style_qualification_for_method = false:suggestion
-dotnet_style_qualification_for_property = false:suggestion
-dotnet_style_require_accessibility_modifiers = for_non_interface_members:suggestion
+# RS0016: Only enable if API files are present
+dotnet_public_api_analyzer.require_api_files = true
 
-# ReSharper properties
-resharper_case_block_braces = next_line_shifted_2
-resharper_constructor_or_destructor_body = expression_body
-resharper_csharp_naming_rule.constants = AaBb
-resharper_csharp_naming_rule.event = AaBb
-resharper_csharp_naming_rule.interfaces = AaBb
-resharper_csharp_naming_rule.locals = aaBb
-resharper_csharp_naming_rule.local_constants = aaBb
-resharper_csharp_naming_rule.local_functions = AaBb
-resharper_csharp_naming_rule.method = AaBb
-resharper_csharp_naming_rule.parameters = aaBb
-resharper_csharp_naming_rule.private_constants = AaBb
-resharper_csharp_naming_rule.private_instance_fields = AaBb
-resharper_csharp_naming_rule.private_static_fields = AaBb
-resharper_csharp_naming_rule.private_static_readonly = AaBb
-resharper_csharp_naming_rule.property = AaBb
-resharper_csharp_naming_rule.public_fields = AaBb
-resharper_csharp_naming_rule.static_readonly = AaBb
-resharper_csharp_naming_rule.types_and_namespaces = AaBb
-resharper_csharp_naming_rule.type_parameters = AaBb
-resharper_keep_existing_initializer_arrangement = false
-resharper_local_function_body = expression_body
-resharper_method_or_operator_body = expression_body
-resharper_show_autodetect_configure_formatting_tip = false
-resharper_use_indent_from_vs = false
+# IDE0055: Fix formatting
+# Workaround for https://github.com/dotnet/roslyn/issues/70570
+dotnet_diagnostic.IDE0055.severity = warning
 
-# ReSharper inspection severities
-resharper_arrange_redundant_parentheses_highlighting = hint
-resharper_arrange_this_qualifier_highlighting = hint
-resharper_arrange_type_member_modifiers_highlighting = hint
-resharper_arrange_type_modifiers_highlighting = hint
-resharper_built_in_type_reference_style_for_member_access_highlighting = hint
-resharper_built_in_type_reference_style_highlighting = hint
-resharper_inconsistent_naming_highlighting = suggestion
-resharper_redundant_base_qualifier_highlighting = warning
+# https://github.com/dotnet/roslyn-analyzers/issues/7436 - False positives from valid GetDeclaredSymbol calls
+dotnet_diagnostic.RS1039.severity = none
 
+# These xUnit analyzers were disabled temporarily to let us move to the
+# new xUnit and get past several component governance issues. The
+# following issue tracks enabling them
+#
+# https://github.com/dotnet/roslyn/issues/75093
+dotnet_diagnostic.xUnit1012.severity = none
+dotnet_diagnostic.xUnit1030.severity = none
+dotnet_diagnostic.xUnit1031.severity = none
+dotnet_diagnostic.xUnit2005.severity = none
+dotnet_diagnostic.xUnit2020.severity = none
+dotnet_diagnostic.xUnit2023.severity = none
+dotnet_diagnostic.xUnit2029.severity = none
+
+# CSharp code style settings:
 [*.cs]
 # Newline settings
 csharp_new_line_before_open_brace = all
@@ -232,7 +196,23 @@ csharp_style_var_for_built_in_types = true:suggestion
 csharp_style_var_when_type_is_apparent = true:suggestion
 csharp_style_var_elsewhere = true:suggestion
 
+# Prefer method-like constructs to have a block body
 csharp_style_expression_bodied_methods = false:none
+csharp_style_expression_bodied_constructors = false:none
+csharp_style_expression_bodied_operators = false:none
+
+# Prefer property-like constructs to have an expression-body
+csharp_style_expression_bodied_properties = true:none
+csharp_style_expression_bodied_indexers = true:none
+csharp_style_expression_bodied_accessors = true:none
+
+# Suggest more modern language features when available
+csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
+csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
+csharp_style_inlined_variable_declaration = true:suggestion
+csharp_style_throw_expression = true:suggestion
+csharp_style_conditional_delegate_call = true:suggestion
+csharp_style_prefer_extended_property_pattern = true:suggestion
 
 # Space preferences
 csharp_space_after_cast = false
@@ -258,7 +238,80 @@ csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
 
-[*.{appxmanifest,asax,ascx,aspx,axaml,axml,build,config,cs,cshtml,csproj,dbml,discomap,dtd,htm,html,jsproj,lsproj,master,njsproj,nuspec,paml,proj,props,razor,resw,resx,skin,StyleCop,targets,tasks,vb,vbproj,xaml,xamlx,xml,xoml,xsd}]
-indent_style = space
-indent_size = 4
-tab_width = 4
+# Blocks are allowed
+csharp_prefer_braces = true:silent
+csharp_preserve_single_line_blocks = true
+csharp_preserve_single_line_statements = true
+
+# IDE0060: Remove unused parameter
+dotnet_diagnostic.IDE0060.severity = warning
+
+[src/{Compilers,ExpressionEvaluator,Scripting}/**Test**/*.{cs,vb}]
+
+# IDE0060: Remove unused parameter
+dotnet_diagnostic.IDE0060.severity = none
+
+[src/{Analyzers,CodeStyle,Features,Workspaces,EditorFeatures,VisualStudio}/**/*.{cs,vb}]
+
+# IDE0011: Add braces
+csharp_prefer_braces = when_multiline:warning
+# NOTE: We need the below severity entry for Add Braces due to https://github.com/dotnet/roslyn/issues/44201
+dotnet_diagnostic.IDE0011.severity = warning
+
+# IDE0040: Add accessibility modifiers
+dotnet_diagnostic.IDE0040.severity = warning
+
+# IDE0052: Remove unread private member
+dotnet_diagnostic.IDE0052.severity = warning
+
+# IDE0059: Unnecessary assignment to a value
+dotnet_diagnostic.IDE0059.severity = warning
+
+# CA1012: Abstract types should not have public constructors
+dotnet_diagnostic.CA1012.severity = warning
+
+# CA1822: Make member static
+dotnet_diagnostic.CA1822.severity = warning
+
+# Prefer "var" everywhere
+dotnet_diagnostic.IDE0007.severity = warning
+csharp_style_var_for_built_in_types = true:warning
+csharp_style_var_when_type_is_apparent = true:warning
+csharp_style_var_elsewhere = true:warning
+
+# csharp_style_allow_embedded_statements_on_same_line_experimental
+dotnet_diagnostic.IDE2001.severity = warning
+
+# csharp_style_allow_blank_lines_between_consecutive_braces_experimental
+dotnet_diagnostic.IDE2002.severity = warning
+
+# csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental
+dotnet_diagnostic.IDE2004.severity = warning
+
+# csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental
+dotnet_diagnostic.IDE2005.severity = warning
+
+# csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental
+dotnet_diagnostic.IDE2006.severity = warning
+
+[src/{VisualStudio}/**/*.{cs,vb}]
+# CA1822: Make member static
+# There is a risk of accidentally breaking an internal API that partners rely on though IVT.
+dotnet_code_quality.CA1822.api_surface = private
+
+[**/{ExternalAccess}/**/*.{cs,vb}]
+
+# RS0016: Only enable if API files are present
+dotnet_public_api_analyzer.require_api_files = true
+
+dotnet_diagnostic.RS0051.severity = error
+dotnet_diagnostic.RS0052.severity = error
+dotnet_diagnostic.RS0053.severity = error
+dotnet_diagnostic.RS0054.severity = error
+dotnet_diagnostic.RS0055.severity = error
+dotnet_diagnostic.RS0056.severity = error
+dotnet_diagnostic.RS0057.severity = error
+dotnet_diagnostic.RS0058.severity = error
+dotnet_diagnostic.RS0059.severity = error
+dotnet_diagnostic.RS0060.severity = error
+dotnet_diagnostic.RS0061.severity = error
