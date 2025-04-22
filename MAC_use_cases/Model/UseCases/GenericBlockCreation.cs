@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using MAC_use_cases.TiaImports;
@@ -25,6 +25,7 @@ public class GenericBlockCreation
 
     /// <summary>
     ///     Creates a Function Block (FB) in the target PLC's program blocks folder.
+    ///     \image html CreateFB.png
     /// </summary>
     /// <remarks>
     ///     This method performs the following steps:
@@ -427,14 +428,14 @@ public class GenericBlockCreation
 
     /// <summary>
     ///     This function Generates the OB with the given number of calls
+    ///     \image html DynamicCall.png
     /// </summary>
     /// <param name="name"></param>
     /// <param name="numberOfCalls">The number of calls in the OB</param>
     /// <param name="languageSettings">The tiaTemplateContext language key</param>
     /// <param name="plcDevice"></param>
     /// <param name="module"></param>
-    /// //TODO params are wrong
-    public static void GenerateMainOBWithMultipleCalls(string name, int numberOfCalls, string languageSettings,
+    public static void GenerateOBWithMultipleCalls(string name, int numberOfCalls, string languageSettings,
         PlcDevice plcDevice, MAC_use_casesEM module)
     {
         var myOb = new XmlOB(name);
