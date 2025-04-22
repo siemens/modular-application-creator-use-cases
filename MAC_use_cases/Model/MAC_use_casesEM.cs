@@ -183,7 +183,7 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
                 GenericBlockCreation.GenerateOB_Main(dbFromMasterCopy.Name, this,
                     tiaTemplateContext.TiaProject.GetEditingLanguage(), _plcDevice);
 
-                GenericBlockCreation.GenerateMainOBWithMultipleCalls("myOB", 10,
+                GenericBlockCreation.GenerateOBWithMultipleCalls("myOB", 10,
                     tiaTemplateContext.TiaProject.GetEditingLanguage(), _plcDevice, this);
 
                 GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_FBD", dbFromMasterCopy.Name,
