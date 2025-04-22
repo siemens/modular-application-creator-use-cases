@@ -18,6 +18,7 @@ public class HardwareGenerationExcelBased
 {
     /// <summary>
     ///     Reads device information from a specified Excel file.
+    ///     \image html ExampleExcelFile.png
     /// </summary>
     /// <param name="filePath">The full path to the Excel file containing device information.</param>
     /// <returns>A list of DeviceInfo objects containing the parsed device information.</returns>
@@ -141,6 +142,7 @@ public class HardwareGenerationExcelBased
 
     /// <summary>
     ///     Creates new devices in the TIA Portal project based on information from an Excel sheet.
+    ///     \image html CreateNewDevicesFromExcelSheet.png
     /// </summary>
     /// <param name="module">The MAC use cases module instance.</param>
     /// <param name="tiaProject">The target TIA Portal project.</param>
