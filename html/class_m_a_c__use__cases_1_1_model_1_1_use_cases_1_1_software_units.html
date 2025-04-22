@@ -149,6 +149,9 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieves an existing software unit or creates a new one if it doesn't exist in the specified PLC device. </p>
+<div class="image">
+<img src="GetOrCreateSoftwareUnit.png" alt=""/>
+</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">plcDevice</td><td>The PLC device where the software unit should be located or created</td></tr>
@@ -160,10 +163,10 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>An interface to the existing or newly created software unit</dd></dl>
 <p>This method provides a convenient way to ensure a software unit exists, creating it if necessary. </p>
 
-<p class="definition">Definition at line <a class="el" href="_software_units_8cs_source.html#l00018">18</a> of file <a class="el" href="_software_units_8cs_source.html">SoftwareUnits.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   20</span>    {</div>
-<div class="line"><span class="lineno">   21</span>        <span class="keywordflow">return</span> plcDevice.SoftwareUnits.GetOrCreateSoftwareUnit(myUnitName, macUseCasesEm);</div>
-<div class="line"><span class="lineno">   22</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="_software_units_8cs_source.html#l00019">19</a> of file <a class="el" href="_software_units_8cs_source.html">SoftwareUnits.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   21</span>    {</div>
+<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">return</span> plcDevice.SoftwareUnits.GetOrCreateSoftwareUnit(myUnitName, macUseCasesEm);</div>
+<div class="line"><span class="lineno">   23</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -191,6 +194,9 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieves the safety software unit from the specified PLC device. </p>
+<div class="image">
+<img src="GetSafetySoftwareUnit.png" alt=""/>
+</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">plcDevice</td><td>The PLC device containing the safety software unit</td></tr>
@@ -200,10 +206,10 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>An interface to the safety software unit</dd></dl>
 <p>This method only retrieves an existing safety software unit and does not create one if it doesn't exist. </p>
 
-<p class="definition">Definition at line <a class="el" href="_software_units_8cs_source.html#l00032">32</a> of file <a class="el" href="_software_units_8cs_source.html">SoftwareUnits.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   34</span>    {</div>
-<div class="line"><span class="lineno">   35</span>        <span class="keywordflow">return</span> plcDevice.SoftwareUnits.GetSafetySoftwareUnit();</div>
-<div class="line"><span class="lineno">   36</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="_software_units_8cs_source.html#l00034">34</a> of file <a class="el" href="_software_units_8cs_source.html">SoftwareUnits.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>    {</div>
+<div class="line"><span class="lineno">   37</span>        <span class="keywordflow">return</span> plcDevice.SoftwareUnits.GetSafetySoftwareUnit();</div>
+<div class="line"><span class="lineno">   38</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
