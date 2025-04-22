@@ -1,4 +1,4 @@
-using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
+﻿using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Engineering.Hmi;
 using Siemens.Engineering.Library.MasterCopies;
@@ -24,6 +24,14 @@ public class IntegrateLibraries
         return module.ResourceManagement.CreateInstanceDb(masterCopy, instanceName, target.Blocks);
     }
 
+    /// <summary>
+    ///     This function creates an instance DB in the target folder (folder under program blocks)
+    ///     \image html CreateInstanceDBFromTypedBlock.png
+    /// </summary>
+    /// <param name="module">The Module</param>
+    /// <param name="libraryType">A master copy of the typed block you want to create an instance DB of</param>
+    /// <param name="instanceName">Name of the instance</param>
+    /// <param name="target">The folder under program blocks in which the DB is created</param>
     public static DataBlock CreateInstanceDataBlock(MAC_use_casesEM module, FBLibraryType libraryType,
         string instanceName, BlockGroup target)
     {
@@ -32,7 +40,7 @@ public class IntegrateLibraries
 
 
     /// <summary>
-    ///     This function can also creates an instance DB in the target folder (folder under program blocks)
+    ///     This function can also create an instance DB in the target folder (folder under program blocks)
     ///     \image html CreateInstanceDB_via_XmlInstDB.png
     /// </summary>
     /// <param name="module">The Module</param>

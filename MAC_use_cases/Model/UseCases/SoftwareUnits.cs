@@ -1,4 +1,4 @@
-using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
+﻿using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
 
 namespace MAC_use_cases.Model.UseCases;
@@ -7,6 +7,7 @@ public class SoftwareUnits
 {
     /// <summary>
     ///     Retrieves an existing software unit or creates a new one if it doesn't exist in the specified PLC device.
+    ///     \image html GetOrCreateSoftwareUnit.png
     /// </summary>
     /// <param name="plcDevice">The PLC device where the software unit should be located or created</param>
     /// <param name="myUnitName">The name of the software unit to get or create</param>
@@ -23,6 +24,7 @@ public class SoftwareUnits
 
     /// <summary>
     ///     Retrieves the safety software unit from the specified PLC device.
+    ///     \image html GetSafetySoftwareUnit.png
     /// </summary>
     /// <param name="plcDevice">The PLC device containing the safety software unit</param>
     /// <returns>An interface to the safety software unit</returns>
