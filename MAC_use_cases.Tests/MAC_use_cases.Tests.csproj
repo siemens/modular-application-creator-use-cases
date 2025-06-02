@@ -65,7 +65,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Siemens.ModularApplicationCreator-V19.2.10.TestEnvironment" Version="1.0.1.207" />
+    <PackageReference Include="Siemens.ModularApplicationCreator-V19.2.10.TestEnvironment" Version="1.0.1.204" />
     <PackageReference Include="StrongNamer" Version="0.2.5" />
   </ItemGroup>
   <ItemGroup>
