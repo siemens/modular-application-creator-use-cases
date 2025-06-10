@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MAC_use_cases</id>
-    <version>1.0.9243-pre20250422072413</version>
+    <version>1.0.9292-pre20250610094739</version>
     <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
@@ -48,19 +48,24 @@
       <files include="any/net48/Images/ConnectDriveToSubnet.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateFB.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateInstanceDB.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CreateInstanceDBFromTypedBlock.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateInstanceDB_via_XmlInstDB.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CreateNewDevicesFromExcelSheet.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateScreenFromMastercopy.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateTag.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateTagTable.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateTO.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/DynamicCall.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/ExampleExcelFile.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/FunctionExplanation.PNG" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GenerateDB.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GenerateOB.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GenerateS120.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GenerateS210.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GetOrCreateHMI.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/GetOrCreateSoftwareUnit.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GetOrCreateSubnet.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/GetSafetySoftwareUnit.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/LocalizationXamlResourceDictionary.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/LogMessage.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/MultiInstanceFB.png" buildAction="Content" copyToOutput="false" />

@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using MAC_use_cases.Model;
 using MAC_use_cases.TiaImports;
 using NUnit.Framework;
@@ -13,7 +13,6 @@ namespace MAC_use_cases.Tests.TestEnvironment
         {
             get => Get(() => new ResourceManagement(), NunitTestContext.TestCase);
         }
-
 
         protected override string DirectoryNameOfViewTestResources
         {
@@ -34,6 +33,8 @@ namespace MAC_use_cases.Tests.TestEnvironment
         {
             get => Get(() => "S7-1500/ET200MP station_1");
         }
+
+        protected override bool AttachToOpenProject => true;
 
         protected override string PlcCPUName
         {

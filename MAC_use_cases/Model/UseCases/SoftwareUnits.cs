@@ -16,10 +16,11 @@ public class SoftwareUnits
     /// <remarks>
     ///     This method provides a convenient way to ensure a software unit exists, creating it if necessary.
     /// </remarks>
-    public static ISoftwareUnit GetOrCreateSoftwareUnit(PlcDevice
-        plcDevice, string myUnitName, MAC_use_casesEM macUseCasesEm)
+    public static ISoftwareUnit GetOrCreateSoftwareUnit(PlcDevice plcDevice, string myUnitName, MAC_use_casesEM macUseCasesEm, string nameSpace = "")
     {
-        return plcDevice.SoftwareUnits.GetOrCreateSoftwareUnit(myUnitName, macUseCasesEm);
+        ISoftwareUnit ssw = plcDevice.SoftwareUnits.GetOrCreateSoftwareUnit(myUnitName, macUseCasesEm);
+        ssw.NamespacePreset = nameSpace;
+        return ssw;
     }
 
     /// <summary>

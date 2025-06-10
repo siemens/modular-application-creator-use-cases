@@ -1,7 +1,9 @@
-using NUnit.Framework;
-
+﻿using MAC_use_cases.Model.UseCases;
 using MAC_use_cases.Tests.TestEnvironment;
-
+using NUnit.Framework;
+using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block;
+using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
+using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
 using Siemens.ModularApplicationCreator.Testenvironment.TestCategoryAttributes;
 using Siemens.ModularApplicationCreator.Testenvironment.UnitTestBaseClasses.Enums;
 
@@ -11,6 +13,8 @@ namespace MAC_use_cases.Tests.Builder.Tests
     {
         protected string LanguageSetting =>
             this.Get(() => ProjectOpenness.LanguageSettings.EditingLanguage.Culture.Name, NunitTestContext.TestCase);
+
+        
 
 
         [Test, MacFunctionTest]
@@ -31,5 +35,12 @@ namespace MAC_use_cases.Tests.Builder.Tests
             //GenerateHardware();
         }
 
-}
+        [Test, MacFunctionTest]
+        public void GenerateProgramBlock_SCL_in_SW_unit()
+        {
+          
+            var _softwareUnit = SoftwareUnits.GetOrCreateSoftwareUnit(PlcDeviceMacSimulated, "MyUnit", EquipmentModule, "Namesapce_example");
+            GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_SCL3", ProgrammingLanguage.SCL, PlcDeviceMacSimulated);
+        }
+    }
 }

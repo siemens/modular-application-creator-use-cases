@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using MAC_use_cases.TiaImports;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block;
@@ -49,6 +50,7 @@ public class GenericBlockCreation
     /// CreateFB("MyFB", "MyFB_DB", ProgrammingLanguage.LAD, plcDevice);
     /// </code>
     /// </example>
+    // TODO expand for sw-units
     public static void CreateFunctionBlock(string blockName, string instanceDbName,
         ProgrammingLanguage programmingLanguage,
         PlcDevice plcDevice)
@@ -220,7 +222,7 @@ public class GenericBlockCreation
     /// </code>
     /// </example>
     public static void CreateFunctionBlockInSoftwareUnit(ISoftwareUnitBase softwareUnitBase, string fbName,
-        ProgrammingLanguage programmingLanguage)
+        ProgrammingLanguage programmingLanguage, PlcDevice plcDevice)
     {
         var fb = new XmlFB(fbName);
 
@@ -237,9 +239,22 @@ public class GenericBlockCreation
             Remanence = RemanenceSettings.IgnoreRemanence
         });
 
-
         //here an example how to create a multi instance call in the function block
-        fb.GenerateXmlBlock(softwareUnitBase, programmingLanguage);
+        if (programmingLanguage == ProgrammingLanguage.SCL)
+        {
+            fb.GenerateSclBlock(softwareUnitBase);
+
+        }
+        else
+        {
+            fb.GenerateXmlBlock(softwareUnitBase, programmingLanguage);
+        }
+        var block = softwareUnitBase.Blocks.ToList().FirstOrDefault(b => b.Value.Name == fbName);
+        block.Value.Namespace = "test";
+
+        //softwareUnitBase.NamespacePreset = "BlockNamespace";
+
+        //softwareUnitBase.SetNamespacePresetOfBlocksAndTypes();
     }
 
     /// <summary>

@@ -1,4 +1,4 @@
-using MAC_use_cases.Model.UseCases;
+﻿using MAC_use_cases.Model.UseCases;
 using MAC_use_cases.ViewModel;
 using Newtonsoft.Json;
 using Siemens.Automation.ModularApplicationCreator.Modules;
@@ -128,16 +128,16 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
         {
             case TiaGenerationPhases.Init:
 
-                if (!string.IsNullOrWhiteSpace(HardwareGenerationExcelBasedViewModel.ImportSource))
-                {
-                    HardwareGenerationExcelBased.CreateNewDevicesFromExcelSheet(this, opennessTiaPortalProject,
-                        HardwareGenerationExcelBasedViewModel.ImportSource);
-                }
+                //if (!string.IsNullOrWhiteSpace(HardwareGenerationExcelBasedViewModel.ImportSource))
+                //{
+                //    HardwareGenerationExcelBased.CreateNewDevicesFromExcelSheet(this, opennessTiaPortalProject,
+                //        HardwareGenerationExcelBasedViewModel.ImportSource);
+                //}
 
-                if (!IsGenerateHardwareChecked)
-                {
-                    break;
-                }
+                //if (!IsGenerateHardwareChecked)
+                //{
+                //    break;
+                //}
 
                 //Hardware config has to be in the Init phase.Otherwise, it can't be used in the MAC.
                 var s120 = HardwareGeneration.GenerateS120(this, "S120MACTest", "S120DeviceTest",
@@ -145,17 +145,17 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
 
                 var s210 = HardwareGeneration.GenerateS210(this, "S210MACTest", "S210DeviceTest",
                     "this drive is generated with MAC");
-                var subnet1 = HardwareGeneration.GetOrCreateSubnet(SubnetsManager, "PN/IE_1");
+                //var subnet1 = HardwareGeneration.GetOrCreateSubnet(SubnetsManager, "PN/IE_1");
 
-                HardwareGeneration.ConnectDriveToSubnet(s120, subnet1, this);
-                HardwareGeneration.ConnectDriveToSubnet(s210, subnet1, this);
+                //HardwareGeneration.ConnectDriveToSubnet(s120, subnet1, this);
+                //HardwareGeneration.ConnectDriveToSubnet(s210, subnet1, this);
 
                 break;
             case TiaGenerationPhases.Build:
 
                 // Add equipment module specific code generation here.
                 var opennessCpu = GeneralSupport.GetOpennessDeviceItem(tiaTemplateContext.TiaDevice);
-                _softwareUnit = SoftwareUnits.GetOrCreateSoftwareUnit(_plcDevice, "MyUnit", this);
+                _softwareUnit = SoftwareUnits.GetOrCreateSoftwareUnit(_plcDevice, "MyUnit", this, "Namesapce_example");
 
                 // Configure a Technology Object
                 MyTo.ConfigureTO(MyTo.TechnologicalObject, this);
@@ -206,7 +206,10 @@ public class MAC_use_casesEM : BaseMAC_use_casesEM
                     ProgrammingLanguage.F_LAD,
                     _plcDevice);
                 GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_FBD",
-                    ProgrammingLanguage.FBD);
+                    ProgrammingLanguage.FBD, _plcDevice);
+                GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_LAD",
+                    ProgrammingLanguage.LAD, _plcDevice);
+                GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_SCL", ProgrammingLanguage.SCL, _plcDevice);
 
                 var dbFromTypedMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(this,
                     ResourceManagement.MyFunctionBlock_Typed,
