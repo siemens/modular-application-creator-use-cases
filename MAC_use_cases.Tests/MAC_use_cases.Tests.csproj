@@ -53,7 +53,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\MAC_use_cases\TiaImports\CustomClasses\**\*.cs" Link="CustomClasses\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\**\*.cs" Link="GeneratedClasses\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\LIBelt_Manager.cs">
+      <Link>GeneratedClasses\LIBelt_Manager.cs</Link>
+    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\LIBelt_V1_1_4_V17_V18_V19.cs">
+      <Link>GeneratedClasses\LIBelt_V1_1_4_V17_V18_V19.cs</Link>
+    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\Lib_MAC_use_cases.cs">
+      <Link>GeneratedClasses\Lib_MAC_use_cases.cs</Link>
+    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\myDataType.cs">
+      <Link>GeneratedClasses\myDataType.cs</Link>
+    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\MyFunctionBlock.cs">
+      <Link>GeneratedClasses\MyFunctionBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\MyFunctionBlock_FailSafe.cs">
+      <Link>GeneratedClasses\MyFunctionBlock_FailSafe.cs</Link>
+    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\MyFunctionBlock_Typed.cs">
+      <Link>GeneratedClasses\MyFunctionBlock_Typed.cs</Link>
+    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\pMiddleLayer.cs">
+      <Link>GeneratedClasses\pMiddleLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\Sollas.cs">
+      <Link>GeneratedClasses\Sollas.cs</Link>
+    </Compile>
     <Compile Include="BUILDER.TESTS\MAC_use_casesBuilderTests.cs" />
     <Compile Include="BUILDER.TESTS\GenerateTiaPortalTest.cs" />
     <Compile Include="TESTENVIRONMENT\MacGenerationTestBaseMAC_use_cases.cs" />

@@ -50,6 +50,7 @@ public class GenericBlockCreation
     /// CreateFB("MyFB", "MyFB_DB", ProgrammingLanguage.LAD, plcDevice);
     /// </code>
     /// </example>
+
     // TODO expand for sw-units
     public static void CreateFunctionBlock(string blockName, string instanceDbName,
         ProgrammingLanguage programmingLanguage,
@@ -243,18 +244,13 @@ public class GenericBlockCreation
         if (programmingLanguage == ProgrammingLanguage.SCL)
         {
             fb.GenerateSclBlock(softwareUnitBase);
-
         }
         else
         {
             fb.GenerateXmlBlock(softwareUnitBase, programmingLanguage);
         }
         var block = softwareUnitBase.Blocks.ToList().FirstOrDefault(b => b.Value.Name == fbName);
-        block.Value.Namespace = "test";
-
-        //softwareUnitBase.NamespacePreset = "BlockNamespace";
-
-        //softwareUnitBase.SetNamespacePresetOfBlocksAndTypes();
+        block.Value.Namespace = "Namespace_Block";
     }
 
     /// <summary>
