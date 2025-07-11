@@ -2,6 +2,13 @@ var annotated_dup =
 [
     [ "MAC_use_cases", "namespace_m_a_c__use__cases.html", [
       [ "Model", "namespace_m_a_c__use__cases_1_1_model.html", [
+        [ "ModuleEssentials", "namespace_m_a_c__use__cases_1_1_model_1_1_module_essentials.html", [
+          [ "Base", "namespace_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base.html", [
+            [ "BaseModelParameterOwner", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_model_parameter_owner.html", null ],
+            [ "BaseParameter", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter.html", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter" ],
+            [ "BaseParameterWithPredefinedTags", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter_with_predefined_tags.html", null ]
+          ] ]
+        ] ],
         [ "UseCases", "namespace_m_a_c__use__cases_1_1_model_1_1_use_cases.html", [
           [ "CreateVariables", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables" ],
           [ "GeneralSupport", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support" ],

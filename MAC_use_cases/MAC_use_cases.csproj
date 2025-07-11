@@ -89,6 +89,9 @@ where to where -->
   in MPFProj12\ProjectNode.cs, ProcessFiles.
   -->
   <ItemGroup>
+    <Compile Include="Model\ModuleEssentials\Base\BaseModelParameterOwner.cs" />
+    <Compile Include="Model\ModuleEssentials\Base\BaseParameter.cs" />
+    <Compile Include="Model\ModuleEssentials\Base\BaseParameterWithPredefinedTags.cs" />
     <Compile Include="Model\UseCases\HardwareGenerationExcelBased.cs" />
     <Compile Include="TiaImports\CustomLibraryClasses\Lib_Screen_1.cs" />
     <Compile Include="TiaImports\CustomLibraryClasses\Lib_MAC_use_cases_custom.cs" />
@@ -188,6 +191,9 @@ where to where -->
       <Version>19.2.10</Version>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials">
+      <Version>19.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Core">
       <Version>19.2.10</Version>
       <PrivateAssets>all</PrivateAssets>
@@ -197,6 +203,7 @@ where to where -->
     <Content Include="Images\*" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Model\ModuleEssentials\Example\" />
     <Folder Include="TiaResources\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['navigation_0',['Quick Navigation',['../index.html#autotoc_md1',1,'']]]
+  ['integrate_20libraries_0',['How to integrate libraries',['../index.html#section-id',1,'']]]
 ];

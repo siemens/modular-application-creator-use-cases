@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['integrate_20libraries_0',['How to integrate libraries',['../index.html#section-id',1,'']]]
+  ['getting_20started_0',['Getting Started',['../md_docs_2module_essentials_page.html#autotoc_md7',1,'']]]
 ];
