@@ -19,5 +19,15 @@ public class BaseModelParameterOwner : EssentialParameterOwner
         _module = module;
     }
 
+    protected override void setup()
+    {
+        base.setup();
+        CreateParameters();
+    }
+
+    protected virtual void CreateParameters()
+    {
+
+    }
     // Add code here for validation, additional logic, or other functionality as needed.
 }

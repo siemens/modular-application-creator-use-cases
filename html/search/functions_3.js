@@ -16,5 +16,6 @@ var searchData=
   ['getorcreatehmisoftware_13',['GetOrCreateHMISoftware',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#aff273d38f036f9f1b8b1c603a5422efb',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
   ['getorcreatesoftwareunit_14',['GetOrCreateSoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html#a609a670185b4e3172043b74ff2263026',1,'MAC_use_cases::Model::UseCases::SoftwareUnits']]],
   ['getorcreatesubnet_15',['GetOrCreateSubnet',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#af53a3919d93de83d94c0b58213a9339d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
-  ['getsafetysoftwareunit_16',['GetSafetySoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html#a1dbe558328e20da047c8bad1a5033a18',1,'MAC_use_cases::Model::UseCases::SoftwareUnits']]]
+  ['getsafetysoftwareunit_16',['GetSafetySoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html#a1dbe558328e20da047c8bad1a5033a18',1,'MAC_use_cases::Model::UseCases::SoftwareUnits']]],
+  ['getvalueforgeneration_17',['GetValueForGeneration',['../class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_example_1_1_parameter_1_1_parameter___is_virtual_axis.html#abe10f380283c309fd2abc2202b9e8ee5',1,'MAC_use_cases::Model::ModuleEssentials::Example::Parameter::Parameter_IsVirtualAxis']]]
 ];

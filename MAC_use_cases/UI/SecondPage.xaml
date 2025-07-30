@@ -1,14 +1,28 @@
-<modulesUI:BaseEditor x:Class="MAC_use_cases.UI.SecondPage"
-                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                      xmlns:modulesUI="clr-namespace:Siemens.Automation.ModularApplicationCreator.Modules.UI;assembly=Siemens.Automation.ModAppCreator.Core"
-                      xmlns:model="clr-namespace:MAC_use_cases.Model"
-                      mc:Ignorable="d">
+<modulesUI:BaseEditor
+    x:Class="MAC_use_cases.UI.SecondPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:checkBox="clr-namespace:Siemens.Automation.ModularApplicationCreator.ControlModules.ModuleEssentials.Controls.EssentialParameterControls.CheckBox;assembly=Siemens.Automation.ModAppCreator.CM.ModuleEssentials"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:MAC_use_cases.Model"
+    xmlns:modulesUI="clr-namespace:Siemens.Automation.ModularApplicationCreator.Modules.UI;assembly=Siemens.Automation.ModAppCreator.Core"
+    mc:Ignorable="d">
 
-    <StackPanel VerticalAlignment="Center"
-                d:DataContext="{d:DesignInstance Type=model:MAC_use_casesEM, IsDesignTimeCreatable=True}">
-        <TextBlock Text="{DynamicResource SampleText2}" />
+    <StackPanel
+        x:Name="StackPanel"
+        VerticalAlignment="Top"
+        d:DataContext="{d:DesignInstance Type=model:MAC_use_casesEM,
+                                         IsDesignTimeCreatable=True}">
+        <TextBlock Margin="30,0,0,0" Text="Example of Essential CheckBox Parameter " />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="30,15,0,0" Text="Technology Object Configuration:" />
+
+            <checkBox:EssentialCheckBoxLineItem
+                CustomLabelLanguageKey="IsVirtualAxis"
+                LabelColumnVisibility="Collapsed"
+                Parameter="{Binding DataContext.MyEssentialTechnologyObjectViewModel.IsVirtualAxis, ElementName=StackPanel}" />
+        </StackPanel>
+
     </StackPanel>
 </modulesUI:BaseEditor>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['essentials_0',['Module Essentials',['../md_docs_2module_essentials_page.html',1,'']]]
+  ['different_20lanugages_0',['How to use different lanugages',['../index.html#localization-id',1,'']]],
+  ['documentation_1',['Help for this documentation',['../index.html#help-id',1,'']]]
 ];

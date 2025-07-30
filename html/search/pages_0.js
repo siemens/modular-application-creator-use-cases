@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['classes_0',['Classes',['../index.html#autotoc_md2',1,'']]]
+  ['architecture_0',['Architecture',['../md_docs_2module_essentials_page.html#autotoc_md9',1,'']]]
 ];

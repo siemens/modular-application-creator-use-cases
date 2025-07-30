@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['versioning_0',['Versioning',['../md_docs_2module_essentials_page.html#autotoc_md8',1,'']]]
+  ['use_20different_20lanugages_0',['How to use different lanugages',['../index.html#localization-id',1,'']]]
 ];

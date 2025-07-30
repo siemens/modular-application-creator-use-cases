@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['navigation_0',['Quick Navigation',['../index.html#autotoc_md1',1,'']]]
+  ['module_20essentials_0',['Module Essentials',['../md_docs_2module_essentials_page.html',1,'']]]
 ];

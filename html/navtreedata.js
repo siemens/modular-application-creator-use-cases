@@ -31,7 +31,8 @@ var NAVTREE =
       [ "Key Features", "md_docs_2module_essentials_page.html#autotoc_md6", null ],
       [ "Getting Started", "md_docs_2module_essentials_page.html#autotoc_md7", [
         [ "Versioning", "md_docs_2module_essentials_page.html#autotoc_md8", null ],
-        [ "Parameter Types", "md_docs_2module_essentials_page.html#autotoc_md9", null ]
+        [ "Architecture", "md_docs_2module_essentials_page.html#autotoc_md9", null ],
+        [ "Parameter Types", "md_docs_2module_essentials_page.html#autotoc_md10", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [

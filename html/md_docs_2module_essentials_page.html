@@ -109,19 +109,19 @@ Key Features</h1>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 Getting Started</h1>
 <p>To use the <b>Module Essentials</b> in your project: <br  />
-</p><ol type="1">
-<li>Install the NuGet package: "Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials" <br  />
-</li>
-</ol>
+ Install the NuGet package: "Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials" <br  />
+ <a href="https://www.nuget.org/packages/Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials">https://www.nuget.org/packages/Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials</a></p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 Versioning</h2>
 <ul>
 <li>The versioning system of <b>Module Essentials</b> ensures compatibility with TIA Portal. <br  />
 </li>
-<li>The <b>first digit</b> of the version number corresponds to the supported TIA Portal version. <br  />
-</li>
+<li>The <b>first digit</b> of the version number corresponds to the supported TIA Portal version.</li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+Architecture</h2>
+<p>To effectively use <b>Module Essentials</b>, you must understand the underlying architecture of the module. Each Data Model is essentially a data container that holds multiple parameters. The model provides a parameter register, where developers can add each parameter as needed based on their specific requirements. For example, if you have an "axisW with various settings, the axis serves as your model, and each individual setting parameter must be properly defined and registered within that model. This architecture allows for flexible and organized management of related parameters within a cohesive data structure.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 Parameter Types</h2>
 <ul>
 <li>In the context of <b>Module Essentials</b>, any UI control is considered a parameter. <br  />
@@ -154,11 +154,10 @@ Parameter Types</h2>
 </li>
 </ul>
 </li>
-<li>UI controls are optional: <br  />
-<ul>
-<li>Developers can choose whether or not to implement UI controls based on their specific requirements. ✅ </li>
 </ul>
-</li>
+<p>UI controls are optional: <br  />
+</p><ul>
+<li>Developers can choose whether or not to implement UI controls based on their specific requirements. ✅ </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
