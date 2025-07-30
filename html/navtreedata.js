@@ -26,13 +26,18 @@ var NAVTREE =
 [
   [ "Modular Application Creator Use Case Based Documentation", "index.html", [
     [ "Overview", "index.html", "index" ],
-    [ "Module Essentials", "md_docs_2module_essentials_page.html", [
-      [ "Overview", "md_docs_2module_essentials_page.html#autotoc_md5", null ],
-      [ "Key Features", "md_docs_2module_essentials_page.html#autotoc_md6", null ],
-      [ "Getting Started", "md_docs_2module_essentials_page.html#autotoc_md7", [
-        [ "Versioning", "md_docs_2module_essentials_page.html#autotoc_md8", null ],
-        [ "Architecture", "md_docs_2module_essentials_page.html#autotoc_md9", null ],
-        [ "Parameter Types", "md_docs_2module_essentials_page.html#autotoc_md10", null ]
+    [ "Advanced", "md_docs_2module_essentials_page.html", [
+      [ "Module Essentials", "md_docs_2module_essentials_page.html#autotoc_md5", [
+        [ "Overview", "md_docs_2module_essentials_page.html#autotoc_md6", null ],
+        [ "Key Features", "md_docs_2module_essentials_page.html#autotoc_md7", null ],
+        [ "Getting Started", "md_docs_2module_essentials_page.html#autotoc_md8", null ],
+        [ "Versioning", "md_docs_2module_essentials_page.html#autotoc_md9", null ],
+        [ "Architecture", "md_docs_2module_essentials_page.html#autotoc_md10", null ],
+        [ "Parameter Types", "md_docs_2module_essentials_page.html#autotoc_md11", null ],
+        [ "Example of Module Essentials Usage", "md_docs_2module_essentials_page.html#autotoc_md12", [
+          [ "UI Control Binding", "md_docs_2module_essentials_page.html#autotoc_md13", null ],
+          [ "Example of Control Binding Usage", "md_docs_2module_essentials_page.html#autotoc_md14", null ]
+        ] ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [

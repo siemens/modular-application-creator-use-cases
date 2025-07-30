@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MAC_use_cases</id>
-    <version>1.0.9330-pre20250718082621</version>
+    <version>1.0.9342-pre20250730100030</version>
     <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
@@ -43,6 +43,7 @@
     <contentFiles>
       <files include="any/net48/AdditionalContent/HardwareGenerationExcelBased.xlsx" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/AddLibrary.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/Architecture.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/ClassExplanation.PNG" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CodeExplanation.PNG" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/ConfigureTO.png" buildAction="Content" copyToOutput="false" />
@@ -69,6 +70,8 @@
       <files include="any/net48/Images/GetSafetySoftwareUnit.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/LocalizationXamlResourceDictionary.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/LogMessage.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/ModuleEssentials.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/ModuleEssentialsControlBinding.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/MultiInstanceFB.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/OpenLibrary.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/OpenTiares.png" buildAction="Content" copyToOutput="false" />

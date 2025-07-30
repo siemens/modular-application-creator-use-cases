@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Modular Application Creator Use Case Based Documentation: Module Essentials</title>
+<title>Modular Application Creator Use Case Based Documentation: Advanced</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,16 +88,18 @@ $(function(){initNavTree('md_docs_2module_essentials_page.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Module Essentials </div></div>
+  <div class="headertitle"><div class="title">Advanced </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md4"></a></p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
-Overview</h1>
+Module Essentials</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+Overview</h2>
 <p>The <b>Module Essentials</b> is a control module designed to streamline the development process. It serves as a NuGet package that helps developers quickly build user interfaces and efficiently manage dependencies between UI controls. <br  />
 </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
-Key Features</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+Key Features</h2>
 <ul>
 <li><b>Rapid UI Development</b>: Simplifies the creation of user interfaces, reducing development time. <br  />
 </li>
@@ -106,22 +108,25 @@ Key Features</h1>
 <li><b>NuGet Integration</b>: Easily accessible as a NuGet package, making it simple to add to your projects. <br  />
 </li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
-Getting Started</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+Getting Started</h2>
 <p>To use the <b>Module Essentials</b> in your project: <br  />
  Install the NuGet package: "Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials" <br  />
  <a href="https://www.nuget.org/packages/Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials">https://www.nuget.org/packages/Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 Versioning</h2>
 <ul>
 <li>The versioning system of <b>Module Essentials</b> ensures compatibility with TIA Portal. <br  />
 </li>
 <li>The <b>first digit</b> of the version number corresponds to the supported TIA Portal version.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
-Architecture</h2>
-<p>To effectively use <b>Module Essentials</b>, you must understand the underlying architecture of the module. Each Data Model is essentially a data container that holds multiple parameters. The model provides a parameter register, where developers can add each parameter as needed based on their specific requirements. For example, if you have an "axisW with various settings, the axis serves as your model, and each individual setting parameter must be properly defined and registered within that model. This architecture allows for flexible and organized management of related parameters within a cohesive data structure.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+Architecture</h2>
+<p>To effectively use <b>Module Essentials</b>, you must understand the underlying architecture of the module. Each Data Model is essentially a data container that holds multiple parameters. The model provides a parameter register, where developers can add each parameter as needed based on their specific requirements. For example, if you have an "axisW with various settings, the axis serves as your model, and each individual setting parameter must be properly defined and registered within that model.
+   This architecture allows for flexible and organized management of related parameters within a cohesive data structure.
+
+  &lt;img src="../MAC_use_cases/Images/Architecture.png" alt="Architecture"/&gt;</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
 Parameter Types</h2>
 <ul>
 <li>In the context of <b>Module Essentials</b>, any UI control is considered a parameter. <br  />
@@ -157,8 +162,18 @@ Parameter Types</h2>
 </ul>
 <p>UI controls are optional: <br  />
 </p><ul>
-<li>Developers can choose whether or not to implement UI controls based on their specific requirements. ✅ </li>
+<li>Developers can choose whether or not to implement UI controls based on their specific requirements. ✅</li>
 </ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+Example of Module Essentials Usage</h2>
+<p>Here is an example of the classes needed to use the Module Essentials:</p>
+<p><img src="../MAC_use_cases/Images/ModuleEssentials.png" alt="ModuleEssentialsExample" class="inline"/></p>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+UI Control Binding</h3>
+<p>To use parameters as UI controls in your application, you must bind them to the corresponding controls in the XAML file. This binding establishes the connection between your parameter classes and the visual elements in the user interface, enabling data flow and user interaction. The binding process typically involves setting the <span class="tt">DataContext</span> or using specific binding expressions that reference your parameter properties.</p>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+Example of Control Binding Usage</h3>
+<p><img src="../MAC_use_cases/Images/ModuleEssentialsControlBinding.png" alt="ModuleEssentialsExample" class="inline"/> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

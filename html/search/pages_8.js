@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['key_20features_0',['Key Features',['../md_docs_2module_essentials_page.html#autotoc_md6',1,'']]]
+  ['integrate_20libraries_0',['How to integrate libraries',['../index.html#section-id',1,'']]]
 ];

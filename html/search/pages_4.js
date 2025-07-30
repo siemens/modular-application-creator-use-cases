@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['features_0',['Key Features',['../md_docs_2module_essentials_page.html#autotoc_md6',1,'']]],
-  ['files_1',['Files',['../index.html#autotoc_md3',1,'']]],
-  ['for_20this_20documentation_2',['Help for this documentation',['../index.html#help-id',1,'']]]
+  ['essentials_0',['Module Essentials',['../md_docs_2module_essentials_page.html#autotoc_md5',1,'']]],
+  ['essentials_20usage_1',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md12',1,'']]],
+  ['example_20of_20control_20binding_20usage_2',['Example of Control Binding Usage',['../md_docs_2module_essentials_page.html#autotoc_md14',1,'']]],
+  ['example_20of_20module_20essentials_20usage_3',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md12',1,'']]]
 ];

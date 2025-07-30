@@ -12,8 +12,9 @@ var searchData=
   ['maximumvelocity_9',['MaximumVelocity',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#a33884cfbed1894671bda77459cc196a4',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
   ['modellist_10',['ModelList',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html#a8553b55cc39aab35c1e9a0d3d1abea4e',1,'MAC_use_cases::Model::UseCases::NonTIAProjectBased']]],
   ['modeltoserialize_11',['ModelToSerialize',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html',1,'MAC_use_cases.Model.UseCases.ModelToSerialize'],['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html#a8edb7fb028a11f369fb619ba3112d402',1,'MAC_use_cases.Model.UseCases.ModelToSerialize.ModelToSerialize()']]],
-  ['module_20essentials_12',['Module Essentials',['../md_docs_2module_essentials_page.html',1,'']]],
-  ['motioncontrolversion_13',['MotionControlVersion',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#add91822485c207e823b0fca7c9c0dc00',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
-  ['myessentialtechnologyobjectviewmodel_14',['MyEssentialTechnologyObjectViewModel',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#a43d8cec702e1a656380311e517cd167f',1,'MAC_use_cases::Model::MAC_use_casesEM']]],
-  ['myto_15',['MyTo',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#ad72e2cc69e2635f82c335634ae417b4e',1,'MAC_use_cases::Model::MAC_use_casesEM']]]
+  ['module_20essentials_12',['Module Essentials',['../md_docs_2module_essentials_page.html#autotoc_md5',1,'']]],
+  ['module_20essentials_20usage_13',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md12',1,'']]],
+  ['motioncontrolversion_14',['MotionControlVersion',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#add91822485c207e823b0fca7c9c0dc00',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
+  ['myessentialtechnologyobjectviewmodel_15',['MyEssentialTechnologyObjectViewModel',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#a43d8cec702e1a656380311e517cd167f',1,'MAC_use_cases::Model::MAC_use_casesEM']]],
+  ['myto_16',['MyTo',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#ad72e2cc69e2635f82c335634ae417b4e',1,'MAC_use_cases::Model::MAC_use_casesEM']]]
 ];

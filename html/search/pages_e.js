@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quick_20navigation_0',['Quick Navigation',['../index.html#autotoc_md1',1,'']]]
+  ['parameter_20types_0',['Parameter Types',['../md_docs_2module_essentials_page.html#autotoc_md11',1,'']]]
 ];
