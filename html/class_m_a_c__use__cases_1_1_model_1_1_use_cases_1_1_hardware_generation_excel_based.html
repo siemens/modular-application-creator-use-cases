@@ -165,103 +165,103 @@ Static Private Member Functions</h2></td></tr>
 </ul>
 
 <p class="definition">Definition at line <a class="el" href="_hardware_generation_excel_based_8cs_source.html#l00034">34</a> of file <a class="el" href="_hardware_generation_excel_based_8cs_source.html">HardwareGenerationExcelBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   35</span>    {</div>
-<div class="line"><span class="lineno">   36</span>        var devices = <span class="keyword">new</span> List&lt;DeviceInfo&gt;();</div>
-<div class="line"><span class="lineno">   37</span>        Excel.Application xlApp = <span class="keyword">null</span>;</div>
-<div class="line"><span class="lineno">   38</span>        Excel.Workbook xlWorkbook = <span class="keyword">null</span>;</div>
-<div class="line"><span class="lineno">   39</span>        Excel.Worksheet xlWorksheet = <span class="keyword">null</span>;</div>
-<div class="line"><span class="lineno">   40</span>        Excel.Range xlRange = <span class="keyword">null</span>;</div>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>        {</div>
+<div class="line"><span class="lineno">   36</span>            var devices = <span class="keyword">new</span> List&lt;DeviceInfo&gt;();</div>
+<div class="line"><span class="lineno">   37</span>            Excel.Application xlApp = <span class="keyword">null</span>;</div>
+<div class="line"><span class="lineno">   38</span>            Excel.Workbook xlWorkbook = <span class="keyword">null</span>;</div>
+<div class="line"><span class="lineno">   39</span>            Excel.Worksheet xlWorksheet = <span class="keyword">null</span>;</div>
+<div class="line"><span class="lineno">   40</span>            Excel.Range xlRange = <span class="keyword">null</span>;</div>
 <div class="line"><span class="lineno">   41</span> </div>
-<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">try</span></div>
-<div class="line"><span class="lineno">   43</span>        {</div>
-<div class="line"><span class="lineno">   44</span>            xlApp = <span class="keyword">new</span> Excel.Application();</div>
-<div class="line"><span class="lineno">   45</span>            xlWorkbook = xlApp.Workbooks.Open(filePath);</div>
-<div class="line"><span class="lineno">   46</span>            xlWorksheet = xlWorkbook.Sheets[1];</div>
-<div class="line"><span class="lineno">   47</span>            xlRange = xlWorksheet.UsedRange;</div>
+<div class="line"><span class="lineno">   42</span>            <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">   43</span>            {</div>
+<div class="line"><span class="lineno">   44</span>                xlApp = <span class="keyword">new</span> Excel.Application();</div>
+<div class="line"><span class="lineno">   45</span>                xlWorkbook = xlApp.Workbooks.Open(filePath);</div>
+<div class="line"><span class="lineno">   46</span>                xlWorksheet = xlWorkbook.Sheets[1];</div>
+<div class="line"><span class="lineno">   47</span>                xlRange = xlWorksheet.UsedRange;</div>
 <div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>            var rowCount = xlRange.Rows.Count;</div>
-<div class="line"><span class="lineno">   50</span>            var colCount = xlRange.Columns.Count;</div>
+<div class="line"><span class="lineno">   49</span>                var rowCount = xlRange.Rows.Count;</div>
+<div class="line"><span class="lineno">   50</span>                var colCount = xlRange.Columns.Count;</div>
 <div class="line"><span class="lineno">   51</span> </div>
-<div class="line"><span class="lineno">   52</span>            <span class="comment">// Create a mapping of column indices to ensure flexibility in column order</span></div>
-<div class="line"><span class="lineno">   53</span>            var columnMap = <span class="keyword">new</span> Dictionary&lt;string, int&gt;();</div>
-<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">for</span> (var j = 1; j &lt;= colCount; j++)</div>
-<div class="line"><span class="lineno">   55</span>            {</div>
-<div class="line"><span class="lineno">   56</span>                <span class="keywordflow">if</span> (xlRange.Cells[1, j].Value2 != <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">   57</span>                {</div>
-<div class="line"><span class="lineno">   58</span>                    columnMap[xlRange.Cells[1, j].Value2.ToString()] = j;</div>
-<div class="line"><span class="lineno">   59</span>                }</div>
-<div class="line"><span class="lineno">   60</span>            }</div>
+<div class="line"><span class="lineno">   52</span>                <span class="comment">// Create a mapping of column indices to ensure flexibility in column order</span></div>
+<div class="line"><span class="lineno">   53</span>                var columnMap = <span class="keyword">new</span> Dictionary&lt;string, int&gt;();</div>
+<div class="line"><span class="lineno">   54</span>                <span class="keywordflow">for</span> (var j = 1; j &lt;= colCount; j++)</div>
+<div class="line"><span class="lineno">   55</span>                {</div>
+<div class="line"><span class="lineno">   56</span>                    <span class="keywordflow">if</span> (xlRange.Cells[1, j].Value2 != <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">   57</span>                    {</div>
+<div class="line"><span class="lineno">   58</span>                        columnMap[xlRange.Cells[1, j].Value2.ToString()] = j;</div>
+<div class="line"><span class="lineno">   59</span>                    }</div>
+<div class="line"><span class="lineno">   60</span>                }</div>
 <div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>            <span class="comment">// Validate required columns exist (excluding Type as it&#39;s optional)</span></div>
-<div class="line"><span class="lineno">   63</span>            <span class="keywordtype">string</span>[] requiredColumns = { <span class="stringliteral">&quot;OrderNumber&quot;</span>, <span class="stringliteral">&quot;Version&quot;</span>, <span class="stringliteral">&quot;Name&quot;</span>, <span class="stringliteral">&quot;DeviceName&quot;</span> };</div>
-<div class="line"><span class="lineno">   64</span>            <span class="keywordflow">foreach</span> (var column <span class="keywordflow">in</span> requiredColumns)</div>
-<div class="line"><span class="lineno">   65</span>            {</div>
-<div class="line"><span class="lineno">   66</span>                <span class="keywordflow">if</span> (!columnMap.ContainsKey(column))</div>
-<div class="line"><span class="lineno">   67</span>                {</div>
-<div class="line"><span class="lineno">   68</span>                    <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception($<span class="stringliteral">&quot;Required column &#39;{column}&#39; not found in Excel file&quot;</span>);</div>
-<div class="line"><span class="lineno">   69</span>                }</div>
-<div class="line"><span class="lineno">   70</span>            }</div>
+<div class="line"><span class="lineno">   62</span>                <span class="comment">// Validate required columns exist (excluding Type as it&#39;s optional)</span></div>
+<div class="line"><span class="lineno">   63</span>                <span class="keywordtype">string</span>[] requiredColumns = { <span class="stringliteral">&quot;OrderNumber&quot;</span>, <span class="stringliteral">&quot;Version&quot;</span>, <span class="stringliteral">&quot;Name&quot;</span>, <span class="stringliteral">&quot;DeviceName&quot;</span> };</div>
+<div class="line"><span class="lineno">   64</span>                <span class="keywordflow">foreach</span> (var column <span class="keywordflow">in</span> requiredColumns)</div>
+<div class="line"><span class="lineno">   65</span>                {</div>
+<div class="line"><span class="lineno">   66</span>                    <span class="keywordflow">if</span> (!columnMap.ContainsKey(column))</div>
+<div class="line"><span class="lineno">   67</span>                    {</div>
+<div class="line"><span class="lineno">   68</span>                        <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception($<span class="stringliteral">&quot;Required column &#39;{column}&#39; not found in Excel file&quot;</span>);</div>
+<div class="line"><span class="lineno">   69</span>                    }</div>
+<div class="line"><span class="lineno">   70</span>                }</div>
 <div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>            <span class="comment">// Read data rows</span></div>
-<div class="line"><span class="lineno">   73</span>            <span class="keywordflow">for</span> (var i = 2; i &lt;= rowCount; i++) <span class="comment">// Start from row 2 to skip headers</span></div>
-<div class="line"><span class="lineno">   74</span>            {</div>
-<div class="line"><span class="lineno">   75</span>                <span class="keywordflow">if</span> (xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;OrderNumber&quot;</span>]].Value2 == <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">   76</span>                {</div>
-<div class="line"><span class="lineno">   77</span>                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">   78</span>                }</div>
+<div class="line"><span class="lineno">   72</span>                <span class="comment">// Read data rows</span></div>
+<div class="line"><span class="lineno">   73</span>                <span class="keywordflow">for</span> (var i = 2; i &lt;= rowCount; i++) <span class="comment">// Start from row 2 to skip headers</span></div>
+<div class="line"><span class="lineno">   74</span>                {</div>
+<div class="line"><span class="lineno">   75</span>                    <span class="keywordflow">if</span> (xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;OrderNumber&quot;</span>]].Value2 == <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">   76</span>                    {</div>
+<div class="line"><span class="lineno">   77</span>                        <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">   78</span>                    }</div>
 <div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>                var device = <span class="keyword">new</span> DeviceInfo</div>
-<div class="line"><span class="lineno">   81</span>                {</div>
-<div class="line"><span class="lineno">   82</span>                    OrderNumber = GetCellValueAsString(xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;OrderNumber&quot;</span>]]),</div>
-<div class="line"><span class="lineno">   83</span>                    Version = GetCellValueAsString(xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;Version&quot;</span>]]),</div>
-<div class="line"><span class="lineno">   84</span>                    Name = GetCellValueAsString(xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;Name&quot;</span>]]),</div>
-<div class="line"><span class="lineno">   85</span>                    DeviceName = GetCellValueAsString(xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;DeviceName&quot;</span>]])</div>
-<div class="line"><span class="lineno">   86</span>                };</div>
+<div class="line"><span class="lineno">   80</span>                    var device = <span class="keyword">new</span> DeviceInfo</div>
+<div class="line"><span class="lineno">   81</span>                    {</div>
+<div class="line"><span class="lineno">   82</span>                        OrderNumber = GetCellValueAsString(xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;OrderNumber&quot;</span>]]),</div>
+<div class="line"><span class="lineno">   83</span>                        Version = GetCellValueAsString(xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;Version&quot;</span>]]),</div>
+<div class="line"><span class="lineno">   84</span>                        Name = GetCellValueAsString(xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;Name&quot;</span>]]),</div>
+<div class="line"><span class="lineno">   85</span>                        DeviceName = GetCellValueAsString(xlRange.Cells[i, columnMap[<span class="stringliteral">&quot;DeviceName&quot;</span>]])</div>
+<div class="line"><span class="lineno">   86</span>                    };</div>
 <div class="line"><span class="lineno">   87</span> </div>
-<div class="line"><span class="lineno">   88</span>                <span class="comment">// Handle Type column separately as it&#39;s optional</span></div>
-<div class="line"><span class="lineno">   89</span>                <span class="keywordflow">if</span> (columnMap.TryGetValue(<span class="stringliteral">&quot;Type&quot;</span>, out var value))</div>
-<div class="line"><span class="lineno">   90</span>                {</div>
-<div class="line"><span class="lineno">   91</span>                    device.Type = GetCellValueAsString(xlRange.Cells[i, value]);</div>
-<div class="line"><span class="lineno">   92</span>                }</div>
+<div class="line"><span class="lineno">   88</span>                    <span class="comment">// Handle Type column separately as it&#39;s optional</span></div>
+<div class="line"><span class="lineno">   89</span>                    <span class="keywordflow">if</span> (columnMap.TryGetValue(<span class="stringliteral">&quot;Type&quot;</span>, out var value))</div>
+<div class="line"><span class="lineno">   90</span>                    {</div>
+<div class="line"><span class="lineno">   91</span>                        device.Type = GetCellValueAsString(xlRange.Cells[i, value]);</div>
+<div class="line"><span class="lineno">   92</span>                    }</div>
 <div class="line"><span class="lineno">   93</span> </div>
-<div class="line"><span class="lineno">   94</span>                <span class="comment">// Only add device if required fields are not empty</span></div>
-<div class="line"><span class="lineno">   95</span>                <span class="keywordflow">if</span> (!<span class="keywordtype">string</span>.IsNullOrWhiteSpace(device.OrderNumber) &amp;&amp;</div>
-<div class="line"><span class="lineno">   96</span>                    !<span class="keywordtype">string</span>.IsNullOrWhiteSpace(device.Version) &amp;&amp;</div>
-<div class="line"><span class="lineno">   97</span>                    !<span class="keywordtype">string</span>.IsNullOrWhiteSpace(device.Name) &amp;&amp;</div>
-<div class="line"><span class="lineno">   98</span>                    !<span class="keywordtype">string</span>.IsNullOrWhiteSpace(device.DeviceName))</div>
-<div class="line"><span class="lineno">   99</span>                {</div>
-<div class="line"><span class="lineno">  100</span>                    devices.Add(device);</div>
-<div class="line"><span class="lineno">  101</span>                }</div>
-<div class="line"><span class="lineno">  102</span>            }</div>
-<div class="line"><span class="lineno">  103</span>        }</div>
-<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">finally</span></div>
-<div class="line"><span class="lineno">  105</span>        {</div>
-<div class="line"><span class="lineno">  106</span>            <span class="comment">// Clean up COM objects</span></div>
-<div class="line"><span class="lineno">  107</span>            <span class="keywordflow">if</span> (xlRange != <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">  108</span>            {</div>
-<div class="line"><span class="lineno">  109</span>                Marshal.ReleaseComObject(xlRange);</div>
-<div class="line"><span class="lineno">  110</span>            }</div>
+<div class="line"><span class="lineno">   94</span>                    <span class="comment">// Only add device if required fields are not empty</span></div>
+<div class="line"><span class="lineno">   95</span>                    <span class="keywordflow">if</span> (!<span class="keywordtype">string</span>.IsNullOrWhiteSpace(device.OrderNumber) &amp;&amp;</div>
+<div class="line"><span class="lineno">   96</span>                        !<span class="keywordtype">string</span>.IsNullOrWhiteSpace(device.Version) &amp;&amp;</div>
+<div class="line"><span class="lineno">   97</span>                        !<span class="keywordtype">string</span>.IsNullOrWhiteSpace(device.Name) &amp;&amp;</div>
+<div class="line"><span class="lineno">   98</span>                        !<span class="keywordtype">string</span>.IsNullOrWhiteSpace(device.DeviceName))</div>
+<div class="line"><span class="lineno">   99</span>                    {</div>
+<div class="line"><span class="lineno">  100</span>                        devices.Add(device);</div>
+<div class="line"><span class="lineno">  101</span>                    }</div>
+<div class="line"><span class="lineno">  102</span>                }</div>
+<div class="line"><span class="lineno">  103</span>            }</div>
+<div class="line"><span class="lineno">  104</span>            <span class="keywordflow">finally</span></div>
+<div class="line"><span class="lineno">  105</span>            {</div>
+<div class="line"><span class="lineno">  106</span>                <span class="comment">// Clean up COM objects</span></div>
+<div class="line"><span class="lineno">  107</span>                <span class="keywordflow">if</span> (xlRange != <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">  108</span>                {</div>
+<div class="line"><span class="lineno">  109</span>                    Marshal.ReleaseComObject(xlRange);</div>
+<div class="line"><span class="lineno">  110</span>                }</div>
 <div class="line"><span class="lineno">  111</span> </div>
-<div class="line"><span class="lineno">  112</span>            <span class="keywordflow">if</span> (xlWorksheet != <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">  113</span>            {</div>
-<div class="line"><span class="lineno">  114</span>                Marshal.ReleaseComObject(xlWorksheet);</div>
-<div class="line"><span class="lineno">  115</span>            }</div>
+<div class="line"><span class="lineno">  112</span>                <span class="keywordflow">if</span> (xlWorksheet != <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">  113</span>                {</div>
+<div class="line"><span class="lineno">  114</span>                    Marshal.ReleaseComObject(xlWorksheet);</div>
+<div class="line"><span class="lineno">  115</span>                }</div>
 <div class="line"><span class="lineno">  116</span> </div>
-<div class="line"><span class="lineno">  117</span>            <span class="keywordflow">if</span> (xlWorkbook != <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">  118</span>            {</div>
-<div class="line"><span class="lineno">  119</span>                xlWorkbook.Close(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  120</span>                Marshal.ReleaseComObject(xlWorkbook);</div>
-<div class="line"><span class="lineno">  121</span>            }</div>
+<div class="line"><span class="lineno">  117</span>                <span class="keywordflow">if</span> (xlWorkbook != <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">  118</span>                {</div>
+<div class="line"><span class="lineno">  119</span>                    xlWorkbook.Close(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  120</span>                    Marshal.ReleaseComObject(xlWorkbook);</div>
+<div class="line"><span class="lineno">  121</span>                }</div>
 <div class="line"><span class="lineno">  122</span> </div>
-<div class="line"><span class="lineno">  123</span>            <span class="keywordflow">if</span> (xlApp != <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">  124</span>            {</div>
-<div class="line"><span class="lineno">  125</span>                xlApp.Quit();</div>
-<div class="line"><span class="lineno">  126</span>                Marshal.ReleaseComObject(xlApp);</div>
-<div class="line"><span class="lineno">  127</span>            }</div>
-<div class="line"><span class="lineno">  128</span>        }</div>
+<div class="line"><span class="lineno">  123</span>                <span class="keywordflow">if</span> (xlApp != <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">  124</span>                {</div>
+<div class="line"><span class="lineno">  125</span>                    xlApp.Quit();</div>
+<div class="line"><span class="lineno">  126</span>                    Marshal.ReleaseComObject(xlApp);</div>
+<div class="line"><span class="lineno">  127</span>                }</div>
+<div class="line"><span class="lineno">  128</span>            }</div>
 <div class="line"><span class="lineno">  129</span> </div>
-<div class="line"><span class="lineno">  130</span>        <span class="keywordflow">return</span> devices;</div>
-<div class="line"><span class="lineno">  131</span>    }</div>
+<div class="line"><span class="lineno">  130</span>            <span class="keywordflow">return</span> devices;</div>
+<div class="line"><span class="lineno">  131</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -298,9 +298,9 @@ Static Private Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The cell value as a trimmed string, or empty string if the cell is null.</dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_hardware_generation_excel_based_8cs_source.html#l00138">138</a> of file <a class="el" href="_hardware_generation_excel_based_8cs_source.html">HardwareGenerationExcelBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  139</span>    {</div>
-<div class="line"><span class="lineno">  140</span>        <span class="keywordflow">return</span> cell?.Value2 == <span class="keyword">null</span> ? string.Empty : (string)cell.Value2.ToString().Trim();</div>
-<div class="line"><span class="lineno">  141</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">  139</span>        {</div>
+<div class="line"><span class="lineno">  140</span>            <span class="keywordflow">return</span> cell?.Value2 == <span class="keyword">null</span> ? string.Empty : (string)cell.Value2.ToString().Trim();</div>
+<div class="line"><span class="lineno">  141</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -363,48 +363,48 @@ Static Private Member Functions</h2></td></tr>
 </ul>
 
 <p class="definition">Definition at line <a class="el" href="_hardware_generation_excel_based_8cs_source.html#l00159">159</a> of file <a class="el" href="_hardware_generation_excel_based_8cs_source.html">HardwareGenerationExcelBased.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  160</span>    {</div>
-<div class="line"><span class="lineno">  161</span>        <span class="keywordflow">try</span></div>
-<div class="line"><span class="lineno">  162</span>        {</div>
-<div class="line"><span class="lineno">  163</span>            <span class="keywordflow">if</span> (!File.Exists(excelFilePath))</div>
-<div class="line"><span class="lineno">  164</span>            {</div>
-<div class="line"><span class="lineno">  165</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> FileNotFoundException(<span class="stringliteral">&quot;Excel file not found&quot;</span>, excelFilePath);</div>
-<div class="line"><span class="lineno">  166</span>            }</div>
+<div class="fragment"><div class="line"><span class="lineno">  160</span>        {</div>
+<div class="line"><span class="lineno">  161</span>            <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  162</span>            {</div>
+<div class="line"><span class="lineno">  163</span>                <span class="keywordflow">if</span> (!File.Exists(excelFilePath))</div>
+<div class="line"><span class="lineno">  164</span>                {</div>
+<div class="line"><span class="lineno">  165</span>                    <span class="keywordflow">throw</span> <span class="keyword">new</span> FileNotFoundException(<span class="stringliteral">&quot;Excel file not found&quot;</span>, excelFilePath);</div>
+<div class="line"><span class="lineno">  166</span>                }</div>
 <div class="line"><span class="lineno">  167</span> </div>
-<div class="line"><span class="lineno">  168</span>            var deviceInfos = ReadExcelFile(excelFilePath);</div>
+<div class="line"><span class="lineno">  168</span>                var deviceInfos = ReadExcelFile(excelFilePath);</div>
 <div class="line"><span class="lineno">  169</span> </div>
-<div class="line"><span class="lineno">  170</span>            <span class="keywordflow">foreach</span> (var deviceInfo <span class="keywordflow">in</span> deviceInfos)</div>
-<div class="line"><span class="lineno">  171</span>            {</div>
-<div class="line"><span class="lineno">  172</span>                <span class="keywordflow">try</span></div>
-<div class="line"><span class="lineno">  173</span>                {</div>
-<div class="line"><span class="lineno">  174</span>                    MacManagement.LoggingService.LogMessage(LogTypes.GenerationInfo,</div>
-<div class="line"><span class="lineno">  175</span>                        $<span class="stringliteral">&quot;Processing device: {deviceInfo}&quot;</span>, module.Name);</div>
+<div class="line"><span class="lineno">  170</span>                <span class="keywordflow">foreach</span> (var deviceInfo <span class="keywordflow">in</span> deviceInfos)</div>
+<div class="line"><span class="lineno">  171</span>                {</div>
+<div class="line"><span class="lineno">  172</span>                    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  173</span>                    {</div>
+<div class="line"><span class="lineno">  174</span>                        MacManagement.LoggingService.LogMessage(LogTypes.GenerationInfo,</div>
+<div class="line"><span class="lineno">  175</span>                            $<span class="stringliteral">&quot;Processing device: {deviceInfo}&quot;</span>, module.Name);</div>
 <div class="line"><span class="lineno">  176</span> </div>
-<div class="line"><span class="lineno">  177</span>                    var typeIdentifier = <span class="keywordtype">string</span>.IsNullOrWhiteSpace(deviceInfo.Type)</div>
-<div class="line"><span class="lineno">  178</span>                        ? $<span class="stringliteral">&quot;OrderNumber:{deviceInfo.OrderNumber}/{deviceInfo.Version}&quot;</span></div>
-<div class="line"><span class="lineno">  179</span>                        : $<span class="stringliteral">&quot;OrderNumber:{deviceInfo.OrderNumber}/{deviceInfo.Version}/{deviceInfo.Type}&quot;</span>;</div>
+<div class="line"><span class="lineno">  177</span>                        var typeIdentifier = <span class="keywordtype">string</span>.IsNullOrWhiteSpace(deviceInfo.Type)</div>
+<div class="line"><span class="lineno">  178</span>                            ? $<span class="stringliteral">&quot;OrderNumber:{deviceInfo.OrderNumber}/{deviceInfo.Version}&quot;</span></div>
+<div class="line"><span class="lineno">  179</span>                            : $<span class="stringliteral">&quot;OrderNumber:{deviceInfo.OrderNumber}/{deviceInfo.Version}/{deviceInfo.Type}&quot;</span>;</div>
 <div class="line"><span class="lineno">  180</span> </div>
-<div class="line"><span class="lineno">  181</span>                    MacManagement.LoggingService.LogMessage(LogTypes.GenerationInfo,</div>
-<div class="line"><span class="lineno">  182</span>                        $<span class="stringliteral">&quot;Creating device with identifier: {typeIdentifier}&quot;</span>, module.Name);</div>
+<div class="line"><span class="lineno">  181</span>                        MacManagement.LoggingService.LogMessage(LogTypes.GenerationInfo,</div>
+<div class="line"><span class="lineno">  182</span>                            $<span class="stringliteral">&quot;Creating device with identifier: {typeIdentifier}&quot;</span>, module.Name);</div>
 <div class="line"><span class="lineno">  183</span> </div>
-<div class="line"><span class="lineno">  184</span>                    HardwareGeneration.GetOrCreateDevice(tiaProject, typeIdentifier, deviceInfo.Name,</div>
-<div class="line"><span class="lineno">  185</span>                        deviceInfo.DeviceName);</div>
+<div class="line"><span class="lineno">  184</span>                        HardwareGeneration.GetOrCreateDevice(tiaProject, typeIdentifier, deviceInfo.Name,</div>
+<div class="line"><span class="lineno">  185</span>                            deviceInfo.DeviceName);</div>
 <div class="line"><span class="lineno">  186</span> </div>
-<div class="line"><span class="lineno">  187</span>                    MacManagement.LoggingService.LogMessage(LogTypes.GenerationInfo,</div>
-<div class="line"><span class="lineno">  188</span>                        $<span class="stringliteral">&quot;Successfully added device: {deviceInfo.DeviceName}&quot;</span>, module.Name);</div>
-<div class="line"><span class="lineno">  189</span>                }</div>
-<div class="line"><span class="lineno">  190</span>                <span class="keywordflow">catch</span> (Exception ex)</div>
-<div class="line"><span class="lineno">  191</span>                {</div>
-<div class="line"><span class="lineno">  192</span>                    MacManagement.LoggingService.LogMessage(LogTypes.GenerationError,</div>
-<div class="line"><span class="lineno">  193</span>                        $<span class="stringliteral">&quot;Failed to process device {deviceInfo}. Error: {ex.Message}&quot;</span>, module.Name);</div>
-<div class="line"><span class="lineno">  194</span>                }</div>
-<div class="line"><span class="lineno">  195</span>            }</div>
-<div class="line"><span class="lineno">  196</span>        }</div>
-<div class="line"><span class="lineno">  197</span>        <span class="keywordflow">catch</span> (Exception ex)</div>
-<div class="line"><span class="lineno">  198</span>        {</div>
-<div class="line"><span class="lineno">  199</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception($<span class="stringliteral">&quot;Error creating devices from Excel file: {ex.Message}&quot;</span>, ex);</div>
-<div class="line"><span class="lineno">  200</span>        }</div>
-<div class="line"><span class="lineno">  201</span>    }</div>
+<div class="line"><span class="lineno">  187</span>                        MacManagement.LoggingService.LogMessage(LogTypes.GenerationInfo,</div>
+<div class="line"><span class="lineno">  188</span>                            $<span class="stringliteral">&quot;Successfully added device: {deviceInfo.DeviceName}&quot;</span>, module.Name);</div>
+<div class="line"><span class="lineno">  189</span>                    }</div>
+<div class="line"><span class="lineno">  190</span>                    <span class="keywordflow">catch</span> (Exception ex)</div>
+<div class="line"><span class="lineno">  191</span>                    {</div>
+<div class="line"><span class="lineno">  192</span>                        MacManagement.LoggingService.LogMessage(LogTypes.GenerationError,</div>
+<div class="line"><span class="lineno">  193</span>                            $<span class="stringliteral">&quot;Failed to process device {deviceInfo}. Error: {ex.Message}&quot;</span>, module.Name);</div>
+<div class="line"><span class="lineno">  194</span>                    }</div>
+<div class="line"><span class="lineno">  195</span>                }</div>
+<div class="line"><span class="lineno">  196</span>            }</div>
+<div class="line"><span class="lineno">  197</span>            <span class="keywordflow">catch</span> (Exception ex)</div>
+<div class="line"><span class="lineno">  198</span>            {</div>
+<div class="line"><span class="lineno">  199</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception($<span class="stringliteral">&quot;Error creating devices from Excel file: {ex.Message}&quot;</span>, ex);</div>
+<div class="line"><span class="lineno">  200</span>            }</div>
+<div class="line"><span class="lineno">  201</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>

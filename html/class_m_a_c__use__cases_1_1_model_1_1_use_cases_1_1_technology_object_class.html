@@ -169,15 +169,15 @@ Properties</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00047">47</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   48</span>    {</div>
-<div class="line"><span class="lineno">   49</span>        TechnologicalObject = <span class="keyword">new</span> TechnologicalObjectInfo(Name, TOType, MotionControlVersion, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="fragment"><div class="line"><span class="lineno">   48</span>        {</div>
+<div class="line"><span class="lineno">   49</span>            TechnologicalObject = <span class="keyword">new</span> TechnologicalObjectInfo(Name, TOType, MotionControlVersion, <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"><span class="lineno">   50</span> </div>
-<div class="line"><span class="lineno">   51</span>        <span class="comment">//Add the main telegram number to the TechnologicalObjectInfo Object</span></div>
-<div class="line"><span class="lineno">   52</span>        TechnologicalObject.MainTelegramNumber = MainTelegramNumber;</div>
+<div class="line"><span class="lineno">   51</span>            <span class="comment">//Add the main telegram number to the TechnologicalObjectInfo Object</span></div>
+<div class="line"><span class="lineno">   52</span>            TechnologicalObject.MainTelegramNumber = MainTelegramNumber;</div>
 <div class="line"><span class="lineno">   53</span> </div>
-<div class="line"><span class="lineno">   54</span>        <span class="comment">//Add the TechnologicalObjectInfo Object to the list of ProvidedTechnologicalObjects of the module</span></div>
-<div class="line"><span class="lineno">   55</span>        myModule.ProvidedTechnologicalObjects.Add(TechnologicalObject);</div>
-<div class="line"><span class="lineno">   56</span>    }</div>
+<div class="line"><span class="lineno">   54</span>            <span class="comment">//Add the TechnologicalObjectInfo Object to the list of ProvidedTechnologicalObjects of the module</span></div>
+<div class="line"><span class="lineno">   55</span>            myModule.ProvidedTechnologicalObjects.Add(TechnologicalObject);</div>
+<div class="line"><span class="lineno">   56</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -213,8 +213,8 @@ Properties</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00063">63</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   64</span>    {</div>
-<div class="line"><span class="lineno">   65</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>        {</div>
+<div class="line"><span class="lineno">   65</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -259,13 +259,13 @@ Properties</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00079">79</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   80</span>    {</div>
-<div class="line"><span class="lineno">   81</span>        <span class="keywordflow">foreach</span> (var toInfo <span class="keywordflow">in</span> module.ProvidedTechnologicalObjects)</div>
-<div class="line"><span class="lineno">   82</span>        {</div>
-<div class="line"><span class="lineno">   83</span>            <span class="comment">//GetOrCreateRootTO will create a TO in the TO root folder. If a TO with the same name already exists, this TO is returned.</span></div>
-<div class="line"><span class="lineno">   84</span>            var generatedTO = plcDevice.TechnologicalObjects.GetOrCreateRootTO(toInfo, module);</div>
-<div class="line"><span class="lineno">   85</span>        }</div>
-<div class="line"><span class="lineno">   86</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">   80</span>        {</div>
+<div class="line"><span class="lineno">   81</span>            <span class="keywordflow">foreach</span> (var toInfo <span class="keywordflow">in</span> module.ProvidedTechnologicalObjects)</div>
+<div class="line"><span class="lineno">   82</span>            {</div>
+<div class="line"><span class="lineno">   83</span>                <span class="comment">//GetOrCreateRootTO will create a TO in the TO root folder. If a TO with the same name already exists, this TO is returned.</span></div>
+<div class="line"><span class="lineno">   84</span>                var generatedTO = plcDevice.TechnologicalObjects.GetOrCreateRootTO(toInfo, module);</div>
+<div class="line"><span class="lineno">   85</span>            }</div>
+<div class="line"><span class="lineno">   86</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -309,18 +309,18 @@ Properties</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_technology_object_class_8cs_source.html#l00095">95</a> of file <a class="el" href="_technology_object_class_8cs_source.html">TechnologyObjectClass.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   96</span>    {</div>
-<div class="line"><span class="lineno">   97</span>        <span class="comment">//Add the additional parameters to the TechnologicalObjectInfo Object</span></div>
-<div class="line"><span class="lineno">   98</span>        var toPath = <span class="stringliteral">&quot;DynamicLimits.MaxVelocity&quot;</span>;</div>
-<div class="line"><span class="lineno">   99</span>        TechnologicalObject.AdditionalParameter[toPath] = MaximumVelocity;</div>
+<div class="fragment"><div class="line"><span class="lineno">   96</span>        {</div>
+<div class="line"><span class="lineno">   97</span>            <span class="comment">//Add the additional parameters to the TechnologicalObjectInfo Object</span></div>
+<div class="line"><span class="lineno">   98</span>            var toPath = <span class="stringliteral">&quot;DynamicLimits.MaxVelocity&quot;</span>;</div>
+<div class="line"><span class="lineno">   99</span>            TechnologicalObject.AdditionalParameter[toPath] = MaximumVelocity;</div>
 <div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>        toPath = <span class="stringliteral">&quot;VirtualAxis.Mode&quot;</span>;</div>
-<div class="line"><span class="lineno">  102</span>        TechnologicalObject.AdditionalParameter[toPath] = VirtualAxisMode;</div>
+<div class="line"><span class="lineno">  101</span>            toPath = <span class="stringliteral">&quot;VirtualAxis.Mode&quot;</span>;</div>
+<div class="line"><span class="lineno">  102</span>            TechnologicalObject.AdditionalParameter[toPath] = VirtualAxisMode;</div>
 <div class="line"><span class="lineno">  103</span> </div>
-<div class="line"><span class="lineno">  104</span>        <span class="comment">//Change parameter of TO</span></div>
-<div class="line"><span class="lineno">  105</span>        toPath = <span class="stringliteral">&quot;DynamicDefaults.Velocity&quot;</span>;</div>
-<div class="line"><span class="lineno">  106</span>        TechnologicalObject.AdditionalParameter[toPath] = <span class="stringliteral">&quot;50.0&quot;</span>;</div>
-<div class="line"><span class="lineno">  107</span>    }</div>
+<div class="line"><span class="lineno">  104</span>            <span class="comment">//Change parameter of TO</span></div>
+<div class="line"><span class="lineno">  105</span>            toPath = <span class="stringliteral">&quot;DynamicDefaults.Velocity&quot;</span>;</div>
+<div class="line"><span class="lineno">  106</span>            TechnologicalObject.AdditionalParameter[toPath] = <span class="stringliteral">&quot;50.0&quot;</span>;</div>
+<div class="line"><span class="lineno">  107</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>

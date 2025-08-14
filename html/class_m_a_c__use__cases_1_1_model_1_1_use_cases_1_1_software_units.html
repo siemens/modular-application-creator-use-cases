@@ -156,11 +156,11 @@ Static Public Member Functions</h2></td></tr>
 <p>This method provides a convenient way to ensure a software unit exists, creating it if necessary. </p>
 
 <p class="definition">Definition at line <a class="el" href="_software_units_8cs_source.html#l00019">19</a> of file <a class="el" href="_software_units_8cs_source.html">SoftwareUnits.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   20</span>    {</div>
-<div class="line"><span class="lineno">   21</span>        ISoftwareUnit ssw = plcDevice.SoftwareUnits.GetOrCreateSoftwareUnit(myUnitName, macUseCasesEm);</div>
-<div class="line"><span class="lineno">   22</span>        ssw.NamespacePreset = nameSpace;</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">return</span> ssw;</div>
-<div class="line"><span class="lineno">   24</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">   20</span>        {</div>
+<div class="line"><span class="lineno">   21</span>            ISoftwareUnit ssw = plcDevice.SoftwareUnits.GetOrCreateSoftwareUnit(myUnitName, macUseCasesEm);</div>
+<div class="line"><span class="lineno">   22</span>            ssw.NamespacePreset = nameSpace;</div>
+<div class="line"><span class="lineno">   23</span>            <span class="keywordflow">return</span> ssw;</div>
+<div class="line"><span class="lineno">   24</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -201,9 +201,9 @@ Static Public Member Functions</h2></td></tr>
 <p>This method only retrieves an existing safety software unit and does not create one if it doesn't exist. </p>
 
 <p class="definition">Definition at line <a class="el" href="_software_units_8cs_source.html#l00035">35</a> of file <a class="el" href="_software_units_8cs_source.html">SoftwareUnits.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span>    {</div>
-<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">return</span> plcDevice.SoftwareUnits.GetSafetySoftwareUnit();</div>
-<div class="line"><span class="lineno">   39</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>        {</div>
+<div class="line"><span class="lineno">   38</span>            <span class="keywordflow">return</span> plcDevice.SoftwareUnits.GetSafetySoftwareUnit();</div>
+<div class="line"><span class="lineno">   39</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
