@@ -16,13 +16,13 @@ To use the **Module Essentials** in your project:
     
    ### Versioning  
    - The versioning system of **Module Essentials** ensures compatibility with TIA Portal.  
-   - The **first digit** of the version number corresponds to the supported TIA Portal version.
+   - The **first number** of the version number corresponds to the supported TIA Portal version.
 
    ### Architecture
    To effectively use **Module Essentials**, you must understand the underlying architecture of the module.
    Each Data Model is essentially a data container that holds multiple parameters.
    The model provides a parameter register, where developers can add each parameter as needed based on their specific requirements.
-   For example, if you have an "axisW with various settings, the axis serves as your model, and each individual setting parameter must be properly defined and registered within that model.
+   For example, if you have an "axis" with various settings, the axis serves as your model, and each individual setting parameter must be properly defined and registered within that model.
    This architecture allows for flexible and organized management of related parameters within a cohesive data structure.
 
    ### Parameter Types
