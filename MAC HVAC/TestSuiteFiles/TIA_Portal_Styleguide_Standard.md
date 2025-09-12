@@ -42,7 +42,7 @@ The Styleguide Check shall enforce the following naming conventions.
 ## 2. Block Properties
 
 ### 2.1. Required Fields
-*   **Author:** The "Author" property of every block must be filled in with the developer's name or team identifier.
+*   **Author:** The "Author" property of every block must be set to **"Dallas Levine"**.
 *   **Header Comment:** Every block (FB, FC) must have a header comment in the "Comment" property that briefly explains its purpose.
 
 ### 2.2. Programming Language
