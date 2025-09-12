@@ -23,8 +23,8 @@ The following software components form the basis of the TIA Portal project.
 
 | Item | Product Name | Version | Description |
 | :--- | :--- | :--- | :--- |
-| **1** | Siemens TIA Portal | **V18** (or latest) | The core engineering environment for programming the S7-1500 PLC and HMI. |
-| **2** | Library of General Functions (LGF) | **Latest** | Siemens library for standard functions like alarming and trending to be used on the HMI. |
+| **1** | Siemens TIA Portal | **V20** | The core engineering environment for programming the S7-1500 PLC and HMI. |
+| **2** | Library of General Functions (LGF) | **V20 Compatible** | Siemens library for standard functions. Version must be compatible with TIA Portal V20. |
 
 ### 2.1. Custom Software Components (To Be Created)
 
