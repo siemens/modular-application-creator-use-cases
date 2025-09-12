@@ -5,7 +5,7 @@
 Project: Basic RTU Controller  
 PLC Platform: Siemens TIA Portal V20
 Target CPU: Siemens S7-1500 Family  
-Author: Senior Controls Engineer  
+Author: Dallas Levine
 Date: September 12, 2025  
 Version: 1.0
 
