@@ -3,7 +3,7 @@
 ## **Basic Rooftop HVAC Unit (RTU) Controller**
 
 Project: Basic RTU Controller  
-PLC Platform: Siemens TIA Portal V18  
+PLC Platform: Siemens TIA Portal V20
 Target CPU: Siemens S7-1500 Family  
 Author: Senior Controls Engineer  
 Date: September 12, 2025  
