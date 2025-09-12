@@ -7,7 +7,7 @@ PLC Platform: Siemens TIA Portal V18
 Target CPU: Siemens S7-1500 Family  
 Author: Senior Controls Engineer  
 Date: September 12, 2025  
-Version: 1.0
+Version: 1.1
 
 ### **1\. System Architecture and Hardware Specification**
 
@@ -123,17 +123,70 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
   | :--- | :--- | :--- | :--- |  
   | Dirty Filter Status | Digital | Input | RTU1\_SYS\_DirtyFilter |
 
-### **3\. Main Control Program (OB1 Logic)**
+### **3\. TIA Portal Project and Code Standards**
+
+This section defines the mandatory software structure and standards to ensure consistency and maintainability, in alignment with the "Programming Best Practices & Design Framework."
+
+#### **3.1. TIA Portal Project Structure**
+
+All project elements shall be organized into the following logical groups within the TIA Portal project tree:
+
+* **Program Blocks:**
+  * `01_Main`: Contains OB1 and the main program cycle calls.
+  * `02_Equipment_Modules`: Contains all Equipment Module FBs.
+  * `03_Functions`: Contains all reusable FCs.
+  * `04_Technology_Objects`: Contains the PID controller blocks (PID_Compact).
+  * `05_Data_Blocks`: Contains all global DBs.
+* **PLC Data Types (UDTs):**
+  * All UDTs will be organized in a folder named `UDTs`.
+* **PLC Tags:**
+  * Organized into specific tag tables (e.g., `DI_Tags`, `DO_Tags`, `AI_Tags`, `AO_Tags`).
+
+#### **3.2. Code Implementation Standards**
+
+* **Guiding Principle:** "Openness and Clarity." Code should be written to be easily understood by another engineer.
+* **Language Choice:**
+  * **Structured Control Language (SCL):** **Preferred language** for all complex logic, state machines, and data manipulation.
+  * **Ladder Logic (LAD):** To be used **only** for simple, visually intuitive boolean logic, such as safety chains or basic permissive circuits.
+* **Naming Conventions:**
+  * **Function Blocks (FBs):** `FB_EM<Number>_<Name>` (e.g., `FB_EM100_SupplyFan`).
+  * **Functions (FCs):** `FC_<Verb><Noun>` (e.g., `FC_ScaleAnalogInput`).
+  * **Data Blocks (DBs):** Global DBs: `DB_<Purpose>` (e.g., `DB_SystemSettings`). Instance DBs: `iDB_EM<Number>_<Name>` (e.g., `iDB_EM100_SupplyFan`).
+  * **User-Defined Types (UDTs):** `UDT_EM<Number>_Interface` (e.g., `UDT_EM100_Interface`).
+* **Addressing and Data:**
+    * **100% Symbolic Addressing:** No absolute addressing is permitted within application blocks.
+    * **No "Magic Numbers":** Configurable values like setpoints and delays must be defined as input parameters or sourced from a global settings DB.
+
+#### **3.3. Global Configuration Data Block**
+All system-wide configurable parameters that are not specific to a single piece of equipment are stored in a central data block.
+
+* **DB Name:** `DB_SystemSettings`
+* **Purpose:** To provide a single source for tuning and configuration values, accessible by all program blocks.
+* **Parameter Set:**
+  | Parameter Name | Data Type | Default | Description |
+  | :--- | :--- | :--- | :--- |
+  | `OccupiedCoolingSetpoint` | Real | 24.0 | Occupied mode cooling setpoint (°C) |
+  | `OccupiedHeatingSetpoint` | Real | 21.0 | Occupied mode heating setpoint (°C) |
+  | `UnoccupiedCoolingSetpoint` | Real | 28.0 | Unoccupied mode cooling setpoint (°C) |
+  | `UnoccupiedHeatingSetpoint` | Real | 18.0 | Unoccupied mode heating setpoint (°C) |
+  | `FanFailureDelay` | Time | T#5s | Delay before a fan failure is triggered. |
+  | `CompressorMinRunTime` | Time | T#3m | Minimum compressor run time to prevent short-cycling. |
+  | `CompressorMinOffTime` | Time | T#3m | Minimum compressor off time to prevent short-cycling. |
+  | `DirtyFilterDelay` | Time | T#10s | Delay before a dirty filter alarm is triggered. |
+  | `MinFreshAirPosition` | Real | 20.0 | Minimum fresh air damper position in occupied mode (%). |
+  | `EconomizerTempDifferential`| Real | 2.0 | Temperature difference (OAT vs RAT) to enable economizer. |
+
+### **4\. Main Control Program (OB1 Logic)**
 
 The main program logic, executed in OB1, coordinates the EMs based on the unit's operating mode and thermal demand.
 
-#### **3.1. Modes of Operation**
+#### **4.1. Modes of Operation**
 
 * **Off:** The unit is completely shut down. All outputs are de-energized.  
 * **Occupied:** The unit is active. The Supply Fan runs continuously at a minimum speed, and the system will heat or cool as needed to maintain the occupied temperature setpoints.  
 * **Unoccupied:** The unit operates in a setback/setup mode. The fan runs only when there is a demand for heating or cooling to maintain wider unoccupied temperature setpoints.
 
-#### **3.2. Control Sequence**
+#### **4.2. Control Sequence**
 
 1. **Mode Determination:** The system state (Off, Occupied, Unoccupied) is determined by a schedule or a Building Automation System (BAS) command.  
 2. **Fan Control:**  
@@ -149,19 +202,20 @@ The main program logic, executed in OB1, coordinates the EMs based on the unit's
    * The TO's output enables EM-300 (Heating Control).  
 6. **Safety Interlocks:** All EM outputs are interlocked with the EM-100 fan status. No heating or cooling can occur unless the fan is proven to be running via the Airflow Switch.
 
-### **4\. HMI Strategy and Library Recommendation**
+### **5\. HMI Strategy and Library Recommendation**
 
 To ensure consistency and rapid development, a standardized HMI library is required.
 
-#### **4.1. HMI Library Recommendation**
+#### **5.1. HMI Library Recommendation**
 
 * **Library:** **Siemens HMI Library Suite**  
 * **Justification:** This comprehensive library provides a wide range of pre-designed graphical objects and faceplates that are ideal for HVAC applications. Key benefits include:  
   * **Standardization:** Ensures all RTU projects have a consistent look and feel.  
-  * **Efficiency:** Faceplates for motors, valves, and PIDs can be dragged and dropped, and linked directly to the UDTs used in our Equipment Modules.  
+  * **Efficiency:** Faceplates for motors, valves, and PIDs can be dragged and dropped and linked directly to the PLC data structures.
   * **Reduced Engineering:** Minimizes the time spent on HMI screen design and scripting.
+* **Data Interface:** The HMI must interface with the PLC **primarily through the UDT created for each Equipment Module.** This ensures a clean, organized, and reusable connection between the front-end and back-end.
 
-#### **4.2. Key HMI Screens**
+#### **5.2. Key HMI Screens**
 
 * **Main Overview:** A graphical P\&ID-style screen showing the entire RTU. It will display the live status of the fan, compressor, and heating element, along with real-time temperatures (OA, RA, DA) and damper position.  
 * **Alarms Screen:** A standard alarm viewer listing all active and historical alarms with timestamps, descriptions, and acknowledgment status.  
@@ -176,17 +230,17 @@ To ensure consistency and rapid development, a standardized HMI library is requi
   * Active Setpoint  
   * Damper Position Command
 
-### **5\. Version Control and Automated Testing Strategy**
+### **6\. Version Control and Automated Testing Strategy**
 
 To align with modern development practices, a robust version control and automated testing pipeline will be implemented.
 
-#### **5.1. Version Control**
+#### **6.1. Version Control**
 
 * **System:** Git  
 * **Platform:** GitHub  
 * **Methodology:** The TIA Portal project will be managed using the siemens/tia-project-exporter tool. This utility exports project components like code blocks (FCs, FBs) and data types (UDTs) into a human-readable XML format. This allows for effective line-by-line change tracking and merging within Git.
 
-#### **5.2. Automated Unit Testing (Continuous Integration)**
+#### **6.2. Automated Unit Testing (Continuous Integration)**
 
 A GitHub Actions workflow will be created to automatically test Equipment Modules upon a push to a development or main branch.
 
