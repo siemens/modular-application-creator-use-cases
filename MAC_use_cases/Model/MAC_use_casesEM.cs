@@ -68,6 +68,8 @@ namespace MAC_use_cases.Model
             set { }
         }
 
+        public RtuSettingsViewModel RtuSettings { get; set; } = new RtuSettingsViewModel();
+
         public HardwareGenerationExcelBasedViewModel HardwareGenerationExcelBasedViewModel { get; set; } = new HardwareGenerationExcelBasedViewModel();
 
         /// <summary>

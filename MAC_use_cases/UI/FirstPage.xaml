@@ -68,30 +68,75 @@
                  HorizontalAlignment="Left"
                  Margin="5" />
 
-        <!-- Row 5 -->
-        <TextBlock Grid.Row="5" Grid.Column="0"
+        <!-- Row 5: RTU Settings -->
+        <GroupBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Header="RTU Project Setpoints" Margin="5" FontWeight="Bold">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Temperature Setpoints -->
+                <Label Grid.Row="0" Grid.Column="0" Content="Occupied Cooling SP (°C):" Margin="5" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding RtuSettings.OccupiedCoolingSetpoint, Mode=TwoWay}" Width="100" Margin="5" />
+                <Label Grid.Row="1" Grid.Column="0" Content="Occupied Heating SP (°C):" Margin="5" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding RtuSettings.OccupiedHeatingSetpoint, Mode=TwoWay}" Width="100" Margin="5" />
+                <Label Grid.Row="2" Grid.Column="0" Content="Unoccupied Cooling SP (°C):" Margin="5" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding RtuSettings.UnoccupiedCoolingSetpoint, Mode=TwoWay}" Width="100" Margin="5" />
+                <Label Grid.Row="3" Grid.Column="0" Content="Unoccupied Heating SP (°C):" Margin="5" />
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding RtuSettings.UnoccupiedHeatingSetpoint, Mode=TwoWay}" Width="100" Margin="5" />
+
+                <!-- Timer Delays -->
+                <Label Grid.Row="0" Grid.Column="2" Content="Fan Failure Delay:" Margin="20,5,5,5" />
+                <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding RtuSettings.FanFailureDelay, Mode=TwoWay}" Width="100" Margin="5" />
+                <Label Grid.Row="1" Grid.Column="2" Content="Compressor Min Run Time:" Margin="20,5,5,5" />
+                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding RtuSettings.CompressorMinRunTime, Mode=TwoWay}" Width="100" Margin="5" />
+                <Label Grid.Row="2" Grid.Column="2" Content="Compressor Min Off Time:" Margin="20,5,5,5" />
+                <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding RtuSettings.CompressorMinOffTime, Mode=TwoWay}" Width="100" Margin="5" />
+                <Label Grid.Row="3" Grid.Column="2" Content="Dirty Filter Delay:" Margin="20,5,5,5" />
+                <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding RtuSettings.DirtyFilterDelay, Mode=TwoWay}" Width="100" Margin="5" />
+
+                <!-- Damper Settings -->
+                <Label Grid.Row="4" Grid.Column="0" Content="Min Fresh Air Position (%):" Margin="5" />
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding RtuSettings.MinFreshAirPosition, Mode=TwoWay}" Width="100" Margin="5" />
+                <Label Grid.Row="4" Grid.Column="2" Content="Economizer Temp Diff (°C):" Margin="20,5,5,5" />
+                <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding RtuSettings.EconomizerTempDifferential, Mode=TwoWay}" Width="100" Margin="5" />
+            </Grid>
+        </GroupBox>
+
+        <!-- Row 6 -->
+        <TextBlock Grid.Row="6" Grid.Column="0"
                    Text="Generate Hardware:"
                    Margin="5" />
-        <CheckBox Grid.Row="5" Grid.Column="1"
+        <CheckBox Grid.Row="6" Grid.Column="1"
                   HorizontalAlignment="Left"
                   Margin="5"
                   IsChecked="{Binding IsGenerateHardwareChecked}" />
 
-        <!-- Row 6 -->
-        <TextBlock Grid.Row="6" Grid.Column="0"
+        <!-- Row 7 -->
+        <TextBlock Grid.Row="7" Grid.Column="0"
                    Text="Generate Hardware based on Excel:"
                    Margin="5" />
-        <TextBox Grid.Row="6" Text="{Binding HardwareGenerationExcelBasedViewModel.ImportSource}" Grid.Column="1"
+        <TextBox Grid.Row="7" Text="{Binding HardwareGenerationExcelBasedViewModel.ImportSource}" Grid.Column="1"
                  Width="550"
                  HorizontalAlignment="Left"
                  IsReadOnly="True" Margin="5" />
-        <Button Grid.Row="6" Content="Browse File" Grid.Column="2"
+        <Button Grid.Row="7" Content="Browse File" Grid.Column="2"
                 Width="125" Height="32" Margin="0,0,0,0" x:Name="BtnBrowse"
                 Command="{Binding HardwareGenerationExcelBasedViewModel.BrowseImportFile}" VerticalAlignment="Center"
                 HorizontalAlignment="Left" />
 
-        <!-- Row 7: Generate RTU Project -->
-        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+        <!-- Row 8: Generate RTU Project -->
+        <Button Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
                 x:Name="GenerateRtuButton"
                 Content="Generate Basic RTU Project"
                 Click="GenerateRtuButton_Click"

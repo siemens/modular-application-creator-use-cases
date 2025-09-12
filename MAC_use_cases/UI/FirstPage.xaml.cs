@@ -54,7 +54,7 @@ namespace MAC_use_cases.UI
                 // 3. Create the main program that calls the block instances
 
                 // Step 1: Generate Global Settings DB
-                RtuGeneration.GenerateSystemSettingsDB(Module.TargetDevice);
+                RtuGeneration.GenerateSystemSettingsDB(Module.TargetDevice, Module.RtuSettings);
 
                 // Step 2: Generate all Equipment Module FBs
                 RtuGeneration.Generate_EM100_SupplyFan(Module.TargetDevice);

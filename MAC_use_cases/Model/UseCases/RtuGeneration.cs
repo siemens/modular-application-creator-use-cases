@@ -1,3 +1,4 @@
+using MAC_use_cases.ViewModel;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block;
 using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
@@ -14,7 +15,8 @@ namespace MAC_use_cases.Model.UseCases
         /// This DB holds all key setpoints and configuration parameters.
         /// </summary>
         /// <param name="plcDevice">The target PLC device.</param>
-        public static void GenerateSystemSettingsDB(PlcDevice plcDevice)
+        /// <param name="settings">The ViewModel containing the setpoint values from the UI.</param>
+        public static void GenerateSystemSettingsDB(PlcDevice plcDevice, RtuSettingsViewModel settings)
         {
             // Create the Global DB object with the specified name from the SDS.
             var settingsDb = new XmlGlobalDB("DB_SystemSettings");
@@ -22,24 +24,24 @@ namespace MAC_use_cases.Model.UseCases
             // Get a reference to the static variable section of the DB interface.
             var itf = settingsDb.Interface[InterfaceSections.Static];
 
-            // Add all the configurable parameters as defined in the project requirements.
-            // Using descriptive names and appropriate data types.
+            // Add all the configurable parameters, using values from the settings ViewModel.
+            // Set Remanence to Retain to ensure values persist through power cycles.
 
             // Temperature Setpoints
-            itf.Add(new InterfaceParameter("OccupiedCoolingSetpoint", "Real") { Comment = "Occupied mode cooling setpoint (°C)", DefaultValue = "24.0" });
-            itf.Add(new InterfaceParameter("OccupiedHeatingSetpoint", "Real") { Comment = "Occupied mode heating setpoint (°C)", DefaultValue = "21.0" });
-            itf.Add(new InterfaceParameter("UnoccupiedCoolingSetpoint", "Real") { Comment = "Unoccupied mode cooling setpoint (°C)", DefaultValue = "28.0" });
-            itf.Add(new InterfaceParameter("UnoccupiedHeatingSetpoint", "Real") { Comment = "Unoccupied mode heating setpoint (°C)", DefaultValue = "18.0" });
+            itf.Add(new InterfaceParameter("OccupiedCoolingSetpoint", "Real") { Comment = "Occupied mode cooling setpoint (°C)", DefaultValue = settings.OccupiedCoolingSetpoint, Remanence = RemanenceSettings.Retain });
+            itf.Add(new InterfaceParameter("OccupiedHeatingSetpoint", "Real") { Comment = "Occupied mode heating setpoint (°C)", DefaultValue = settings.OccupiedHeatingSetpoint, Remanence = RemanenceSettings.Retain });
+            itf.Add(new InterfaceParameter("UnoccupiedCoolingSetpoint", "Real") { Comment = "Unoccupied mode cooling setpoint (°C)", DefaultValue = settings.UnoccupiedCoolingSetpoint, Remanence = RemanenceSettings.Retain });
+            itf.Add(new InterfaceParameter("UnoccupiedHeatingSetpoint", "Real") { Comment = "Unoccupied mode heating setpoint (°C)", DefaultValue = settings.UnoccupiedHeatingSetpoint, Remanence = RemanenceSettings.Retain });
 
             // Time Delays (in seconds)
-            itf.Add(new InterfaceParameter("FanFailureDelay", "Time") { Comment = "Delay for fan failure alarm (s)", DefaultValue = "T#5s" });
-            itf.Add(new InterfaceParameter("CompressorMinRunTime", "Time") { Comment = "Compressor minimum run time to prevent short cycling (s)", DefaultValue = "T#3m" });
-            itf.Add(new InterfaceParameter("CompressorMinOffTime", "Time") { Comment = "Compressor minimum off time to prevent short cycling (s)", DefaultValue = "T#3m" });
-            itf.Add(new InterfaceParameter("DirtyFilterDelay", "Time") { Comment = "Delay for dirty filter alarm (s)", DefaultValue = "T#10s" });
+            itf.Add(new InterfaceParameter("FanFailureDelay", "Time") { Comment = "Delay for fan failure alarm (s)", DefaultValue = settings.FanFailureDelay, Remanence = RemanenceSettings.Retain });
+            itf.Add(new InterfaceParameter("CompressorMinRunTime", "Time") { Comment = "Compressor minimum run time to prevent short cycling (s)", DefaultValue = settings.CompressorMinRunTime, Remanence = RemanenceSettings.Retain });
+            itf.Add(new InterfaceParameter("CompressorMinOffTime", "Time") { Comment = "Compressor minimum off time to prevent short cycling (s)", DefaultValue = settings.CompressorMinOffTime, Remanence = RemanenceSettings.Retain });
+            itf.Add(new InterfaceParameter("DirtyFilterDelay", "Time") { Comment = "Delay for dirty filter alarm (s)", DefaultValue = settings.DirtyFilterDelay, Remanence = RemanenceSettings.Retain });
 
             // Damper Settings
-            itf.Add(new InterfaceParameter("MinFreshAirPosition", "Real") { Comment = "Minimum fresh air damper position during occupied mode (%)", DefaultValue = "20.0" });
-            itf.Add(new InterfaceParameter("EconomizerTempDifferential", "Real") { Comment = "Temp diff (OAT vs RAT) to enable economizer (°C)", DefaultValue = "2.0" });
+            itf.Add(new InterfaceParameter("MinFreshAirPosition", "Real") { Comment = "Minimum fresh air damper position during occupied mode (%)", DefaultValue = settings.MinFreshAirPosition, Remanence = RemanenceSettings.Retain });
+            itf.Add(new InterfaceParameter("EconomizerTempDifferential", "Real") { Comment = "Temp diff (OAT vs RAT) to enable economizer (°C)", DefaultValue = settings.EconomizerTempDifferential, Remanence = RemanenceSettings.Retain });
 
             // Generate the actual block in the TIA project.
             settingsDb.GenerateXmlBlock(plcDevice);
