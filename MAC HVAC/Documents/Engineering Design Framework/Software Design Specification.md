@@ -155,11 +155,8 @@ To ensure consistency and rapid development, a standardized HMI library is requi
 
 #### **4.1. HMI Library Recommendation**
 
-* **Library:** **Siemens HMI Library Suite**  
-* **Justification:** This comprehensive library provides a wide range of pre-designed graphical objects and faceplates that are ideal for HVAC applications. Key benefits include:  
-  * **Standardization:** Ensures all RTU projects have a consistent look and feel.  
-  * **Efficiency:** Faceplates for motors, valves, and PIDs can be dragged and dropped, and linked directly to the UDTs used in our Equipment Modules.  
-  * **Reduced Engineering:** Minimizes the time spent on HMI screen design and scripting.
+* **Library:** **Simatic Control Function Library (CFL)**
+* **Justification:** The CFL is chosen to accelerate development and ensure a high degree of standardization. It provides pre-built, tested function blocks with integrated HMI faceplates for common control tasks (e.g., motors, valves, PIDs), which align directly with the Equipment Modules defined in this specification. This strategy allows for rapid implementation of core functionality while still allowing for custom development where necessary.
 
 #### **4.2. Key HMI Screens**
 
