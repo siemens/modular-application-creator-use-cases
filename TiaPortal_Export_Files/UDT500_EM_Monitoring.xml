@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V20"/>
+  <DocumentInfo>
+    <Created>2025-09-12T17:58:00.0000000Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+  </DocumentInfo>
+  <SW.Types.PlcStruct ID="0" CompositionName="UserTypes">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+        <Section Name="None">
+          <Member Name="Dirty_Filter_DI" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Input: Dirty filter DP switch (`True` = Dirty).</MultiLanguageText></Comment></Member>
+          <Member Name="Filter_Delay_Sec" Datatype="Time" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Time delay for dirty filter alarm (e.g., `T#10s`).</MultiLanguageText></Comment></Member>
+          <Member Name="Dirty_Filter_Alm" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Alarm: Dirty filter alarm.</MultiLanguageText></Comment></Member>
+        </Section>
+      </Sections></Interface>
+      <Name>UDT500_EM_Monitoring</Name>
+    </AttributeList>
+  </SW.Types.PlcStruct>
+</Document>

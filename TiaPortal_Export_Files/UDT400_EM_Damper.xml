@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V20"/>
+  <DocumentInfo>
+    <Created>2025-09-12T17:58:00.0000000Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+  </DocumentInfo>
+  <SW.Types.PlcStruct ID="0" CompositionName="UserTypes">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+        <Section Name="None">
+          <Member Name="Return_Air_Temp_AI" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Analog Input: Return air temperature sensor.</MultiLanguageText></Comment></Member>
+          <Member Name="Outside_Air_Temp_AI" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Analog Input: Outside air temperature sensor.</MultiLanguageText></Comment></Member>
+          <Member Name="Discharge_Air_Temp_AI" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Analog Input: Discharge air temperature sensor.</MultiLanguageText></Comment></Member>
+          <Member Name="Damper_Pos_Cmd_AO" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Analog Output: Damper position command (0.0 - 100.0 %).</MultiLanguageText></Comment></Member>
+          <Member Name="Min_Fresh_Air_Pos" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Minimum damper position for ventilation (e.g., 20.0 %).</MultiLanguageText></Comment></Member>
+          <Member Name="Econ_Temp_Diff" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Temp diff (RAT - OAT) to enable economizer (e.g., 2.0).</MultiLanguageText></Comment></Member>
+          <Member Name="Econ_High_Limit" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">High OAT limit to disable economizer (e.g., 65.0).</MultiLanguageText></Comment></Member>
+          <Member Name="Econ_Mode_Active" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Status: `True` when economizer mode is active.</MultiLanguageText></Comment></Member>
+        </Section>
+      </Sections></Interface>
+      <Name>UDT400_EM_Damper</Name>
+    </AttributeList>
+  </SW.Types.PlcStruct>
+</Document>

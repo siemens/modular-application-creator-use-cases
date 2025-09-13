@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V20"/>
+  <DocumentInfo>
+    <Created>2025-09-12T17:49:00.0000000Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+  </DocumentInfo>
+  <SW.Types.PlcStruct ID="0" CompositionName="UserTypes">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+        <Section Name="None">
+          <Member Name="Run_Fdbk_DI" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Input: Fan run feedback from VFD/contactor.</MultiLanguageText></Comment></Member>
+          <Member Name="Airflow_Status_DI" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Input: Airflow switch status (`True` = Airflow OK).</MultiLanguageText></Comment></Member>
+          <Member Name="VFD_Fault_DI" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Input: VFD fault status (`True` = Fault).</MultiLanguageText></Comment></Member>
+          <Member Name="Start_Cmd_DO" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Output: Command to start/stop the fan.</MultiLanguageText></Comment></Member>
+          <Member Name="Speed_Ref_AO" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Analog Output: Speed reference to VFD (0.0 - 100.0 %).</MultiLanguageText></Comment></Member>
+          <Member Name="Fault_Delay_Sec" Datatype="Time" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Time delay for fan failure detection (e.g., `T#5s`).</MultiLanguageText></Comment></Member>
+          <Member Name="Is_Running" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Status: `True` when the fan is commanded on and all feedback is normal.</MultiLanguageText></Comment></Member>
+          <Member Name="Fan_Failure_Alm" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Alarm: `True` if run/airflow feedback is missing after delay.</MultiLanguageText></Comment></Member>
+          <Member Name="VFD_Fault_Alm" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Alarm: `True` if the VFD hardware fault input is active.</MultiLanguageText></Comment></Member>
+        </Section>
+      </Sections></Interface>
+      <Name>UDT100_EM_SupplyFan</Name>
+    </AttributeList>
+  </SW.Types.PlcStruct>
+</Document>
