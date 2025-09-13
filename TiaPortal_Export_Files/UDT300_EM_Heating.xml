@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V20"/>
+  <DocumentInfo>
+    <Created>2025-09-12T17:57:00.0000000Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+  </DocumentInfo>
+  <SW.Types.PlcStruct ID="0" CompositionName="UserTypes">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+        <Section Name="None">
+          <Member Name="High_Limit_DI" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Input: High-temperature limit switch (`True` = Fault).</MultiLanguageText></Comment></Member>
+          <Member Name="Heat_Stage1_Cmd_DO" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Output: Command for heating stage 1.</MultiLanguageText></Comment></Member>
+          <Member Name="High_Limit_Alm" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Alarm: High-temperature limit fault.</MultiLanguageText></Comment></Member>
+        </Section>
+      </Sections></Interface>
+      <Name>UDT300_EM_Heating</Name>
+    </AttributeList>
+  </SW.Types.PlcStruct>
+</Document>

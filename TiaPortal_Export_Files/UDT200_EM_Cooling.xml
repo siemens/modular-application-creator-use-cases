@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V20"/>
+  <DocumentInfo>
+    <Created>2025-09-12T17:57:00.0000000Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+  </DocumentInfo>
+  <SW.Types.PlcStruct ID="0" CompositionName="UserTypes">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+        <Section Name="None">
+          <Member Name="HP_Switch_DI" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Input: High-pressure refrigerant switch (`True` = Fault).</MultiLanguageText></Comment></Member>
+          <Member Name="LP_Switch_DI" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Input: Low-pressure refrigerant switch (`True` = Fault).</MultiLanguageText></Comment></Member>
+          <Member Name="Freeze_Stat_DI" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Input: Freeze-stat on coil (`True` = Fault).</MultiLanguageText></Comment></Member>
+          <Member Name="Compressor_Cmd_DO" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Digital Output: Command to start/stop the compressor.</MultiLanguageText></Comment></Member>
+          <Member Name="Min_Run_Time_Sec" Datatype="Time" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Minimum compressor run time to prevent short-cycling (e.g., `T#3m`).</MultiLanguageText></Comment></Member>
+          <Member Name="Min_Off_Time_Sec" Datatype="Time" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Minimum compressor off time to prevent short-cycling (e.g., `T#3m`).</MultiLanguageText></Comment></Member>
+          <Member Name="HP_Fault_Alm" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Alarm: High-pressure fault.</MultiLanguageText></Comment></Member>
+          <Member Name="LP_Fault_Alm" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Alarm: Low-pressure fault.</MultiLanguageText></Comment></Member>
+          <Member Name="Freeze_Stat_Alm" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Alarm: Freeze-stat tripped.</MultiLanguageText></Comment></Member>
+        </Section>
+      </Sections></Interface>
+      <Name>UDT200_EM_Cooling</Name>
+    </AttributeList>
+  </SW.Types.PlcStruct>
+</Document>
