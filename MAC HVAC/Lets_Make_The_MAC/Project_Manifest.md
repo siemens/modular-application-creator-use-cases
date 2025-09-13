@@ -29,6 +29,14 @@ These directories contain the C# projects and all related source code, resources
 *   `MAC_use_cases/` - The main project for the MAC GUI application.
 *   `MAC_use_cases.Tests/` - The test project containing all unit and integration tests.
 
+### 2.3. Repository and Environment Files
+
+For the project to work correctly within a version-controlled development environment, these files from the root directory are also required:
+
+*   **`.gitignore`**: Essential for preventing compiled binaries and other unnecessary files from being committed to Git.
+*   **`.editorconfig`**: Ensures consistent coding styles (e.g., indentation, spacing) across different editors.
+*   **`.gitattributes`**: Manages how Git handles line endings, which is important for cross-platform development.
+
 ## 3. Build & Run Instructions
 
 1.  **Gather Components:** Create a new root folder and copy the files and directories listed above into it.
