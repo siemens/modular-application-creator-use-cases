@@ -61,3 +61,21 @@ The script will print its progress to the console.
 *   A **`PASSED`** message at the end of each test case indicates that all assertions within that test were successful.
 *   An **`AssertionError`** message indicates a test failure. The message will specify which check failed (e.g., `AssertionError: Compressor should stop on HP fault`). This means the PLC logic did not behave as expected.
 *   The script will print a final "Testing complete" message when it has finished running all test functions.
+
+---
+
+## 6. Troubleshooting
+
+*   **Issue:** `ModuleNotFoundError: No module named 'plcsim_adv_api'`
+    *   **Cause:** The required Python library for communicating with PLCSIM Advanced is not installed in your Python environment.
+    *   **Solution:** Run `pip install plcsim-adv-api` from your terminal, as described in the "Prerequisites" section.
+
+*   **Issue:** The script fails with a connection error or cannot find the PLC instance.
+    *   **Cause 1:** The PLCSIM Advanced virtual PLC instance is not running.
+    *   **Solution 1:** Open the "SIMATIC PLCSIM Advanced" control panel and start your virtual PLC.
+    *   **Cause 2:** The `PLC_INSTANCE_NAME` variable in the Python script does not exactly match the name of the running virtual PLC instance.
+    *   **Solution 2:** Ensure the name in the script matches the name in the PLCSIM Advanced control panel.
+
+*   **Issue:** A test fails with an `AssertionError`.
+    *   **Cause:** The logic in the PLC program is not behaving as the test expects.
+    *   **Solution:** This is a genuine test failure. Use the error message to identify the failing test case. Review the SCL code in the corresponding Function Block and the logic in the test script to debug the issue.

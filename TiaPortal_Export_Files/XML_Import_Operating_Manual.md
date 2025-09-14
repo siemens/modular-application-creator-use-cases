@@ -40,3 +40,15 @@ Follow these steps precisely to ensure the project components are generated corr
     3.  **Generate FBs:** Select all `FB*.xml` files, right-click, and select "Generate blocks from source". Verify their creation under `Program blocks`.
 
 You have now successfully imported the complete structural framework of the RTU controller into your TIA Portal project.
+
+---
+
+## 4. Troubleshooting
+
+*   **Issue:** When generating an FB, you get a compile error like "Data type `UDT...` not found."
+    *   **Cause:** The required UDT or Tag Table was not generated before the FB that depends on it.
+    *   **Solution:** Follow the generation order in Section 3 precisely. Ensure all `UDT*.xml` and `TagTable_*.xml` files are generated successfully *before* attempting to generate the `FB*.xml` files.
+
+*   **Issue:** A source file has a red 'X' next to it after adding it, or you get a generic error during generation.
+    *   **Cause:** The XML file may be malformed, or there is a syntax error.
+    *   **Solution:** Check the "Info > Compile" window in TIA Portal. It will provide detailed error messages that can help pinpoint the exact problem in the XML source file.
