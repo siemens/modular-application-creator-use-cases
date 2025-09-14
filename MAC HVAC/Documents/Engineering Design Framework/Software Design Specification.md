@@ -201,3 +201,30 @@ A GitHub Actions workflow will be created to automatically test Equipment Module
      * Force the RunFeedback\_DI low and verify the Fan\_Failure alarm becomes active.  
   7. The script concludes and reports a pass/fail status.  
   8. The GitHub Action run will reflect this status, blocking faulty code from being merged into the main branch.
+
+### **6\. Glossary & FAQ**
+
+#### **6.1. Glossary of Acronyms**
+*   **PLC:** Programmable Logic Controller
+*   **RTU:** Rooftop HVAC Unit
+*   **EM:** Equipment Module
+*   **FB:** Function Block
+*   **UDT:** User Data Type (a structured data type)
+*   **TIA Portal:** Totally Integrated Automation Portal (Siemens engineering software)
+*   **SCL:** Structured Control Language (a high-level programming language for PLCs)
+*   **VFD:** Variable Frequency Drive
+*   **I/O:** Input/Output
+
+#### **6.2. Frequently Asked Questions (FAQ)**
+
+*   **Q: Why are the generated source files in XML format?**
+    *   **A:** The XML format is used by the TIA Portal Openness interface. It provides a text-based, human-readable representation of PLC blocks that is ideal for version control systems like Git and allows for automated generation.
+
+*   **Q: What is the correct order to import the XML files into TIA Portal?**
+    *   **A:** The import order is critical due to dependencies. The correct order is:
+        1.  User Data Types (`UDT*.xml`)
+        2.  PLC Tag Tables (`TagTable_*.xml`)
+        3.  Function Blocks (`FB*.xml`)
+
+*   **Q: Why are the Function Blocks (FBs) missing their internal SCL logic?**
+    *   **A:** The project is being developed using a 'breadth-first' approach. We first create the entire structure (all UDTs, Tag Tables, and FB interfaces) to ensure the framework is solid. The next phase of work will be to populate these FB skeletons with the detailed control logic.
