@@ -5,9 +5,9 @@
 Project: Basic RTU Controller  
 PLC Platform: Siemens TIA Portal V20
 Target CPU: Siemens S7-1500 Family  
-Author: Dallas Levine
-Date: September 12, 2025  
-Version: 1.0
+Author: Jules
+Date: September 15, 2025
+Version: 1.1
 
 ### **1\. System Architecture and Hardware Specification**
 
@@ -20,7 +20,7 @@ This section defines the core hardware components and the software architecture 
 
 #### **1.2. I/O Signal Modules (SMs)**
 
-Based on the required I/O points from the Equipment Modules, the following hardware is specified. The integrated I/O of the 1511C will be utilized, supplemented by one signal module for analog I/O.
+Based on the required I/O points from the Equipment Modules, the following hardware is specified. The integrated I/O of the 1511C will be utilized.
 
 * **Integrated Digital I/O (on CPU):**  
   * 16x Digital Inputs (DI)  
@@ -37,18 +37,19 @@ Based on the required I/O points from the Equipment Modules, the following hardw
 
 #### **1.3. Technology Objects (TOs)**
 
-To ensure robust and efficient process control, the PID\_Compact Technology Object will be used for temperature regulation.
+To ensure robust and efficient process control, two instances of the PID\_Compact Technology Object will be used for temperature regulation. This strategy separates the primary temperature control from the dedicated economizer free-cooling logic.
 
-* **Instance 1: PID\_Cooling**  
-  * **Purpose:** Discharge Air Temperature Control (Cooling Mode). This loop modulates the economizer dampers and enables the DX cooling stage.  
-  * **Process Variable (PV):** RTU1\_DAT\_Temp (Discharge Air Temperature).  
-  * **Setpoint (SP):** RTU1\_Cooling\_Sp (Cooling Setpoint).  
-  * **Manipulated Variable (MV):** The PID output will be directed to the economizer damper command and the cooling stage enable.  
-* **Instance 2: PID\_Heating**  
-  * **Purpose:** Discharge Air Temperature Control (Heating Mode).  
-  * **Process Variable (PV):** RTU1\_DAT\_Temp (Discharge Air Temperature).  
-  * **Setpoint (SP):** RTU1\_Heating\_Sp (Heating Setpoint).  
-  * **Manipulated Variable (MV):** The PID output will enable the heating stage.
+* **Instance 1: `TO_PID_DAT_Control`**
+  * **Purpose:** Main Discharge Air Temperature (DAT) Control. This is the primary PID loop responsible for maintaining the DAT setpoint by enabling mechanical heating or cooling.
+  * **Process Variable (PV):** `RTU1_DAT_Temp` (Discharge Air Temperature).
+  * **Setpoint (SP):** The active DAT Setpoint (either Occupied or Unoccupied).
+  * **Manipulated Variable (MV):** The output of this PID will be mapped to a bipolar range (e.g., -100% to +100%). Negative output signifies a demand for heating, and positive output signifies a demand for cooling. This demand signal will enable `EM-200` (Cooling) or `EM-300` (Heating).
+
+* **Instance 2: `TO_PID_Econ_Control`**
+  * **Purpose:** Economizer Free Cooling Control. This loop is active only when the system is in Economizer Mode.
+  * **Process Variable (PV):** `RTU1_DAT_Temp` (Discharge Air Temperature).
+  * **Setpoint (SP):** The active Cooling Setpoint.
+  * **Manipulated Variable (MV):** The output (0-100%) directly controls the `Damper Position Command` of `EM-400` to modulate the amount of free cooling provided by outside air.
 
 ### **2\. Detailed Equipment Module (EM) Specifications**
 
@@ -61,7 +62,7 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
   * Accepts a digital Start/Stop command and an analog speed command (0-100%).  
   * Monitors VFD Run Feedback, VFD Fault status, and Airflow Switch status.  
   * A "Fan Failure" alarm is generated if the RunFeedback\_DI is not received within a configurable StartDelay (e.g., 5 seconds) of the Start\_DO being true, OR if the AirflowSw\_DI is not made when the fan is confirmed running.  
-* Parameter Set:  
+* **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
   | Start/Stop Command | Digital | Output | RTU1\_SF\_StartCmd |  
@@ -77,7 +78,7 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
   * Accepts a cooling enable command from the main program logic.  
   * Monitors High-Pressure, Low-Pressure, and Freeze Stat safety switches. A trip on any safety generates a specific alarm and locks out the compressor until reset.  
   * Implements configurable minimum run-time and minimum off-time delays (e.g., 3 minutes) to prevent compressor short-cycling. The compressor command will not be turned off until the min run-time is met, and will not be turned on until the min off-time is met.  
-* Parameter Set:  
+* **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
   | Compressor Stage 1 Cmd | Digital | Output | RTU1\_C\_Comp1Cmd |  
@@ -91,7 +92,7 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
 * **Logic:**  
   * Accepts a heating enable command from the main program logic.  
   * Monitors a High-Temperature Limit switch. If the switch trips, the module generates a "High-Temperature Limit Fault" alarm and locks out the heating stage until reset.  
-* Parameter Set:  
+* **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
   | Heating Stage 1 Cmd | Digital | Output | RTU1\_H\_Heat1Cmd |  
@@ -103,8 +104,8 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
 * **Logic:**  
   * In all occupied modes, the damper modulates to a MinFreshAirPosition setpoint (e.g., 20%) to ensure proper ventilation.  
   * "Economizer Mode" is enabled if Outside Air Temperature is lower than Return Air Temperature by a configurable differential (e.g., 2°C) and there is a call for cooling.  
-  * In Economizer Mode, the PID\_Cooling TO output modulates the damper actuator to maintain the Discharge Air Temperature Setpoint.  
-* Parameter Set:  
+  * In Economizer Mode, the `TO_PID_Econ_Control` TO output modulates the damper actuator to maintain the Discharge Air Temperature Setpoint.
+* **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
   | Damper Position Cmd | Analog | Output | RTU1\_DMP\_PosCmd |  
@@ -118,7 +119,7 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
 * **Logic:**  
   * Monitors a differential pressure switch across the air filters.  
   * If the switch is made for a configurable delay (e.g., 10 seconds), a "Dirty Filter" alarm is generated. This is a maintenance alert and does not shut down the unit.  
-* Parameter Set:  
+* **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
   | Dirty Filter Status | Digital | Input | RTU1\_SYS\_DirtyFilter |
@@ -130,7 +131,7 @@ The main program logic, executed in OB1, coordinates the EMs based on the unit's
 #### **3.1. Modes of Operation**
 
 * **Off:** The unit is completely shut down. All outputs are de-energized.  
-* **Occupied:** The unit is active. The Supply Fan runs continuously at a minimum speed, and the system will heat or cool as needed to maintain the occupied temperature setpoints.  
+* **Occupied:** The unit is active. The Supply Fan runs continuously, and the system will heat or cool as needed to maintain the occupied temperature setpoints.
 * **Unoccupied:** The unit operates in a setback/setup mode. The fan runs only when there is a demand for heating or cooling to maintain wider unoccupied temperature setpoints.
 
 #### **3.2. Control Sequence**
@@ -139,14 +140,13 @@ The main program logic, executed in OB1, coordinates the EMs based on the unit's
 2. **Fan Control:**  
    * In Occupied mode, EM-100 is commanded to start.  
    * In Unoccupied mode, EM-100 is commanded to start only when there is a call for heat or cool.  
-3. **Demand Calculation:** The system compares the Discharge Air Temperature to the active heating and cooling setpoints to determine the operating state (Heating, Cooling, Deadband).  
+3. **Demand Calculation:** The `TO_PID_DAT_Control` PID determines the operating state (Heating, Cooling, Deadband).
 4. **Cooling Logic:**  
-   * If a call for cooling exists, the PID\_Cooling TO is enabled.  
-   * The system first attempts to cool using the EM-400 economizer if conditions are favorable.  
-   * If economizer cooling is insufficient, EM-200 (DX Cooling) is enabled.  
+   * If a call for cooling exists (i.e., the `TO_PID_DAT_Control` output is positive), the system evaluates the cooling strategy.
+   * The system first attempts to cool using the EM-400 economizer. If conditions are favorable, the `TO_PID_Econ_Control` is enabled to modulate the damper.
+   * If economizer cooling is not available or insufficient, the output of `TO_PID_DAT_Control` enables EM-200 (DX Cooling).
 5. **Heating Logic:**  
-   * If a call for heating exists, the PID\_Heating TO is enabled.  
-   * The TO's output enables EM-300 (Heating Control).  
+   * If a call for heating exists (i.e., the `TO_PID_DAT_Control` output is negative), its output enables EM-300 (Heating Control).
 6. **Safety Interlocks:** All EM outputs are interlocked with the EM-100 fan status. No heating or cooling can occur unless the fan is proven to be running via the Airflow Switch.
 
 ### **4\. HMI Strategy and Library Recommendation**
@@ -155,12 +155,12 @@ To ensure consistency and rapid development, a standardized HMI library is requi
 
 #### **4.1. HMI Library Recommendation**
 
-* **Library:** **Simatic Control Function Library (CFL)**
-* **Justification:** The CFL is chosen to accelerate development and ensure a high degree of standardization. It provides pre-built, tested function blocks with integrated HMI faceplates for common control tasks (e.g., motors, valves, PIDs), which align directly with the Equipment Modules defined in this specification. This strategy allows for rapid implementation of core functionality while still allowing for custom development where necessary.
+* **Library:** **Library of General Functions (LGF)**
+* **Justification:** The LGF is selected to align with the project's software bill of materials and to maintain an open, flexible, and cost-effective design. As a free and universally available library from Siemens, the LGF provides a comprehensive set of basic functions (e.g., scaling, timers, signal processing) that can be used to build robust control logic without introducing licensing costs or dependencies on more complex, feature-heavy libraries. This approach gives developers the flexibility to create highly customized HMI screens tailored specifically to the RTU application, rather than being constrained by pre-defined faceplates.
 
 #### **4.2. Key HMI Screens**
 
-* **Main Overview:** A graphical P\&ID-style screen showing the entire RTU. It will display the live status of the fan, compressor, and heating element, along with real-time temperatures (OA, RA, DA) and damper position.  
+* **Main Overview:** A graphical P&ID-style screen showing the entire RTU. It will display the live status of the fan, compressor, and heating element, along with real-time temperatures (OA, RA, DA) and damper position.
 * **Alarms Screen:** A standard alarm viewer listing all active and historical alarms with timestamps, descriptions, and acknowledgment status.  
 * **Settings Screen:** A password-protected screen for authorized personnel to adjust key operational parameters, including:  
   * Occupied/Unoccupied Setpoints  
