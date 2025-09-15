@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V20"/>
+  <DocumentInfo>
+    <Created>2025-09-14T10:59:00.0000000Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+  </DocumentInfo>
+  <SW.Tags.PlcTagTable ID="0" CompositionName="TagTables">
+    <AttributeList>
+      <Name>TagTable_DO</Name>
+    </AttributeList>
+    <ObjectList>
+      <SW.Tags.PlcTag ID="1" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Bool</DataTypeName>
+          <LogicalAddress>%Q0.0</LogicalAddress>
+          <Name>RTU1_SF_StartCmd</Name>
+        </AttributeList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="2" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Bool</DataTypeName>
+          <LogicalAddress>%Q0.1</LogicalAddress>
+          <Name>RTU1_C_Comp1Cmd</Name>
+        </AttributeList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="3" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Bool</DataTypeName>
+          <LogicalAddress>%Q0.2</LogicalAddress>
+          <Name>RTU1_H_Heat1Cmd</Name>
+        </AttributeList>
+      </SW.Tags.PlcTag>
+    </ObjectList>
+  </SW.Tags.PlcTagTable>
+</Document>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V20"/>
+  <DocumentInfo>
+    <Created>2025-09-14T11:17:00.0000000Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+  </DocumentInfo>
+  <SW.Tags.PlcTagTable ID="0" CompositionName="TagTables">
+    <AttributeList>
+      <Name>TagTable_AO</Name>
+    </AttributeList>
+    <ObjectList>
+      <SW.Tags.PlcTag ID="1" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Real</DataTypeName>
+          <LogicalAddress>%QW64</LogicalAddress>
+          <Name>RTU1_SF_SpeedRef</Name>
+        </AttributeList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="2" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Real</DataTypeName>
+          <LogicalAddress>%QW66</LogicalAddress>
+          <Name>RTU1_DMP_PosCmd</Name>
+        </AttributeList>
+      </SW.Tags.PlcTag>
+    </ObjectList>
+  </SW.Tags.PlcTagTable>
+</Document>
