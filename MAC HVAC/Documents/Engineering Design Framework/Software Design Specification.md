@@ -42,13 +42,13 @@ To ensure robust and efficient process control, two instances of the PID\_Compac
 
 * **Instance 1: `TO_PID_DAT_Control`**
   * **Purpose:** Main Discharge Air Temperature (DAT) Control. This is the primary PID loop responsible for maintaining the DAT setpoint by enabling mechanical heating or cooling.
-  * **Process Variable (PV):** `RTU1_DAT_Temp` (Discharge Air Temperature).
+  * **Process Variable (PV):** `AHU1_DAT_Temp` (Discharge Air Temperature).
   * **Setpoint (SP):** The active DAT Setpoint (either Occupied or Unoccupied).
   * **Manipulated Variable (MV):** The output of this PID will be mapped to a bipolar range (e.g., -100% to +100%). Negative output signifies a demand for heating, and positive output signifies a demand for cooling. This demand signal will enable `EM-200` (Cooling) or `EM-300` (Heating).
 
 * **Instance 2: `TO_PID_Econ_Control`**
   * **Purpose:** Economizer Free Cooling Control. This loop is active only when the system is in Economizer Mode.
-  * **Process Variable (PV):** `RTU1_DAT_Temp` (Discharge Air Temperature).
+  * **Process Variable (PV):** `AHU1_DAT_Temp` (Discharge Air Temperature).
   * **Setpoint (SP):** The active Cooling Setpoint.
   * **Manipulated Variable (MV):** The output (0-100%) directly controls the `Damper Position Command` of `EM-400` to modulate the amount of free cooling provided by outside air.
 

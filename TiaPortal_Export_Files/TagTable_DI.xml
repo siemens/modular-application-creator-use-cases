@@ -2,10 +2,16 @@
 <Document>
   <Engineering version="V20"/>
   <DocumentInfo>
-    <Created>2025-09-14T10:59:00.0000000Z</Created>
+    <Created>2025-09-15T14:47:00.0000000Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V20</DisplayVersion>
+      </Product>
+    </InstalledProducts>
   </DocumentInfo>
-  <SW.Tags.PlcTagTable ID="0" CompositionName="TagTables">
+  <SW.Tags.PlcTagTable ID="0">
     <AttributeList>
       <Name>TagTable_DI</Name>
     </AttributeList>
@@ -13,57 +19,37 @@
       <SW.Tags.PlcTag ID="1" CompositionName="Tags">
         <AttributeList>
           <DataTypeName>Bool</DataTypeName>
-          <LogicalAddress>%I0.0</LogicalAddress>
-          <Name>RTU1_SF_RunFdbk</Name>
+          <Name>AHU1_SF_RunFdbk</Name>
         </AttributeList>
       </SW.Tags.PlcTag>
       <SW.Tags.PlcTag ID="2" CompositionName="Tags">
         <AttributeList>
           <DataTypeName>Bool</DataTypeName>
-          <LogicalAddress>%I0.1</LogicalAddress>
-          <Name>RTU1_SF_AirflowSw</Name>
+          <Name>AHU1_SF_AirflowSw</Name>
         </AttributeList>
       </SW.Tags.PlcTag>
       <SW.Tags.PlcTag ID="3" CompositionName="Tags">
         <AttributeList>
           <DataTypeName>Bool</DataTypeName>
-          <LogicalAddress>%I0.2</LogicalAddress>
-          <Name>RTU1_SF_VfdFault</Name>
+          <Name>AHU1_SF_VfdFault</Name>
         </AttributeList>
       </SW.Tags.PlcTag>
       <SW.Tags.PlcTag ID="4" CompositionName="Tags">
         <AttributeList>
           <DataTypeName>Bool</DataTypeName>
-          <LogicalAddress>%I0.3</LogicalAddress>
-          <Name>RTU1_C_HighPressSw</Name>
+          <Name>AHU1_CW_FreezeStat</Name>
         </AttributeList>
       </SW.Tags.PlcTag>
       <SW.Tags.PlcTag ID="5" CompositionName="Tags">
         <AttributeList>
           <DataTypeName>Bool</DataTypeName>
-          <LogicalAddress>%I0.4</LogicalAddress>
-          <Name>RTU1_C_LowPressSw</Name>
+          <Name>AHU1_HW_FreezeStat</Name>
         </AttributeList>
       </SW.Tags.PlcTag>
       <SW.Tags.PlcTag ID="6" CompositionName="Tags">
         <AttributeList>
           <DataTypeName>Bool</DataTypeName>
-          <LogicalAddress>%I0.5</LogicalAddress>
-          <Name>RTU1_C_FreezeStat</Name>
-        </AttributeList>
-      </SW.Tags.PlcTag>
-      <SW.Tags.PlcTag ID="7" CompositionName="Tags">
-        <AttributeList>
-          <DataTypeName>Bool</DataTypeName>
-          <LogicalAddress>%I0.6</LogicalAddress>
-          <Name>RTU1_H_HighTempSw</Name>
-        </AttributeList>
-      </SW.Tags.PlcTag>
-      <SW.Tags.PlcTag ID="8" CompositionName="Tags">
-        <AttributeList>
-          <DataTypeName>Bool</DataTypeName>
-          <LogicalAddress>%I0.7</LogicalAddress>
-          <Name>RTU1_SYS_DirtyFilter</Name>
+          <Name>AHU1_SYS_DirtyFilter</Name>
         </AttributeList>
       </SW.Tags.PlcTag>
     </ObjectList>
