@@ -30,41 +30,41 @@ Each test case created in the Test Suite editor for an FB shall be structured wi
     *   **Value:** The value being written to an input or the expected value of an output.
     *   **Comment:** An explanation of the purpose of the test step.
 
-## 4. Example: Testing EM-100 (`FB100_EM_SupplyFan`)
+## 4. Example: Testing EM-200 (`FB200_EM_Cooling`)
 
-This example demonstrates how to create a test case for the `FB100_EM_SupplyFan` Function Block.
+This example demonstrates how to create a test case for the `FB200_EM_Cooling` Function Block, which controls a modulating valve.
 
-**Test Objective:** To verify the fan starts correctly under normal conditions and that the "Fan Failure" alarm logic functions as expected.
+**Test Objective:** To verify the chilled water valve modulates correctly based on an analog demand signal and that the freeze protection safety works.
 
-### Test Case 1: Normal Start and Run
+### Test Case 1: Modulating Valve Control
 
-*   **Test Name:** `TC1_Normal_Start_Run`
+*   **Test Name:** `TC1_Modulation_Test`
 *   **Test Steps:**
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
-| 1.0 | **Initial State** | `#Instance_DB.Enable` | `FALSE` | Ensure FB is initially disabled. |
-| 1.1 | | `#Instance_DB.UDT.Run_Fdbk_DI` | `FALSE` | |
-| 1.2 | | `#Instance_DB.UDT.VFD_Fault_DI` | `FALSE` | |
-| 2.0 | **Command Fan ON** | `#Instance_DB.Enable` | `TRUE` | Enable the fan module. |
-| 2.1 | *Evaluate* | `#Instance_DB.UDT.Start_Cmd_DO` | `TRUE` | **Check:** The start command is sent. |
-| 2.2 | *Evaluate* | `#Instance_DB.UDT.Fan_Failure_Alm` | `FALSE` | **Check:** No alarm should be present yet. |
-| 3.0 | **Simulate Feedback** | `#Instance_DB.UDT.Run_Fdbk_DI`| `TRUE` | Simulate VFD run feedback. |
-| 3.1 | | `#Instance_DB.UDT.Airflow_Status_DI`| `TRUE` | Simulate airflow switch made. |
-| 3.2 | *Evaluate* | `#Instance_DB.UDT.Is_Running` | `TRUE` | **Check:** The `Is_Running` status is set. |
-| 3.3 | *Evaluate* | `#Instance_DB.UDT.Fan_Failure_Alm` | `FALSE` | **Check:** The failure alarm remains false. |
+| 1.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | Ensure FB is enabled. |
+| 1.1 | | `#Instance_DB.UDT.CHW_Freeze_Stat_DI`| `FALSE` | Ensure no safety faults are active. |
+| 1.2 | | `#Instance_DB.Cooling_Demand` | `0.0` | Set cooling demand to 0%. |
+| 1.3 | *Evaluate* | `#Instance_DB.UDT.CHW_Valve_Cmd_AO`| `0.0` | **Check:** Valve command is at 0%. |
+| 2.0 | **Test 50% Demand**| `#Instance_DB.Cooling_Demand` | `50.0` | Simulate a 50% cooling demand from the PID. |
+| 2.1 | *Evaluate* | `#Instance_DB.UDT.CHW_Valve_Cmd_AO`| `50.0` | **Check:** Valve command tracks the demand. |
+| 3.0 | **Test 100% Demand**| `#Instance_DB.Cooling_Demand` | `100.0` | Simulate a 100% cooling demand. |
+| 3.1 | *Evaluate* | `#Instance_DB.UDT.CHW_Valve_Cmd_AO`| `100.0` | **Check:** Valve command goes to 100%. |
+| 4.0 | **Test 0% Demand** | `#Instance_DB.Cooling_Demand` | `0.0` | Remove cooling demand. |
+| 4.1 | *Evaluate* | `#Instance_DB.UDT.CHW_Valve_Cmd_AO`| `0.0` | **Check:** Valve command returns to 0%. |
 
-### Test Case 2: Fan Failure (No Run Feedback)
+### Test Case 2: Freeze Stat Safety Trip
 
-*   **Test Name:** `TC2_Failure_No_Feedback`
+*   **Test Name:** `TC2_Freeze_Safety_Trip`
 *   **Test Steps:**
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
-| 1.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | Enable the fan module. |
-| 1.1 | | `#Instance_DB.UDT.Run_Fdbk_DI` | `FALSE` | Ensure no feedback is present. |
-| 1.2 | | `#Instance_DB.UDT.Fault_Delay_Sec`| `T#5s` | Set fault delay. |
-| 2.0 | **Wait for Fault** | `#WAIT` | `5000` | Wait for 5000 ms. |
-| 2.1 | *Evaluate* | `#Instance_DB.UDT.Fan_Failure_Alm`| `TRUE` | **Check:** The failure alarm is now active. |
-| 2.2 | *Evaluate* | `#Instance_DB.UDT.Start_Cmd_DO` | `FALSE` | **Check:** The start command is disabled on fault. |
+| 1.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | Enable the module. |
+| 1.1 | | `#Instance_DB.Cooling_Demand` | `75.0` | Set cooling demand to 75%. |
+| 1.2 | *Evaluate* | `#Instance_DB.UDT.CHW_Valve_Cmd_AO`| `75.0` | **Check:** Valve is open. |
+| 2.0 | **Simulate Fault** | `#Instance_DB.UDT.CHW_Freeze_Stat_DI`| `TRUE` | Simulate the freeze stat tripping. |
+| 2.1 | *Evaluate* | `#Instance_DB.UDT.CHW_Freeze_Alm`| `TRUE` | **Check:** The freeze alarm is now active. |
+| 2.2 | *Evaluate* | `#Instance_DB.UDT.CHW_Valve_Cmd_AO`| `0.0` | **Check:** Valve is commanded closed on fault. |
 
 ## 5. Test Management and CI/CD
 

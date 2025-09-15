@@ -1,15 +1,15 @@
 # Sequence of Operations & Functional Test Procedure
 
-**Project:** Basic Rooftop Unit (RTU) Controller
+**Project:** Constant Volume Air Handler Unit (AHU) Controller
 **Reference:** Software Design Specification, Version 1.0
 
 ## 1. Sequence of Operations (SOO)
 
 ### 1.1. General Operation & Modes
 
-The RTU will operate in one of three modes, determined by a time schedule, a command from a Building Automation System (BAS), or a manual selection on the HMI:
+The AHU will operate in one of three modes, determined by a time schedule, a command from a Building Automation System (BAS), or a manual selection on the HMI:
 
-*   **Off Mode:** The entire RTU is disabled. The supply fan, heating, and cooling are all off. The outside air damper is commanded closed.
+*   **Off Mode:** The entire AHU is disabled. The supply fan, heating, and cooling are all off. The outside air damper is commanded closed.
 *   **Occupied Mode:** The unit is active during normal building hours.
     *   The **Supply Fan** runs continuously to provide ventilation.
     *   The controller actively maintains the **Occupied Discharge Air Temperature (DAT) Setpoint**.
@@ -26,7 +26,7 @@ The RTU will operate in one of three modes, determined by a time schedule, a com
 
 ### 1.3. Temperature Control
 
-A single PID loop (`TO_PID_DAT_Control`) manages all heating and cooling to maintain the active Discharge Air Temperature (DAT) Setpoint.
+A single PID loop (`TO_PID_DAT_Control`) manages all heating and cooling to maintain the active Discharge Air Temperature (DAT) Setpoint. The output of this PID is bipolar (-100% to +100%) and drives the heating and cooling valves.
 
 #### 1.3.1. Economizer / Free Cooling Mode (`EM-400`)
 
@@ -39,23 +39,22 @@ A single PID loop (`TO_PID_DAT_Control`) manages all heating and cooling to main
     *   A dedicated economizer PID loop (`TO_PID_Econ_Control`) will modulate the outside air damper to bring in cool air and maintain the DAT setpoint.
 *   **Deactivation:** If any of the activation conditions become false, the economizer will exit, and the damper will return to its minimum position.
 
-#### 1.3.2. Mechanical Cooling Mode (`EM-200`)
+#### 1.3.2. Chilled Water Cooling Mode (`EM-200`)
 
-*   **Activation:** The system will enable the DX compressor if **ALL** of the following conditions are true:
-    1.  There is a demand for cooling.
+*   **Activation:** The system will enable chilled water cooling if **ALL** of the following conditions are true:
+    1.  There is a demand for cooling (the `TO_PID_DAT_Control` output is > 0).
     2.  The system is **NOT** in Economizer mode.
-    3.  All cooling safeties (High/Low Pressure, Freeze Stat) are in a normal state.
-    4.  The compressor minimum off-time (3 minutes) has elapsed.
-*   **Operation:** The single-stage compressor is commanded ON. It will run until the cooling demand is met or for a minimum run-time of 3 minutes, whichever is longer.
-*   **Safety Trips:** A trip on the High-Pressure, Low-Pressure, or Freeze-Stat inputs will immediately de-energize the compressor and generate a specific alarm.
+    3.  The chilled water coil freeze-stat (`CHW_Freeze_Stat_DI`) is in a normal state.
+*   **Operation:** The positive output of the `TO_PID_DAT_Control` (0 to 100%) is scaled and sent to the `CHW_Valve_Cmd_AO` to modulate the chilled water valve.
+*   **Safety Trip:** A trip on the `CHW_Freeze_Stat_DI` input will immediately command the valve closed (0%) and generate a **"Chilled Water Freeze Alarm"**.
 
-#### 1.3.3. Heating Mode (`EM-300`)
+#### 1.3.3. Hot Water Heating Mode (`EM-300`)
 
-*   **Activation:** The system will enable the heating stage if **ALL** of the following conditions are true:
-    1.  There is a demand for heating (DAT is below setpoint).
-    2.  The high-temperature limit safety is in a normal state.
-*   **Operation:** The single-stage heating element is commanded ON and will run until the heating demand is met.
-*   **Safety Trip:** A trip on the High-Temperature Limit input will immediately de-energize the heating element and generate a **"High-Temperature Limit Fault"** alarm.
+*   **Activation:** The system will enable hot water heating if **ALL** of the following conditions are true:
+    1.  There is a demand for heating (the `TO_PID_DAT_Control` output is < 0).
+    2.  The hot water coil freeze-stat (`HW_Freeze_Stat_DI`) is in a normal state.
+*   **Operation:** The negative output of the `TO_PID_DAT_Control` (-100% to 0) is inverted and scaled (to 0-100%) and sent to the `HW_Valve_Cmd_AO` to modulate the hot water valve.
+*   **Safety Trip:** A trip on the `HW_Freeze_Stat_DI` input will immediately command the valve closed (0%) and generate a **"Hot Water Freeze Alarm"**.
 
 ### 1.4. Ventilation Control (`EM-400`)
 
@@ -64,11 +63,11 @@ A single PID loop (`TO_PID_DAT_Control`) manages all heating and cooling to main
 ### 1.5. System Monitoring & Alarms (`EM-500`)
 
 *   **Dirty Filter:** A "Dirty Filter" alarm is generated if the filter differential pressure switch is active for more than 10 seconds. This is a maintenance alarm and does not shut down the unit.
-*   **Safety Alarms:** All safety alarms (Fan Failure, VFD Fault, HP/LP Fault, Freeze Stat, High-Limit) are critical and will shut down the associated equipment.
+*   **Safety Alarms:** All safety alarms (Fan Failure, VFD Fault, CHW Freeze Alarm, HW Freeze Alarm) are critical and will shut down the associated equipment.
 
 ## 2. Functional Test Procedure
 
-This procedure is to be used by a commissioning technician to verify the correct operation of the RTU controller.
+This procedure is to be used by a commissioning technician to verify the correct operation of the AHU controller.
 
 **Pre-Test Checks:**
 1.  Verify all I/O wiring matches the specification document.
@@ -85,13 +84,13 @@ This procedure is to be used by a commissioning technician to verify the correct
 | 2 | While fan is running, disable the **Run Feedback** input. | After 5 seconds, the fan command turns OFF and a "Fan Failure" alarm appears on the HMI. |
 | 3 | Clear alarm. Simulate a **VFD Fault** input. | Fan command turns OFF immediately and a "VFD Fault" alarm appears. |
 | **Heating Control** |
-| 4 | Clear alarms. Set DAT Setpoint to 75°F. Force the DAT reading to 65°F. | Heating command turns ON. |
-| 5 | Simulate a **High-Temperature Limit** fault. | Heating command turns OFF immediately. "High-Temperature Limit Fault" alarm appears. |
+| 4 | Clear alarms. Set DAT Setpoint to 75°F. Force the DAT reading to 65°F. | The `HW_Valve_Cmd_AO` should modulate towards 100% to bring the DAT up to setpoint. |
+| 5 | Simulate a **HW Freeze Stat** fault. | The `HW_Valve_Cmd_AO` should go to 0 immediately. A "Hot Water Freeze Alarm" appears. |
 | **Cooling Control** |
-| 6 | Clear alarms. Set DAT Setpoint to 55°F. Force DAT to 65°F. Force OAT to 80°F (to disable economizer). | After the 3-minute off-time delay, the Compressor command turns ON. |
-| 7 | While running, simulate a **High-Pressure Switch** fault. | Compressor command turns OFF immediately. "High Pressure Fault" alarm appears. |
+| 6 | Clear alarms. Set DAT Setpoint to 55°F. Force DAT to 65°F. Force OAT to 80°F (to disable economizer). | The `CHW_Valve_Cmd_AO` should modulate towards 100% to bring the DAT down to setpoint. |
+| 7 | While cooling, simulate a **CHW Freeze Stat** fault. | The `CHW_Valve_Cmd_AO` should go to 0 immediately. A "Chilled Water Freeze Alarm" appears. |
 | **Economizer Control** |
-| 8 | Clear alarms. Set DAT Setpoint to 55°F. Force DAT to 65°F. Force OAT to 50°F and RAT to 75°F. | The system enters Economizer mode. **The Compressor command must remain OFF.** The Damper command modulates to control the DAT. |
-| 9 | Force OAT to 70°F (above the high-limit). | Economizer mode exits. The damper returns to its minimum position. The Compressor command turns ON (after its time delay). |
+| 8 | Clear alarms. Set DAT Setpoint to 55°F. Force DAT to 65°F. Force OAT to 50°F and RAT to 75°F. | The system enters Economizer mode. **The `CHW_Valve_Cmd_AO` must remain at 0.** The Damper command modulates to control the DAT. |
+| 9 | Force OAT to 70°F (above the high-limit). | Economizer mode exits. The damper returns to its minimum position. The `CHW_Valve_Cmd_AO` begins to modulate to control temperature. |
 | **System Monitoring** |
 | 10 | Simulate a **Dirty Filter Status** input. | After 10 seconds, a "Dirty Filter" alarm appears. The unit continues to run. |
