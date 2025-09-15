@@ -1,21 +1,22 @@
 # Hardware and Software Specification
 
-**Project:** Basic Rooftop Unit (RTU) Controller
+**Project:** Constant Volume Air Handler Unit (AHU) Controller
 **Reference:** Software Design Specification, Version 1.0
 
 ## 1. Hardware Bill of Materials (BOM)
 
-The following hardware components are required for a single RTU controller panel. The selection is based on the I/O requirements defined in the SDS and the use of the integrated I/O on the CPU 1511C-1 PN.
+The following hardware components are required for a single AHU controller panel. The selection is based on the I/O requirements defined in the SDS. The integrated I/O of the CPU is supplemented by a dedicated analog output module to control the modulating valves.
 
 | Item | Manufacturer | Part Number | Quantity | Description |
 | :--- | :--- | :--- | :--- | :--- |
 | **1** | Siemens | **6ES7511-1CK01-0AB0** | 1 | SIMATIC S7-1500 Compact CPU, CPU 1511C-1 PN. Includes 16 DI, 16 DO, 5 AI, 2 AO. |
-| **2** | Siemens | **6ES7954-8LC03-0AA0** | 1 | SIMATIC S7 Memory Card, 4 MB. Required for CPU operation. |
-| **3** | Siemens | **6ES7505-0KA00-0AB0** | 1 | SIMATIC PM 70W Power Supply. Provides 24V DC power to the PLC rack. |
-| **4** | Siemens | **6ES7590-1AE80-0AA0** | 1 | SIMATIC S7-1500 Mounting Rail, 483 mm (19"). |
-| **5** | - | - | 1 | NEMA 1 Enclosure (or as required by installation environment). |
-| **6** | - | - | 1 | Terminal blocks, wiring, and circuit protection as required for field I/O connections. |
-| **7** | - | - | 1 | HMI Panel (e.g., Siemens Comfort Panel TP700, 7") if local control is required. |
+| **2** | Siemens | **6ES7532-5HD00-0AB0** | 1 | SIMATIC S7-1500 Analog Output Module, SM 532, AQ 4xU/I ST. Required for valve control. |
+| **3** | Siemens | **6ES7954-8LC03-0AA0** | 1 | SIMATIC S7 Memory Card, 4 MB. Required for CPU operation. |
+| **4** | Siemens | **6ES7505-0KA00-0AB0** | 1 | SIMATIC PM 70W Power Supply. Provides 24V DC power to the PLC rack. |
+| **5** | Siemens | **6ES7590-1AE80-0AA0** | 1 | SIMATIC S7-1500 Mounting Rail, 483 mm (19"). |
+| **6** | - | - | 1 | NEMA 1 Enclosure (or as required by installation environment). |
+| **7** | - | - | 1 | Terminal blocks, wiring, and circuit protection as required for field I/O connections. |
+| **8** | - | - | 1 | HMI Panel (e.g., Siemens Comfort Panel TP700, 7") if local control is required. |
 
 ## 2. Software Bill of Materials (BOM)
 
@@ -43,8 +44,8 @@ Standardized data structures will be created for each Equipment Module to hold a
 Each Equipment Module will be encapsulated in its own reusable Function Block.
 
 *   `FB100_EM_SupplyFan`: Contains all logic for the supply fan.
-*   `FB200_EM_Cooling`: Contains all logic for the cooling stage.
-*   `FB300_EM_Heating`: Contains all logic for the heating stage.
+*   `FB200_EM_Cooling`: Contains all logic for the chilled water cooling valve.
+*   `FB300_EM_Heating`: Contains all logic for the hot water heating valve.
 *   `FB400_EM_Damper`: Contains all logic for damper control.
 *   `FB500_EM_Monitoring`: Contains all logic for system monitoring.
 

@@ -1,39 +1,40 @@
 # **Software Design Specification (SDS)**
 
-## **Basic Rooftop HVAC Unit (RTU) Controller**
+## **Constant Volume Air Handler Unit (AHU) Controller**
 
-Project: Basic RTU Controller  
+Project: Constant Volume AHU Controller
 PLC Platform: Siemens TIA Portal V20
 Target CPU: Siemens S7-1500 Family  
 Author: Jules
 Date: September 15, 2025
-Version: 1.1
+Version: 2.0
 
 ### **1\. System Architecture and Hardware Specification**
 
-This section defines the core hardware components and the software architecture for the RTU controller. The design emphasizes a centralized control strategy using a single Siemens S7-1500 PLC.
+This section defines the core hardware components and the software architecture for the AHU controller. The design emphasizes a centralized control strategy using a single Siemens S7-1500 PLC.
 
 #### **1.1. PLC Hardware**
 
 * **Controller:** Siemens SIMATIC S7-1500, **CPU 1511C-1 PN**.  
-  * **Rationale:** The compact model provides an excellent balance of performance and value. It includes integrated I/O points suitable for a basic RTU, with processing power to spare for future enhancements.
+  * **Rationale:** The compact model provides an excellent balance of performance and value. Its integrated I/O is supplemented by an analog output module to meet all project requirements.
 
 #### **1.2. I/O Signal Modules (SMs)**
 
-Based on the required I/O points from the Equipment Modules, the following hardware is specified. The integrated I/O of the 1511C will be utilized.
+Based on the required I/O points from the Equipment Modules, the integrated I/O of the CPU will be supplemented by one analog output signal module.
 
-* **Integrated Digital I/O (on CPU):**  
+* **CPU Integrated I/O:**
   * 16x Digital Inputs (DI)  
   * 16x Digital Outputs (DO)  
-* **Integrated Analog I/O (on CPU):**  
   * 5x Analog Inputs (AI)  
-  * 2x Analog Outputs (AO)  
+  * 2x Analog Outputs (AO)
+* **Additional Signal Modules:**
+  * 1x **SM 532, AQ 4xU/I ST** (4x Analog Outputs)
 * **Total Project I/O Requirements:**  
-  * 8 Digital Inputs  
-  * 3 Digital Outputs  
+  * 6 Digital Inputs
+  * 1 Digital Output
   * 3 Analog Inputs  
-  * 2 Analog Outputs  
-* **Conclusion:** The CPU 1511C-1 PN's integrated I/O is sufficient for this application, providing room for future expansion without additional hardware.
+  * 4 Analog Outputs
+* **Conclusion:** The CPU 1511C-1 PN's integrated I/O combined with one 4-channel analog output module is sufficient for this application.
 
 #### **1.3. Technology Objects (TOs)**
 
@@ -65,38 +66,37 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
 * **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
-  | Start/Stop Command | Digital | Output | RTU1\_SF\_StartCmd |  
-  | Speed Reference | Analog | Output | RTU1\_SF\_SpeedRef |  
-  | Run Feedback/Status | Digital | Input | RTU1\_SF\_RunFdbk |  
-  | Airflow Switch Status | Digital | Input | RTU1\_SF\_AirflowSw |  
-  | VFD Fault Status | Digital | Input | RTU1\_SF\_VfdFault |
+  | Start/Stop Command | Digital | Output | AHU1\_SF\_StartCmd |
+  | Speed Reference | Analog | Output | AHU1\_SF\_SpeedRef |
+  | Run Feedback/Status | Digital | Input | AHU1\_SF\_RunFdbk |
+  | Airflow Switch Status | Digital | Input | AHU1\_SF\_AirflowSw |
+  | VFD Fault Status | Digital | Input | AHU1\_SF\_VfdFault |
 
-#### **EM-200: Cooling Control (Single-Stage DX)**
+#### **EM-200: Cooling Control (Chilled Water)**
 
-* **Purpose:** To control and monitor a single-stage direct expansion (DX) cooling compressor and its safeties.  
+* **Purpose:** To control a modulating chilled water valve for cooling the discharge air.
 * **Logic:**  
-  * Accepts a cooling enable command from the main program logic.  
-  * Monitors High-Pressure, Low-Pressure, and Freeze Stat safety switches. A trip on any safety generates a specific alarm and locks out the compressor until reset.  
-  * Implements configurable minimum run-time and minimum off-time delays (e.g., 3 minutes) to prevent compressor short-cycling. The compressor command will not be turned off until the min run-time is met, and will not be turned on until the min off-time is met.  
+  * Accepts an analog cooling demand (0-100%) from the main PID controller.
+  * Scales the demand signal to the `CHW_Valve_Cmd_AO` analog output.
+  * Monitors a `CHW_Freeze_Stat_DI` on the coil. If the freeze stat trips, the valve is commanded fully closed (0%) and a `CHW_Freeze_Alm` is generated.
 * **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
-  | Compressor Stage 1 Cmd | Digital | Output | RTU1\_C\_Comp1Cmd |  
-  | High-Pressure Switch | Digital | Input | RTU1\_C\_HighPressSw |  
-  | Low-Pressure Switch | Digital | Input | RTU1\_C\_LowPressSw |  
-  | Freeze Stat | Digital | Input | RTU1\_C\_FreezeStat |
+  | Chilled Water Valve Cmd | Analog | Output | AHU1\_CW\_VlvCmd |
+  | Chilled Water Freeze Stat | Digital | Input | AHU1\_CW\_FreezeStat |
 
-#### **EM-300: Heating Control (Single-Stage Gas/Electric)**
+#### **EM-300: Heating Control (Hot Water)**
 
-* **Purpose:** To control a single-stage heating element and its primary safety.  
+* **Purpose:** To control a modulating hot water valve for heating the discharge air.
 * **Logic:**  
-  * Accepts a heating enable command from the main program logic.  
-  * Monitors a High-Temperature Limit switch. If the switch trips, the module generates a "High-Temperature Limit Fault" alarm and locks out the heating stage until reset.  
+  * Accepts an analog heating demand (0-100%) from the main PID controller.
+  * Scales the demand signal to the `HW_Valve_Cmd_AO` analog output.
+  * Monitors a `HW_Freeze_Stat_DI` on the coil. If the freeze stat trips, the valve is commanded fully closed (0%) and a `HW_Freeze_Alm` is generated.
 * **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
-  | Heating Stage 1 Cmd | Digital | Output | RTU1\_H\_Heat1Cmd |  
-  | High-Temp Limit Sw | Digital | Input | RTU1\_H\_HighTempSw |
+  | Hot Water Valve Cmd | Analog | Output | AHU1\_HW\_VlvCmd |
+  | Hot Water Freeze Stat | Digital | Input | AHU1\_HW\_FreezeStat |
 
 #### **EM-400: Damper/Economizer Control**
 
@@ -108,10 +108,10 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
 * **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
-  | Damper Position Cmd | Analog | Output | RTU1\_DMP\_PosCmd |  
-  | Return Air Temp | Analog | Input | RTU1\_RAT\_Temp |  
-  | Outside Air Temp | Analog | Input | RTU1\_OAT\_Temp |  
-  | Discharge Air Temp | Analog | Input | RTU1\_DAT\_Temp |
+  | Damper Position Cmd | Analog | Output | AHU1\_DMP\_PosCmd |
+  | Return Air Temp | Analog | Input | AHU1\_RAT\_Temp |
+  | Outside Air Temp | Analog | Input | AHU1\_OAT\_Temp |
+  | Discharge Air Temp | Analog | Input | AHU1\_DAT\_Temp |
 
 #### **EM-500: System Monitoring**
 
@@ -122,7 +122,7 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
 * **Parameter Set:**
   | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |  
   | :--- | :--- | :--- | :--- |  
-  | Dirty Filter Status | Digital | Input | RTU1\_SYS\_DirtyFilter |
+  | Dirty Filter Status | Digital | Input | AHU1\_SYS\_DirtyFilter |
 
 ### **3\. Main Control Program (OB1 Logic)**
 
@@ -142,11 +142,11 @@ The main program logic, executed in OB1, coordinates the EMs based on the unit's
    * In Unoccupied mode, EM-100 is commanded to start only when there is a call for heat or cool.  
 3. **Demand Calculation:** The `TO_PID_DAT_Control` PID determines the operating state (Heating, Cooling, Deadband).
 4. **Cooling Logic:**  
-   * If a call for cooling exists (i.e., the `TO_PID_DAT_Control` output is positive), the system evaluates the cooling strategy.
+   * If the `TO_PID_DAT_Control` output is positive (indicating a cooling demand), the system evaluates the cooling strategy.
    * The system first attempts to cool using the EM-400 economizer. If conditions are favorable, the `TO_PID_Econ_Control` is enabled to modulate the damper.
-   * If economizer cooling is not available or insufficient, the output of `TO_PID_DAT_Control` enables EM-200 (DX Cooling).
+   * If economizer cooling is not available or insufficient, the positive output of `TO_PID_DAT_Control` (0-100%) is passed to EM-200 to modulate the chilled water valve.
 5. **Heating Logic:**  
-   * If a call for heating exists (i.e., the `TO_PID_DAT_Control` output is negative), its output enables EM-300 (Heating Control).
+   * If the `TO_PID_DAT_Control` output is negative (indicating a heating demand), the inverted output (0-100%) is passed to EM-300 to modulate the hot water valve.
 6. **Safety Interlocks:** All EM outputs are interlocked with the EM-100 fan status. No heating or cooling can occur unless the fan is proven to be running via the Airflow Switch.
 
 ### **4\. HMI Strategy and Library Recommendation**
@@ -156,22 +156,24 @@ To ensure consistency and rapid development, a standardized HMI library is requi
 #### **4.1. HMI Library Recommendation**
 
 * **Library:** **Library of General Functions (LGF)**
-* **Justification:** The LGF is selected to align with the project's software bill of materials and to maintain an open, flexible, and cost-effective design. As a free and universally available library from Siemens, the LGF provides a comprehensive set of basic functions (e.g., scaling, timers, signal processing) that can be used to build robust control logic without introducing licensing costs or dependencies on more complex, feature-heavy libraries. This approach gives developers the flexibility to create highly customized HMI screens tailored specifically to the RTU application, rather than being constrained by pre-defined faceplates.
+* **Justification:** The LGF is selected to align with the project's software bill of materials and to maintain an open, flexible, and cost-effective design. As a free and universally available library from Siemens, the LGF provides a comprehensive set of basic functions (e.g., scaling, timers, signal processing) that can be used to build robust control logic without introducing licensing costs or dependencies on more complex, feature-heavy libraries. This approach gives developers the flexibility to create highly customized HMI screens tailored specifically to the AHU application, rather than being constrained by pre-defined faceplates.
 
 #### **4.2. Key HMI Screens**
 
-* **Main Overview:** A graphical P&ID-style screen showing the entire RTU. It will display the live status of the fan, compressor, and heating element, along with real-time temperatures (OA, RA, DA) and damper position.
+* **Main Overview:** A graphical P&ID-style screen showing the entire AHU. It will display the live status of the fan, hot water valve position, and chilled water valve position, along with real-time temperatures (OA, RA, DA) and damper position.
 * **Alarms Screen:** A standard alarm viewer listing all active and historical alarms with timestamps, descriptions, and acknowledgment status.  
 * **Settings Screen:** A password-protected screen for authorized personnel to adjust key operational parameters, including:  
   * Occupied/Unoccupied Setpoints  
   * PID Tuning Parameters (P, I, D)  
-  * Configurable Time Delays (compressor cycle, fan failure, etc.)  
+  * Configurable Time Delays (fan failure, etc.)
 * **Trend Screen:** A multi-pen trend view for diagnostics and performance monitoring. Key trends will include:  
   * Discharge Air Temperature  
   * Return Air Temperature  
   * Outside Air Temperature  
   * Active Setpoint  
   * Damper Position Command
+  * HW Valve Position Command
+  * CW Valve Position Command
 
 ### **5\. Version Control and Automated Testing Strategy**
 
@@ -206,7 +208,7 @@ A GitHub Actions workflow will be created to automatically test Equipment Module
 
 #### **6.1. Glossary of Acronyms**
 *   **PLC:** Programmable Logic Controller
-*   **RTU:** Rooftop HVAC Unit
+*   **AHU:** Air Handler Unit
 *   **EM:** Equipment Module
 *   **FB:** Function Block
 *   **UDT:** User Data Type (a structured data type)

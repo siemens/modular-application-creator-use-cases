@@ -32,38 +32,31 @@ This document defines the structure of the User Data Types (UDTs) for each Equip
 
 ## `UDT200_EM_Cooling`
 
-**Description:** Holds all parameters for the single-stage Cooling Control Equipment Module (`EM-200`).
+**Description:** Holds all parameters for the Chilled Water Cooling Equipment Module (`EM-200`).
 
 | Parameter Name | Data Type | Comment / Purpose |
 | :--- | :--- | :--- |
 | **// -- Inputs (from I/O) --** | | |
-| `HP_Switch_DI` | `Bool` | Digital Input: High-pressure refrigerant switch (`True` = Fault). |
-| `LP_Switch_DI` | `Bool` | Digital Input: Low-pressure refrigerant switch (`True` = Fault). |
-| `Freeze_Stat_DI` | `Bool` | Digital Input: Freeze-stat on coil (`True` = Fault). |
+| `CHW_Freeze_Stat_DI` | `Bool` | Digital Input: Freeze-stat on chilled water coil (`True` = Fault). |
 | **// -- Outputs (to I/O) --** | | |
-| `Compressor_Cmd_DO`| `Bool` | Digital Output: Command to start/stop the compressor. |
-| **// -- Configuration --** | | |
-| `Min_Run_Time_Sec` | `Time` | Minimum compressor run time to prevent short-cycling (e.g., `T#3m`). |
-| `Min_Off_Time_Sec` | `Time` | Minimum compressor off time to prevent short-cycling (e.g., `T#3m`). |
+| `CHW_Valve_Cmd_AO`| `Real` | Analog Output: Chilled water valve position (0.0 - 100.0 %). |
 | **// -- Status & Alarms --** | | |
-| `HP_Fault_Alm` | `Bool` | Alarm: High-pressure fault. |
-| `LP_Fault_Alm` | `Bool` | Alarm: Low-pressure fault. |
-| `Freeze_Stat_Alm`| `Bool` | Alarm: Freeze-stat tripped. |
+| `CHW_Freeze_Alm`| `Bool` | Alarm: Chilled water coil freeze-stat tripped. |
 
 ---
 
 ## `UDT300_EM_Heating`
 
-**Description:** Holds all parameters for the single-stage Heating Control Equipment Module (`EM-300`).
+**Description:** Holds all parameters for the Hot Water Heating Equipment Module (`EM-300`).
 
 | Parameter Name | Data Type | Comment / Purpose |
 | :--- | :--- | :--- |
 | **// -- Inputs (from I/O) --** | | |
-| `High_Limit_DI` | `Bool` | Digital Input: High-temperature limit switch (`True` = Fault). |
+| `HW_Freeze_Stat_DI` | `Bool` | Digital Input: Freeze-stat on hot water coil (`True` = Fault). |
 | **// -- Outputs (to I/O) --** | | |
-| `Heat_Stage1_Cmd_DO`| `Bool` | Digital Output: Command for heating stage 1. |
+| `HW_Valve_Cmd_AO`| `Real` | Analog Output: Hot water valve position (0.0 - 100.0 %). |
 | **// -- Status & Alarms --** | | |
-| `High_Limit_Alm` | `Bool` | Alarm: High-temperature limit fault. |
+| `HW_Freeze_Alm` | `Bool` | Alarm: Hot water coil freeze-stat tripped. |
 
 ---
 
