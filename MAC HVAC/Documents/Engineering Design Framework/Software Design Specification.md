@@ -38,7 +38,7 @@ Based on the required I/O points from the Equipment Modules, the integrated I/O 
 
 #### **1.3. Technology Objects (TOs)**
 
-To ensure robust and efficient process control, two instances of the PID\_Compact Technology Object will be used for temperature regulation. This strategy separates the primary temperature control from the dedicated economizer free-cooling logic.
+To ensure robust and efficient process control, a combination of PID Technology Objects will be used. The main temperature control will use the more advanced `PID_Temp` object for its bipolar output capabilities, while the economizer will use the simpler `PID_Compact` for its single-direction control.
 
 * **Instance 1: `TO_PID_DAT_Control`**
   * **Purpose:** Main Discharge Air Temperature (DAT) Control. This is the primary PID loop responsible for maintaining the DAT setpoint by enabling mechanical heating or cooling.
