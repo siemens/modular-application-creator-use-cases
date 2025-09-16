@@ -5,9 +5,9 @@
 Project: Constant Volume AHU Controller
 PLC Platform: Siemens TIA Portal V20
 Target CPU: Siemens S7-1500 Family  
-Author: Jules
+Author: Dallas Levine
 Date: September 15, 2025
-Version: 2.0
+Version: 2.1
 
 ### **1\. System Architecture and Hardware Specification**
 
@@ -32,9 +32,9 @@ Based on the required I/O points from the Equipment Modules, the integrated I/O 
 * **Total Project I/O Requirements:**  
   * 6 Digital Inputs
   * 1 Digital Output
-  * 3 Analog Inputs  
+  * 5 Analog Inputs
   * 4 Analog Outputs
-* **Conclusion:** The CPU 1511C-1 PN's integrated I/O combined with one 4-channel analog output module is sufficient for this application.
+* **Conclusion:** The CPU 1511C-1 PN's integrated I/O (which includes 5 AIs) combined with one 4-channel analog output module is sufficient for this application. No additional analog input module is required.
 
 #### **1.3. Technology Objects (TOs)**
 
@@ -45,6 +45,7 @@ To ensure robust and efficient process control, a combination of PID Technology 
   * **Process Variable (PV):** `AHU1_DAT_Temp` (Discharge Air Temperature).
   * **Setpoint (SP):** The active DAT Setpoint (either Occupied or Unoccupied).
   * **Manipulated Variable (MV):** The output of this PID will be mapped to a bipolar range (e.g., -100% to +100%). Negative output signifies a demand for heating, and positive output signifies a demand for cooling. This demand signal will enable `EM-200` (Cooling) or `EM-300` (Heating).
+  * **Tuning Considerations:** To ensure stable control of the slow-reacting water valves, the PID's integral time (`Ti`) should be set to a relatively high value. This will prevent rapid oscillation of the valve commands. Derivative action (`Td`) is likely not required for this thermal process.
 
 * **Instance 2: `TO_PID_Econ_Control`**
   * **Purpose:** Economizer Free Cooling Control. This loop is active only when the system is in Economizer Mode.
@@ -84,6 +85,7 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
   | :--- | :--- | :--- | :--- |  
   | Chilled Water Valve Cmd | Analog | Output | AHU1\_CW\_VlvCmd |
   | Chilled Water Freeze Stat | Digital | Input | AHU1\_CW\_FreezeStat |
+  | Chilled Water Valve Fdbk | Analog | Input | AHU1\_CW\_VlvFdbk |
 
 #### **EM-300: Heating Control (Hot Water)**
 
@@ -97,6 +99,7 @@ The control logic is segmented into the following Equipment Modules (EMs). Each 
   | :--- | :--- | :--- | :--- |  
   | Hot Water Valve Cmd | Analog | Output | AHU1\_HW\_VlvCmd |
   | Hot Water Freeze Stat | Digital | Input | AHU1\_HW\_FreezeStat |
+  | Hot Water Valve Fdbk | Analog | Input | AHU1\_HW\_VlvFdbk |
 
 #### **EM-400: Damper/Economizer Control**
 

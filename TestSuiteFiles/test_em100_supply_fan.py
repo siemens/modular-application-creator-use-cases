@@ -19,6 +19,7 @@ class TestSupplyFan(unittest.TestCase):
         """Set up a new mock PLC for each test."""
         self.plc = MockPLC()
         # Set default values for the UDT
+        self.plc.set_tag("FB100_EM_SupplyFan.Enable", False)
         self.plc.set_tag("FB100_EM_SupplyFan.UDT.Run_Fdbk_DI", False)
         self.plc.set_tag("FB100_EM_SupplyFan.UDT.Airflow_Status_DI", False)
         self.plc.set_tag("FB100_EM_SupplyFan.UDT.VFD_Fault_DI", False)

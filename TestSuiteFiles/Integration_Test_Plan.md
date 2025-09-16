@@ -17,6 +17,7 @@ To ensure the main PID controller correctly responds to changes in temperature b
 *   **Key Parameters:**
     *   **Input (to be forced):** `AHU1_DAT_Temp` (Process Variable).
     *   **Configuration:** `Setpoint` will be set to a nominal value (e.g., 70.0). `OutputUpperLimit` = 100.0, `OutputLowerLimit` = -100.0.
+    *   **Tuning Note:** For these tests, the PID's integral time (`Ti`) should be set to a high value (e.g., `T#60s`) to simulate the slow response required for stable valve control.
     *   **Output (to be evaluated):** `Output` (The manipulated variable).
 
 ---

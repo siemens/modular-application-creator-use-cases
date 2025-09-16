@@ -38,8 +38,9 @@ This document defines the structure of the User Data Types (UDTs) for each Equip
 | :--- | :--- | :--- |
 | **// -- Inputs (from I/O) --** | | |
 | `CHW_Freeze_Stat_DI` | `Bool` | Digital Input: Freeze-stat on chilled water coil (`True` = Fault). |
+| `CHW_Valve_Fdbk_AI` | `Real` | Analog Input: Chilled water valve position feedback (0.0 - 100.0 %). |
 | **// -- Outputs (to I/O) --** | | |
-| `CHW_Valve_Cmd_AO`| `Real` | Analog Output: Chilled water valve position (0.0 - 100.0 %). |
+| `CHW_Valve_Cmd_AO`| `Real` | Analog Output: Chilled water valve position command (0.0 - 100.0 %). |
 | **// -- Status & Alarms --** | | |
 | `CHW_Freeze_Alm`| `Bool` | Alarm: Chilled water coil freeze-stat tripped. |
 
@@ -53,8 +54,9 @@ This document defines the structure of the User Data Types (UDTs) for each Equip
 | :--- | :--- | :--- |
 | **// -- Inputs (from I/O) --** | | |
 | `HW_Freeze_Stat_DI` | `Bool` | Digital Input: Freeze-stat on hot water coil (`True` = Fault). |
+| `HW_Valve_Fdbk_AI` | `Real` | Analog Input: Hot water valve position feedback (0.0 - 100.0 %). |
 | **// -- Outputs (to I/O) --** | | |
-| `HW_Valve_Cmd_AO`| `Real` | Analog Output: Hot water valve position (0.0 - 100.0 %). |
+| `HW_Valve_Cmd_AO`| `Real` | Analog Output: Hot water valve position command (0.0 - 100.0 %). |
 | **// -- Status & Alarms --** | | |
 | `HW_Freeze_Alm` | `Bool` | Alarm: Hot water coil freeze-stat tripped. |
 

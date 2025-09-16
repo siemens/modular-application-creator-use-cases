@@ -13,6 +13,7 @@
       <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
         <Section Name="Input">
           <Member Name="Enable" Datatype="Bool" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Enables the block's execution.</MultiLanguageText></Comment></Member>
+          <Member Name="Valve_Demand_In" Datatype="Real" Accessibility="Public"><Comment><MultiLanguageText Lang="en-US">Demand signal from the main PID controller (0.0 - 100.0 %).</MultiLanguageText></Comment></Member>
         </Section>
         <Section Name="Output"/>
         <Section Name="InOut"/>
