@@ -2,10 +2,16 @@
 <Document>
   <Engineering version="V20"/>
   <DocumentInfo>
-    <Created>2025-09-14T11:17:00.0000000Z</Created>
+    <Created>2025-09-15T14:47:00.0000000Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V20</DisplayVersion>
+      </Product>
+    </InstalledProducts>
   </DocumentInfo>
-  <SW.Tags.PlcTagTable ID="0" CompositionName="TagTables">
+  <SW.Tags.PlcTagTable ID="0">
     <AttributeList>
       <Name>TagTable_AO</Name>
     </AttributeList>
@@ -13,15 +19,25 @@
       <SW.Tags.PlcTag ID="1" CompositionName="Tags">
         <AttributeList>
           <DataTypeName>Real</DataTypeName>
-          <LogicalAddress>%QW64</LogicalAddress>
-          <Name>RTU1_SF_SpeedRef</Name>
+          <Name>AHU1_SF_SpeedRef</Name>
         </AttributeList>
       </SW.Tags.PlcTag>
       <SW.Tags.PlcTag ID="2" CompositionName="Tags">
         <AttributeList>
           <DataTypeName>Real</DataTypeName>
-          <LogicalAddress>%QW66</LogicalAddress>
-          <Name>RTU1_DMP_PosCmd</Name>
+          <Name>AHU1_DMP_PosCmd</Name>
+        </AttributeList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="3" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Real</DataTypeName>
+          <Name>AHU1_CW_VlvCmd</Name>
+        </AttributeList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="4" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Real</DataTypeName>
+          <Name>AHU1_HW_VlvCmd</Name>
         </AttributeList>
       </SW.Tags.PlcTag>
     </ObjectList>

@@ -1,8 +1,8 @@
 # **Programming Best Practices & Design Framework**
 
-## **RTU Controller Project**
+## **AHU Controller Project**
 
-**Document Purpose:** This document provides a unified set of programming standards and best practices for all engineers developing PLC (back-end) and HMI (front-end) software for the Basic RTU Controller project. Adherence to these guidelines is mandatory to ensure the final product is maintainable, robust, and consistent with the architectural goals defined in the Software Design Specification (SDS).
+**Document Purpose:** This document provides a unified set of programming standards and best practices for all engineers developing PLC (back-end) and HMI (front-end) software for the Constant Volume AHU Controller project.
 
 **Guiding Principle:** "Openness and Clarity." Code should be written to be easily understood by another engineer with no prior knowledge of the specific block. Avoid overly complex or "clever" solutions in favor of straightforward, readable logic.
 

@@ -14,7 +14,7 @@ Each `.xml` file in this directory represents an "external source file" that TIA
 
 ## 2. File Descriptions
 
-This directory contains the structural definitions for the RTU Controller's PLC program.
+This directory contains the structural definitions for the AHU Controller's PLC program.
 
 *   **`UDT*.xml` files:** Define the custom **User Data Types** (structs) that form the data foundation for our Equipment Modules.
 *   **`TagTable_*.xml` files:** Define the **PLC Tag Tables**, separated by I/O type (DI, DO, AI, AO). They map symbolic tag names to physical PLC addresses.
@@ -39,7 +39,7 @@ Follow these steps precisely to ensure the project components are generated corr
     2.  **Generate Tag Tables:** Select all `TagTable_*.xml` files, right-click, and select "Generate blocks from source". Verify their creation under `PLC tags`.
     3.  **Generate FBs:** Select all `FB*.xml` files, right-click, and select "Generate blocks from source". Verify their creation under `Program blocks`.
 
-You have now successfully imported the complete structural framework of the RTU controller into your TIA Portal project.
+You have now successfully imported the complete structural framework of the AHU controller into your TIA Portal project.
 
 ---
 
