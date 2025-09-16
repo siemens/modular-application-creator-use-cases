@@ -33,8 +33,8 @@ To ensure the heating module correctly passes an analog demand signal to its val
 *   **Test Steps:**
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
-| 1.0 | **Initial State** | `#Instance_DB.Valve_Demand_In` | `75.0` | Set demand to 75%. |
-| 1.1 | *Evaluate* | `#Instance_DB.UDT.HW_Valve_Cmd_AO`| `75.0` | **Check:** Valve is commanded open. |
-| 2.0 | **Simulate Fault** | `#Instance_DB.UDT.HW_Freeze_Stat_DI`| `TRUE` | Simulate the freeze stat tripping. |
-| 2.1 | *Evaluate* | `#Instance_DB.UDT.HW_Freeze_Alm`| `TRUE` | **Check:** The freeze alarm is now active. |
-| 2.2 | *Evaluate* | `#Instance_DB.UDT.HW_Valve_Cmd_AO`| `0.0` | **Check:** Valve is commanded fully closed on fault, ignoring the input demand. |
+| 3.0 | **Initial State** | `#Instance_DB.Valve_Demand_In` | `75.0` | Set demand to 75%. |
+| 3.1 | *Evaluate* | `#Instance_DB.UDT.HW_Valve_Cmd_AO`| `75.0` | **Check:** Valve is commanded open. |
+| 4.0 | **Simulate Fault** | `#Instance_DB.UDT.HW_Freeze_Stat_DI`| `TRUE` | Simulate the freeze stat tripping. |
+| 4.1 | *Evaluate* | `#Instance_DB.UDT.HW_Freeze_Alm`| `TRUE` | **Check:** The freeze alarm is now active. |
+| 4.2 | *Evaluate* | `#Instance_DB.UDT.HW_Valve_Cmd_AO`| `0.0` | **Check:** Valve is commanded fully closed on fault, ignoring the input demand. |

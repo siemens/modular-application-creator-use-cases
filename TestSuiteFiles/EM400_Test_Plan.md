@@ -31,7 +31,7 @@ To ensure the damper module correctly drives to the minimum ventilation position
 *   **Test Steps:**
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
-| 1.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | |
-| 1.1 | | `#Instance_DB.Econ_Mode_Active`| `TRUE` | Activate economizer mode. |
-| 1.2 | | `#Instance_DB.Econ_PID_Demand` | `65.0` | Simulate 65% demand from economizer PID. |
-| 1.3 | *Evaluate* | `#Instance_DB.UDT.Damper_Pos_Cmd_AO`| `65.0` | **Check:** Damper command follows the PID demand. |
+| 2.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | |
+| 2.1 | | `#Instance_DB.Econ_Mode_Active`| `TRUE` | Activate economizer mode. |
+| 2.2 | | `#Instance_DB.Econ_PID_Demand` | `65.0` | Simulate 65% demand from economizer PID. |
+| 2.3 | *Evaluate* | `#Instance_DB.UDT.Damper_Pos_Cmd_AO`| `65.0` | **Check:** Damper command follows the PID demand. |
