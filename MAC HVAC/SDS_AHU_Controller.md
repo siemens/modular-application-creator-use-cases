@@ -7,7 +7,7 @@
 **Date:** 2025-09-17
 **Version:** 2.0
 
-**References:** This document's requirements are based on the corrected `AGENTS.md` file. The design incorporates details from existing project documents (`Software Design Specification.md`, `RTU_Sequence_of_Operations.md`) and user feedback to create a specification for a Constant Volume AHU with full feedback on modulating devices.
+**References:** This document's requirements are based on the corrected `AGENTS.md` file. The design incorporates details from existing project documents (`Software Design Specification.md`, `AHU_Sequence_of_Operations.md`) and user feedback to create a specification for a Constant Volume AHU with full feedback on modulating devices.
 
 ---
 

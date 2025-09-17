@@ -12,7 +12,7 @@ import time
 # A real implementation would require a connection object to a running PLCSIM Adv instance.
 
 # --- Test Configuration ---
-PLC_INSTANCE_NAME = "RTU_Controller_Sim"
+PLC_INSTANCE_NAME = "AHU_Controller_Sim"
 INSTANCE_DB_NAME = "IDB_SupplyFan"  # The name of the instance DB for the fan module
 
 class MockPLC:
