@@ -5,18 +5,19 @@
 
 ## 1. Hardware Bill of Materials (BOM)
 
-The following hardware components are required for a single AHU controller panel. The selection is based on the I/O requirements defined in the SDS. The integrated I/O of the CPU is supplemented by a dedicated analog output module to control the modulating valves.
+The following hardware components are required for a single AHU controller panel. The selection is based on the I/O requirements defined in the SDS.
 
 | Item | Manufacturer | Part Number | Quantity | Description |
 | :--- | :--- | :--- | :--- | :--- |
 | **1** | Siemens | **6ES7511-1CK01-0AB0** | 1 | SIMATIC S7-1500 Compact CPU, CPU 1511C-1 PN. Includes 16 DI, 16 DO, 5 AI, 2 AO. |
-| **2** | Siemens | **6ES7532-5HD00-0AB0** | 1 | SIMATIC S7-1500 Analog Output Module, SM 532, AQ 4xU/I ST. Required for valve control. |
-| **3** | Siemens | **6ES7954-8LC03-0AA0** | 1 | SIMATIC S7 Memory Card, 4 MB. Required for CPU operation. |
-| **4** | Siemens | **6ES7505-0KA00-0AB0** | 1 | SIMATIC PM 70W Power Supply. Provides 24V DC power to the PLC rack. |
-| **5** | Siemens | **6ES7590-1AE80-0AA0** | 1 | SIMATIC S7-1500 Mounting Rail, 483 mm (19"). |
-| **6** | - | - | 1 | NEMA 1 Enclosure (or as required by installation environment). |
-| **7** | - | - | 1 | Terminal blocks, wiring, and circuit protection as required for field I/O connections. |
+| **2** | Siemens | **6ES7531-7KF00-0AB0** | 1 | SIMATIC S7-1500 Analog Input Module, SM 531, AI 8xU/I/RTD/TC ST. Required for temperature and position feedback. |
+| **3** | Siemens | **6ES7532-5HD00-0AB0** | 1 | SIMATIC S7-1500 Analog Output Module, SM 532, AQ 4xU/I ST. Required for fan, valve, and damper control. |
+| **4** | Siemens | **6ES7954-8LC03-0AA0** | 1 | SIMATIC S7 Memory Card, 4 MB. Required for CPU operation. |
+| **5** | Siemens | **6ES7505-0KA00-0AB0** | 1 | SIMATIC PM 70W Power Supply. Provides 24V DC power to the PLC rack. |
+| **6** | Siemens | **6ES7590-1AE80-0AA0** | 1 | SIMATIC S7-1500 Mounting Rail, 483 mm (19"). |
+| **7** | - | - | 1 | NEMA 1 Enclosure (or as required by installation environment). |
 | **8** | - | - | 1 | HMI Panel (e.g., Siemens Comfort Panel TP700, 7") if local control is required. |
+
 
 ## 2. Software Bill of Materials (BOM)
 
@@ -29,38 +30,4 @@ The following software components form the basis of the TIA Portal project.
 
 ### 2.1. Custom Software Components (To Be Created)
 
-These are the specific software objects that will be created within the TIA Portal project, following the Modular Application Creator (MAC) philosophy.
-
-#### **User Data Types (UDTs)**
-Standardized data structures will be created for each Equipment Module to hold all parameters, commands, and status signals.
-
-*   `UDT100_EM_SupplyFan`
-*   `UDT200_EM_Cooling`
-*   `UDT300_EM_Heating`
-*   `UDT400_EM_Damper`
-*   `UDT500_EM_Monitoring`
-
-#### **Function Blocks (FBs)**
-Each Equipment Module will be encapsulated in its own reusable Function Block.
-
-*   `FB100_EM_SupplyFan`: Contains all logic for the supply fan.
-*   `FB200_EM_Cooling`: Contains all logic for the chilled water cooling valve.
-*   `FB300_EM_Heating`: Contains all logic for the hot water heating valve.
-*   `FB400_EM_Damper`: Contains all logic for damper control.
-*   `FB500_EM_Monitoring`: Contains all logic for system monitoring.
-
-#### **Data Blocks (DBs)**
-Instance Data Blocks (IDBs) will be generated for each FB instance. A global DB will hold system-wide parameters.
-
-*   `IDB_EM_SupplyFan`: Instance DB for the Supply Fan FB.
-*   `IDB_EM_Cooling`: Instance DB for the Cooling FB.
-*   `IDB_EM_Heating`: Instance DB for the Heating FB.
-*   `IDB_EM_Damper`: Instance DB for the Damper FB.
-*   `IDB_EM_Monitoring`: Instance DB for the Monitoring FB.
-*   `DB_Global_Params`: Global DB for setpoints, modes, and system-wide configuration.
-
-#### **Technology Objects (TOs)**
-As defined in the SDS, the following TOs will be configured in the project.
-
-*   `TO_PID_DAT_Control`: PID controller for main temperature control. This will be an instance of **PID_Temp**.
-*   `TO_PID_Econ_Control`: PID controller for economizer damper modulation. This will be an instance of **PID_Compact**.
+All custom software components (UDTs, FBs, DBs) and Technology Objects (TOs) will be created as defined in the main **Software Design Specification** document. This ensures a single source of truth for the detailed software design.
