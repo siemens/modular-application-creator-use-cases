@@ -1,0 +1,65 @@
+FUNCTION_BLOCK "FB200_EM_Cooling"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+AUTHOR : 'Dallas Levine & Gemini'
+VERSION : '1.0' // Initial logic implementation
+
+VAR_INPUT
+    // Enables the block's execution. If FALSE, all outputs are forced to a safe state.
+    Enable : Bool;
+    
+    // Analog cooling demand (0.0 - 100.0%) from the main temperature controller.
+    Valve_Demand_In : Real;
+END_VAR
+
+VAR
+    // The data interface for the Cooling Equipment Module.
+    UDT : "UDT200_EM_Cooling";
+END_VAR
+
+BEGIN
+    //================================================================================
+    // REGION 1: Main Execution Logic
+    // The block's logic only runs if it is enabled by the main program.
+    //================================================================================
+    
+    IF #Enable THEN
+    
+        //----------------------------------------------------------------------------
+        // SUB-REGION 1.1: Safety Monitoring (Highest Priority)
+        // Per SDS section 2 (EM-200), a freeze stat trip must immediately override
+        // all other logic and force the valve closed.
+        //----------------------------------------------------------------------------
+        
+        IF #UDT.CHW_Freeze_Stat_DI THEN
+            // A freeze condition is detected.
+            #UDT.CHW_Freeze_Alm := TRUE;      // Set the freeze alarm bit.
+            #UDT.CHW_Valve_Cmd_AO := 0.0;     // CRITICAL: Force the valve command to 0%.
+            
+        ELSE
+            //------------------------------------------------------------------------
+            // SUB-REGION 1.2: Normal Operation
+            // If there are no active safety trips, the block operates normally.
+            //------------------------------------------------------------------------
+            
+            #UDT.CHW_Freeze_Alm := FALSE;     // Ensure the alarm is clear.
+            
+            // Pass the incoming analog demand directly to the analog output command.
+            // The logic assumes the input demand is already scaled from 0.0 to 100.0.
+            #UDT.CHW_Valve_Cmd_AO := #Valve_Demand_In;
+            
+        END_IF;
+        
+    ELSE // This ELSE corresponds to "IF #Enable"
+        //============================================================================
+        // REGION 2: Disabled State Logic
+        // If the entire block is disabled, force all outputs to a safe, off state.
+        //============================================================================
+        
+        #UDT.CHW_Valve_Cmd_AO := 0.0;
+        #UDT.CHW_Freeze_Alm := FALSE;
+        
+    END_IF;
+
+END_FUNCTION_BLOCK

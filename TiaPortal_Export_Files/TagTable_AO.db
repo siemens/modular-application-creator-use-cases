@@ -1,0 +1,16 @@
+DATA_BLOCK "TagTable_AO"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+VERSION : 0.1
+
+VAR
+    AHU1_SF_SpeedRef : Real;
+    AHU1_DMP_PosCmd : Real;
+    AHU1_CW_VlvCmd : Real;
+    AHU1_HW_VlvCmd : Real;
+END_VAR
+
+BEGIN
+    
+END_DATA_BLOCK

@@ -1,0 +1,10 @@
+TYPE "UDT500_EM_Monitoring"
+VERSION : 0.1
+// Data interface for the Monitoring Equipment Module.
+
+STRUCT
+    Dirty_Filter_DI : Bool;       // Digital Input: Dirty filter DP switch (`True` = Dirty).
+    Filter_Delay_Sec : Time;      // Time delay for dirty filter alarm (e.g., `T#10s`).
+    Dirty_Filter_Alm : Bool;      // Alarm: Dirty filter alarm.
+END_STRUCT
+END_TYPE

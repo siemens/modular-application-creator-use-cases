@@ -1,0 +1,61 @@
+FUNCTION_BLOCK "FB400_EM_Damper"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+AUTHOR : 'Dallas Levine & Gemini'
+VERSION : '1.1' // Interface updated for modularity
+
+VAR_INPUT
+    // Enables the block's execution (typically tied to fan status).
+    Enable : Bool;
+    
+    // The final damper position command (0.0 - 100.0%) from the main logic.
+    // This block passes this value to its output.
+    Damper_Demand_In : Real;
+    
+    // The cooling demand (0.0 - 100.0%) from the main PID controller.
+    // This is required to determine if economizer mode should be activated.
+    Cooling_Demand : Real;
+END_VAR
+
+VAR
+    // The data interface for the Damper Equipment Module.
+    UDT : "UDT400_EM_Damper";
+END_VAR
+
+BEGIN
+    //================================================================================
+    // REGION 1: Main Execution Logic
+    //================================================================================
+    IF #Enable THEN
+        
+        //----------------------------------------------------------------------------
+        // SUB-REGION 1.1: Economizer Mode Calculation
+        // Evaluate all conditions required for economizer activation based on the SOO.
+        //----------------------------------------------------------------------------
+        IF (#Cooling_Demand > 1.0) AND // 1. There is a demand for cooling.
+           (#UDT.Outside_Air_Temp_AI < (#UDT.Return_Air_Temp_AI - #UDT.Econ_Temp_Diff)) AND // 2. OAT is cooler than RAT.
+           (#UDT.Outside_Air_Temp_AI < #UDT.Econ_High_Limit) // 3. OAT is below the high limit.
+        THEN
+            #UDT.Econ_Mode_Active := TRUE;
+        ELSE
+            #UDT.Econ_Mode_Active := FALSE;
+        END_IF;
+        
+        //----------------------------------------------------------------------------
+        // SUB-REGION 1.2: Damper Position Command
+        // Pass the calculated command from the main logic to the physical output.
+        //----------------------------------------------------------------------------
+        #UDT.Damper_Pos_Cmd_AO := #Damper_Demand_In;
+        
+    ELSE // This ELSE corresponds to "IF #Enable"
+        //============================================================================
+        // REGION 2: Disabled State Logic
+        // If the fan is off, the damper should be closed and economizer inactive.
+        //============================================================================
+        #UDT.Econ_Mode_Active := FALSE;
+        #UDT.Damper_Pos_Cmd_AO := 0.0;
+        
+    END_IF;
+
+END_FUNCTION_BLOCK

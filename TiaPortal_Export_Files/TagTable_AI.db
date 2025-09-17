@@ -1,0 +1,17 @@
+DATA_BLOCK "TagTable_AI"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+VERSION : 0.1
+
+VAR
+    AHU1_RAT_Temp : Real;
+    AHU1_OAT_Temp : Real;
+    AHU1_DAT_Temp : Real;
+    AHU1_CW_VlvFdbk : Real;
+    AHU1_HW_VlvFdbk : Real;
+END_VAR
+
+BEGIN
+    
+END_DATA_BLOCK

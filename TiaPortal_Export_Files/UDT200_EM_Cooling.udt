@@ -1,0 +1,9 @@
+TYPE "UDT200_EM_Cooling"
+VERSION : 2.0
+STRUCT
+    CHW_Freeze_Stat_DI : Bool;    // Digital Input: Freeze-stat on chilled water coil (`True` = Fault).
+    CHW_Valve_Fdbk_AI : Real;     // Analog Input: Chilled water valve position feedback (0.0 - 100.0 %).
+    CHW_Valve_Cmd_AO : Real;      // Analog Output: Chilled water valve position command (0.0 - 100.0 %).
+    CHW_Freeze_Alm : Bool;        // Alarm: Chilled water coil freeze-stat tripped.
+END_STRUCT
+END_TYPE

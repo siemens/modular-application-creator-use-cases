@@ -1,0 +1,58 @@
+FUNCTION_BLOCK "FB500_EM_Monitoring"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+AUTHOR : 'Dallas Levine & Gemini'
+VERSION : '1.0'
+
+VAR_INPUT
+    // Enables the block's execution.
+    Enable : Bool;
+    
+    // A rising edge on this input will reset any latched alarms.
+    Reset_Alarms : Bool;
+END_VAR
+
+VAR
+    // The data interface for the Monitoring Equipment Module.
+    UDT : "UDT500_EM_Monitoring";
+    
+    // Internal timer for the dirty filter alarm delay.
+    filterDelayTimer : TON_TIME;
+END_VAR
+
+BEGIN
+    //================================================================================
+    // REGION 1: Main Execution Logic
+    //================================================================================
+    IF #Enable THEN
+        
+        // The alarm delay timer runs whenever the dirty filter switch is active.
+        #filterDelayTimer(
+            IN := #UDT.Dirty_Filter_DI, 
+            PT := #UDT.Filter_Delay_Sec,
+            Q  => NOP, 
+            ET => NOP
+        );
+        
+        // If the timer finishes (meaning the switch has been active for the full delay),
+        // latch the Dirty Filter Alarm.
+        IF #filterDelayTimer.Q THEN
+            #UDT.Dirty_Filter_Alm := TRUE;
+        END_IF;
+        
+        // If the reset command is given, clear the alarm.
+        IF #Reset_Alarms THEN
+            #UDT.Dirty_Filter_Alm := FALSE;
+        END_IF;
+        
+    ELSE // This ELSE corresponds to "IF #Enable"
+        //============================================================================
+        // REGION 2: Disabled State Logic
+        //============================================================================
+        
+        #UDT.Dirty_Filter_Alm := FALSE;
+        
+    END_IF;
+
+END_FUNCTION_BLOCK

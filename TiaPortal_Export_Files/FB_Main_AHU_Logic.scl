@@ -1,0 +1,118 @@
+FUNCTION_BLOCK "FB_Main_AHU_Logic"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+AUTHOR : 'Gemini'
+VERSION : '2.0' // Final version with PID control logic
+
+VAR_TEMP
+    // Temporary variables to hold PID outputs for clear logic
+    pidOutputCooling : Real;
+    pidOutputHeating : Real;
+    
+    // Temporary variable to hold the currently active DAT setpoint
+    activeSetpoint : Real;
+END_VAR
+
+VAR
+    instFan : "FB100_EM_SupplyFan";
+    instCooling : "FB200_EM_Cooling";
+    instHeating : "FB300_EM_Heating";
+    instDamper : "FB400_EM_Damper";
+    instMonitoring : "FB500_EM_Monitoring";
+END_VAR
+
+BEGIN
+    //================================================================================
+    // STEP 1: Map all physical inputs and global data to the FB interfaces
+    //================================================================================
+    #instFan.UDT.Run_Fdbk_DI       := "TagTable_DI".AHU1_SF_RunFdbk;
+    #instFan.UDT.Airflow_Status_DI  := "TagTable_DI".AHU1_SF_AirflowSw;
+    #instFan.UDT.VFD_Fault_DI      := "TagTable_DI".AHU1_SF_VfdFault;
+    #instCooling.UDT.CHW_Freeze_Stat_DI := "TagTable_DI".AHU1_CW_FreezeStat;
+    #instCooling.UDT.CHW_Valve_Fdbk_AI  := "TagTable_AI".AHU1_CW_VlvFdbk;
+    #instHeating.UDT.HW_Freeze_Stat_DI := "TagTable_DI".AHU1_HW_FreezeStat;
+    #instHeating.UDT.HW_Valve_Fdbk_AI  := "TagTable_AI".AHU1_HW_VlvFdbk;
+    #instDamper.UDT.Return_Air_Temp_AI   := "TagTable_AI".AHU1_RAT_Temp;
+    #instDamper.UDT.Outside_Air_Temp_AI  := "TagTable_AI".AHU1_OAT_Temp;
+    #instDamper.UDT.Discharge_Air_Temp_AI:= "TagTable_AI".AHU1_DAT_Temp;
+    #instMonitoring.UDT.Dirty_Filter_DI := "TagTable_DI".AHU1_SYS_DirtyFilter;
+
+    //================================================================================
+    // STEP 2: Manage Setpoints and Call PID Controllers
+    //================================================================================
+    
+    // Determine the active setpoint based on the Occupied status.
+    IF "DB_Global_Params".Occupied THEN
+        #activeSetpoint := "DB_Global_Params".Occupied_DAT_Setpoint;
+    ELSE
+        // In Unoccupied, the setpoint is the midpoint of the deadband.
+        // A real application might have more complex logic here.
+        #activeSetpoint := ("DB_Global_Params".Unoccupied_Heating_Setpoint + "DB_Global_Params".Unoccupied_Cooling_Setpoint) / 2.0;
+    END_IF;
+
+    // Call the main temperature PID controller, passing the active setpoint to its input.
+    "TO_PID_DAT_Control"(Setpoint := #activeSetpoint);
+
+    // Call the economizer PID controller.
+    "TO_PID_Econ_Control"(Setpoint := #activeSetpoint);
+    
+    // Read the separate heating and cooling demands from the PID_Temp instance.
+    #pidOutputCooling := "TO_PID_DAT_Control".OutputCool;
+    #pidOutputHeating := "TO_PID_DAT_Control".OutputHeat;
+
+    //================================================================================
+    // STEP 3: Implement Fan Control Logic based on Mode and Demand
+    //================================================================================
+    IF "DB_Global_Params".Occupied OR
+      (NOT "DB_Global_Params".Occupied AND (#pidOutputHeating > 0.0 OR #pidOutputCooling > 0.0)) THEN
+        #instFan.Enable := TRUE;
+    ELSE
+        #instFan.Enable := FALSE;
+    END_IF;
+    #instFan(); // Call fan immediately to update its Is_Running status
+
+    //================================================================================
+    // STEP 4: Set Damper Inputs and Call Module
+    //================================================================================
+    #instDamper.Cooling_Demand := #pidOutputCooling;
+    #instDamper.Enable := #instFan.UDT.Is_Running;
+    #instDamper(); // Call the block to update the Econ_Mode_Active status.
+
+    //================================================================================
+    // STEP 5: Set Heating, Cooling, and Damper Demands with Interlocks
+    //================================================================================
+    IF #instFan.UDT.Is_Running THEN
+        #instHeating.Valve_Demand_In := #pidOutputHeating;
+        
+        IF #instDamper.UDT.Econ_Mode_Active THEN
+            #instDamper.Damper_Demand_In := "TO_PID_Econ_Control".Output;
+            #instCooling.Valve_Demand_In := 0.0;
+        ELSE
+            #instDamper.Damper_Demand_In := #instDamper.UDT.Min_Fresh_Air_Pos;
+            #instCooling.Valve_Demand_In := #pidOutputCooling;
+        END_IF;
+    ELSE
+        #instHeating.Valve_Demand_In := 0.0;
+        #instCooling.Valve_Demand_In := 0.0;
+        #instDamper.Damper_Demand_In := 0.0;
+    END_IF;
+
+    //================================================================================
+    // STEP 6: Call Remaining Modules
+    //================================================================================
+    #instDamper();
+    #instCooling();
+    #instHeating();
+    #instMonitoring();
+
+    //================================================================================
+    // STEP 7: Map the FB interface outputs back to the physical outputs
+    //================================================================================
+    "TagTable_DO".AHU1_SF_StartCmd := #instFan.UDT.Start_Cmd_DO;
+    "TagTable_AO".AHU1_SF_SpeedRef := #instFan.UDT.Speed_Ref_AO;
+    "TagTable_AO".AHU1_CW_VlvCmd := #instCooling.UDT.CHW_Valve_Cmd_AO;
+    "TagTable_AO".AHU1_HW_VlvCmd := #instHeating.UDT.HW_Valve_Cmd_AO;
+    "TagTable_AO".AHU1_DMP_PosCmd := #instDamper.UDT.Damper_Pos_Cmd_AO;
+    
+END_FUNCTION_BLOCK

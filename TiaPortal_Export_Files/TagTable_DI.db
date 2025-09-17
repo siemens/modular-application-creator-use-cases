@@ -1,0 +1,18 @@
+DATA_BLOCK "TagTable_DI"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+VERSION : 0.1
+
+VAR
+    AHU1_SF_RunFdbk : Bool;
+    AHU1_SF_AirflowSw : Bool;
+    AHU1_SF_VfdFault : Bool;
+    AHU1_CW_FreezeStat : Bool;
+    AHU1_HW_FreezeStat : Bool;
+    AHU1_SYS_DirtyFilter : Bool;
+END_VAR
+
+BEGIN
+    
+END_DATA_BLOCK

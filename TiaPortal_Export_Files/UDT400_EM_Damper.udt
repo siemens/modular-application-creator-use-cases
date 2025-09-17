@@ -1,0 +1,15 @@
+TYPE "UDT400_EM_Damper"
+VERSION : 0.1
+// Data interface for the Damper Equipment Module.
+
+STRUCT
+    Return_Air_Temp_AI : Real;    // Analog Input: Return air temperature sensor.
+    Outside_Air_Temp_AI : Real;   // Analog Input: Outside air temperature sensor.
+    Discharge_Air_Temp_AI : Real; // Analog Input: Discharge air temperature sensor.
+    Damper_Pos_Cmd_AO : Real;     // Analog Output: Damper position command (0.0 - 100.0 %).
+    Min_Fresh_Air_Pos : Real;     // Minimum damper position for ventilation (e.g., 20.0 %).
+    Econ_Temp_Diff : Real;        // Temp diff (RAT - OAT) to enable economizer (e.g., 2.0).
+    Econ_High_Limit : Real;       // High OAT limit to disable economizer (e.g., 65.0).
+    Econ_Mode_Active : Bool;      // Status: `True` when economizer mode is active.
+END_STRUCT
+END_TYPE
