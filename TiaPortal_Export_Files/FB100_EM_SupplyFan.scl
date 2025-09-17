@@ -1,0 +1,105 @@
+FUNCTION_BLOCK "FB100_EM_SupplyFan"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+AUTHOR : 'Dallas Levine & Gemini'
+VERSION : '1.0' // Initial logic implementation
+
+VAR_INPUT
+    // Enables the block's execution. This is the main Start/Stop command
+    // from the main orchestrator block (FB_Main_AHU_Logic).
+    Enable : Bool;
+END_VAR
+
+VAR
+    // The data interface for the Supply Fan Equipment Module.
+    // This UDT holds all I/O, configuration, and status for this module.
+    UDT : "UDT100_EM_SupplyFan";
+    
+    // Internal timer for the fan failure delay. An instance of the TON
+    // (On-Delay Timer) instruction is required to check for feedback.
+    faultDelayTimer : TON_TIME;
+END_VAR
+
+BEGIN
+    //================================================================================
+    // REGION 1: VFD Fault Monitoring (Highest Priority)
+    // A hardware VFD fault is a critical safety issue and must shut down the fan
+    // immediately, overriding all other logic.
+    //================================================================================
+    
+    // Check for a direct fault signal from the VFD hardware.
+    IF #UDT.VFD_Fault_DI THEN
+        #UDT.VFD_Fault_Alm := TRUE; // Latch the VFD Fault Alarm
+    END_IF;
+    
+    // The rest of the logic can only execute if there is NO VFD fault.
+    IF NOT #UDT.VFD_Fault_Alm THEN
+    
+        //================================================================================
+        // REGION 2: Main Start/Stop Logic
+        // This section handles the primary command to run the fan.
+        //================================================================================
+        
+        // If the block is enabled by the main program AND has no fan failure alarm,
+        // command the fan's start relay/digital output to turn on.
+        IF #Enable AND NOT #UDT.Fan_Failure_Alm THEN
+            #UDT.Start_Cmd_DO := TRUE;
+        ELSE
+            #UDT.Start_Cmd_DO := FALSE;
+        END_IF;
+        
+        //================================================================================
+        // REGION 3: Fan Failure Monitoring (Proof of Operation)
+        // Per the Sequence of Operations, we must verify the fan is actually running
+        // after we command it to start.
+        //================================================================================
+        
+        // The fault delay timer runs whenever the start command is active.
+        #faultDelayTimer(
+            IN := #UDT.Start_Cmd_DO, 
+            PT := #UDT.Fault_Delay_Sec, // Use the configurable delay from the UDT
+            Q => NOP, 
+            ET => NOP
+        );
+        
+        // A "Fan Failure" alarm occurs if the start command has been on long enough
+        // for the timer to expire, but we STILL don't have proof from BOTH the
+        // run feedback and the airflow switch.
+        IF #faultDelayTimer.Q AND (NOT #UDT.Run_Fdbk_DI OR NOT #UDT.Airflow_Status_DI) THEN
+            #UDT.Fan_Failure_Alm := TRUE;
+        END_IF;
+        
+        // Acknowledgment/Reset of Alarms (Simple Reset Logic)
+        // If the fan is commanded off, clear the alarms.
+        // NOTE: A real-world application would have a more robust HMI-based reset button.
+        IF NOT #Enable THEN
+            #UDT.Fan_Failure_Alm := FALSE;
+            #UDT.VFD_Fault_Alm   := FALSE; // This assumes the fault is externally reset.
+        END_IF;
+        
+    ELSE // This ELSE corresponds to "IF NOT #UDT.VFD_Fault_Alm"
+        // If a VFD Fault IS active, ensure the fan command is forced OFF.
+        #UDT.Start_Cmd_DO := FALSE;
+    END_IF;
+    
+    //================================================================================
+    // REGION 4: Final Status and Output Calculation
+    // This section calculates the final, overall status and sets analog outputs.
+    //================================================================================
+    
+    // The fan is considered "Is_Running" only if all conditions are met:
+    // It's commanded ON, there is run feedback, there is airflow, AND there are no active alarms.
+    #UDT.Is_Running := #UDT.Start_Cmd_DO AND #UDT.Run_Fdbk_DI AND #UDT.Airflow_Status_DI
+                       AND NOT #UDT.Fan_Failure_Alm AND NOT #UDT.VFD_Fault_Alm;
+                       
+    // Drive the analog output for the VFD speed reference.
+    // The speed is assumed to be 100% when running, 0% when stopped.
+    // A more complex system might have this driven by a PID.
+    IF #UDT.Is_Running THEN
+        #UDT.Speed_Ref_AO := 100.0;
+    ELSE
+        #UDT.Speed_Ref_AO := 0.0;
+    END_IF;
+
+END_FUNCTION_BLOCK

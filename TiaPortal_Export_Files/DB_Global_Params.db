@@ -1,0 +1,25 @@
+DATA_BLOCK "DB_Global_Params"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+
+VERSION : 1.0
+
+VAR
+    // --- System Mode Control ---
+    // This tag is the primary command for the system's operating mode.
+    // It would typically be written to by a time schedule or a BAS.
+    Occupied : Bool := FALSE; // System Mode (False = Unoccupied, True = Occupied)
+    
+    // --- Temperature Setpoints ---
+    Occupied_DAT_Setpoint : Real := 55.0; // Target Discharge Air Temp during Occupied mode [°F]
+    
+    Unoccupied_Heating_Setpoint : Real := 60.0; // Low-limit temp during Unoccupied mode [°F]
+    
+    Unoccupied_Cooling_Setpoint : Real := 85.0; // High-limit temp during Unoccupied mode [°F]
+    
+END_VAR
+
+BEGIN
+    
+END_DATA_BLOCK

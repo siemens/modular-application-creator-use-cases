@@ -1,0 +1,16 @@
+TYPE "UDT100_EM_SupplyFan"
+VERSION : 0.1
+// Data interface for the Supply Fan Equipment Module.
+
+STRUCT
+    Run_Fdbk_DI : Bool;           // Digital Input: Fan run feedback from VFD/contactor.
+    Airflow_Status_DI : Bool;     // Digital Input: Airflow switch status (`True` = Airflow OK).
+    VFD_Fault_DI : Bool;          // Digital Input: VFD fault status (`True` = Fault).
+    Start_Cmd_DO : Bool;          // Digital Output: Command to start/stop the fan.
+    Speed_Ref_AO : Real;          // Analog Output: Speed reference to VFD (0.0 - 100.0 %).
+    Fault_Delay_Sec : Time;       // Time delay for fan failure detection (e.g., `T#5s`).
+    Is_Running : Bool;            // Status: `True` when the fan is commanded on and all feedback is normal.
+    Fan_Failure_Alm : Bool;       // Alarm: `True` if run/airflow feedback is missing after delay.
+    VFD_Fault_Alm : Bool;         // Alarm: `True` if the VFD hardware fault input is active.
+END_STRUCT
+END_TYPE

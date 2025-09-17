@@ -1,0 +1,13 @@
+DATA_BLOCK "TagTable_DO"
+{
+    S7_Optimized_Access := 'TRUE'
+}
+VERSION : 0.1
+
+VAR
+    AHU1_SF_StartCmd : Bool;
+END_VAR
+
+BEGIN
+    
+END_DATA_BLOCK
