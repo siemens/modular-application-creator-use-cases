@@ -22,53 +22,70 @@ class MockPLC:
     """
     def __init__(self):
         self.tags = {}
-        print("MockPLC: Initialized.")
+        self.fault_timer_start = None
+        print("MockPLC: Initialized for Supply Fan Test.")
 
     def read_tag(self, tag_name):
-        print(f"READ:  '{tag_name}' -> {self.tags.get(tag_name, 'Not Found')}")
         return self.tags.get(tag_name)
 
     def write_tag(self, tag_name, value):
-        print(f"WRITE: '{tag_name}' <- {value}")
         self.tags[tag_name] = value
 
     def run_cycle(self):
-        """Simulates the execution of the FB logic based on current inputs."""
-        print("--- PLC CYCLE ---")
-        # Simulate FB logic here based on self.tags
-        # Example: If Enable is true and no faults, Start_Cmd_DO should be true.
+        """Simulates the execution of the FB100 logic based on current inputs."""
+        # --- Read Inputs ---
         enable = self.tags.get(f'"{INSTANCE_DB_NAME}"."Enable"')
-        vfd_fault = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_DI"')
+        vfd_fault_di = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_DI"')
+        run_fdbk_di = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.Run_Fdbk_DI"')
+        airflow_di = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.Airflow_Status_DI"')
+        fault_delay = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.Fault_Delay_Sec"')
 
-        if vfd_fault:
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"'] = False
+        # --- VFD Fault Logic (Highest Priority) ---
+        if vfd_fault_di:
             self.tags[f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_Alm"'] = True
-        elif enable:
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"'] = True
-        else:
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"'] = False
 
-        # ... add more logic for other alarms and statuses ...
-        time.sleep(0.1)
+        # Alarms can only be reset when the fan is disabled
+        if not enable:
+            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.Fan_Failure_Alm"'] = False
+            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_Alm"'] = False
+
+        vfd_fault_alm = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_Alm"')
+        fan_fail_alm = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.Fan_Failure_Alm"')
+
+        # --- Start/Stop Command Logic ---
+        start_cmd = enable and not vfd_fault_alm and not fan_fail_alm
+        self.tags[f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"'] = start_cmd
+
+        # --- Fan Failure Timer Logic ---
+        proof_of_run = run_fdbk_di and airflow_di
+        timer_active = start_cmd and not proof_of_run
+
+        if timer_active:
+            if self.fault_timer_start is None:
+                self.fault_timer_start = time.time()
+            if (time.time() - self.fault_timer_start) >= fault_delay:
+                self.tags[f'"{INSTANCE_DB_NAME}"."UDT.Fan_Failure_Alm"'] = True
+        else:
+            self.fault_timer_start = None
+
+        time.sleep(0.01)
 
 
 def test_normal_start_stop(plc):
     """Test Case 1: Verifies a normal start/stop sequence."""
     print("\n--- Running Test: TC1_Normal_Start_Stop ---")
-
-    # 1. Initial state: Ensure module is disabled
     plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', False)
     plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_DI"', False)
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.Run_Fdbk_DI"', False)
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.Airflow_Status_DI"', False)
     plc.run_cycle()
     assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"') is False
 
-    # 2. Command ON
     print("Step: Command ON")
     plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', True)
     plc.run_cycle()
     assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"') is True
 
-    # 3. Command OFF
     print("Step: Command OFF")
     plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', False)
     plc.run_cycle()
@@ -80,14 +97,11 @@ def test_normal_start_stop(plc):
 def test_vfd_fault_condition(plc):
     """Test Case 2: Verifies a VFD fault immediately shuts down the fan."""
     print("\n--- Running Test: TC2_VFD_Fault ---")
-
-    # 1. Initial state: Fan is commanded to run, no faults
     plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', True)
     plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_DI"', False)
     plc.run_cycle()
     assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"') is True
 
-    # 2. Simulate VFD Fault
     print("Step: Simulate VFD Fault")
     plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_DI"', True)
     plc.run_cycle()
@@ -97,30 +111,56 @@ def test_vfd_fault_condition(plc):
     print("--- TC2_VFD_Fault: PASSED ---")
 
 
+def test_fan_failure_alarm(plc):
+    """Test Case 3: Verifies the fan failure alarm logic."""
+    print("\n--- Running Test: TC3_Fan_Failure_Alarm ---")
+    delay = 1
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', True)
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.VFD_Fault_DI"', False)
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.Fault_Delay_Sec"', delay)
+
+    # Simulate normal running feedback first
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.Run_Fdbk_DI"', True)
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.Airflow_Status_DI"', True)
+    plc.run_cycle()
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"') is True
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Fan_Failure_Alm"') is False
+
+    print("Step: Create failure condition (no airflow)")
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.Airflow_Status_DI"', False)
+    plc.run_cycle()
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Fan_Failure_Alm"') is False, "Failure alarm should be delayed"
+
+    print(f"Step: Waiting for {delay}s delay...")
+    time.sleep(delay)
+    plc.run_cycle()
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Fan_Failure_Alm"') is True, "Failure alarm should be active after delay"
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Start_Cmd_DO"') is False, "Start command should be off on failure"
+
+    print("Step: Disable to reset alarm")
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', False)
+    plc.run_cycle()
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Fan_Failure_Alm"') is False, "Failure alarm should reset when disabled"
+
+    print("--- TC3_Fan_Failure_Alarm: PASSED ---")
+
+
 def main():
     """Main function to set up the environment and run all tests."""
     print("Initializing Test Environment...")
-    # In a real CI/CD pipeline, you would connect to a PLCSIM Adv instance here.
-    # from plcsim_adv_api import PLCSIMAdvanced
-    # plc = PLCSIMAdvanced()
-    # plc.start_instance(PLC_INSTANCE_NAME)
-
-    # For this example, we use the MockPLC
     plc = MockPLC()
 
     try:
         # Run all test cases
         test_normal_start_stop(plc)
         test_vfd_fault_condition(plc)
-        # Add calls to other test functions (e.g., test_fan_failure) here.
+        test_fan_failure_alarm(plc)
 
     except AssertionError as e:
         print(f"\n!!! A TEST FAILED: {e} !!!")
     except Exception as e:
         print(f"\n!!! AN UNEXPECTED ERROR OCCURRED: {e} !!!")
     finally:
-        # plc.set_stop()
-        # plc.close_instance()
         print("\nTesting complete.")
 
 
