@@ -1,8 +1,6 @@
 # test_em300_heating.py
 #
 # Automated unit test for the FB300_EM_Heating module.
-# This script has been completely rewritten to correctly test the
-# hot water valve logic as specified in the SDS.
 
 import time
 
@@ -11,11 +9,10 @@ import time
 INSTANCE_DB_NAME = "IDB_Heating"
 
 class MockPLC:
-    """Mock PLC class to simulate the plcsim-adv-api for the HW Valve."""
+    """Mock PLC class to simulate the plcsim-adv-api."""
     def __init__(self):
         self.tags = {}
-        self.failure_timer_start = None
-        print("MockPLC: Initialized for Hot Water Heating Test.")
+        print("MockPLC: Initialized for Heating Test.")
 
     def read_tag(self, tag_name):
         return self.tags.get(tag_name)
@@ -24,109 +21,77 @@ class MockPLC:
         self.tags[tag_name] = value
 
     def run_cycle(self):
-        """Simulates the execution of the FB300 logic based on current inputs."""
+        """Simulates the execution of the FB logic."""
         enable = self.tags.get(f'"{INSTANCE_DB_NAME}"."Enable"')
-        valve_demand = self.tags.get(f'"{INSTANCE_DB_NAME}"."Valve_Demand_In"')
-        freeze_di = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Stat_DI"')
+        high_limit = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.High_Limit_DI"')
 
-        if not enable:
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Cmd_AO"'] = 0.0
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Alm"'] = False
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Failure_Alm"'] = False
-            return
+        # --- Alarm Logic ---
+        self.tags[f'"{INSTANCE_DB_NAME}"."UDT.High_Limit_Alm"'] = high_limit
 
-        if freeze_di:
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Cmd_AO"'] = 0.0
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Alm"'] = True
+        # --- Command Logic ---
+        if enable and not high_limit:
+            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.Heat_Stage1_Cmd_DO"'] = True
         else:
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Alm"'] = False
-            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Cmd_AO"'] = valve_demand
+            self.tags[f'"{INSTANCE_DB_NAME}"."UDT.Heat_Stage1_Cmd_DO"'] = False
 
-            # Simulate Valve Failure Logic
-            cmd_ao = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Cmd_AO"')
-            fdbk_ai = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Fdbk_AI"')
-            tolerance = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.Valve_Fdbk_Tolerance"')
-            delay = self.tags.get(f'"{INSTANCE_DB_NAME}"."UDT.Valve_Failure_Delay_Sec"')
-
-            error = abs(cmd_ao - fdbk_ai) > tolerance
-            is_active = cmd_ao > 5.0 and error
-
-            if is_active:
-                if self.failure_timer_start is None:
-                    self.failure_timer_start = time.time()
-                if (time.time() - self.failure_timer_start) >= delay:
-                    self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Failure_Alm"'] = True
-            else:
-                self.failure_timer_start = None
-                self.tags[f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Failure_Alm"'] = False
-
-        time.sleep(0.01)
+        time.sleep(0.1)
 
 def test_normal_operation(plc):
-    """Test Case 3.1: Verifies normal valve modulation."""
+    """Test Case 3.1: Verifies normal start/stop sequence."""
     print("\n--- Running Test: TC3.1_Normal_Operation ---")
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', True)
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Stat_DI"', False)
 
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Valve_Demand_In"', 75.0)
+    # 1. Initial state
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', False)
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.High_Limit_DI"', False)
     plc.run_cycle()
-    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Cmd_AO"') == 75.0, "Valve command should match demand"
+
+    # 2. Command ON
+    print("Step: Command ON")
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', True)
+    plc.run_cycle()
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Heat_Stage1_Cmd_DO"') is True, "Heater should start"
+
+    # 3. Command OFF
+    print("Step: Command OFF")
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', False)
+    plc.run_cycle()
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Heat_Stage1_Cmd_DO"') is False, "Heater should stop"
 
     print("--- TC3.1_Normal_Operation: PASSED ---")
 
-def test_freeze_stat_safety(plc):
-    """Test Case 3.2: Verifies freeze stat safety trip."""
-    print("\n--- Running Test: TC3.2_Freeze_Stat_Safety ---")
+def test_safety_trip(plc):
+    """Test Case 3.2: Verifies the high-limit safety cutout."""
+    print("\n--- Running Test: TC3.2_Safety_Trip ---")
+
+    # 1. Initial state: running
     plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', True)
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Valve_Demand_In"', 100.0)
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Stat_DI"', False)
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.High_Limit_DI"', False)
     plc.run_cycle()
-    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Cmd_AO"') == 100.0
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Heat_Stage1_Cmd_DO"') is True
 
-    print("Step: Activate Freeze Stat")
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Stat_DI"', True)
+    # 2. Test High Limit Fault
+    print("Step: Test High Limit Fault")
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.High_Limit_DI"', True)
     plc.run_cycle()
-    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Cmd_AO"') == 0.0, "Valve should close on freeze stat"
-    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Alm"') is True, "Freeze alarm should be active"
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Heat_Stage1_Cmd_DO"') is False, "Heater should stop on high limit fault"
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.High_Limit_Alm"') is True, "High Limit Alarm should be active"
 
-    print("--- TC3.2_Freeze_Stat_Safety: PASSED ---")
-
-def test_valve_failure_alarm(plc):
-    """Test Case 3.3: Verifies the valve failure alarm logic."""
-    print("\n--- Running Test: TC3.3_Valve_Failure_Alarm ---")
-    delay = 1
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Enable"', True)
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Freeze_Stat_DI"', False)
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.Valve_Fdbk_Tolerance"', 5.0)
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.Valve_Failure_Delay_Sec"', delay)
-
-    print("Step: Create failure condition")
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."Valve_Demand_In"', 90.0)
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Fdbk_AI"', 40.0)
+    # Reset
+    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.High_Limit_DI"', False)
     plc.run_cycle()
-    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Failure_Alm"') is False, "Failure alarm should be delayed"
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.High_Limit_Alm"') is False, "High Limit Alarm should reset"
+    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.Heat_Stage1_Cmd_DO"') is True, "Heater should restart"
 
-    print(f"Step: Waiting for {delay}s delay...")
-    time.sleep(delay)
-    plc.run_cycle()
-    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Failure_Alm"') is True, "Failure alarm should be active after delay"
-
-    print("Step: Resolve failure condition")
-    plc.write_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Fdbk_AI"', 90.0)
-    plc.run_cycle()
-    assert plc.read_tag(f'"{INSTANCE_DB_NAME}"."UDT.HW_Valve_Failure_Alm"') is False, "Failure alarm should reset"
-
-    print("--- TC3.3_Valve_Failure_Alarm: PASSED ---")
+    print("--- TC3.2_Safety_Trip: PASSED ---")
 
 def main():
     """Main function to set up and run all tests."""
-    print("Initializing Hot Water Heating Module Test Environment...")
+    print("Initializing Heating Module Test Environment...")
     plc = MockPLC()
 
     try:
         test_normal_operation(plc)
-        test_freeze_stat_safety(plc)
-        test_valve_failure_alarm(plc)
+        test_safety_trip(plc)
 
     except AssertionError as e:
         print(f"\n!!! A TEST FAILED: {e} !!!")

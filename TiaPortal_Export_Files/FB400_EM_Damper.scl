@@ -3,7 +3,7 @@ FUNCTION_BLOCK "FB400_EM_Damper"
     S7_Optimized_Access := 'TRUE'
 }
 AUTHOR : 'Dallas Levine & Gemini'
-VERSION : '2.0' // Added Damper Failure alarm logic
+VERSION : '1.1' // Interface updated for modularity
 
 VAR_INPUT
     // Enables the block's execution (typically tied to fan status).
@@ -21,9 +21,6 @@ END_VAR
 VAR
     // The data interface for the Damper Equipment Module.
     UDT : "UDT400_EM_Damper";
-
-    // Internal timer for the damper failure delay.
-    damperFailureTimer : TON_TIME;
 END_VAR
 
 BEGIN
@@ -34,7 +31,7 @@ BEGIN
         
         //----------------------------------------------------------------------------
         // SUB-REGION 1.1: Economizer Mode Calculation
-        // Evaluate all conditions required for economizer activation.
+        // Evaluate all conditions required for economizer activation based on the SOO.
         //----------------------------------------------------------------------------
         IF (#Cooling_Demand > 1.0) AND // 1. There is a demand for cooling.
            (#UDT.Outside_Air_Temp_AI < (#UDT.Return_Air_Temp_AI - #UDT.Econ_Temp_Diff)) AND // 2. OAT is cooler than RAT.
@@ -47,37 +44,17 @@ BEGIN
         
         //----------------------------------------------------------------------------
         // SUB-REGION 1.2: Damper Position Command
-        // Pass the command from the main logic to the physical output.
+        // Pass the calculated command from the main logic to the physical output.
         //----------------------------------------------------------------------------
         #UDT.Damper_Pos_Cmd_AO := #Damper_Demand_In;
         
-        //----------------------------------------------------------------------------
-        // SUB-REGION 1.3: Damper Failure Monitoring
-        // Compares the damper command to its feedback after a delay.
-        //----------------------------------------------------------------------------
-        #damperFailureTimer(
-            IN := #UDT.Damper_Pos_Cmd_AO > 5.0 AND ABS(#UDT.Damper_Pos_Cmd_AO - #UDT.Damper_Pos_Fdbk_AI) > #UDT.Damper_Fdbk_Tolerance,
-            PT := #UDT.Damper_Failure_Delay_Sec,
-            Q => NOP,
-            ET => NOP
-        );
-
-        IF #damperFailureTimer.Q THEN
-            #UDT.Damper_Failure_Alm := TRUE;
-        END_IF;
-
-        IF NOT #damperFailureTimer.IN THEN
-            #UDT.Damper_Failure_Alm := FALSE;
-        END_IF;
-
     ELSE // This ELSE corresponds to "IF #Enable"
         //============================================================================
         // REGION 2: Disabled State Logic
-        // If disabled, force outputs to a safe state and reset all alarms.
+        // If the fan is off, the damper should be closed and economizer inactive.
         //============================================================================
         #UDT.Econ_Mode_Active := FALSE;
         #UDT.Damper_Pos_Cmd_AO := 0.0;
-        #UDT.Damper_Failure_Alm := FALSE;
         
     END_IF;
 

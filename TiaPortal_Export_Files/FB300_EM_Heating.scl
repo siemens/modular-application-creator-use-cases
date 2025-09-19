@@ -3,7 +3,7 @@ FUNCTION_BLOCK "FB300_EM_Heating"
     S7_Optimized_Access := 'TRUE'
 }
 AUTHOR : 'Dallas Levine & Gemini'
-VERSION : '2.0' // Added Valve Failure alarm logic
+VERSION : '1.0'
 
 VAR_INPUT
     // Enables the block's execution.
@@ -16,9 +16,6 @@ END_VAR
 VAR
     // The data interface for the Heating Equipment Module.
     UDT : "UDT300_EM_Heating";
-
-    // Internal timer for the valve failure delay.
-    valveFailureTimer : TON_TIME;
 END_VAR
 
 BEGIN
@@ -29,12 +26,14 @@ BEGIN
     
         //----------------------------------------------------------------------------
         // SUB-REGION 1.1: Safety Monitoring (Highest Priority)
-        // A freeze stat trip must immediately override all other logic.
+        // A freeze stat trip must immediately override all other logic and
+        // force the valve closed to prevent coil damage.
         //----------------------------------------------------------------------------
         
         IF #UDT.HW_Freeze_Stat_DI THEN
-            #UDT.HW_Freeze_Alm := TRUE;
-            #UDT.HW_Valve_Cmd_AO := 0.0;
+            // A freeze condition is detected.
+            #UDT.HW_Freeze_Alm := TRUE;      // Set the freeze alarm bit.
+            #UDT.HW_Valve_Cmd_AO := 0.0;     // CRITICAL: Force the valve command to 0%.
             
         ELSE
             //------------------------------------------------------------------------
@@ -42,42 +41,21 @@ BEGIN
             // If no safety faults are active, operate normally.
             //------------------------------------------------------------------------
             
-            #UDT.HW_Freeze_Alm := FALSE;
+            #UDT.HW_Freeze_Alm := FALSE;     // Ensure the alarm is clear.
             
-            // Pass the incoming analog demand to the analog output command.
+            // Pass the incoming analog demand directly to the analog output command.
             #UDT.HW_Valve_Cmd_AO := #Valve_Demand_In;
             
-            //------------------------------------------------------------------------
-            // SUB-REGION 1.3: Valve Failure Monitoring
-            // Compares the valve command to its feedback after a delay.
-            //------------------------------------------------------------------------
-
-            #valveFailureTimer(
-                IN := #UDT.HW_Valve_Cmd_AO > 5.0 AND ABS(#UDT.HW_Valve_Cmd_AO - #UDT.HW_Valve_Fdbk_AI) > #UDT.Valve_Fdbk_Tolerance,
-                PT := #UDT.Valve_Failure_Delay_Sec,
-                Q => NOP,
-                ET => NOP
-            );
-
-            IF #valveFailureTimer.Q THEN
-                #UDT.HW_Valve_Failure_Alm := TRUE;
-            END_IF;
-
-            IF NOT #valveFailureTimer.IN THEN
-                #UDT.HW_Valve_Failure_Alm := FALSE;
-            END_IF;
-
         END_IF;
         
     ELSE // This ELSE corresponds to "IF #Enable"
         //============================================================================
         // REGION 2: Disabled State Logic
-        // If disabled, force outputs to a safe state and reset all alarms.
+        // If the block is disabled, force all outputs to a safe, off state.
         //============================================================================
         
         #UDT.HW_Valve_Cmd_AO := 0.0;
         #UDT.HW_Freeze_Alm := FALSE;
-        #UDT.HW_Valve_Failure_Alm := FALSE;
         
     END_IF;
 
