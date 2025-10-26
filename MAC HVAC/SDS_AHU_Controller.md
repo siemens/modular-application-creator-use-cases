@@ -34,7 +34,13 @@ This section defines the core hardware and software architecture for the AHU con
     *   1x **SM 532, AQ 4xU/I ST** (Provides 4 additional Analog Outputs)
 *   **Conclusion:** The CPU's integrated I/O combined with one analog input module and one analog output module is required.
 
-#### **1.3. Technology Objects (TOs)**
+#### **1.3. Heat Exchanger Configuration**
+
+*   The AHU contains a single, shared heat exchanger unit with two separate coils for heating and cooling.
+    *   A modulating **hot water valve** controls the flow from a larger hot water loop.
+    *   A modulating **chilled water valve** controls the flow from a larger chilled water loop.
+
+#### **1.4. Technology Objects (TOs)**
 
 *   **Instance 1: `TO_PID_DAT_Control`**
     *   **Type:** `PID_Temp`
@@ -63,9 +69,9 @@ This section defines the core hardware and software architecture for the AHU con
 | Airflow Switch Status | Digital | Input | AHU1_SF_AirflowSw |
 | VFD Fault Status | Digital | Input | AHU1_SF_VfdFault |
 
-#### **EM-200: Cooling Control (Chilled Water)**
-*   **Purpose:** To control a modulating chilled water valve.
-*   **Logic:** Accepts an analog demand (0-100%). Monitors a freeze-stat. Generates a "Valve Failure" alarm if the commanded position and feedback do not match within a 5% tolerance after a 5-second delay.
+#### **EM-200: Heat Exchanger Cooling Valve Control**
+*   **Purpose:** To control the modulating chilled water valve for the main heat exchanger unit. This valve is part of a larger chilled water loop.
+*   **Logic:** Accepts an analog cooling demand (0-100%) from the main PID controller. Monitors a freeze-stat on the shared coil. Generates a "Valve Failure" alarm if the commanded position and feedback do not match within a 5% tolerance after a 5-second delay.
 *   **Parameter Set:**
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
@@ -73,9 +79,9 @@ This section defines the core hardware and software architecture for the AHU con
 | Chilled Water Valve Fdbk | Analog | Input | AHU1_CW_VlvFdbk |
 | Chilled Water Freeze Stat | Digital | Input | AHU1_CW_FreezeStat |
 
-#### **EM-300: Heating Control (Hot Water)**
-*   **Purpose:** To control a modulating hot water valve.
-*   **Logic:** Accepts an analog demand (0-100%). Monitors a freeze-stat. Generates a "Valve Failure" alarm if the commanded position and feedback do not match within a 5% tolerance after a 5-second delay.
+#### **EM-300: Heat Exchanger Heating Valve Control**
+*   **Purpose:** To control the modulating hot water valve for the main heat exchanger unit. This valve is part of a larger hot water loop.
+*   **Logic:** Accepts an analog heating demand (0-100%) from the main PID controller. Monitors a freeze-stat on the shared coil. Generates a "Valve Failure" alarm if the commanded position and feedback do not match within a 5% tolerance after a 5-second delay.
 *   **Parameter Set:**
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
@@ -125,6 +131,7 @@ The main logic coordinates the EMs based on operating mode and thermal demand.
 *   **AHU:** Air Handler Unit
 *   **EM:** Equipment Module
 *   **VFD:** Variable Frequency Drive
+*   **Heat Exchanger Unit:** A single, shared unit containing both the heating (hot water) and cooling (chilled water) coils.
 *   **CHW / HW:** Chilled Water / Hot Water
 *   **Fdbk:** Feedback (a signal representing the actual state of a device)
 *   **Q: Why add an extra AI and AO module?**

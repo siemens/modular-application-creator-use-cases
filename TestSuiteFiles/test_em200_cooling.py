@@ -14,7 +14,7 @@ class MockPLC:
 # Global constants
 PLC_INSTANCE_NAME = "AHU_Controller_Sim"
 
-class TestCoolingModule(unittest.TestCase):
+class TestCoolingValveModule(unittest.TestCase):
     def setUp(self):
         """Set up a new mock PLC for each test."""
         self.plc = MockPLC()
@@ -31,7 +31,7 @@ class TestCoolingModule(unittest.TestCase):
         self.mismatch_start_time = None
 
     def run_cooling_logic(self, current_time):
-        """Simulates one scan of the FB200_EM_Cooling logic."""
+        """Simulates one scan of the FB200_EM_Cooling logic for the heat exchanger cooling valve."""
         enable = self.plc.get_tag("FB200_EM_Cooling.Enable")
         demand = self.plc.get_tag("FB200_EM_Cooling.Valve_Demand_In")
         freeze_stat = self.plc.get_tag("FB200_EM_Cooling.UDT.CHW_Freeze_Stat_DI")
@@ -64,8 +64,8 @@ class TestCoolingModule(unittest.TestCase):
         self.plc.set_tag("FB200_EM_Cooling.UDT.Valve_Failure_Alm", valve_failure_alm)
 
     def test_valve_passthrough(self):
-        """TC1: Test that the valve command follows the demand input."""
-        print(f"Running cooling test on PLC instance: {PLC_INSTANCE_NAME}")
+        """TC1: Test that the cooling valve command follows the demand input."""
+        print(f"Running Heat Exchanger Cooling Valve test on PLC instance: {PLC_INSTANCE_NAME}")
         self.plc.set_tag("FB200_EM_Cooling.Enable", True)
 
         # Test 50% demand
@@ -79,7 +79,7 @@ class TestCoolingModule(unittest.TestCase):
         self.assertEqual(self.plc.get_tag("FB200_EM_Cooling.UDT.CHW_Valve_Cmd_AO"), 100.0)
 
     def test_freeze_safety_trip(self):
-        """TC2: Test that the freeze stat safety overrides the demand."""
+        """TC2: Test that the freeze stat safety overrides the demand for the cooling valve."""
         self.plc.set_tag("FB200_EM_Cooling.Enable", True)
         self.plc.set_tag("FB200_EM_Cooling.Valve_Demand_In", 80.0)
         self.run_cooling_logic(current_time=0.0)
@@ -93,7 +93,7 @@ class TestCoolingModule(unittest.TestCase):
         self.assertEqual(self.plc.get_tag("FB200_EM_Cooling.UDT.CHW_Valve_Cmd_AO"), 0.0, "Valve should close on freeze fault")
 
     def test_valve_failure_alarm(self):
-        """TC3: Test that the valve failure alarm triggers on mismatch."""
+        """TC3: Test that the cooling valve failure alarm triggers on mismatch."""
         self.plc.set_tag("FB200_EM_Cooling.Enable", True)
 
         # Command valve to 50%

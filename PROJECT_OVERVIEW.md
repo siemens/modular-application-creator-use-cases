@@ -2,7 +2,7 @@
 
 ## 1. Project Purpose
 
-This repository contains a complete solution for generating the PLC (Programmable Logic Controller) software for a **Constant Volume Air Handler Unit (AHU)**. The project uses the **Siemens Modular Application Creator (MAC)** framework to automate the creation of a TIA Portal project from a C#/.NET application.
+This repository contains a complete solution for generating the PLC (Programmable Logic Controller) software for a **Constant Volume Air Handler Unit (AHU)**. The design is centered around a single heat exchanger unit with separate modulating valves for the heating (hot water) and cooling (chilled water) loops. The project uses the **Siemens Modular Application Creator (MAC)** framework to automate the creation of a TIA Portal project from a C#/.NET application.
 
 The primary goal is to provide a standardized, robust, and maintainable software package for controlling common HVAC equipment.
 

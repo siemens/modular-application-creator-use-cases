@@ -2,8 +2,8 @@ FUNCTION_BLOCK "FB_Main_AHU_Logic"
 {
     S7_Optimized_Access := 'TRUE'
 }
-AUTHOR : 'Gemini'
-VERSION : '2.0' // Final version with PID control logic
+AUTHOR : 'Jules'
+VERSION : '2.1' // Documentation review for single heat exchanger design.
 
 VAR_TEMP
     // Temporary variables to hold PID outputs for clear logic

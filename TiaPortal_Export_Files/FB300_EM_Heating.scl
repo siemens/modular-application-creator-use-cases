@@ -2,8 +2,8 @@ FUNCTION_BLOCK "FB300_EM_Heating"
 {
     S7_Optimized_Access := 'TRUE'
 }
-AUTHOR : 'Dallas Levine & Gemini'
-VERSION : '1.0'
+AUTHOR : 'Jules'
+VERSION : '2.0' // Reworked for single heat exchanger unit design.
 
 VAR_INPUT
     // Enables the block's execution.
@@ -14,7 +14,7 @@ VAR_INPUT
 END_VAR
 
 VAR
-    // The data interface for the Heating Equipment Module.
+    // The data interface for the Heat Exchanger Heating Valve Module.
     UDT : "UDT300_EM_Heating";
 
     // Internal timer for the valve feedback failure delay.
@@ -29,12 +29,12 @@ BEGIN
     
         //----------------------------------------------------------------------------
         // SUB-REGION 1.1: Safety Monitoring (Highest Priority)
-        // A freeze stat trip must immediately override all other logic and
-        // force the valve closed to prevent coil damage.
+        // A freeze stat trip on the shared heat exchanger coil must immediately
+        // override all other logic and force the valve closed.
         //----------------------------------------------------------------------------
         
         IF #UDT.HW_Freeze_Stat_DI THEN
-            // A freeze condition is detected.
+            // A freeze condition is detected on the shared coil.
             #UDT.HW_Freeze_Alm := TRUE;      // Set the freeze alarm bit.
             #UDT.HW_Valve_Cmd_AO := 0.0;     // CRITICAL: Force the valve command to 0%.
             #UDT.Valve_Failure_Alm := FALSE;  // Reset failure alarm during freeze condition.

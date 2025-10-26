@@ -1,21 +1,21 @@
-# Unit Test Plan: EM-300 Heating Control
+# Unit Test Plan: EM-300 Heat Exchanger Heating Valve Control
 
-**Version:** 2.0
-**Date:** September 15, 2025
-**Purpose:** To define the test cases for verifying the functionality of the `FB300_EM_Heating` Function Block.
+**Version:** 2.1
+**Date:** September 17, 2025
+**Purpose:** To define the test cases for verifying the functionality of the `FB300_EM_Heating` Function Block, which controls the heating valve on the main heat exchanger.
 
 ---
 
 ## 1. Test Objective
 
-To ensure the heating module correctly passes an analog demand signal to its valve command output, correctly reads its feedback, and safely shuts down on a freeze alarm.
+To ensure the heating valve module correctly passes an analog demand signal to its output, correctly reads its feedback, and safely shuts down on a freeze alarm from the shared coil.
 
 ## 2. Test Cases
 
 ### Test Case 1: Valve Command Passthrough
 
 *   **Test Name:** `TC1_Passthrough_and_Feedback`
-*   **Objective:** Verify the valve command directly follows the demand signal from the main controller.
+*   **Objective:** Verify the heating valve command directly follows the demand signal from the main controller.
 *   **Test Steps:**
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
@@ -29,7 +29,7 @@ To ensure the heating module correctly passes an analog demand signal to its val
 ### Test Case 2: Freeze Stat Safety Trip
 
 *   **Test Name:** `TC2_Freeze_Safety_Trip`
-*   **Objective:** Verify that a freeze stat fault safely closes the valve, overriding the demand.
+*   **Objective:** Verify that a freeze stat fault on the shared coil safely closes the heating valve, overriding the demand.
 *   **Test Steps:**
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |

@@ -2,8 +2,8 @@ FUNCTION_BLOCK "FB200_EM_Cooling"
 {
     S7_Optimized_Access := 'TRUE'
 }
-AUTHOR : 'Dallas Levine & Gemini'
-VERSION : '1.0' // Initial logic implementation
+AUTHOR : 'Jules'
+VERSION : '2.0' // Reworked for single heat exchanger unit design.
 
 VAR_INPUT
     // Enables the block's execution. If FALSE, all outputs are forced to a safe state.
@@ -14,7 +14,7 @@ VAR_INPUT
 END_VAR
 
 VAR
-    // The data interface for the Cooling Equipment Module.
+    // The data interface for the Heat Exchanger Cooling Valve Module.
     UDT : "UDT200_EM_Cooling";
 
     // Internal timer for the valve feedback failure delay.
@@ -31,12 +31,12 @@ BEGIN
     
         //----------------------------------------------------------------------------
         // SUB-REGION 1.1: Safety Monitoring (Highest Priority)
-        // Per SDS section 2 (EM-200), a freeze stat trip must immediately override
-        // all other logic and force the valve closed.
+        // A freeze stat trip on the shared heat exchanger coil must immediately
+        // override all other logic and force the valve closed.
         //----------------------------------------------------------------------------
         
         IF #UDT.CHW_Freeze_Stat_DI THEN
-            // A freeze condition is detected.
+            // A freeze condition is detected on the shared coil.
             #UDT.CHW_Freeze_Alm := TRUE;      // Set the freeze alarm bit.
             #UDT.CHW_Valve_Cmd_AO := 0.0;     // CRITICAL: Force the valve command to 0%.
             #UDT.Valve_Failure_Alm := FALSE;  // Reset failure alarm during freeze condition.
