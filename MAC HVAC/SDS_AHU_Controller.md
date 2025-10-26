@@ -37,10 +37,12 @@ This section defines the core hardware and software architecture for the AHU con
 #### **1.3. Technology Objects (TOs)**
 
 *   **Instance 1: `TO_PID_DAT_Control`**
+    *   **Type:** `PID_Temp`
     *   **Purpose:** Main Discharge Air Temperature (DAT) Control. A bipolar PID that outputs -100% (full heat) to +100% (full cool).
     *   **Process Variable (PV):** `AHU1_DAT_Temp`
     *   **Manipulated Variable (MV):** The bipolar output is mapped to the heating and cooling valve commands.
 *   **Instance 2: `TO_PID_Econ_Control`**
+    *   **Type:** `PID_Compact`
     *   **Purpose:** Economizer Free Cooling Control.
     *   **Process Variable (PV):** `AHU1_DAT_Temp`
     *   **Manipulated Variable (MV):** The output (0-100%) directly controls the `Damper Position Command`.
@@ -51,7 +53,7 @@ This section defines the core hardware and software architecture for the AHU con
 
 #### **EM-100: Supply Fan Control**
 *   **Purpose:** To control and monitor the VFD for the main supply fan.
-*   **Logic:** Controls fan start/stop and speed. Monitors run feedback, airflow, and VFD fault status.
+*   **Logic:** Controls fan start/stop and speed. Monitors run feedback, airflow, and VFD fault status. A "Fan Failure" alarm is generated if run feedback is missing or airflow is not proven after a 5-second delay.
 *   **Parameter Set:**
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
@@ -63,7 +65,7 @@ This section defines the core hardware and software architecture for the AHU con
 
 #### **EM-200: Cooling Control (Chilled Water)**
 *   **Purpose:** To control a modulating chilled water valve.
-*   **Logic:** Accepts an analog demand (0-100%). Monitors a freeze-stat. Generates a "Valve Failure" alarm if the commanded position and feedback do not match.
+*   **Logic:** Accepts an analog demand (0-100%). Monitors a freeze-stat. Generates a "Valve Failure" alarm if the commanded position and feedback do not match within a 5% tolerance after a 5-second delay.
 *   **Parameter Set:**
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
@@ -73,7 +75,7 @@ This section defines the core hardware and software architecture for the AHU con
 
 #### **EM-300: Heating Control (Hot Water)**
 *   **Purpose:** To control a modulating hot water valve.
-*   **Logic:** Accepts an analog demand (0-100%). Monitors a freeze-stat. Generates a "Valve Failure" alarm if the commanded position and feedback do not match.
+*   **Logic:** Accepts an analog demand (0-100%). Monitors a freeze-stat. Generates a "Valve Failure" alarm if the commanded position and feedback do not match within a 5% tolerance after a 5-second delay.
 *   **Parameter Set:**
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
@@ -83,7 +85,7 @@ This section defines the core hardware and software architecture for the AHU con
 
 #### **EM-400: Damper/Economizer Control**
 *   **Purpose:** To manage dampers for ventilation and economizer cooling.
-*   **Logic:** Controls a modulating damper actuator. Generates a "Damper Failure" alarm if the commanded position and feedback do not match.
+*   **Logic:** Controls a modulating damper actuator. Generates a "Damper Failure" alarm if the commanded position and feedback do not match within a 5% tolerance after a 5-second delay.
 *   **Parameter Set:**
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
