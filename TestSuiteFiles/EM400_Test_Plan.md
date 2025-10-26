@@ -35,3 +35,17 @@ To ensure the damper module correctly drives to the minimum ventilation position
 | 2.1 | | `#Instance_DB.Econ_Mode_Active`| `TRUE` | Activate economizer mode. |
 | 2.2 | | `#Instance_DB.Econ_PID_Demand` | `65.0` | Simulate 65% demand from economizer PID. |
 | 2.3 | *Evaluate* | `#Instance_DB.UDT.Damper_Pos_Cmd_AO`| `65.0` | **Check:** Damper command follows the PID demand. |
+
+### Test Case 3: Damper Failure on Feedback Mismatch
+
+*   **Test Name:** `TC3_Damper_Failure`
+*   **Objective:** Verify the damper failure alarm is triggered if command and feedback do not match.
+*   **Test Steps:**
+| Test ID | Test Step Name | Parameter | Value | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| 3.0 | **Initial State** | `#Instance_DB.Econ_PID_Demand` | `70.0` | Command damper to 70%. |
+| 3.1 | | `#Instance_DB.UDT.Fault_Delay_Sec`| `T#5s` | Set fault delay for the test. |
+| 3.2 | | `#Instance_DB.UDT.Fault_Tolerance_Perc`| `5.0` | Set fault tolerance to 5%. |
+| 4.0 | **Simulate Mismatch** | `#Instance_DB.UDT.Damper_Pos_Fdbk_AI`| `40.0` | Simulate a stuck damper. |
+| 4.1 | **Wait for Fault** | `#WAIT` | `5000` | Wait for 5000 ms. |
+| 4.2 | *Evaluate* | `#Instance_DB.UDT.Damper_Failure_Alm`| `TRUE` | **Check:** The failure alarm is now active. |

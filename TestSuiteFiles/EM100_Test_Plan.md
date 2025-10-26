@@ -4,6 +4,8 @@
 **Date:** September 15, 2025
 **Purpose:** To define the test cases for verifying the functionality of the `FB100_EM_SupplyFan` Function Block.
 
+**Verification Note:** This document has been reviewed against `SDS_AHU_Controller.md` (Version 2.0). Test Case 2 (`TC2_Failure_No_Feedback`) correctly validates the 5-second fan failure alarm delay specified in the SDS.
+
 ---
 
 ## 1. Test Objective
