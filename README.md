@@ -2,6 +2,10 @@
 
 This repository demonstrates how to use the comfort functions of the Modular Application Creator Module Builder. With those comfort functions the Openness programmer does not need to handle the xml file when e.g. calls in ladder logic should be generated. More information is available under [Modular Application Creator on SIOS](https://support.industry.siemens.com/cs/de/en/view/109762852).
 
+## Project Purpose
+
+This repository contains a complete solution for generating the control software for an HVAC Air Handler Unit (AHU). For a high-level overview of the project's purpose, workflow, and structure, please see the **[Project Overview](PROJECT_OVERVIEW.md)**.
+
 ## 🚀 Getting started Documentation
 
 We just updated our [Modular Application Creator Use Case Based Documentation](https://siemens.github.io/modular-application-creator-use-cases/html/index.html).
