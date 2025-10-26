@@ -3,7 +3,10 @@ FUNCTION_BLOCK "FB100_EM_SupplyFan"
     S7_Optimized_Access := 'TRUE'
 }
 AUTHOR : 'Dallas Levine & Gemini'
-VERSION : '1.0' // Initial logic implementation
+VERSION : '1.1' // Verified against SDS v2.0
+
+// Verification Note: This logic has been reviewed against SDS_AHU_Controller.md (Version 2.0).
+// The fan failure timer logic in REGION 3 correctly implements the specified 5-second delay.
 
 VAR_INPUT
     // Enables the block's execution. This is the main Start/Stop command

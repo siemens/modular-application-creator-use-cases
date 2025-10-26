@@ -21,6 +21,9 @@ END_VAR
 VAR
     // The data interface for the Damper Equipment Module.
     UDT : "UDT400_EM_Damper";
+
+    // Internal timer for the damper feedback failure delay.
+    feedbackFaultTimer : TON_TIME;
 END_VAR
 
 BEGIN
@@ -48,6 +51,20 @@ BEGIN
         //----------------------------------------------------------------------------
         #UDT.Damper_Pos_Cmd_AO := #Damper_Demand_In;
         
+        //----------------------------------------------------------------------------
+        // SUB-REGION 1.3: Feedback Failure Monitoring
+        //----------------------------------------------------------------------------
+        #feedbackFaultTimer(
+            IN := ABS(REAL_TO_LREAL(#UDT.Damper_Pos_Cmd_AO) - REAL_TO_LREAL(#UDT.Damper_Pos_Fdbk_AI)) > #UDT.Fault_Tolerance_Perc,
+            PT := #UDT.Fault_Delay_Sec,
+            Q => NOP,
+            ET => NOP
+        );
+
+        IF #feedbackFaultTimer.Q THEN
+            #UDT.Damper_Failure_Alm := TRUE;
+        END_IF;
+
     ELSE // This ELSE corresponds to "IF #Enable"
         //============================================================================
         // REGION 2: Disabled State Logic
@@ -55,6 +72,7 @@ BEGIN
         //============================================================================
         #UDT.Econ_Mode_Active := FALSE;
         #UDT.Damper_Pos_Cmd_AO := 0.0;
+        #UDT.Damper_Failure_Alm := FALSE;
         
     END_IF;
 

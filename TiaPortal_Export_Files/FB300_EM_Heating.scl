@@ -16,6 +16,9 @@ END_VAR
 VAR
     // The data interface for the Heating Equipment Module.
     UDT : "UDT300_EM_Heating";
+
+    // Internal timer for the valve feedback failure delay.
+    feedbackFaultTimer : TON_TIME;
 END_VAR
 
 BEGIN
@@ -34,6 +37,7 @@ BEGIN
             // A freeze condition is detected.
             #UDT.HW_Freeze_Alm := TRUE;      // Set the freeze alarm bit.
             #UDT.HW_Valve_Cmd_AO := 0.0;     // CRITICAL: Force the valve command to 0%.
+            #UDT.Valve_Failure_Alm := FALSE;  // Reset failure alarm during freeze condition.
             
         ELSE
             //------------------------------------------------------------------------
@@ -46,6 +50,22 @@ BEGIN
             // Pass the incoming analog demand directly to the analog output command.
             #UDT.HW_Valve_Cmd_AO := #Valve_Demand_In;
             
+            //------------------------------------------------------------------------
+            // SUB-REGION 1.3: Feedback Failure Monitoring
+            // Compares the valve command with the feedback to detect a fault.
+            //------------------------------------------------------------------------
+
+            #feedbackFaultTimer(
+                IN := ABS(REAL_TO_LREAL(#UDT.HW_Valve_Cmd_AO) - REAL_TO_LREAL(#UDT.HW_Valve_Fdbk_AI)) > #UDT.Fault_Tolerance_Perc,
+                PT := #UDT.Fault_Delay_Sec,
+                Q => NOP,
+                ET => NOP
+            );
+
+            IF #feedbackFaultTimer.Q THEN
+                #UDT.Valve_Failure_Alm := TRUE;
+            END_IF;
+
         END_IF;
         
     ELSE // This ELSE corresponds to "IF #Enable"
@@ -56,6 +76,7 @@ BEGIN
         
         #UDT.HW_Valve_Cmd_AO := 0.0;
         #UDT.HW_Freeze_Alm := FALSE;
+        #UDT.Valve_Failure_Alm := FALSE;
         
     END_IF;
 
