@@ -25,8 +25,8 @@ To ensure the supply fan module correctly responds to start/stop commands and th
 | 1.1 | *Evaluate* | `#Instance_DB.UDT.Start_Cmd_DO` | `FALSE` | **Check:** Start command is off. |
 | 2.0 | **Command Fan ON** | `#Instance_DB.Enable` | `TRUE` | Enable the fan module. |
 | 2.1 | *Evaluate* | `#Instance_DB.UDT.Start_Cmd_DO` | `TRUE` | **Check:** The start command is sent. |
-| 3.0 | **Simulate Feedback** | `#Instance_DB.UDT.Run_Fdbk_DI`| `TRUE` | Simulate VFD run feedback. |
-| 3.1 | | `#Instance_DB.UDT.Airflow_Status_DI`| `TRUE` | Simulate airflow switch made. |
+| 3.0 | **Simulate Feedback** | `#Instance_DB.UDT.Run_Fdbk_DI` | `TRUE` | Simulate VFD run feedback. |
+| 3.1 | | `#Instance_DB.UDT.Airflow_Status_DI` | `TRUE` | Simulate airflow switch made. |
 | 3.2 | *Evaluate* | `#Instance_DB.UDT.Is_Running` | `TRUE` | **Check:** The `Is_Running` status is set. |
 
 ### Test Case 2: Fan Failure on Start
@@ -37,9 +37,9 @@ To ensure the supply fan module correctly responds to start/stop commands and th
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
 | 4.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | Enable the fan module. |
-| 4.1 | | `#Instance_DB.UDT.Fault_Delay_Sec`| `T#5s` | Set fault delay for the test. |
+| 4.1 | | `#Instance_DB.UDT.Fault_Delay_Sec` | `T#5s` | Set fault delay for the test. |
 | 5.0 | **Wait for Fault** | `#WAIT` | `5000` | Wait for 5000 ms. |
-| 5.1 | *Evaluate* | `#Instance_DB.UDT.Fan_Failure_Alm`| `TRUE` | **Check:** The failure alarm is now active. |
+| 5.1 | *Evaluate* | `#Instance_DB.UDT.Fan_Failure_Alm` | `TRUE` | **Check:** The failure alarm is now active. |
 | 5.2 | *Evaluate* | `#Instance_DB.UDT.Start_Cmd_DO` | `FALSE` | **Check:** The start command is disabled on fault. |
 
 ### Test Case 3: VFD Fault Trip
@@ -51,6 +51,6 @@ To ensure the supply fan module correctly responds to start/stop commands and th
 | :--- | :--- | :--- | :--- | :--- |
 | 6.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | Fan is running. |
 | 6.1 | | `#Instance_DB.UDT.Run_Fdbk_DI` | `TRUE` | |
-| 7.0 | **Simulate VFD Fault**| `#Instance_DB.UDT.VFD_Fault_DI`| `TRUE` | |
+| 7.0 | **Simulate VFD Fault** | `#Instance_DB.UDT.VFD_Fault_DI` | `TRUE` | |
 | 7.1 | *Evaluate* | `#Instance_DB.UDT.VFD_Fault_Alm` | `TRUE` | **Check:** VFD Fault alarm is active. |
-| 7.2 | *Evaluate* | `#Instance_DB.UDT.Start_Cmd_DO` | `FALSE`| **Check:** Start command is immediately turned off. |
+| 7.2 | *Evaluate* | `#Instance_DB.UDT.Start_Cmd_DO` | `FALSE` | **Check:** Start command is immediately turned off. |

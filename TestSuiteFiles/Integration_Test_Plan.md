@@ -34,7 +34,7 @@ To ensure the main PID controller correctly responds to changes in temperature b
 | 1.0 | **Initial State** | `Setpoint` | `70.0` | Set a baseline setpoint. |
 | 1.1 | | `AHU1_DAT_Temp` | `70.0` | Simulate temperature at setpoint. |
 | 1.2 | *Evaluate* | `Output` | `0.0` | **Check:** PID output should be zero. |
-| 2.0 | **Simulate Heat Demand**| `AHU1_DAT_Temp` | `65.0` | Force temperature below setpoint. |
+| 2.0 | **Simulate Heat Demand** | `AHU1_DAT_Temp` | `65.0` | Force temperature below setpoint. |
 | 2.1 | *Evaluate* | `Output` | `< 0.0` | **Check:** PID output is negative, demanding heat. |
 
 ### Test Case 2: Cooling Response
@@ -47,7 +47,7 @@ To ensure the main PID controller correctly responds to changes in temperature b
 | 3.0 | **Initial State** | `Setpoint` | `70.0` | |
 | 3.1 | | `AHU1_DAT_Temp` | `70.0` | |
 | 3.2 | *Evaluate* | `Output` | `0.0` | **Check:** PID output should be zero. |
-| 4.0 | **Simulate Cool Demand**| `AHU1_DAT_Temp` | `75.0` | Force temperature above setpoint. |
+| 4.0 | **Simulate Cool Demand** | `AHU1_DAT_Temp` | `75.0` | Force temperature above setpoint. |
 | 4.1 | *Evaluate* | `Output` | `> 0.0` | **Check:** PID output is positive, demanding cooling. |
 
 ### Test Case 3: Output Clamping (Upper Limit)
@@ -58,8 +58,8 @@ To ensure the main PID controller correctly responds to changes in temperature b
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
 | 5.0 | **Initial State** | `Setpoint` | `70.0` | |
-| 5.1 | | `OutputUpperLimit` | `100.0`| |
-| 6.0 | **Force High Error**| `AHU1_DAT_Temp` | `90.0` | Force a large temperature error to drive output high. |
+| 5.1 | | `OutputUpperLimit` | `100.0` | |
+| 6.0 | **Force High Error** | `AHU1_DAT_Temp` | `90.0` | Force a large temperature error to drive output high. |
 | 6.1 | *Evaluate* | `Output` | `100.0` | **Check:** PID output is clamped exactly at the upper limit. |
 
 ### Test Case 4: Output Clamping (Lower Limit)
@@ -68,8 +68,8 @@ To ensure the main PID controller correctly responds to changes in temperature b
 *   **Objective:** Verify that the PID output does not exceed its configured lower limit.
 *   **Test Steps:**
 | Test ID | Test Step Name | Parameter | Value | Comment |
-| :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :- | :--- | :--- |
 | 7.0 | **Initial State** | `Setpoint` | `70.0` | |
-| 7.1 | | `OutputLowerLimit` | `-100.0`| |
-| 8.0 | **Force High Error**| `AHU1_DAT_Temp` | `50.0` | Force a large temperature error to drive output low. |
+| 7.1 | | `OutputLowerLimit` | `-100.0` | |
+| 8.0 | **Force High Error** | `AHU1_DAT_Temp` | `50.0` | Force a large temperature error to drive output low. |
 | 8.1 | *Evaluate* | `Output` | `-100.0` | **Check:** PID output is clamped exactly at the lower limit. |

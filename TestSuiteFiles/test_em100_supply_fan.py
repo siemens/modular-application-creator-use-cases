@@ -35,20 +35,25 @@ class TestSupplyFan(unittest.TestCase):
         run_feedback = self.plc.get_tag("FB100_EM_SupplyFan.UDT.Run_Fdbk_DI")
         vfd_fault = self.plc.get_tag("FB100_EM_SupplyFan.UDT.VFD_Fault_DI")
 
-        # Basic logic simulation
-        is_running = False
+        # Previous state
+        start_cmd_was_on = self.plc.get_tag("FB100_EM_SupplyFan.UDT.Start_Cmd_DO")
         fan_failure = self.plc.get_tag("FB100_EM_SupplyFan.UDT.Fan_Failure_Alm")
+        is_running = False
 
         if enable and not vfd_fault:
             self.plc.set_tag("FB100_EM_SupplyFan.UDT.Start_Cmd_DO", True)
             if run_feedback:
                 is_running = True
+                fan_failure = False # Clear failure on good feedback
             else:
-                # Simplified failure logic for demonstration
-                fan_failure = True
+                # If start command was already on and we still don't have feedback,
+                # then we can consider it a failure (simulating timer expired).
+                if start_cmd_was_on:
+                    fan_failure = True
         else:
             self.plc.set_tag("FB100_EM_SupplyFan.UDT.Start_Cmd_DO", False)
             is_running = False
+            # Fan failure is latched until manually reset or feedback is restored.
 
         # Outputs to UDT
         self.plc.set_tag("FB100_EM_SupplyFan.UDT.Is_Running", is_running)
@@ -59,11 +64,12 @@ class TestSupplyFan(unittest.TestCase):
         """TC1: Test normal fan start and run sequence."""
         print(f"Running test on PLC instance: {PLC_INSTANCE_NAME}")
 
-        # Step 1: Command Fan ON
+        # Step 1: Command Fan ON - First scan
         self.plc.set_tag("FB100_EM_SupplyFan.Enable", True)
         self.run_fan_logic()
         self.assertTrue(self.plc.get_tag("FB100_EM_SupplyFan.UDT.Start_Cmd_DO"), "Start command should be ON")
-        self.assertFalse(self.plc.get_tag("FB100_EM_SupplyFan.UDT.Fan_Failure_Alm"), "Fan failure alarm should be OFF")
+        # On the very first scan, the failure should not be active.
+        self.assertFalse(self.plc.get_tag("FB100_EM_SupplyFan.UDT.Fan_Failure_Alm"), "Fan failure alarm should be OFF initially")
 
         # Step 2: Simulate Feedback
         self.plc.set_tag("FB100_EM_SupplyFan.UDT.Run_Fdbk_DI", True)
@@ -78,7 +84,8 @@ class TestSupplyFan(unittest.TestCase):
         # Command Fan ON with no feedback
         self.plc.set_tag("FB100_EM_SupplyFan.Enable", True)
         self.plc.set_tag("FB100_EM_SupplyFan.UDT.Run_Fdbk_DI", False)
-        self.run_fan_logic()
+        self.run_fan_logic() # First scan turns on the start command
+        self.run_fan_logic() # Second scan detects the failure
 
         # Check for failure alarm
         self.assertTrue(self.plc.get_tag("FB100_EM_SupplyFan.UDT.Fan_Failure_Alm"), "Fan failure alarm should be ON")
