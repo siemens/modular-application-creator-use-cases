@@ -32,7 +32,7 @@ The following checklist items must be verified against the design documents. All
 | Requirement ID | Requirement Description | Design Document(s) & Specification (Example) | Verified (Y/N) | Comments / Deviations |
 | :--- | :--- | :--- | :--- | :--- |
 | **FS 5.1** | **Grade A: Temp Control** | AHU-01 Datasheet: Cooling/Heating Coil Capacity. P&ID-101: Temp Sensor T-101 specified. | | |
-| | **Grade A: Temp Setpoint:** 22°C ± 1°C | BAS Control Logic Diagram: Setpoint specified. | | |
+| | **Grade A: Temp Setpoint:** 72°F ± 2°F | BAS Control Logic Diagram: Setpoint specified. | | |
 | **FS 5.1** | **Grade B: RH Control** | AHU-02 Datasheet: Humidifier/Dehumidifier Capacity. P&ID-102: RH Sensor H-102 specified. | | |
 | | **Grade B: RH Setpoint:** 45% ± 5% | BAS Control Logic Diagram: Setpoint specified. | | |
 | **FS 5.1** | **Grade C: Pressure Control** | Airflow Schematic AFS-103: Air balance calculation shows +15 Pa cascade. P&ID-103: DP Sensor DP-103 specified. | | |
