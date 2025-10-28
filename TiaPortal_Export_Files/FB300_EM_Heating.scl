@@ -10,7 +10,7 @@ VAR_INPUT
     Enable : Bool;
     
     // Analog heating demand (0.0 - 100.0%) from the main temperature controller.
-    Valve_Demand_In : Real;
+    Heating_Demand_In : Real;
 END_VAR
 
 VAR
@@ -36,8 +36,8 @@ BEGIN
         IF #UDT.HW_Freeze_Stat_DI THEN
             // A freeze condition is detected on the shared coil.
             #UDT.HW_Freeze_Alm := TRUE;      // Set the freeze alarm bit.
-            #UDT.HW_Valve_Cmd_AO := 0.0;     // CRITICAL: Force the valve command to 0%.
-            #UDT.Valve_Failure_Alm := FALSE;  // Reset failure alarm during freeze condition.
+            #UDT.HW_Valve_Position_Cmd_AO := 0.0;     // CRITICAL: Force the valve command to 0%.
+            #UDT.Valve_Position_Failure_Alm := FALSE;  // Reset failure alarm during freeze condition.
             
         ELSE
             //------------------------------------------------------------------------
@@ -48,22 +48,22 @@ BEGIN
             #UDT.HW_Freeze_Alm := FALSE;     // Ensure the alarm is clear.
             
             // Pass the incoming analog demand directly to the analog output command.
-            #UDT.HW_Valve_Cmd_AO := #Valve_Demand_In;
-            
+            #UDT.HW_Valve_Position_Cmd_AO := #Heating_Demand_In;
+
             //------------------------------------------------------------------------
             // SUB-REGION 1.3: Feedback Failure Monitoring
             // Compares the valve command with the feedback to detect a fault.
             //------------------------------------------------------------------------
 
             #feedbackFaultTimer(
-                IN := ABS(REAL_TO_LREAL(#UDT.HW_Valve_Cmd_AO) - REAL_TO_LREAL(#UDT.HW_Valve_Fdbk_AI)) > #UDT.Fault_Tolerance_Perc,
+                IN := ABS(REAL_TO_LREAL(#UDT.HW_Valve_Position_Cmd_AO) - REAL_TO_LREAL(#UDT.HW_Valve_Position_Fdbk_AI)) > #UDT.Fault_Tolerance_Perc,
                 PT := #UDT.Fault_Delay_Sec,
                 Q => NOP,
                 ET => NOP
             );
 
             IF #feedbackFaultTimer.Q THEN
-                #UDT.Valve_Failure_Alm := TRUE;
+                #UDT.Valve_Position_Failure_Alm := TRUE;
             END_IF;
 
         END_IF;
@@ -74,9 +74,9 @@ BEGIN
         // If the block is disabled, force all outputs to a safe, off state.
         //============================================================================
         
-        #UDT.HW_Valve_Cmd_AO := 0.0;
+        #UDT.HW_Valve_Position_Cmd_AO := 0.0;
         #UDT.HW_Freeze_Alm := FALSE;
-        #UDT.Valve_Failure_Alm := FALSE;
+        #UDT.Valve_Position_Failure_Alm := FALSE;
         
     END_IF;
 
