@@ -17,6 +17,7 @@ To ensure the damper module correctly drives to the minimum ventilation position
 *   **Test Name:** `TC1_Min_Vent_Position`
 *   **Objective:** Verify the damper goes to its minimum position when the fan is on and economizer is inactive.
 *   **Test Steps:**
+
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
 | 1.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | Enable the module. |
@@ -29,6 +30,7 @@ To ensure the damper module correctly drives to the minimum ventilation position
 *   **Test Name:** `TC2_Econ_Mode`
 *   **Objective:** Verify the damper command follows the economizer PID's demand.
 *   **Test Steps:**
+
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
 | 2.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | |
@@ -41,6 +43,7 @@ To ensure the damper module correctly drives to the minimum ventilation position
 *   **Test Name:** `TC3_Damper_Failure`
 *   **Objective:** Verify the damper failure alarm is triggered if feedback does not match the command.
 *   **Test Steps:**
+
 | Test ID | Test Step Name | Parameter | Value | Comment |
 | :--- | :--- | :--- | :--- | :--- |
 | 3.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | Enable the module. |

@@ -1,4 +1,6 @@
 import unittest
+from unittest.mock import patch
+import time
 
 # Mock PLC class to simulate the TIA Portal environment
 class MockPLC:
@@ -26,6 +28,7 @@ class TestDamperModule(unittest.TestCase):
         self.plc.set_tag("FB400_EM_Damper.UDT.Damper_Pos_Cmd_AO", 0.0)
         self.plc.set_tag("FB400_EM_Damper.UDT.Damper_Pos_Fdbk_AI", 0.0)
         self.plc.set_tag("FB400_EM_Damper.UDT.Damper_Failure_Alm", False)
+        self.fault_timer_start = None
 
     def run_damper_logic(self):
         """Simulates one scan of the FB400_EM_Damper logic."""
@@ -36,8 +39,8 @@ class TestDamperModule(unittest.TestCase):
         cmd = self.plc.get_tag("FB400_EM_Damper.UDT.Damper_Pos_Cmd_AO")
         fdbk = self.plc.get_tag("FB400_EM_Damper.UDT.Damper_Pos_Fdbk_AI")
 
+        failure_alm = self.plc.get_tag("FB400_EM_Damper.UDT.Damper_Failure_Alm")
         pos_cmd = 0.0
-        failure_alm = False
 
         if enable:
             if econ_active:
@@ -45,9 +48,15 @@ class TestDamperModule(unittest.TestCase):
             else:
                 pos_cmd = min_pos
 
-        # Simplified failure logic: assumes 5s timer has elapsed
-        if enable and abs(cmd - fdbk) > 5.0: # 5% tolerance
-             failure_alm = True
+            # Time-delayed failure logic
+            if abs(pos_cmd - fdbk) > 5.0: # 5% tolerance
+                if self.fault_timer_start is None:
+                    self.fault_timer_start = time.time()
+                if (time.time() - self.fault_timer_start) >= 5:
+                    failure_alm = True
+            else:
+                self.fault_timer_start = None
+                failure_alm = False
 
         self.plc.set_tag("FB400_EM_Damper.UDT.Damper_Pos_Cmd_AO", pos_cmd)
         self.plc.set_tag("FB400_EM_Damper.UDT.Damper_Failure_Alm", failure_alm)
@@ -67,11 +76,21 @@ class TestDamperModule(unittest.TestCase):
         self.run_damper_logic()
         self.assertEqual(self.plc.get_tag("FB400_EM_Damper.UDT.Damper_Pos_Cmd_AO"), 65.0)
 
-    def test_damper_failure(self):
-        """TC3: Test damper failure alarm."""
+    @patch('time.time')
+    def test_damper_failure(self, mock_time):
+        """TC3: Test damper failure alarm with mocked time delay."""
         self.plc.set_tag("FB400_EM_Damper.Enable", True)
-        self.plc.set_tag("FB400_EM_Damper.UDT.Damper_Pos_Cmd_AO", 50.0)
+        self.plc.set_tag("FB400_EM_Damper.Econ_Mode_Active", True)
+        self.plc.set_tag("FB400_EM_Damper.Econ_PID_Demand", 50.0)
         self.plc.set_tag("FB400_EM_Damper.UDT.Damper_Pos_Fdbk_AI", 10.0) # Stuck
+
+        # 1. First scan, timer starts
+        mock_time.return_value = 2000.0
+        self.run_damper_logic()
+        self.assertFalse(self.plc.get_tag("FB400_EM_Damper.UDT.Damper_Failure_Alm"))
+
+        # 2. Advance time by 6 seconds
+        mock_time.return_value = 2006.0
         self.run_damper_logic()
         self.assertTrue(self.plc.get_tag("FB400_EM_Damper.UDT.Damper_Failure_Alm"))
 

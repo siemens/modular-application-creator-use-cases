@@ -37,8 +37,8 @@ This OQ protocol covers the functional testing of the HVAC system serving the Gr
 #### **5.1 Control Loop Verification**
 | Test ID | Test Description | Acceptance Criteria | Result (Pass/Fail) | Comments |
 | :--- | :--- | :--- | :--- | :--- |
-| OQ-CL-01 | **Grade B Temp Control:** Set BAS temp to 21°C. | Room temperature stabilizes at 21°C ± 1.0°C within 30 minutes. | | |
-| OQ-CL-02 | **Grade B Temp Control:** Set BAS temp to 23°C. | Room temperature stabilizes at 23°C ± 1.0°C within 30 minutes. | | |
+| OQ-CL-01 | **Grade B Temp Control:** Set BAS temp to 70°F. | Room temperature stabilizes at 70°F ± 2°F within 30 minutes. | | |
+| OQ-CL-02 | **Grade B Temp Control:** Set BAS temp to 73°F. | Room temperature stabilizes at 73°F ± 2°F within 30 minutes. | | |
 | OQ-CL-03 | **Grade C RH Control:** Set BAS RH to 40%. | Room RH stabilizes at 40% ± 5% within 30 minutes. | | |
 | OQ-CL-04 | **Grade C RH Control:** Set BAS RH to 50%. | Room RH stabilizes at 50% ± 5% within 30 minutes. | | |
 | OQ-CL-05 | **Pressure Cascade Test:** Open/close door between Grade C and Hallway. | Grade C pressure returns to +15 Pa (±3 Pa) relative to Hallway within 60 seconds. | | |
@@ -46,7 +46,7 @@ This OQ protocol covers the functional testing of the HVAC system serving the Gr
 #### **5.2 Alarm and Interlock Verification**
 | Test ID | Test Description | Acceptance Criteria | Result (Pass/Fail) | Comments |
 | :--- | :--- | :--- | :--- | :--- |
-| OQ-ALM-01 | **High Temp Alarm:** Artificially force Grade B temperature reading to 25°C. | A "Major" alarm activates on the HMI. Email is sent to Supervisor. | | |
+| OQ-ALM-01 | **High Temp Alarm:** Artificially force Grade B temperature reading to 77°F. | A "Major" alarm activates on the HMI. Email is sent to Supervisor. | | |
 | OQ-ALM-02 | **Low Pressure Alarm:** Isolate DP sensor for Grade A and vent to atmosphere. | A "Critical" alarm activates. Audible/visual alarms trigger. Auto-dialer is activated. | | |
 | OQ-ALM-03 | **HEPA Filter Alarm:** Simulate high differential pressure across a terminal HEPA filter. | A "Critical" alarm activates on the HMI. | | |
 | OQ-ALM-04 | **Sensor Failure:** Disconnect the RH sensor for Grade C. | A "Major" alarm for sensor failure/communication loss activates on the HMI. | | |
@@ -55,7 +55,7 @@ This OQ protocol covers the functional testing of the HVAC system serving the Gr
 | Test ID | Test Description | Acceptance Criteria | Result (Pass/Fail) | Comments |
 | :--- | :--- | :--- | :--- | :--- |
 | OQ-SEC-01 | **Operator Access:** Log in as an Operator. Attempt to change a setpoint. | Access is denied. Operator can view values and acknowledge alarms. | | |
-| OQ-SEC-02 | **Supervisor Access:** Log in as a Supervisor. Change Grade C temperature setpoint from 22°C to 21.5°C. | Change is successful. An entry is created in the audit trail requiring a reason for the change. | | |
+| OQ-SEC-02 | **Supervisor Access:** Log in as a Supervisor. Change Grade C temperature setpoint from 72°F to 71°F. | Change is successful. An entry is created in the audit trail requiring a reason for the change. | | |
 | OQ-SEC-03 | **Data Logging:** Verify BAS data log for the duration of the OQ. | All critical parameters (Temp, RH, DP) are logged every 60 seconds without interruption. | | |
 
 #### **5.4 Power Failure and Recovery**
