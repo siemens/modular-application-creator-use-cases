@@ -49,7 +49,7 @@ where to where -->
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <TiaPortalLocation Condition="'$(TiaPortalLocation)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\_InstalledSW\TIAP19\Global@Path)</TiaPortalLocation>
+    <TiaPortalLocation Condition="'$(TiaPortalLocation)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\_InstalledSW\TIAP20\Global@Path)</TiaPortalLocation>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -60,9 +60,9 @@ where to where -->
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Siemens.Engineering, Version=19.0.0.0, Culture=neutral, PublicKeyToken=d29ec89bac048f84, processorArchitecture=MSIL">
+    <Reference Include="Siemens.Engineering, Version=20.0.0.0, Culture=neutral, PublicKeyToken=d29ec89bac048f84, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(TiaPortalLocation)\PublicAPI\V19\Siemens.Engineering.dll</HintPath>
+      <HintPath>$(TiaPortalLocation)\PublicAPI\V20\Siemens.Engineering.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -171,8 +171,8 @@ where to where -->
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="EquipmentModule.Build.Tasks">
-      <Version>19.2.10</Version>
+    <PackageReference Include="Siemens.EquipmentModule.Build.Tasks">
+      <Version>20.1.6</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -185,11 +185,11 @@ where to where -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Basics">
-      <Version>19.2.10</Version>
+      <Version>20.1.6</Version>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Core">
-      <Version>19.2.10</Version>
+      <Version>20.1.6</Version>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
