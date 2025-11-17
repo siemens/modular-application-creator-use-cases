@@ -25,7 +25,7 @@ This section defines the core hardware and software architecture for the AHU con
 *   **Total Project I/O Requirements:**
     *   6 Digital Inputs
     *   1 Digital Output
-    *   6 Analog Inputs (3x Temp, 3x Feedback)
+    *   12 Analog Inputs (3x Temp, 3x Feedback, 3x RH, 3x DP)
     *   4 Analog Outputs (1x Fan Speed, 2x Valve, 1x Damper)
 *   **CPU Integrated I/O:**
     *   16x DI, 16x DO, 5x AI, 2x AO
@@ -100,6 +100,12 @@ This section defines the core hardware and software architecture for the AHU con
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
 | Dirty Filter Status | Digital | Input | AHU1_SYS_DirtyFilter |
+| Return Air RH | Analog | Input | AHU1_RAR_RH |
+| Outside Air RH | Analog | Input | AHU1_OAR_RH |
+| Discharge Air RH | Analog | Input | AHU1_DAR_RH |
+| Pre-Filter DP | Analog | Input | AHU1_PFL_DP |
+| Post-Filter DP | Analog | Input | AHU1_AFL_DP |
+| Room DP | Analog | Input | AHU1_RM_DP |
 
 ---
 

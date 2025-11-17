@@ -58,6 +58,7 @@ This document defines the structure of the User Data Types (UDTs) for each Equip
 | `Damper_Pos_Cmd_AO`| `Real` | Analog Output: Damper position command (0-100%). |
 | `Damper_Failure_Alm` | `Bool` | Alarm: `True` if command and feedback do not match. |
 | `Econ_Mode_Active`| `Bool` | Status: `True` when economizer mode is active. |
+| `Min_Fresh_Air_Pos` | `Real` | Configuration: The minimum fresh air damper position (0-100%). |
 
 ---
 
@@ -68,3 +69,9 @@ This document defines the structure of the User Data Types (UDTs) for each Equip
 | `Dirty_Filter_DI`| `Bool` | Digital Input: Dirty filter DP switch. |
 | `Filter_Delay_Sec` | `Time` | Time delay for dirty filter alarm. |
 | `Dirty_Filter_Alm` | `Bool` | Alarm: Dirty filter alarm. |
+| `Return_Air_RH_AI` | `Real` | Analog Input: Return air relative humidity sensor. |
+| `Outside_Air_RH_AI` | `Real` | Analog Input: Outside air relative humidity sensor. |
+| `Discharge_Air_RH_AI` | `Real` | Analog Input: Discharge air relative humidity sensor. |
+| `Pre_Filter_DP_AI` | `Real` | Analog Input: Pre-filter differential pressure sensor. |
+| `Post_Filter_DP_AI` | `Real` | Analog Input: Post-filter differential pressure sensor. |
+| `Room_DP_AI` | `Real` | Analog Input: Room differential pressure sensor. |
