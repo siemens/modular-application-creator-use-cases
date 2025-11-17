@@ -32,6 +32,20 @@ This IQ protocol covers the physical installation of all components related to t
 | IQ-DOC-04 | Instrument Calibration Certificates | All cGMP-critical sensors have valid, traceable calibration certificates. | | |
 | IQ-DOC-05 | Material Certificates for Ductwork | Certificates for Grade 316L SS are available. | | |
 
+#### **3.1.1. Instrument to PLC Tag Cross-Reference**
+*Note: This table provides a mapping from the P&ID instrument tag to the PLC software tag.*
+| P&ID Instrument Tag | PLC Tag (from SDS) | Description |
+| :--- | :--- | :--- |
+| `T-101` | `AHU1_DAT_Temp` | Discharge Air Temperature |
+| `T-102` | `AHU1_RAT_Temp` | Return Air Temperature |
+| `T-103` | `AHU1_OAT_Temp` | Outside Air Temperature |
+| `H-101` | `AHU1_DAR_RH` | Discharge Air Relative Humidity |
+| `H-102` | `AHU1_RAR_RH` | Return Air Relative Humidity |
+| `H-103` | `AHU1_OAR_RH` | Outside Air Relative Humidity |
+| `DP-101` | `AHU1_PFL_DP` | Pre-Filter Differential Pressure |
+| `DP-102` | `AHU1_AFL_DP` | Post-Filter Differential Pressure |
+| `DP-103` | `AHU1_RM_DP` | Room Differential Pressure |
+
 #### **3.2 Equipment Installation Verification (Physical Check)**
 | Check ID | Equipment | Acceptance Criteria | Verified (Y/N) | Comments (e.g., Serial #) |
 | :--- | :--- | :--- | :--- | :--- |

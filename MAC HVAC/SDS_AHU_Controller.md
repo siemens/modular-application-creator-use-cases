@@ -25,7 +25,7 @@ This section defines the core hardware and software architecture for the AHU con
 *   **Total Project I/O Requirements:**
     *   6 Digital Inputs
     *   1 Digital Output
-    *   6 Analog Inputs (3x Temp, 3x Feedback)
+    *   12 Analog Inputs (3x Temp, 3x Feedback, 3x RH, 3x DP)
     *   4 Analog Outputs (1x Fan Speed, 2x Valve, 1x Damper)
 *   **CPU Integrated I/O:**
     *   16x DI, 16x DO, 5x AI, 2x AO
@@ -53,6 +53,7 @@ This section defines the core hardware and software architecture for the AHU con
 *   **Purpose:** To control and monitor the VFD for the main supply fan.
 *   **Logic:** Controls fan start/stop and speed. Monitors run feedback, airflow, and VFD fault status.
 *   **Parameter Set:**
+
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
 | Start/Stop Command | Digital | Output | AHU1_SF_StartCmd |
@@ -65,6 +66,7 @@ This section defines the core hardware and software architecture for the AHU con
 *   **Purpose:** To control a modulating chilled water valve.
 *   **Logic:** Accepts an analog demand (0-100%). Monitors a freeze-stat. Generates a "Valve Failure" alarm if the commanded position and feedback do not match.
 *   **Parameter Set:**
+
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
 | Chilled Water Valve Cmd | Analog | Output | AHU1_CW_VlvCmd |
@@ -75,6 +77,7 @@ This section defines the core hardware and software architecture for the AHU con
 *   **Purpose:** To control a modulating hot water valve.
 *   **Logic:** Accepts an analog demand (0-100%). Monitors a freeze-stat. Generates a "Valve Failure" alarm if the commanded position and feedback do not match.
 *   **Parameter Set:**
+
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
 | Hot Water Valve Cmd | Analog | Output | AHU1_HW_VlvCmd |
@@ -85,6 +88,7 @@ This section defines the core hardware and software architecture for the AHU con
 *   **Purpose:** To manage dampers for ventilation and economizer cooling.
 *   **Logic:** Controls a modulating damper actuator. Generates a "Damper Failure" alarm if the commanded position and feedback do not match.
 *   **Parameter Set:**
+
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
 | Damper Position Cmd | Analog | Output | AHU1_DMP_PosCmd |
@@ -97,9 +101,16 @@ This section defines the core hardware and software architecture for the AHU con
 *   **Purpose:** To monitor system-wide components.
 *   **Logic:** Monitors a differential pressure switch for a "Dirty Filter" alarm.
 *   **Parameter Set:**
+
 | Parameter Name | Signal Type | I/O Type | TIA Portal Tag Name Convention |
 | :--- | :--- | :--- | :--- |
 | Dirty Filter Status | Digital | Input | AHU1_SYS_DirtyFilter |
+| Return Air RH | Analog | Input | AHU1_RAR_RH |
+| Outside Air RH | Analog | Input | AHU1_OAR_RH |
+| Discharge Air RH | Analog | Input | AHU1_DAR_RH |
+| Pre-Filter DP | Analog | Input | AHU1_PFL_DP |
+| Post-Filter DP | Analog | Input | AHU1_AFL_DP |
+| Room DP | Analog | Input | AHU1_RM_DP |
 
 ---
 

@@ -1,0 +1,106 @@
+FUNCTION_BLOCK FB_CalculateAirEnthalpy
+VERSION : 0.1
+AUTHOR  : AI_Assistant
+
+VAR_INPUT
+    DryBulbTemp_F : Real;    // Dry Bulb Temperature in degrees Fahrenheit
+    RelativeHumidity_Pct : Real; // Relative Humidity in percentage (0 to 100)
+    AtmosphericPressure_hPa : Real; // Atmospheric Pressure in hPa (HectoPascals)
+END_VAR
+
+VAR_OUTPUT
+    Enthalpy_BTU_lb : Real;  // Specific Enthalpy in BTU per pound of dry air
+    HumidityRatio_lb_lb : Real; // Humidity Ratio in pounds water per pound dry air
+    PartialVaporPressure_Pa : Real; // Partial Vapor Pressure in Pascals
+    SaturationVaporPressure_Pa : Real; // Saturation Vapor Pressure in Pascals
+    CalculationError : Bool; // True if an error occurred during calculation (e.g., bad RH)
+END_VAR
+
+VAR_TEMP
+    DryBulbTemp_C : Real;    // Dry Bulb Temperature in degrees Celsius
+    Temp_K : Real;           // Temperature in Kelvin
+    RelativeHumidity_Decimal : Real; // Relative Humidity as a decimal (0.0 to 1.0)
+    AtmosphericPressure_Pa : Real; // Atmospheric Pressure in Pascals
+    Psat_Pa : Real;          // Saturation Vapor Pressure in Pascals (intermediate)
+    Pv_Pa : Real;            // Partial Vapor Pressure in Pascals (intermediate)
+    HumidityRatio_Calc : Real; // Humidity Ratio (intermediate)
+
+    // Constants for Saturation Vapor Pressure (Buck equation - valid for 0-100°C)
+    c1 : Real := -5800.2206;
+    c2 : Real := 1.3914993;
+    c3 : Real := -0.04860239;
+    c4 : Real := 0.00004176476;
+    c5 : Real := -0.0000000007215;
+    c6 : Real := 2.0543323;
+
+    // Constants for Saturation Vapor Pressure (Ice phase - sub 0°C)
+    c1_ice : Real := -5674.5359;
+    c2_ice : Real := 6.3925247;
+    c3_ice : Real := -0.009677843;
+    c4_ice : Real := 0.00000062215701;
+    c5_ice : Real := 0.000000002074528;
+    c6_ice : Real := -0.0000000000009484024;
+    c7_ice : Real := 4.1635019;
+
+    // Imperial Constants for Enthalpy (approximate for BTU/lb_dry_air)
+    C_pa_imp : Real := 0.240;   // Specific heat of dry air at constant pressure (BTU/lb.F)
+    C_pv_imp : Real := 0.444;   // Specific heat of water vapor at constant pressure (BTU/lb.F)
+    h_fg_imp : Real := 1061.0;  // Latent heat of vaporization at 0F (approx.) (BTU/lb)
+    MW_Ratio : Real := 0.62198; // Ratio of molecular weight of water to dry air (approx 0.622)
+END_VAR
+
+BEGIN
+
+    #CalculationError := FALSE; // Reset error flag
+
+    // --- Input Validation ---
+    IF (#RelativeHumidity_Pct < 0.0) OR (#RelativeHumidity_Pct > 100.0) THEN
+        #CalculationError := TRUE;
+        RETURN; // Exit FB if input is invalid
+    END_IF;
+
+    // --- Convert Inputs ---
+    #RelativeHumidity_Decimal := #RelativeHumidity_Pct / 100.0;
+    #AtmosphericPressure_Pa := #AtmosphericPressure_hPa * 100.0; // hPa to Pa
+
+    // --- Convert Fahrenheit to Celsius and Kelvin for internal formulas ---
+    #DryBulbTemp_C := (#DryBulbTemp_F - 32.0) * 5.0 / 9.0;
+    #Temp_K := #DryBulbTemp_C + 273.15;
+
+    // --- Saturation Vapor Pressure Calculation (Psat_Pa) ---
+    IF #DryBulbTemp_C >= 0.0 THEN
+        // Buck equation for water phase (0-100 C)
+        #Psat_Pa := EXP(#c1/#Temp_K + #c2 + #c3*#Temp_K + #c4*EXPT(#Temp_K, 2.0) + #c5*EXPT(#Temp_K, 3.0) + #c6*LN(#Temp_K));
+    ELSE
+        // ASHRAE Handbook correlation for ice phase (sub 0 C)
+        #Psat_Pa := EXP(#c1_ice/#Temp_K + #c2_ice + #c3_ice*#Temp_K + #c4_ice*EXPT(#Temp_K, 2.0) + #c5_ice*EXPT(#Temp_K, 3.0) + #c6_ice*EXPT(#Temp_K, 4.0) + #c7_ice*LN(#Temp_K));
+    END_IF;
+
+    // Assign to output for diagnostics
+    #SaturationVaporPressure_Pa := #Psat_Pa;
+
+    // --- Partial Vapor Pressure (Pv_Pa) ---
+    #Pv_Pa := #RelativeHumidity_Decimal * #Psat_Pa;
+
+    // Assign to output for diagnostics
+    #PartialVaporPressure_Pa := #Pv_Pa;
+
+    // --- Humidity Ratio (lb_water / lb_dry_air) ---
+    // w = (MW_Ratio * Pv) / (Patm - Pv)
+    IF (#AtmosphericPressure_Pa - #Pv_Pa) > 0.0 THEN
+        #HumidityRatio_Calc := (#MW_Ratio * #Pv_Pa) / (#AtmosphericPressure_Pa - #Pv_Pa);
+    ELSE
+        // Avoid division by zero or negative denominator (highly unlikely with valid inputs)
+        #CalculationError := TRUE;
+        #HumidityRatio_Calc := 0.0;
+        RETURN;
+    END_IF;
+
+    // Assign to output
+    #HumidityRatio_lb_lb := #HumidityRatio_Calc;
+
+    // --- Enthalpy Calculation (BTU/lb_dry_air) ---
+    // h = C_pa_imp * T_f + HumidityRatio_Calc * (h_fg_imp + C_pv_imp * T_f)
+    #Enthalpy_BTU_lb := (#C_pa_imp * #DryBulbTemp_F) + (#HumidityRatio_Calc * (#h_fg_imp + (#C_pv_imp * #DryBulbTemp_F)));
+
+END_FUNCTION_BLOCK

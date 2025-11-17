@@ -1,0 +1,46 @@
+FUNCTION_BLOCK FB_CondensationPrevention
+VERSION : 0.1
+AUTHOR  : AI_Assistant
+
+VAR_INPUT
+    Tdp_sp_User : Real; // User's desired dew point setpoint
+    PlenumSurfaceTemp_1 : Real; // Sensor reading for critical plenum surface 1
+    PlenumSurfaceTemp_2 : Real; // Sensor reading for critical plenum surface 2
+    ActualDewPoint_F : Real; // Calculated from FB_CalculateAirEnthalpy outputs
+    Tdp_MinMargin : Real := 5.0; // Minimum margin in F (e.g., dew point must be at least 5F below surface temp)
+END_VAR
+
+VAR_OUTPUT
+    HumidifierEnable : Bool;
+    CurrentTdp_Limit : Real;
+END_VAR
+
+VAR_TEMP
+    Tdp_Limit_1 : Real;
+    Tdp_Limit_2 : Real;
+END_VAR
+
+BEGIN
+
+    // Call your Dew Point Calculation Function (e.g., FC_CalculateDewPoint)
+    // FC_CalculateDewPoint(PartialVaporPressure_Pa := FB_CalculateAirEnthalpy_DB.PartialVaporPressure_Pa,
+    //                     DryBulbTemp_F := FB_CalculateAirEnthalpy_DB.DryBulbTemp_F, // May be needed for some Tdp calcs
+    //                     DewPoint_F := #ActualDewPoint_F);
+
+    // Determine critical dew point limits
+    #Tdp_Limit_1 := #PlenumSurfaceTemp_1 - #Tdp_MinMargin;
+    #Tdp_Limit_2 := #PlenumSurfaceTemp_2 - #Tdp_MinMargin;
+    #CurrentTdp_Limit := MIN(#Tdp_Limit_1, #Tdp_Limit_2); // Take the lowest (most restrictive) limit
+
+    // Override Humidifier Control
+    IF #ActualDewPoint_F >= #CurrentTdp_Limit THEN
+        // Dew point is too high, risk of condensation!
+        // Reduce humidifier output, or even temporarily disable it.
+        // This would typically override the PID_HumidityRatio output directly.
+        #HumidifierEnable := FALSE; // Or force PID output to 0
+        // You might also log an alarm here
+    ELSE
+        #HumidifierEnable := TRUE; // Allow humidifier to operate normally
+    END_IF;
+
+END_FUNCTION_BLOCK

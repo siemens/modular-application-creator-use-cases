@@ -1,6 +1,6 @@
 # Unit Test Plan: EM-400 Damper Control
 
-**Version:** 1.0
+**Version:** 2.0
 **Date:** September 15, 2025
 **Purpose:** To define the test cases for verifying the functionality of the `FB400_EM_Damper` Function Block.
 
@@ -24,6 +24,19 @@ To ensure the damper module correctly drives to the minimum ventilation position
 | 1.1 | | `#Instance_DB.Econ_Mode_Active` | `FALSE` | Ensure economizer is off. |
 | 1.2 | | `#Instance_DB.UDT.Min_Fresh_Air_Pos`| `20.0` | Set min position to 20%. |
 | 1.3 | *Evaluate* | `#Instance_DB.UDT.Damper_Pos_Cmd_AO`| `20.0` | **Check:** Damper command is at min position. |
+
+### Test Case 4: Min Fresh Air Position Override
+
+*   **Test Name:** `TC4_Min_Fresh_Air_Config`
+*   **Objective:** Verify the damper command correctly uses the `Min_Fresh_Air_Pos` setpoint.
+*   **Test Steps:**
+
+| Test ID | Test Step Name | Parameter | Value | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| 4.0 | **Initial State** | `#Instance_DB.Enable` | `TRUE` | Enable the module. |
+| 4.1 | | `#Instance_DB.Econ_Mode_Active` | `FALSE` | Ensure economizer is off. |
+| 4.2 | | `#Instance_DB.UDT.Min_Fresh_Air_Pos`| `25.0` | Set a new min position of 25%. |
+| 4.3 | *Evaluate* | `#Instance_DB.UDT.Damper_Pos_Cmd_AO`| `25.0` | **Check:** Damper command now follows the new setpoint. |
 
 ### Test Case 2: Economizer Mode Passthrough
 
