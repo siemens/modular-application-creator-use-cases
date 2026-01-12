@@ -10,11 +10,11 @@
     <releaseNotes>#rnote_en##rnote_de##rnote_zh#</releaseNotes>
     <copyright>Copyright © SIEMENS AG</copyright>
     <dependencies>
-      <group targetFramework=".NETFramework4.8">
+      <group>
         <dependency id="Newtonsoft.Json" version="13.0.3" />
       </group>
     </dependencies>
-    <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V19.0</tags>
+    <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V19.0 FAILSAFE_CPU_REQUIRED</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.8" />
       <frameworkAssembly assemblyName="Microsoft.VisualBasic" targetFramework=".NETFramework4.8" />
