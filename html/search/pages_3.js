@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['help_20for_20this_20documentation_0',['Help for this documentation',['../index.html#help-id',1,'']]],
-  ['how_20to_20integrate_20libraries_1',['How to integrate libraries',['../index.html#section-id',1,'']]],
-  ['how_20to_20use_20different_20lanugages_2',['How to use different lanugages',['../index.html#localization-id',1,'']]]
+  ['a_20v20_20module_20to_20v21_20module_20upgrade_20id_0',['How to upgrade a v20 module to v21 {# module-upgrade-id}',['../index.html#autotoc_md2',1,'']]],
+  ['already_20have_20collaboration_20framework_20installed_20on_20your_20project_1',['&lt;b&gt;Fix 1&lt;/b&gt; - If you already have collaboration framework installed on your project.',['../index.html#autotoc_md4',1,'']]],
+  ['and_20is_20not_20planned_20to_20change_20it_20for_20the_20collaboration_20framework_2',['&lt;b&gt;Fix 3&lt;/b&gt; - If your project has direct dll references and is not planned to change it for the Collaboration framework',['../index.html#autotoc_md6',1,'']]]
 ];

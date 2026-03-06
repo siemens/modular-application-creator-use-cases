@@ -1,13 +1,22 @@
 var searchData=
 [
-  ['mac_5fuse_5fcases_0',['MAC_use_cases',['../namespace_m_a_c__use__cases.html',1,'']]],
-  ['mac_5fuse_5fcases_3a_3amodel_1',['Model',['../namespace_m_a_c__use__cases_1_1_model.html',1,'MAC_use_cases']]],
-  ['mac_5fuse_5fcases_3a_3amodel_3a_3ausecases_2',['UseCases',['../namespace_m_a_c__use__cases_1_1_model_1_1_use_cases.html',1,'MAC_use_cases::Model']]],
-  ['mac_5fuse_5fcasesem_3',['MAC_use_casesEM',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html',1,'MAC_use_cases::Model']]],
-  ['maintelegramnumber_4',['MainTelegramNumber',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#acbb2f88844c6c3773a2cf5d4e3059fc6',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
-  ['maximumvelocity_5',['MaximumVelocity',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#a33884cfbed1894671bda77459cc196a4',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
-  ['modellist_6',['ModelList',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html#a8553b55cc39aab35c1e9a0d3d1abea4e',1,'MAC_use_cases::Model::UseCases::NonTIAProjectBased']]],
-  ['modeltoserialize_7',['ModelToSerialize',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html',1,'MAC_use_cases.Model.UseCases.ModelToSerialize'],['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html#a8edb7fb028a11f369fb619ba3112d402',1,'MAC_use_cases.Model.UseCases.ModelToSerialize.ModelToSerialize()']]],
-  ['motioncontrolversion_8',['MotionControlVersion',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#add91822485c207e823b0fca7c9c0dc00',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
-  ['myto_9',['MyTo',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#ad72e2cc69e2635f82c335634ae417b4e',1,'MAC_use_cases::Model::MAC_use_casesEM']]]
+  ['generalsupport_0',['GeneralSupport',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html',1,'MAC_use_cases::Model::UseCases']]],
+  ['generateblock_1',['GenerateBlock',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#aedce987a76e148aaf68d196ab91327d4',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generateglobaldatablock_2',['GenerateGlobalDataBlock',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a0e37bca94696fd314ca9137944280bbc',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generatemultiinstancefb_3',['GenerateMultiInstanceFB',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a17a82e9f89386b2646840fc5b8d3f048',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generateob_5fmain_4',['GenerateOB_Main',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a402cc20191963a0871d53273afbf909d',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generateobwithmultiplecalls_5',['GenerateOBWithMultipleCalls',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a8b2bff310be5f504302fcfb93eb12f50',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generates120_6',['GenerateS120',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a7d5006c4913789ae5058a3e5509d0203',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['generates210_7',['GenerateS210',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a782897c3d537e943b5d7a1dfb57c812d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['generatescreenfrommastercopy_8',['GenerateScreenFromMastercopy',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html#a3315703cfbf49ca6581c56508e99aec9',1,'MAC_use_cases::Model::UseCases::IntegrateLibraries']]],
+  ['genericblockcreation_9',['GenericBlockCreation',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html',1,'MAC_use_cases::Model::UseCases']]],
+  ['getcellvalueasstring_10',['GetCellValueAsString',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation_excel_based.html#a7f684b029e82b0902a37e7f100579fa6',1,'MAC_use_cases::Model::UseCases::HardwareGenerationExcelBased']]],
+  ['getlocalizedstring_11',['GetLocalizedString',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#aff97a98b46f419847390811bd027b05d',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getopennessdeviceitem_12',['GetOpennessDeviceItem',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a489cbf03993600d0c9fde73637efb946',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getopennessproject_13',['GetOpennessProject',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a5463d99c4c5089045b15a2c12f19496d',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getorcreatedevice_14',['GetOrCreateDevice',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a2247d2a45fea4739a31b6f8ff786ccf9',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['getorcreatehmisoftware_15',['GetOrCreateHMISoftware',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#aff273d38f036f9f1b8b1c603a5422efb',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['getorcreatesoftwareunit_16',['GetOrCreateSoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html#a609a670185b4e3172043b74ff2263026',1,'MAC_use_cases::Model::UseCases::SoftwareUnits']]],
+  ['getorcreatesubnet_17',['GetOrCreateSubnet',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#af53a3919d93de83d94c0b58213a9339d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['getsafetysoftwareunit_18',['GetSafetySoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html#a1dbe558328e20da047c8bad1a5033a18',1,'MAC_use_cases::Model::UseCases::SoftwareUnits']]]
 ];
