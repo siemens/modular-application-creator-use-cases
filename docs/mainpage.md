@@ -53,7 +53,7 @@ Create KeyValue pairs in the ResourceDictionaries with matching Key and use them
         <TextBlock Text="{DynamicResource SampleText}" />
 ```
 
-## How to upgrade a v20 module to v21 {# module-upgrade-id}
+## How to upgrade a v20 module to v21 {#module-upgrade-id}
 
 There have been major changes in the new TIA Portal V21 Openness API. This API **is not backward compatible** with any previous APIs, therefore every Openness user **must upgrade** their project to the latest API. To do this task with Siemens Modular Application Creator Equipment Modules, this manual will make it easier.
 
