@@ -110,7 +110,7 @@ Quick Navigation</h1>
 </li>
 <li><a class="el" href="#section-id">How to integrate libraries</a></li>
 <li><a class="el" href="#localization-id">How to use different lanugages</a></li>
-<li>[How to upgrade a v20 module to v21] (module-upgrade-id)</li>
+<li>[How to upgrade a v20 module to v21] (<a class="el" href="#module-upgrade-id">How to upgrade a v20 module to v21</a>)</li>
 <li><a class="el" href="#help-id">Help for this documentation</a></li>
 </ol>
 <h1 class="doxsection"><a class="anchor" id="section-id"></a>
@@ -134,17 +134,17 @@ How to use different lanugages</h1>
 <p><img src="../MAC_use_cases/Images/LocalizationXamlResourceDictionary.png" alt="XAML ResourceDictionary" class="inline"/></p>
 <p>Create KeyValue pairs in the ResourceDictionaries with matching Key and use them with DynamicResource Binding in your XAML files:</p>
 <div class="fragment"><div class="line">&lt;TextBlock Text=&quot;{DynamicResource SampleText}&quot; /&gt;</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
-How to upgrade a v20 module to v21 {# module-upgrade-id}</h1>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="module-upgrade-id"></a>
+How to upgrade a v20 module to v21</h1>
 <p>There have been major changes in the new TIA Portal V21 Openness API. This API <b>is not backward compatible</b> with any previous APIs, therefore every Openness user <b>must upgrade</b> their project to the latest API. To do this task with Siemens Modular Application Creator Equipment Modules, this manual will make it easier.</p>
 <p>There are two easy ways to do it, if you already have the <b>Siemens Collaboration Framework</b> installed in your project, or if you don’t have it installed yet but agree to install it. This framework comes with MAC-MB by default and can only be missing in case of (un)intended removal, or in a case of a very old EQM project.</p>
 <p>The third, bit harder way to do it is to direct reference the new dll-s into the csproj.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
 How does it work if the EQM is not upgraded?</h2>
 <p>If you install the module to MAC V21 and generate, this is the result:</p>
 <p><img src="../MAC_use_cases/Images/V20_To_V21_GenerationError.png" alt="Generation Error" class="inline"/></p>
 <p>The v20 Siemens.Engineering.dll is not compatible with v21 dll-s, and also it does not exist in v21 installs, so MAC throws an assemby load exception. (This is expected behavior in this case).</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 <b>Fix 1</b> - If you already have collaboration framework installed on your project.</h3>
 <p>If your project has collaboration framework then the changeover can be very easy.</p>
 <ol type="1">
@@ -167,7 +167,7 @@ How does it work if the EQM is not upgraded?</h2>
 <p class="startli"><img src="../MAC_use_cases/Images/V20_To_V21_OldEngineeringDll.png" alt="MAC Old Engineering DLL" class="inline"/></p>
 </li>
 </ol>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 <b>Fix 2</b> - If you do not have the Collaboration Framework installed on your project</h3>
 <p>If you do not have a nuget package reference for the Collaboration Framework, your module might use a direct dll reference to Siemens.Engineering.dll. The easiest way to fix this is to remove the dll reference and install the Collaboration Framework.</p><ol type="1">
 <li>Remove all references for Siemens.Engineering.dll from your project.</li>
@@ -181,7 +181,7 @@ How does it work if the EQM is not upgraded?</h2>
 </li>
 <li>Please Follow <b>Fix 1</b> from point **#4** – Update the NuGet packages.</li>
 </ol>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 <b>Fix 3</b> - If your project has direct dll references and is not planned to change it for the Collaboration framework</h3>
 <ol type="1">
 <li>Locate your TIA Portal install path, and find the API dll-s. (Usually: C:\Program Files\Siemens\Automation\Portal 21\PublicAPI\V21\net48).</li>
@@ -198,13 +198,13 @@ How does it work if the EQM is not upgraded?</h2>
 </ol>
 <h1 class="doxsection"><a class="anchor" id="help-id"></a>
 Help for this documentation</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Classes</h2>
 <p>The "Classes" section explains the classes used in the project. In addition to the explanation of the class and a first overview of all functions used in the class, the page contains a detailed explanation of all functions of the class.</p>
 <p><img src="../MAC_use_cases/Images/ClassExplanation.png" alt="Class Explanation" class="inline"/></p>
 <p>In all explanatory sections there is a short literal explanation of the function and its parameters, as well as a picture of the resulting result in the Tia Portal after generation. Also included is the used code of the function and a link to the code of the whole class.</p>
 <p><img src="../MAC_use_cases/Images/FunctionExplanation.png" alt="Function Explanation" class="inline"/></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 Files</h2>
 <p>The above-mentioned link to the class code then points to the files contained in the "Files" section. There, all classes in the C# code are included again to show how the classes look as simple as possible. It is also possible to copy the code to reuse it in your own modules.</p>
 <p><img src="../MAC_use_cases/Images/CodeExplanation.png" alt="Code Explanation" class="inline"/> </p>

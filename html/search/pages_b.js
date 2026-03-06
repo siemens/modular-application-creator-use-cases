@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['module_20to_20v21_20module_20upgrade_20id_0',['How to upgrade a v20 module to v21 {# module-upgrade-id}',['../index.html#autotoc_md2',1,'']]],
-  ['module_20upgrade_20id_1',['How to upgrade a v20 module to v21 {# module-upgrade-id}',['../index.html#autotoc_md2',1,'']]]
+  ['module_20to_20v21_0',['How to upgrade a v20 module to v21',['../index.html#module-upgrade-id',1,'']]]
 ];
