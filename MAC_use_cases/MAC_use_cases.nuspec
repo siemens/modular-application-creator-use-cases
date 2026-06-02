@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MAC_use_cases</id>
-    <version>1.0.9342-pre20250730100030</version>
+    <version>1.0.9433-pre20251029095401</version>
     <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
@@ -10,12 +10,12 @@
     <releaseNotes>#rnote_en##rnote_de##rnote_zh#</releaseNotes>
     <copyright>Copyright © SIEMENS AG</copyright>
     <dependencies>
-      <group targetFramework=".NETFramework4.8">
+      <group>
         <dependency id="Newtonsoft.Json" version="13.0.3" />
         <dependency id="Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials" version="19.0.3" />
       </group>
     </dependencies>
-    <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V19.0</tags>
+    <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V19.0 FAILSAFE_CPU_REQUIRED</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.8" />
       <frameworkAssembly assemblyName="Microsoft.VisualBasic" targetFramework=".NETFramework4.8" />

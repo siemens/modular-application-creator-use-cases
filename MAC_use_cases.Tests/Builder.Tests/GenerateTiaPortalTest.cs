@@ -11,6 +11,8 @@ namespace MAC_use_cases.Tests.Builder.Tests
         [Test, MacGenerationTest]
         public void GenerateTiaPortal_Test()
         {
+            //SyncTiaPortalDataToMacData(); necassary to generate Subnetconnections, if not needed it can be deleted to save time
+            SyncTiaPortalDataToMacData();
             GenerateTiaPortal();
             OpenProjectInNewTiaPortalWithUi();
         }

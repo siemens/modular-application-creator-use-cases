@@ -1,150 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4C3974F2-4EFF-4168-A68E-EC9E5CACCDA1}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Module.Tests</RootNamespace>
-    <AssemblyName>Module.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProductVersion>8.0.30703</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>4c3974f2-4eff-4168-a68e-ec9e5caccda1</ProjectGuid>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>Module.Tests</RootNamespace>
+		<AssemblyName>Module.Tests</AssemblyName>
+		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+		<FileAlignment>512</FileAlignment>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+ 		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
   <PropertyGroup>
     <EqmProjectPath Condition="Exists('..\MAC_use_cases\MAC_use_cases.csproj')">..\MAC_use_cases\MAC_use_cases.csproj</EqmProjectPath>
     <EqmProjectPath Condition="Exists('..\MAC_use_cases.csproj')">..\MAC_use_cases.csproj</EqmProjectPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
+		<Reference Include="System"/>
+		
+		<Reference Include="System.Core"/>
+		<Reference Include="System.Xml.Linq"/>
+		<Reference Include="System.Data.DataSetExtensions"/>
+		
+		
+		<Reference Include="Microsoft.CSharp"/>
+ 		
+		<Reference Include="System.Data"/>
+		<Reference Include="System.Xml"/>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="Properties\AssemblyInfo.cs" />
+	</ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="..\MAC_use_cases\Resources\**\*.xaml" Link="Resources\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Copy always" />
     <EmbeddedResource Include="..\MAC_use_cases\TiaImports\**\*.zip" Link="Resources\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Copy always" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\MAC_use_cases\TiaImports\CustomClasses\**\*.cs" Link="CustomClasses\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\LIBelt_Manager.cs">
-      <Link>GeneratedClasses\LIBelt_Manager.cs</Link>
-    </Compile>
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\LIBelt_V1_1_4_V17_V18_V19.cs">
-      <Link>GeneratedClasses\LIBelt_V1_1_4_V17_V18_V19.cs</Link>
-    </Compile>
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\Lib_MAC_use_cases.cs">
-      <Link>GeneratedClasses\Lib_MAC_use_cases.cs</Link>
-    </Compile>
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\myDataType.cs">
-      <Link>GeneratedClasses\myDataType.cs</Link>
-    </Compile>
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\MyFunctionBlock.cs">
-      <Link>GeneratedClasses\MyFunctionBlock.cs</Link>
-    </Compile>
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\MyFunctionBlock_FailSafe.cs">
-      <Link>GeneratedClasses\MyFunctionBlock_FailSafe.cs</Link>
-    </Compile>
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\MyFunctionBlock_Typed.cs">
-      <Link>GeneratedClasses\MyFunctionBlock_Typed.cs</Link>
-    </Compile>
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\pMiddleLayer.cs">
-      <Link>GeneratedClasses\pMiddleLayer.cs</Link>
-    </Compile>
-    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\Sollas.cs">
-      <Link>GeneratedClasses\Sollas.cs</Link>
-    </Compile>
+    <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\**\*.cs" Link="GeneratedClasses\%(RecursiveDir)%(Filename)%(Extension)" />
     <Compile Include="BUILDER.TESTS\MAC_use_casesBuilderTests.cs" />
     <Compile Include="BUILDER.TESTS\GenerateTiaPortalTest.cs" />
     <Compile Include="TESTENVIRONMENT\MacGenerationTestBaseMAC_use_cases.cs" />
     <Compile Include="TESTENVIRONMENT\MacFunctionTestBaseMAC_use_cases.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Remove="Resources\BaseTestProject.zap19" />
+    <!--<None Remove="Resources\BaseTestProject.zap20" />-->
     <None Include="Siemens.ModularApplicationCreator.Testenvironment_Documentation_V1.0.pdf" />
     <None Include="App.config" />
   </ItemGroup>
+
+
+
   <ItemGroup>
-    <PackageReference Include="Siemens.ModularApplicationCreator-V19.2.10.TestEnvironment" Version="1.0.1.204" />
+    <PackageReference Include="Siemens.ModularApplicationCreator.Testenvironment" Version="[20.1.6-0,)" IncludePrerelease="true" />
     <PackageReference Include="StrongNamer" Version="0.2.5" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="$(EqmProjectPath)" />
   </ItemGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="Resources\MacTestenvironmentBaseProject.zap19" />
+    <EmbeddedResource Include="Resources\MacTestenvironmentBaseProject.zap20" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="StoreOriginalReferencePath" BeforeTargets="ModifyReferencePathForStrongNamer">
-    <ItemGroup>
-      <OriginalReferencePath Include="@(ReferencePath)" />
-    </ItemGroup>
-  </Target>
-  <Target Name="ModifyReferencePathForStrongNamer" BeforeTargets="StrongNamerTarget">
-    <PropertyGroup>
-      <EqmBinDllPath Condition="Exists('$(SolutionDir)MAC_use_cases\MAC_use_cases.csproj')">$(SolutionDir)MAC_use_cases\bin\$(Configuration)\MAC_use_cases.dll</EqmBinDllPath>
-      <EqmBinDllPath Condition="Exists('$(SolutionDir)MAC_use_cases.csproj')">$(SolutionDir)bin\$(Configuration)\MAC_use_cases.dll</EqmBinDllPath>
-    </PropertyGroup>
-    <!-- Redefine ReferencePath excluding the specific reference -->
-    <ItemGroup>
-      <DllReferencesFromOtherProject Include="@(Reference)" Condition="'%(Reference.HintPath)' != '' &#xD;&#xA;						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('ben.demystifier'))&#xD;&#xA;						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('system'))&#xD;&#xA;						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('siemens.collaboration'))&#xD;&#xA;						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('siemens.modularapplicationcreator'))&#xD;&#xA;						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('castle.core'))&#xD;&#xA;						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('microsoft.bcl.asyncinterfaces'))&#xD;&#xA;						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('nunit'))" />
-      <ReferencePath Remove="$(EqmBinDllPath)" />
-      <ReferencePath Remove="@(DllReferencesFromOtherProject)" />
-    </ItemGroup>
-    <!-- Output the modified reference path -->
-    <Message Text="Modified ReferencePath: @(ReferencePath)" Importance="high" />
-  </Target>
-  <Target Name="RestoreOriginalReferencePath" AfterTargets="StrongNamerTarget">
-    <ItemGroup>
-      <ReferencePath Include="@(OriginalReferencePath)" />
-    </ItemGroup>
-    <Message Text="Restored ReferencePath: @(ReferencePath)" Importance="high" />
-  </Target>
-  <Target Name="UpdateAppConfig" AfterTargets="Build">
-    <ItemGroup>
-      <Assemblies Include="$(OutputPath)Siemens.Automation.ModAppCreator.Core.dll" />
-    </ItemGroup>
-    <GetAssemblyIdentity AssemblyFiles="@(Assemblies)">
-      <Output TaskParameter="Assemblies" ItemName="AssemblyIdentities" />
-    </GetAssemblyIdentity>
-    <ReplaceFileText Filename="App.config" NewAssemblyVersion="@(AssemblyIdentities->'%(Version)')" />
-  </Target>
-  <UsingTask TaskName="ReplaceFileText" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
-    <ParameterGroup>
-      <Filename ParameterType="System.String" Required="true" />
-      <NewAssemblyVersion ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="System.Text.RegularExpressions" />
-      <Code Type="Fragment" Language="cs"><![CDATA[
+  
+	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+
+	<Target Name="StoreOriginalReferencePath" BeforeTargets="ModifyReferencePathForStrongNamer">
+		<ItemGroup>
+			<OriginalReferencePath Include="@(ReferencePath)" />
+		</ItemGroup>
+	</Target>
+
+	<Target Name="ModifyReferencePathForStrongNamer" BeforeTargets="StrongNamerTarget">
+		<PropertyGroup>
+			<EqmBinDllPath Condition="Exists('$(SolutionDir)MAC_use_cases\MAC_use_cases.csproj')">$(SolutionDir)MAC_use_cases\bin\$(Configuration)\MAC_use_cases.dll</EqmBinDllPath>
+			<EqmBinDllPath Condition="Exists('$(SolutionDir)MAC_use_cases.csproj')">$(SolutionDir)bin\$(Configuration)\MAC_use_cases.dll</EqmBinDllPath>
+		</PropertyGroup>
+		<!-- Redefine ReferencePath excluding the specific reference -->
+		<ItemGroup>
+			<DllReferencesFromOtherProject Include="@(Reference)" Condition="'%(Reference.HintPath)' != '' 
+						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('ben.demystifier'))
+						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('system'))
+						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('siemens.collaboration'))
+						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('siemens.modularapplicationcreator'))
+						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('castle.core'))
+						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('microsoft.bcl.asyncinterfaces'))
+						   And !$([System.String]::Copy('%(Reference.HintPath)').Contains('nunit'))"/>
+			<ReferencePath Remove="$(EqmBinDllPath)" />
+			<ReferencePath Remove="@(DllReferencesFromOtherProject)" />
+		</ItemGroup>
+		<!-- Output the modified reference path -->
+		<Message Text="Modified ReferencePath: @(ReferencePath)" Importance="high" />
+	</Target>
+
+	<Target Name="RestoreOriginalReferencePath" AfterTargets="StrongNamerTarget">
+		<ItemGroup>
+			<ReferencePath Include="@(OriginalReferencePath)" />
+		</ItemGroup>
+		<Message Text="Restored ReferencePath: @(ReferencePath)" Importance="high" />
+	</Target>
+
+	<Target Name="UpdateAppConfig" AfterTargets="Build">
+		<ItemGroup>
+			<Assemblies Include="$(OutputPath)Siemens.Automation.ModAppCreator.Core.dll" />
+		</ItemGroup>
+
+		<GetAssemblyIdentity AssemblyFiles="@(Assemblies)">
+			<Output TaskParameter="Assemblies" ItemName="AssemblyIdentities" />
+		</GetAssemblyIdentity>
+
+		<ReplaceFileText
+			Filename="App.config"
+			NewAssemblyVersion="@(AssemblyIdentities->'%(Version)')" />
+	</Target>
+
+	<UsingTask TaskName="ReplaceFileText" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+		<ParameterGroup>
+			<Filename ParameterType="System.String" Required="true" />
+			<NewAssemblyVersion ParameterType="System.String" Required="true" />
+		</ParameterGroup>
+		<Task>
+			<Using Namespace="System" />
+			<Using Namespace="System.IO" />
+			<Using Namespace="System.Text.RegularExpressions" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
 				    File.WriteAllText(
 				        Filename,
 				        Regex.Replace(File.ReadAllText(Filename), "(?<=<assemblyIdentity name=\"Siemens\\.Automation\\.ModAppCreator\\.Core\"[^>]*>\\s*<bindingRedirect[^>]*newVersion=\")[^\"]*", NewAssemblyVersion)
@@ -153,7 +158,9 @@
 				        Filename,
 				        Regex.Replace(File.ReadAllText(Filename), "(?<=<assemblyIdentity name=\"Siemens\\.Automation\\.ModAppCreator\\.Basics\"[^>]*>\\s*<bindingRedirect[^>]*newVersion=\")[^\"]*", NewAssemblyVersion)
 				    );
-				  ]]></Code>
-    </Task>
-  </UsingTask>
+				  ]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
 </Project>
