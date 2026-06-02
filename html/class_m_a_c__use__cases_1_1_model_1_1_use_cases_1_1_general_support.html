@@ -105,11 +105,18 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a489cbf03993600d0c9fde73637efb946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the CPU DeviceItem from a TIA Portal device using the Openness API.  <br /></td></tr>
 <tr class="memitem:a5463d99c4c5089045b15a2c12f19496d" id="r_a5463d99c4c5089045b15a2c12f19496d"><td class="memItemLeft" align="right" valign="top">static Project&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5463d99c4c5089045b15a2c12f19496d">GetOpennessProject</a> (Siemens.Automation.ModularApplicationCreator.Tia.Openness.Project tiaProject)</td></tr>
 <tr class="memdesc:a5463d99c4c5089045b15a2c12f19496d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This call returns the openness object of the TIA Portal project.  <br /></td></tr>
+<tr class="memitem:ae067d7fdc1c3511c7840899bd84eb129" id="r_ae067d7fdc1c3511c7840899bd84eb129"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae067d7fdc1c3511c7840899bd84eb129">ReadAdditionalInformationsFromTIAPortalProject</a> (<a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html">MAC_use_casesEM</a> module, TiaTemplateContext tiaTemplateContext)</td></tr>
+<tr class="memdesc:ae067d7fdc1c3511c7840899bd84eb129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads additional information from the TIA Portal project and populates MAC_use_casesEM.PlcBlockNames with the names of all PLC blocks found across all block groups recursively. This method is intended to be called from MAC_use_casesEM.ReadTiaPortalAfterAssignOrUpdate when <a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#a5dec75864ddc1d0c8e008f0827036763" title="Controls whether additional readout from TIA Portal is required. Set this to true when you need to re...">MAC_use_casesEM.IsAdditionalReadOutRequired</a> returns <code>true</code>.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-static-methods" class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:ae9c138aa40277ab78d1ad0097abf6f20" id="r_ae9c138aa40277ab78d1ad0097abf6f20"><td class="memItemLeft" align="right" valign="top">static List&lt; PlcBlock &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9c138aa40277ab78d1ad0097abf6f20">GetAllBlocksRecursive</a> (PlcBlockGroup group)</td></tr>
+<tr class="memdesc:ae9c138aa40277ab78d1ad0097abf6f20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively collects all PlcBlock objects from the given PlcBlockGroup and all its nested subgroups.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This are functions that support you in different ways while using Modular Application Creator. </p>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00013">13</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00019">19</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a5e4a55f6f80ee7681d5ab544ea1075b1" name="a5e4a55f6f80ee7681d5ab544ea1075b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5e4a55f6f80ee7681d5ab544ea1075b1">&#9670;&#160;</a></span>LogMessage()</h2>
@@ -156,10 +163,10 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00022">22</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span>        {</div>
-<div class="line"><span class="lineno">   24</span>            MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);</div>
-<div class="line"><span class="lineno">   25</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00028">28</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   29</span>        {</div>
+<div class="line"><span class="lineno">   30</span>            MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);</div>
+<div class="line"><span class="lineno">   31</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -195,10 +202,10 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The localized string value corresponding to the specified key. If the key is not found, returns an empty string or the key itself (depending on the LanguageService implementation) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00036">36</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span>        {</div>
-<div class="line"><span class="lineno">   38</span>            <span class="keywordflow">return</span> MacManagement.LanguageService.GetString(key);</div>
-<div class="line"><span class="lineno">   39</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00042">42</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   43</span>        {</div>
+<div class="line"><span class="lineno">   44</span>            <span class="keywordflow">return</span> MacManagement.LanguageService.GetString(key);</div>
+<div class="line"><span class="lineno">   45</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -235,11 +242,11 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The first DeviceItem classified as CPU, or null if no CPU is found</dd></dl>
 <p>This method performs a type conversion from the internal Device type to the Openness API Device type, allowing access to the Openness object model for device navigation. </p>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00050">50</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>        {</div>
-<div class="line"><span class="lineno">   52</span>            var opennessDevice = (Siemens.Engineering.HW.Device)device;</div>
-<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">return</span> opennessDevice.DeviceItems.FirstOrDefault(x =&gt; x.Classification == DeviceItemClassifications.CPU);</div>
-<div class="line"><span class="lineno">   54</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00056">56</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   57</span>        {</div>
+<div class="line"><span class="lineno">   58</span>            var opennessDevice = (Siemens.Engineering.HW.Device)device;</div>
+<div class="line"><span class="lineno">   59</span>            <span class="keywordflow">return</span> opennessDevice.DeviceItems.FirstOrDefault(x =&gt; x.Classification == DeviceItemClassifications.CPU);</div>
+<div class="line"><span class="lineno">   60</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -274,10 +281,126 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00060">60</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>        {</div>
-<div class="line"><span class="lineno">   63</span>            <span class="keywordflow">return</span> (Project)tiaProject;</div>
-<div class="line"><span class="lineno">   64</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00066">66</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   68</span>        {</div>
+<div class="line"><span class="lineno">   69</span>            <span class="keywordflow">return</span> (Project)tiaProject;</div>
+<div class="line"><span class="lineno">   70</span>        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae067d7fdc1c3511c7840899bd84eb129" name="ae067d7fdc1c3511c7840899bd84eb129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae067d7fdc1c3511c7840899bd84eb129">&#9670;&#160;</a></span>ReadAdditionalInformationsFromTIAPortalProject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MAC_use_cases.Model.UseCases.GeneralSupport.ReadAdditionalInformationsFromTIAPortalProject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html">MAC_use_casesEM</a></td>          <td class="paramname"><span class="paramname"><em>module</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TiaTemplateContext</td>          <td class="paramname"><span class="paramname"><em>tiaTemplateContext</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads additional information from the TIA Portal project and populates MAC_use_casesEM.PlcBlockNames with the names of all PLC blocks found across all block groups recursively. This method is intended to be called from MAC_use_casesEM.ReadTiaPortalAfterAssignOrUpdate when <a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#a5dec75864ddc1d0c8e008f0827036763" title="Controls whether additional readout from TIA Portal is required. Set this to true when you need to re...">MAC_use_casesEM.IsAdditionalReadOutRequired</a> returns <code>true</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">module</td><td>The equipment module whose MAC_use_casesEM.PlcBlockNames collection will be updated with the retrieved block names </td></tr>
+    <tr><td class="paramname">tiaTemplateContext</td><td>The TIA Portal context providing access to the project and its devices, used to locate the CPU and its associated PLC software </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00088">88</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   89</span>            {</div>
+<div class="line"><span class="lineno">   90</span>                DeviceItem plc = <span class="keyword">null</span>;</div>
+<div class="line"><span class="lineno">   91</span>                <span class="keywordflow">foreach</span> (var device <span class="keywordflow">in</span> ((Siemens.Engineering.Project)tiaTemplateContext.TiaProject).Devices)</div>
+<div class="line"><span class="lineno">   92</span>                {</div>
+<div class="line"><span class="lineno">   93</span>                    <span class="keywordflow">foreach</span> (var deviceItem <span class="keywordflow">in</span> device.DeviceItems)</div>
+<div class="line"><span class="lineno">   94</span>                    {</div>
+<div class="line"><span class="lineno">   95</span>                        <span class="keywordflow">if</span> (deviceItem.Classification == DeviceItemClassifications.CPU)</div>
+<div class="line"><span class="lineno">   96</span>                        {</div>
+<div class="line"><span class="lineno">   97</span>                            plc = deviceItem;</div>
+<div class="line"><span class="lineno">   98</span>                            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">   99</span>                        }</div>
+<div class="line"><span class="lineno">  100</span>                    }</div>
+<div class="line"><span class="lineno">  101</span>                }</div>
+<div class="line"><span class="lineno">  102</span>                var softwareContainer = plc.GetService&lt;SoftwareContainer&gt;().Software as PlcSoftware;</div>
+<div class="line"><span class="lineno">  103</span>                var allBlocks = GetAllBlocksRecursive(softwareContainer.BlockGroup);</div>
+<div class="line"><span class="lineno">  104</span> </div>
+<div class="line"><span class="lineno">  105</span>                Application.Current.Dispatcher.Invoke(() =&gt;</div>
+<div class="line"><span class="lineno">  106</span>                {</div>
+<div class="line"><span class="lineno">  107</span>                    module.PlcBlockNames.Clear();</div>
+<div class="line"><span class="lineno">  108</span>                    <span class="keywordflow">foreach</span> (var block <span class="keywordflow">in</span> allBlocks)</div>
+<div class="line"><span class="lineno">  109</span>                    {</div>
+<div class="line"><span class="lineno">  110</span>                        module.PlcBlockNames.Add(block.Name);</div>
+<div class="line"><span class="lineno">  111</span>                    }</div>
+<div class="line"><span class="lineno">  112</span>                });</div>
+<div class="line"><span class="lineno">  113</span>            }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae9c138aa40277ab78d1ad0097abf6f20" name="ae9c138aa40277ab78d1ad0097abf6f20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9c138aa40277ab78d1ad0097abf6f20">&#9670;&#160;</a></span>GetAllBlocksRecursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt; PlcBlock &gt; MAC_use_cases.Model.UseCases.GeneralSupport.GetAllBlocksRecursive </td>
+          <td>(</td>
+          <td class="paramtype">PlcBlockGroup</td>          <td class="paramname"><span class="paramname"><em>group</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recursively collects all PlcBlock objects from the given PlcBlockGroup and all its nested subgroups. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">group</td><td>The root block group to start traversal from</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A flat list of all blocks found at every nesting level</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00121">121</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  122</span>        {</div>
+<div class="line"><span class="lineno">  123</span>            var result = <span class="keyword">new</span> List&lt;PlcBlock&gt;();</div>
+<div class="line"><span class="lineno">  124</span> </div>
+<div class="line"><span class="lineno">  125</span>            <span class="keywordflow">foreach</span> (var block <span class="keywordflow">in</span> group.Blocks)</div>
+<div class="line"><span class="lineno">  126</span>            {</div>
+<div class="line"><span class="lineno">  127</span>                result.Add(block);</div>
+<div class="line"><span class="lineno">  128</span>            }</div>
+<div class="line"><span class="lineno">  129</span> </div>
+<div class="line"><span class="lineno">  130</span>            <span class="keywordflow">foreach</span> (var subGroup <span class="keywordflow">in</span> group.Groups)</div>
+<div class="line"><span class="lineno">  131</span>            {</div>
+<div class="line"><span class="lineno">  132</span>                result.AddRange(GetAllBlocksRecursive(subGroup));</div>
+<div class="line"><span class="lineno">  133</span>            }</div>
+<div class="line"><span class="lineno">  134</span> </div>
+<div class="line"><span class="lineno">  135</span>            <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  136</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>

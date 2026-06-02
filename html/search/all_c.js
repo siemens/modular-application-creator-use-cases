@@ -11,6 +11,7 @@ var searchData=
   ['integratelibraries_8',['IntegrateLibraries',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html',1,'MAC_use_cases::Model::UseCases']]],
   ['is_20not_20planned_20to_20change_20it_20for_20the_20collaboration_20framework_9',['&lt;b&gt;Fix 3&lt;/b&gt; - If your project has direct dll references and is not planned to change it for the Collaboration framework',['../index.html#autotoc_md5',1,'']]],
   ['is_20not_20upgraded_10',['How does it work if the EQM is not upgraded?',['../index.html#autotoc_md2',1,'']]],
-  ['it_20for_20the_20collaboration_20framework_11',['&lt;b&gt;Fix 3&lt;/b&gt; - If your project has direct dll references and is not planned to change it for the Collaboration framework',['../index.html#autotoc_md5',1,'']]],
-  ['it_20work_20if_20the_20eqm_20is_20not_20upgraded_12',['How does it work if the EQM is not upgraded?',['../index.html#autotoc_md2',1,'']]]
+  ['isadditionalreadoutrequired_11',['IsAdditionalReadOutRequired',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#a5dec75864ddc1d0c8e008f0827036763',1,'MAC_use_cases::Model::MAC_use_casesEM']]],
+  ['it_20for_20the_20collaboration_20framework_12',['&lt;b&gt;Fix 3&lt;/b&gt; - If your project has direct dll references and is not planned to change it for the Collaboration framework',['../index.html#autotoc_md5',1,'']]],
+  ['it_20work_20if_20the_20eqm_20is_20not_20upgraded_13',['How does it work if the EQM is not upgraded?',['../index.html#autotoc_md2',1,'']]]
 ];
