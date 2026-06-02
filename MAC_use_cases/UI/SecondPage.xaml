@@ -5,10 +5,46 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:modulesUI="clr-namespace:Siemens.Automation.ModularApplicationCreator.Modules.UI;assembly=Siemens.Automation.ModAppCreator.Core"
                       xmlns:model="clr-namespace:MAC_use_cases.Model"
-                      mc:Ignorable="d">
+                      mc:Ignorable="d"
+                      d:Background="White">
 
-    <StackPanel VerticalAlignment="Center"
-                d:DataContext="{d:DesignInstance Type=model:MAC_use_casesEM, IsDesignTimeCreatable=True}">
-        <TextBlock Text="{DynamicResource SampleText2}" />
-    </StackPanel>
+    <Grid VerticalAlignment="Top" Margin="30"
+          d:DataContext="{d:DesignInstance Type=model:MAC_use_casesEM, IsDesignTimeCreatable=True}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 0 -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                   Text="{DynamicResource SampleText2}"
+                   Margin="5" />
+
+        <!-- Row 1 -->
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   VerticalAlignment="Top"
+                   Text="PLC Blocks:"
+                   FontWeight="Bold"
+                   Margin="5,13,5,5" />
+
+        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                  ItemsSource="{Binding PlcBlockNames}"
+                  MaxHeight="300"
+                  Width="400"
+                  Margin="155,5,5,5"
+                  HorizontalAlignment="Left"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </modulesUI:BaseEditor>

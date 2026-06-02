@@ -1,7 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using Siemens.Automation.ModularApplicationCreator.Core;
+using Siemens.Automation.ModularApplicationCreator.Tia;
 using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
 using Siemens.Engineering.HW;
+using Siemens.Engineering.HW.Features;
+using Siemens.Engineering.SW;
+using Siemens.Engineering.SW.Blocks;
 using Device = Siemens.Automation.ModularApplicationCreator.Tia.Openness.Device;
 using Project = Siemens.Engineering.Project;
 
@@ -61,6 +67,72 @@ namespace MAC_use_cases.Model.UseCases
             Siemens.Automation.ModularApplicationCreator.Tia.Openness.Project tiaProject)
         {
             return (Project)tiaProject;
+        }
+
+        /// <summary>
+        ///     Reads additional information from the TIA Portal project and populates
+        ///     <see cref="MAC_use_casesEM.PlcBlockNames"/> with the names of all PLC blocks
+        ///     found across all block groups recursively.
+        ///     This method is intended to be called from
+        ///     <see cref="MAC_use_casesEM.ReadTiaPortalAfterAssignOrUpdate"/> when
+        ///     <see cref="MAC_use_casesEM.IsAdditionalReadOutRequired"/> returns <c>true</c>.
+        /// </summary>
+        /// <param name="module">
+        ///     The equipment module whose <see cref="MAC_use_casesEM.PlcBlockNames"/> collection
+        ///     will be updated with the retrieved block names
+        /// </param>
+        /// <param name="tiaTemplateContext">
+        ///     The TIA Portal context providing access to the project and its devices,
+        ///     used to locate the CPU and its associated PLC software
+        /// </param>
+        public static void ReadAdditionalInformationsFromTIAPortalProject(MAC_use_casesEM module, TiaTemplateContext tiaTemplateContext)
+            {
+                DeviceItem plc = null;
+                foreach (var device in ((Siemens.Engineering.Project)tiaTemplateContext.TiaProject).Devices)
+                {
+                    foreach (var deviceItem in device.DeviceItems)
+                    {
+                        if (deviceItem.Classification == DeviceItemClassifications.CPU)
+                        {
+                            plc = deviceItem;
+                            continue;
+                        }
+                    }
+                }
+                var softwareContainer = plc.GetService<SoftwareContainer>().Software as PlcSoftware;
+                var allBlocks = GetAllBlocksRecursive(softwareContainer.BlockGroup);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    module.PlcBlockNames.Clear();
+                    foreach (var block in allBlocks)
+                    {
+                        module.PlcBlockNames.Add(block.Name);
+                    }
+                });
+            }
+
+        /// <summary>
+        ///     Recursively collects all <see cref="PlcBlock"/> objects from the given
+        ///     <see cref="PlcBlockGroup"/> and all its nested subgroups.
+        /// </summary>
+        /// <param name="group">The root block group to start traversal from</param>
+        /// <returns>A flat list of all blocks found at every nesting level</returns>
+        private static List<PlcBlock> GetAllBlocksRecursive(PlcBlockGroup group)
+        {
+            var result = new List<PlcBlock>();
+
+            foreach (var block in group.Blocks)
+            {
+                result.Add(block);
+            }
+
+            foreach (var subGroup in group.Groups)
+            {
+                result.AddRange(GetAllBlocksRecursive(subGroup));
+            }
+
+            return result;
         }
     }
 }
