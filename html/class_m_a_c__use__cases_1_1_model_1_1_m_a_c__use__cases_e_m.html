@@ -126,6 +126,7 @@ Properties</h2></td></tr>
 <tr class="memitem:ad72e2cc69e2635f82c335634ae417b4e" id="r_ad72e2cc69e2635f82c335634ae417b4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html">TechnologyObjectClass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad72e2cc69e2635f82c335634ae417b4e">MyTo</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:ad72e2cc69e2635f82c335634ae417b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This attribute is the instance of the <a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html" title="All the functions to configure and generate Technology Objects are defined here.">TechnologyObjectClass</a>.  <br /></td></tr>
 <tr class="memitem:ae76654689a40e43d65b4dbe195d59794" id="r_ae76654689a40e43d65b4dbe195d59794"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae76654689a40e43d65b4dbe195d59794">IsGenerateHardwareChecked</a> = false<code> [get, set]</code></td></tr>
+<tr class="memitem:abe7a5ef57ea054de1079e8376962225d" id="r_abe7a5ef57ea054de1079e8376962225d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe7a5ef57ea054de1079e8376962225d">IsGenerateSafetyBlockChecked</a> = false<code> [get, set]</code></td></tr>
 <tr class="memitem:af30c7bc65892d4a985d109be8e59fe31" id="r_af30c7bc65892d4a985d109be8e59fe31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html">NonTIAProjectBased</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af30c7bc65892d4a985d109be8e59fe31">NonTiaProjectBased</a> = new <a class="el" href="class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html">NonTIAProjectBased</a>(&quot;myModel&quot;)<code> [get, set]</code></td></tr>
 <tr class="memdesc:af30c7bc65892d4a985d109be8e59fe31"><td class="mdescLeft">&#160;</td><td class="mdescRight">This attribute is the instance for the serialization.  <br /></td></tr>
 <tr class="memitem:a379dcb4729a98dd2cab8293a8094a531" id="r_a379dcb4729a98dd2cab8293a8094a531"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a379dcb4729a98dd2cab8293a8094a531">NameOfMyFb</a> = &quot;MyFunctionBlock&quot;<code> [get, set]</code></td></tr>
@@ -256,11 +257,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00107">107</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  108</span>        {</div>
-<div class="line"><span class="lineno">  109</span>            base.ReadTiaPortalAfterAssignOrUpdate(tiaTemplateContext);</div>
-<div class="line"><span class="lineno">  110</span>            GeneralSupport.ReadAdditionalInformationsFromTIAPortalProject(<span class="keyword">this</span>, tiaTemplateContext);</div>
-<div class="line"><span class="lineno">  111</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00108">108</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>        {</div>
+<div class="line"><span class="lineno">  110</span>            base.ReadTiaPortalAfterAssignOrUpdate(tiaTemplateContext);</div>
+<div class="line"><span class="lineno">  111</span>            GeneralSupport.ReadAdditionalInformationsFromTIAPortalProject(<span class="keyword">this</span>, tiaTemplateContext);</div>
+<div class="line"><span class="lineno">  112</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -291,147 +292,150 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00119">119</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  120</span>        {</div>
-<div class="line"><span class="lineno">  121</span>            <span class="keywordflow">switch</span> (generationPhaseName)</div>
-<div class="line"><span class="lineno">  122</span>            {</div>
-<div class="line"><span class="lineno">  123</span>                <span class="keywordflow">case</span> TiaGenerationPhases.Init:</div>
-<div class="line"><span class="lineno">  124</span>                    _plcDevice = GetPlcDevice(tiaTemplateContext);</div>
-<div class="line"><span class="lineno">  125</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  126</span> </div>
-<div class="line"><span class="lineno">  127</span>                <span class="comment">// Add equipment module specific code for each generation phase here, which is</span></div>
-<div class="line"><span class="lineno">  128</span>                <span class="comment">// necessary before the ResourceManagement is called.</span></div>
-<div class="line"><span class="lineno">  129</span>            }</div>
-<div class="line"><span class="lineno">  130</span> </div>
-<div class="line"><span class="lineno">  131</span>            ResourceManagement.Generate(tiaTemplateContext, <span class="keyword">this</span>, generationPhaseName);</div>
-<div class="line"><span class="lineno">  132</span> </div>
-<div class="line"><span class="lineno">  133</span>            <span class="keywordflow">foreach</span> (var module <span class="keywordflow">in</span> ControlModules)</div>
-<div class="line"><span class="lineno">  134</span>            {</div>
-<div class="line"><span class="lineno">  135</span>                <span class="keywordflow">if</span> (module is ITiaGenerateable tiaGen)</div>
-<div class="line"><span class="lineno">  136</span>                {</div>
-<div class="line"><span class="lineno">  137</span>                    tiaGen.GenerateTiaPortal(tiaTemplateContext, generationPhaseName);</div>
-<div class="line"><span class="lineno">  138</span>                }</div>
-<div class="line"><span class="lineno">  139</span>            }</div>
-<div class="line"><span class="lineno">  140</span> </div>
-<div class="line"><span class="lineno">  141</span>            var opennessTiaPortalProject = GeneralSupport.GetOpennessProject(tiaTemplateContext.TiaProject);</div>
-<div class="line"><span class="lineno">  142</span> </div>
-<div class="line"><span class="lineno">  143</span>            <span class="keywordflow">switch</span> (generationPhaseName)</div>
-<div class="line"><span class="lineno">  144</span>            {</div>
-<div class="line"><span class="lineno">  145</span>                <span class="keywordflow">case</span> TiaGenerationPhases.Init:</div>
-<div class="line"><span class="lineno">  146</span> </div>
-<div class="line"><span class="lineno">  147</span>                    <span class="comment">//if (!string.IsNullOrWhiteSpace(HardwareGenerationExcelBasedViewModel.ImportSource))</span></div>
-<div class="line"><span class="lineno">  148</span>                    <span class="comment">//{</span></div>
-<div class="line"><span class="lineno">  149</span>                    <span class="comment">//    HardwareGenerationExcelBased.CreateNewDevicesFromExcelSheet(this, opennessTiaPortalProject,</span></div>
-<div class="line"><span class="lineno">  150</span>                    <span class="comment">//        HardwareGenerationExcelBasedViewModel.ImportSource);</span></div>
-<div class="line"><span class="lineno">  151</span>                    <span class="comment">//}</span></div>
-<div class="line"><span class="lineno">  152</span> </div>
-<div class="line"><span class="lineno">  153</span>                    <span class="comment">//if (!IsGenerateHardwareChecked)</span></div>
-<div class="line"><span class="lineno">  154</span>                    <span class="comment">//{</span></div>
-<div class="line"><span class="lineno">  155</span>                    <span class="comment">//    break;</span></div>
-<div class="line"><span class="lineno">  156</span>                    <span class="comment">//}</span></div>
-<div class="line"><span class="lineno">  157</span> </div>
-<div class="line"><span class="lineno">  158</span>                    <span class="comment">//Hardware config has to be in the Init phase.Otherwise, it can&#39;t be used in the MAC.</span></div>
-<div class="line"><span class="lineno">  159</span>                    var s120 = HardwareGeneration.GenerateS120(<span class="keyword">this</span>, <span class="stringliteral">&quot;S120MACTest&quot;</span>, <span class="stringliteral">&quot;S120DeviceTest&quot;</span>,</div>
-<div class="line"><span class="lineno">  160</span>                        <span class="stringliteral">&quot;this drive is generated with MAC&quot;</span>);</div>
-<div class="line"><span class="lineno">  161</span> </div>
-<div class="line"><span class="lineno">  162</span>                    var s210 = HardwareGeneration.GenerateS210(<span class="keyword">this</span>, <span class="stringliteral">&quot;S210MACTest&quot;</span>, <span class="stringliteral">&quot;S210DeviceTest&quot;</span>,</div>
-<div class="line"><span class="lineno">  163</span>                        <span class="stringliteral">&quot;this drive is generated with MAC&quot;</span>);</div>
-<div class="line"><span class="lineno">  164</span>                    <span class="comment">//var subnet1 = HardwareGeneration.GetOrCreateSubnet(SubnetsManager, &quot;PN/IE_1&quot;);</span></div>
-<div class="line"><span class="lineno">  165</span> </div>
-<div class="line"><span class="lineno">  166</span>                    <span class="comment">//HardwareGeneration.ConnectDriveToSubnet(s120, subnet1, this);</span></div>
-<div class="line"><span class="lineno">  167</span>                    <span class="comment">//HardwareGeneration.ConnectDriveToSubnet(s210, subnet1, this);</span></div>
-<div class="line"><span class="lineno">  168</span> </div>
-<div class="line"><span class="lineno">  169</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  170</span>                <span class="keywordflow">case</span> TiaGenerationPhases.Build:</div>
-<div class="line"><span class="lineno">  171</span> </div>
-<div class="line"><span class="lineno">  172</span>                    <span class="comment">// Add equipment module specific code generation here.</span></div>
-<div class="line"><span class="lineno">  173</span>                    var opennessCpu = GeneralSupport.GetOpennessDeviceItem(tiaTemplateContext.TiaDevice);</div>
-<div class="line"><span class="lineno">  174</span>                    _softwareUnit = SoftwareUnits.GetOrCreateSoftwareUnit(_plcDevice, <span class="stringliteral">&quot;MyUnit&quot;</span>, <span class="keyword">this</span>, <span class="stringliteral">&quot;Namesapce_example&quot;</span>);</div>
-<div class="line"><span class="lineno">  175</span> </div>
-<div class="line"><span class="lineno">  176</span>                    <span class="comment">// Configure a Technology Object</span></div>
-<div class="line"><span class="lineno">  177</span>                    MyTo.ConfigureTO(MyTo.TechnologicalObject, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  178</span>                    <span class="comment">// Log messages</span></div>
-<div class="line"><span class="lineno">  179</span>                    GeneralSupport.LogMessage(LogTypes.GenerationInfo, <span class="stringliteral">&quot;Generate technology objects&quot;</span>, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  180</span>                    <span class="comment">// Create Technology Object</span></div>
-<div class="line"><span class="lineno">  181</span>                    TechnologyObjectClass.CreateTOs(_plcDevice, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>                    IntegrateLibraries.CreateInstanceDB_via_XmlInstDB(<span class="keyword">this</span>, ResourceManagement.MyFunctionBlock,</div>
-<div class="line"><span class="lineno">  184</span>                        <span class="stringliteral">&quot;CreatedDbFromMasterCopy_XmlInstDB&quot;</span>, ResourceManagement.ModuleBlocksRootGroup, _plcDevice);</div>
-<div class="line"><span class="lineno">  185</span> </div>
-<div class="line"><span class="lineno">  186</span>                    var myDataBlockGlobal =</div>
-<div class="line"><span class="lineno">  187</span>                        GenericBlockCreation.GenerateGlobalDataBlock(<span class="stringliteral">&quot;MyDataBlock_Global&quot;</span>, _plcDevice, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  188</span> </div>
-<div class="line"><span class="lineno">  189</span>                    GenericBlockCreation.SetDefaultValue(myDataBlockGlobal.Name, <span class="stringliteral">&quot;myParameterName&quot;</span>, TIATYPE.INT, <span class="stringliteral">&quot;99&quot;</span>,</div>
-<div class="line"><span class="lineno">  190</span>                        <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  191</span> </div>
-<div class="line"><span class="lineno">  192</span>                    GenericBlockCreation.GenerateMultiInstanceFB(_plcDevice,</div>
-<div class="line"><span class="lineno">  193</span>                        tiaTemplateContext.TiaProject.GetEditingLanguage(), <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  194</span> </div>
-<div class="line"><span class="lineno">  195</span>                    var dbFromMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(<span class="keyword">this</span>,</div>
-<div class="line"><span class="lineno">  196</span>                        ResourceManagement.MyFunctionBlock,</div>
-<div class="line"><span class="lineno">  197</span>                        $<span class="stringliteral">&quot;{nameof(ResourceManagement.MyFunctionBlock)}Db&quot;</span>, ResourceManagement.ModuleBlocksRootGroup);</div>
-<div class="line"><span class="lineno">  198</span> </div>
-<div class="line"><span class="lineno">  199</span>                    GenericBlockCreation.GenerateOB_Main(dbFromMasterCopy.Name, <span class="keyword">this</span>,</div>
-<div class="line"><span class="lineno">  200</span>                        tiaTemplateContext.TiaProject.GetEditingLanguage(), _plcDevice);</div>
-<div class="line"><span class="lineno">  201</span> </div>
-<div class="line"><span class="lineno">  202</span>                    GenericBlockCreation.GenerateOBWithMultipleCalls(<span class="stringliteral">&quot;myOB&quot;</span>, 10,</div>
-<div class="line"><span class="lineno">  203</span>                        tiaTemplateContext.TiaProject.GetEditingLanguage(), _plcDevice, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  204</span> </div>
-<div class="line"><span class="lineno">  205</span>                    GenericBlockCreation.CreateFunctionBlock($<span class="stringliteral">&quot;{NameOfMyFb}_FBD&quot;</span>, dbFromMasterCopy.Name,</div>
-<div class="line"><span class="lineno">  206</span>                        ProgrammingLanguage.FBD,</div>
-<div class="line"><span class="lineno">  207</span>                        _plcDevice);</div>
-<div class="line"><span class="lineno">  208</span>                    GenericBlockCreation.CreateFunctionBlock($<span class="stringliteral">&quot;{NameOfMyFb}_LAD&quot;</span>, dbFromMasterCopy.Name,</div>
-<div class="line"><span class="lineno">  209</span>                        ProgrammingLanguage.LAD,</div>
-<div class="line"><span class="lineno">  210</span>                        _plcDevice);</div>
-<div class="line"><span class="lineno">  211</span>                    GenericBlockCreation.CreateFunctionBlock($<span class="stringliteral">&quot;{NameOfMyFb}_SCL&quot;</span>, dbFromMasterCopy.Name,</div>
-<div class="line"><span class="lineno">  212</span>                        ProgrammingLanguage.SCL,</div>
-<div class="line"><span class="lineno">  213</span>                        _plcDevice);</div>
-<div class="line"><span class="lineno">  214</span> </div>
-<div class="line"><span class="lineno">  215</span>                    var dbFromFailSafeFbMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(<span class="keyword">this</span>,</div>
-<div class="line"><span class="lineno">  216</span>                        ResourceManagement.MyFunctionBlock_FailSafe,</div>
-<div class="line"><span class="lineno">  217</span>                        $<span class="stringliteral">&quot;{nameof(ResourceManagement.MyFunctionBlock_FailSafe)}Db&quot;</span>,</div>
-<div class="line"><span class="lineno">  218</span>                        ResourceManagement.ModuleBlocksRootGroup);</div>
-<div class="line"><span class="lineno">  219</span> </div>
-<div class="line"><span class="lineno">  220</span>                    GenericBlockCreation.CreateFailSafeFunctionBlock($<span class="stringliteral">&quot;{NameOfMyFailSafeFb}_F_LAD&quot;</span>,</div>
-<div class="line"><span class="lineno">  221</span>                        dbFromFailSafeFbMasterCopy.Name,</div>
-<div class="line"><span class="lineno">  222</span>                        ProgrammingLanguage.F_LAD,</div>
-<div class="line"><span class="lineno">  223</span>                        _plcDevice);</div>
-<div class="line"><span class="lineno">  224</span>                    GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, <span class="stringliteral">&quot;MyFb_FBD&quot;</span>,</div>
-<div class="line"><span class="lineno">  225</span>                        ProgrammingLanguage.FBD, _plcDevice);</div>
-<div class="line"><span class="lineno">  226</span>                    GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, <span class="stringliteral">&quot;MyFb_LAD&quot;</span>,</div>
-<div class="line"><span class="lineno">  227</span>                        ProgrammingLanguage.LAD, _plcDevice);</div>
-<div class="line"><span class="lineno">  228</span>                    GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, <span class="stringliteral">&quot;MyFb_SCL&quot;</span>, ProgrammingLanguage.SCL, _plcDevice);</div>
-<div class="line"><span class="lineno">  229</span> </div>
-<div class="line"><span class="lineno">  230</span>                    var dbFromTypedMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(<span class="keyword">this</span>,</div>
-<div class="line"><span class="lineno">  231</span>                        ResourceManagement.MyFunctionBlock_Typed,</div>
-<div class="line"><span class="lineno">  232</span>                        $<span class="stringliteral">&quot;{nameof(ResourceManagement.MyFunctionBlock_Typed)}Db&quot;</span>, ResourceManagement.ModuleBlocksRootGroup);</div>
+<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00120">120</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  121</span>        {</div>
+<div class="line"><span class="lineno">  122</span>            <span class="keywordflow">switch</span> (generationPhaseName)</div>
+<div class="line"><span class="lineno">  123</span>            {</div>
+<div class="line"><span class="lineno">  124</span>                <span class="keywordflow">case</span> TiaGenerationPhases.Init:</div>
+<div class="line"><span class="lineno">  125</span>                    _plcDevice = GetPlcDevice(tiaTemplateContext);</div>
+<div class="line"><span class="lineno">  126</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  127</span> </div>
+<div class="line"><span class="lineno">  128</span>                <span class="comment">// Add equipment module specific code for each generation phase here, which is</span></div>
+<div class="line"><span class="lineno">  129</span>                <span class="comment">// necessary before the ResourceManagement is called.</span></div>
+<div class="line"><span class="lineno">  130</span>            }</div>
+<div class="line"><span class="lineno">  131</span> </div>
+<div class="line"><span class="lineno">  132</span>            ResourceManagement.Generate(tiaTemplateContext, <span class="keyword">this</span>, generationPhaseName);</div>
+<div class="line"><span class="lineno">  133</span> </div>
+<div class="line"><span class="lineno">  134</span>            <span class="keywordflow">foreach</span> (var module <span class="keywordflow">in</span> ControlModules)</div>
+<div class="line"><span class="lineno">  135</span>            {</div>
+<div class="line"><span class="lineno">  136</span>                <span class="keywordflow">if</span> (module is ITiaGenerateable tiaGen)</div>
+<div class="line"><span class="lineno">  137</span>                {</div>
+<div class="line"><span class="lineno">  138</span>                    tiaGen.GenerateTiaPortal(tiaTemplateContext, generationPhaseName);</div>
+<div class="line"><span class="lineno">  139</span>                }</div>
+<div class="line"><span class="lineno">  140</span>            }</div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>            var opennessTiaPortalProject = GeneralSupport.GetOpennessProject(tiaTemplateContext.TiaProject);</div>
+<div class="line"><span class="lineno">  143</span> </div>
+<div class="line"><span class="lineno">  144</span>            <span class="keywordflow">switch</span> (generationPhaseName)</div>
+<div class="line"><span class="lineno">  145</span>            {</div>
+<div class="line"><span class="lineno">  146</span>                <span class="keywordflow">case</span> TiaGenerationPhases.Init:</div>
+<div class="line"><span class="lineno">  147</span> </div>
+<div class="line"><span class="lineno">  148</span>                    <span class="comment">//if (!string.IsNullOrWhiteSpace(HardwareGenerationExcelBasedViewModel.ImportSource))</span></div>
+<div class="line"><span class="lineno">  149</span>                    <span class="comment">//{</span></div>
+<div class="line"><span class="lineno">  150</span>                    <span class="comment">//    HardwareGenerationExcelBased.CreateNewDevicesFromExcelSheet(this, opennessTiaPortalProject,</span></div>
+<div class="line"><span class="lineno">  151</span>                    <span class="comment">//        HardwareGenerationExcelBasedViewModel.ImportSource);</span></div>
+<div class="line"><span class="lineno">  152</span>                    <span class="comment">//}</span></div>
+<div class="line"><span class="lineno">  153</span> </div>
+<div class="line"><span class="lineno">  154</span>                    <span class="comment">//if (!IsGenerateHardwareChecked)</span></div>
+<div class="line"><span class="lineno">  155</span>                    <span class="comment">//{</span></div>
+<div class="line"><span class="lineno">  156</span>                    <span class="comment">//    break;</span></div>
+<div class="line"><span class="lineno">  157</span>                    <span class="comment">//}</span></div>
+<div class="line"><span class="lineno">  158</span> </div>
+<div class="line"><span class="lineno">  159</span>                    <span class="comment">//Hardware config has to be in the Init phase.Otherwise, it can&#39;t be used in the MAC.</span></div>
+<div class="line"><span class="lineno">  160</span>                    var s120 = HardwareGeneration.GenerateS120(<span class="keyword">this</span>, <span class="stringliteral">&quot;S120MACTest&quot;</span>, <span class="stringliteral">&quot;S120DeviceTest&quot;</span>,</div>
+<div class="line"><span class="lineno">  161</span>                        <span class="stringliteral">&quot;this drive is generated with MAC&quot;</span>);</div>
+<div class="line"><span class="lineno">  162</span> </div>
+<div class="line"><span class="lineno">  163</span>                    var s210 = HardwareGeneration.GenerateS210(<span class="keyword">this</span>, <span class="stringliteral">&quot;S210MACTest&quot;</span>, <span class="stringliteral">&quot;S210DeviceTest&quot;</span>,</div>
+<div class="line"><span class="lineno">  164</span>                        <span class="stringliteral">&quot;this drive is generated with MAC&quot;</span>);</div>
+<div class="line"><span class="lineno">  165</span>                    <span class="comment">//var subnet1 = HardwareGeneration.GetOrCreateSubnet(SubnetsManager, &quot;PN/IE_1&quot;);</span></div>
+<div class="line"><span class="lineno">  166</span> </div>
+<div class="line"><span class="lineno">  167</span>                    <span class="comment">//HardwareGeneration.ConnectDriveToSubnet(s120, subnet1, this);</span></div>
+<div class="line"><span class="lineno">  168</span>                    <span class="comment">//HardwareGeneration.ConnectDriveToSubnet(s210, subnet1, this);</span></div>
+<div class="line"><span class="lineno">  169</span> </div>
+<div class="line"><span class="lineno">  170</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  171</span>                <span class="keywordflow">case</span> TiaGenerationPhases.Build:</div>
+<div class="line"><span class="lineno">  172</span> </div>
+<div class="line"><span class="lineno">  173</span>                    <span class="comment">// Add equipment module specific code generation here.</span></div>
+<div class="line"><span class="lineno">  174</span>                    var opennessCpu = GeneralSupport.GetOpennessDeviceItem(tiaTemplateContext.TiaDevice);</div>
+<div class="line"><span class="lineno">  175</span>                    _softwareUnit = SoftwareUnits.GetOrCreateSoftwareUnit(_plcDevice, <span class="stringliteral">&quot;MyUnit&quot;</span>, <span class="keyword">this</span>, <span class="stringliteral">&quot;Namesapce_example&quot;</span>);</div>
+<div class="line"><span class="lineno">  176</span> </div>
+<div class="line"><span class="lineno">  177</span>                    <span class="comment">// Configure a Technology Object</span></div>
+<div class="line"><span class="lineno">  178</span>                    MyTo.ConfigureTO(MyTo.TechnologicalObject, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  179</span>                    <span class="comment">// Log messages</span></div>
+<div class="line"><span class="lineno">  180</span>                    GeneralSupport.LogMessage(LogTypes.GenerationInfo, <span class="stringliteral">&quot;Generate technology objects&quot;</span>, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  181</span>                    <span class="comment">// Create Technology Object</span></div>
+<div class="line"><span class="lineno">  182</span>                    TechnologyObjectClass.CreateTOs(_plcDevice, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  183</span> </div>
+<div class="line"><span class="lineno">  184</span>                    IntegrateLibraries.CreateInstanceDB_via_XmlInstDB(<span class="keyword">this</span>, ResourceManagement.MyFunctionBlock,</div>
+<div class="line"><span class="lineno">  185</span>                        <span class="stringliteral">&quot;CreatedDbFromMasterCopy_XmlInstDB&quot;</span>, ResourceManagement.ModuleBlocksRootGroup, _plcDevice);</div>
+<div class="line"><span class="lineno">  186</span> </div>
+<div class="line"><span class="lineno">  187</span>                    var myDataBlockGlobal =</div>
+<div class="line"><span class="lineno">  188</span>                        GenericBlockCreation.GenerateGlobalDataBlock(<span class="stringliteral">&quot;MyDataBlock_Global&quot;</span>, _plcDevice, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  189</span> </div>
+<div class="line"><span class="lineno">  190</span>                    GenericBlockCreation.SetDefaultValue(myDataBlockGlobal.Name, <span class="stringliteral">&quot;myParameterName&quot;</span>, TIATYPE.INT, <span class="stringliteral">&quot;99&quot;</span>,</div>
+<div class="line"><span class="lineno">  191</span>                        <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  192</span> </div>
+<div class="line"><span class="lineno">  193</span>                    GenericBlockCreation.GenerateMultiInstanceFB(_plcDevice,</div>
+<div class="line"><span class="lineno">  194</span>                        tiaTemplateContext.TiaProject.GetEditingLanguage(), <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  195</span> </div>
+<div class="line"><span class="lineno">  196</span>                    var dbFromMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(<span class="keyword">this</span>,</div>
+<div class="line"><span class="lineno">  197</span>                        ResourceManagement.MyFunctionBlock,</div>
+<div class="line"><span class="lineno">  198</span>                        $<span class="stringliteral">&quot;{nameof(ResourceManagement.MyFunctionBlock)}Db&quot;</span>, ResourceManagement.ModuleBlocksRootGroup);</div>
+<div class="line"><span class="lineno">  199</span> </div>
+<div class="line"><span class="lineno">  200</span>                    GenericBlockCreation.GenerateOB_Main(dbFromMasterCopy.Name, <span class="keyword">this</span>,</div>
+<div class="line"><span class="lineno">  201</span>                        tiaTemplateContext.TiaProject.GetEditingLanguage(), _plcDevice);</div>
+<div class="line"><span class="lineno">  202</span> </div>
+<div class="line"><span class="lineno">  203</span>                    GenericBlockCreation.GenerateOBWithMultipleCalls(<span class="stringliteral">&quot;myOB&quot;</span>, 10,</div>
+<div class="line"><span class="lineno">  204</span>                        tiaTemplateContext.TiaProject.GetEditingLanguage(), _plcDevice, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  205</span> </div>
+<div class="line"><span class="lineno">  206</span>                    GenericBlockCreation.CreateFunctionBlock($<span class="stringliteral">&quot;{NameOfMyFb}_FBD&quot;</span>, dbFromMasterCopy.Name,</div>
+<div class="line"><span class="lineno">  207</span>                        ProgrammingLanguage.FBD,</div>
+<div class="line"><span class="lineno">  208</span>                        _plcDevice);</div>
+<div class="line"><span class="lineno">  209</span>                    GenericBlockCreation.CreateFunctionBlock($<span class="stringliteral">&quot;{NameOfMyFb}_LAD&quot;</span>, dbFromMasterCopy.Name,</div>
+<div class="line"><span class="lineno">  210</span>                        ProgrammingLanguage.LAD,</div>
+<div class="line"><span class="lineno">  211</span>                        _plcDevice);</div>
+<div class="line"><span class="lineno">  212</span>                    GenericBlockCreation.CreateFunctionBlock($<span class="stringliteral">&quot;{NameOfMyFb}_SCL&quot;</span>, dbFromMasterCopy.Name,</div>
+<div class="line"><span class="lineno">  213</span>                        ProgrammingLanguage.SCL,</div>
+<div class="line"><span class="lineno">  214</span>                        _plcDevice);</div>
+<div class="line"><span class="lineno">  215</span> </div>
+<div class="line"><span class="lineno">  216</span>                    var dbFromFailSafeFbMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(<span class="keyword">this</span>,</div>
+<div class="line"><span class="lineno">  217</span>                        ResourceManagement.MyFunctionBlock_FailSafe,</div>
+<div class="line"><span class="lineno">  218</span>                        $<span class="stringliteral">&quot;{nameof(ResourceManagement.MyFunctionBlock_FailSafe)}Db&quot;</span>,</div>
+<div class="line"><span class="lineno">  219</span>                        ResourceManagement.ModuleBlocksRootGroup);</div>
+<div class="line"><span class="lineno">  220</span> </div>
+<div class="line"><span class="lineno">  221</span>                    <span class="keywordflow">if</span> (IsGenerateSafetyBlockChecked)</div>
+<div class="line"><span class="lineno">  222</span>                    {</div>
+<div class="line"><span class="lineno">  223</span>                        GenericBlockCreation.CreateFailSafeFunctionBlock($<span class="stringliteral">&quot;{NameOfMyFailSafeFb}_F_LAD&quot;</span>,</div>
+<div class="line"><span class="lineno">  224</span>                            dbFromFailSafeFbMasterCopy.Name,</div>
+<div class="line"><span class="lineno">  225</span>                            ProgrammingLanguage.F_LAD,</div>
+<div class="line"><span class="lineno">  226</span>                            _plcDevice);</div>
+<div class="line"><span class="lineno">  227</span>                    }</div>
+<div class="line"><span class="lineno">  228</span>                    GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, <span class="stringliteral">&quot;MyFb_FBD&quot;</span>,</div>
+<div class="line"><span class="lineno">  229</span>                        ProgrammingLanguage.FBD, _plcDevice);</div>
+<div class="line"><span class="lineno">  230</span>                    GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, <span class="stringliteral">&quot;MyFb_LAD&quot;</span>,</div>
+<div class="line"><span class="lineno">  231</span>                        ProgrammingLanguage.LAD, _plcDevice);</div>
+<div class="line"><span class="lineno">  232</span>                    GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, <span class="stringliteral">&quot;MyFb_SCL&quot;</span>, ProgrammingLanguage.SCL, _plcDevice);</div>
 <div class="line"><span class="lineno">  233</span> </div>
-<div class="line"><span class="lineno">  234</span>                    GenericBlockCreation.CreateFunctionBlock($<span class="stringliteral">&quot;{nameof(ResourceManagement.MyFunctionBlock_Typed)}_FBD&quot;</span>,</div>
-<div class="line"><span class="lineno">  235</span>                        dbFromTypedMasterCopy.Name,</div>
-<div class="line"><span class="lineno">  236</span>                        ProgrammingLanguage.FBD,</div>
-<div class="line"><span class="lineno">  237</span>                        _plcDevice);</div>
-<div class="line"><span class="lineno">  238</span> </div>
-<div class="line"><span class="lineno">  239</span>                    var myTagTable = CreateVariables.CreateTagTable(_plcDevice, <span class="stringliteral">&quot;myTagTable&quot;</span>);</div>
-<div class="line"><span class="lineno">  240</span>                    var mySoftwareUnitTagTable = CreateVariables.CreateTagTable(_softwareUnit, <span class="stringliteral">&quot;mySoftwareUnitTagTable&quot;</span>);</div>
-<div class="line"><span class="lineno">  241</span> </div>
-<div class="line"><span class="lineno">  242</span>                    CreateVariables.CreateTagInTagTable(myTagTable, <span class="stringliteral">&quot;%I&quot;</span>, <span class="stringliteral">&quot;187&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;myTag_0&quot;</span>, <span class="stringliteral">&quot;Bool&quot;</span>, <span class="stringliteral">&quot;myTagComment&quot;</span>);</div>
-<div class="line"><span class="lineno">  243</span>                    CreateVariables.CreateTagInTagTable(mySoftwareUnitTagTable, <span class="stringliteral">&quot;%I&quot;</span>, <span class="stringliteral">&quot;188&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;myTag_1&quot;</span>, <span class="stringliteral">&quot;Bool&quot;</span>,</div>
-<div class="line"><span class="lineno">  244</span>                        <span class="stringliteral">&quot;myTagComment&quot;</span>);</div>
+<div class="line"><span class="lineno">  234</span>                    var dbFromTypedMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(<span class="keyword">this</span>,</div>
+<div class="line"><span class="lineno">  235</span>                        ResourceManagement.MyFunctionBlock_Typed,</div>
+<div class="line"><span class="lineno">  236</span>                        $<span class="stringliteral">&quot;{nameof(ResourceManagement.MyFunctionBlock_Typed)}Db&quot;</span>, ResourceManagement.ModuleBlocksRootGroup);</div>
+<div class="line"><span class="lineno">  237</span> </div>
+<div class="line"><span class="lineno">  238</span>                    GenericBlockCreation.CreateFunctionBlock($<span class="stringliteral">&quot;{nameof(ResourceManagement.MyFunctionBlock_Typed)}_FBD&quot;</span>,</div>
+<div class="line"><span class="lineno">  239</span>                        dbFromTypedMasterCopy.Name,</div>
+<div class="line"><span class="lineno">  240</span>                        ProgrammingLanguage.FBD,</div>
+<div class="line"><span class="lineno">  241</span>                        _plcDevice);</div>
+<div class="line"><span class="lineno">  242</span> </div>
+<div class="line"><span class="lineno">  243</span>                    var myTagTable = CreateVariables.CreateTagTable(_plcDevice, <span class="stringliteral">&quot;myTagTable&quot;</span>);</div>
+<div class="line"><span class="lineno">  244</span>                    var mySoftwareUnitTagTable = CreateVariables.CreateTagTable(_softwareUnit, <span class="stringliteral">&quot;mySoftwareUnitTagTable&quot;</span>);</div>
 <div class="line"><span class="lineno">  245</span> </div>
-<div class="line"><span class="lineno">  246</span>                    <span class="keywordflow">if</span> (IsGenerateHardwareChecked)</div>
-<div class="line"><span class="lineno">  247</span>                    {</div>
-<div class="line"><span class="lineno">  248</span>                        var hmiSoftware = HardwareGeneration.GetOrCreateHMISoftware(opennessTiaPortalProject, <span class="stringliteral">&quot;HMI_1&quot;</span>);</div>
-<div class="line"><span class="lineno">  249</span>                        IntegrateLibraries.GenerateScreenFromMastercopy(hmiSoftware,</div>
-<div class="line"><span class="lineno">  250</span>                            ResourceManagement.Lib_MAC_use_cases.Lib_Screen_1);</div>
-<div class="line"><span class="lineno">  251</span>                    }</div>
-<div class="line"><span class="lineno">  252</span> </div>
-<div class="line"><span class="lineno">  253</span>                    provider.CollectAttributes(Attributes);</div>
-<div class="line"><span class="lineno">  254</span>                    provider.WriteValues(_plcDevice);</div>
-<div class="line"><span class="lineno">  255</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  256</span>            }</div>
-<div class="line"><span class="lineno">  257</span> </div>
-<div class="line"><span class="lineno">  258</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  259</span>        }</div>
+<div class="line"><span class="lineno">  246</span>                    CreateVariables.CreateTagInTagTable(myTagTable, <span class="stringliteral">&quot;%I&quot;</span>, <span class="stringliteral">&quot;187&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;myTag_0&quot;</span>, <span class="stringliteral">&quot;Bool&quot;</span>, <span class="stringliteral">&quot;myTagComment&quot;</span>);</div>
+<div class="line"><span class="lineno">  247</span>                    CreateVariables.CreateTagInTagTable(mySoftwareUnitTagTable, <span class="stringliteral">&quot;%I&quot;</span>, <span class="stringliteral">&quot;188&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;myTag_1&quot;</span>, <span class="stringliteral">&quot;Bool&quot;</span>,</div>
+<div class="line"><span class="lineno">  248</span>                        <span class="stringliteral">&quot;myTagComment&quot;</span>);</div>
+<div class="line"><span class="lineno">  249</span> </div>
+<div class="line"><span class="lineno">  250</span>                    <span class="keywordflow">if</span> (IsGenerateHardwareChecked)</div>
+<div class="line"><span class="lineno">  251</span>                    {</div>
+<div class="line"><span class="lineno">  252</span>                        var hmiSoftware = HardwareGeneration.GetOrCreateHMISoftware(opennessTiaPortalProject, <span class="stringliteral">&quot;HMI_1&quot;</span>);</div>
+<div class="line"><span class="lineno">  253</span>                        IntegrateLibraries.GenerateScreenFromMastercopy(hmiSoftware,</div>
+<div class="line"><span class="lineno">  254</span>                            ResourceManagement.Lib_MAC_use_cases.Lib_Screen_1);</div>
+<div class="line"><span class="lineno">  255</span>                    }</div>
+<div class="line"><span class="lineno">  256</span> </div>
+<div class="line"><span class="lineno">  257</span>                    provider.CollectAttributes(Attributes);</div>
+<div class="line"><span class="lineno">  258</span>                    provider.WriteValues(_plcDevice);</div>
+<div class="line"><span class="lineno">  259</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  260</span>            }</div>
+<div class="line"><span class="lineno">  261</span> </div>
+<div class="line"><span class="lineno">  262</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  263</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -592,6 +596,31 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="abe7a5ef57ea054de1079e8376962225d" name="abe7a5ef57ea054de1079e8376962225d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe7a5ef57ea054de1079e8376962225d">&#9670;&#160;</a></span>IsGenerateSafetyBlockChecked</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MAC_use_cases.Model.MAC_use_casesEM.IsGenerateSafetyBlockChecked = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel get">get</span><span class="mlabel set">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00081">81</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   81</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">false</span>;</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="af30c7bc65892d4a985d109be8e59fe31" name="af30c7bc65892d4a985d109be8e59fe31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af30c7bc65892d4a985d109be8e59fe31">&#9670;&#160;</a></span>NonTiaProjectBased</h2>
 
@@ -614,8 +643,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This attribute is the instance for the serialization. </p>
 
-<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00084">84</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   84</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">new</span> NonTIAProjectBased(<span class="stringliteral">&quot;myModel&quot;</span>);</div>
+<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00085">85</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   85</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">new</span> NonTIAProjectBased(<span class="stringliteral">&quot;myModel&quot;</span>);</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -641,8 +670,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This attribute is the string which is used for the renaming of the FB. This string can be changed in the View. </p>
 
-<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00090">90</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   90</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="stringliteral">&quot;MyFunctionBlock&quot;</span>;</div>
+<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00091">91</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="stringliteral">&quot;MyFunctionBlock&quot;</span>;</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -668,8 +697,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This attribute is the string which is used for the renaming of the safety-FB. This string can be changed in the View. </p>
 
-<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00096">96</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   96</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="stringliteral">&quot;MyFunctionBlock_FailSafe&quot;</span>;</div>
+<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00097">97</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   97</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="stringliteral">&quot;MyFunctionBlock_FailSafe&quot;</span>;</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -693,8 +722,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00105">105</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  105</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">new</span> ObservableCollection&lt;string&gt;();</div>
+<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00106">106</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  106</span>{ <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">new</span> ObservableCollection&lt;string&gt;();</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -718,10 +747,10 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00114">114</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  115</span>        {</div>
-<div class="line"><span class="lineno">  116</span>            <span class="keyword">get</span> =&gt; NamingConventions.CreateModuleNameAndTypeForEM(<span class="stringliteral">&quot;MAC_use_cases&quot;</span>, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">  117</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html#l00115">115</a> of file <a class="el" href="_m_a_c__use__cases_e_m_8cs_source.html">MAC_use_casesEM.cs</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>        {</div>
+<div class="line"><span class="lineno">  117</span>            <span class="keyword">get</span> =&gt; NamingConventions.CreateModuleNameAndTypeForEM(<span class="stringliteral">&quot;MAC_use_cases&quot;</span>, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  118</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
