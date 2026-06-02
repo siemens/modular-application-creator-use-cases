@@ -1,14 +1,14 @@
 # Tasks: SDK-style Conversion
 
 **Legend**: ✅ Complete | 🔄 In Progress | 🔲 Pending | ⚠️ Blocked | ❌ Failed
-
-**Status**: In Progress  
+**Progress**: 2/3 tasks complete <progress value="67" max="100"></progress> 67%
+**Progress**: 1/3 tasks complete <progress value="33" max="100"></progress> 33%
 **Progress**: 1/3 tasks complete <progress value="33" max="100"></progress> 33%
 **Progress**: 0/3 tasks complete <progress value="0" max="100"></progress> 0%
 
 ## Task Hierarchy
-- ✅ 01-convert-main-project: Convert MAC_use_cases Project ([Content](tasks/01-convert-main-project/task.md), [Progress](tasks/01-convert-main-project/progress-details.md))
-- 🔄 01-convert-main-project: Convert MAC_use_cases Project
+- ✅ 02-convert-test-project: Convert MAC_use_cases.Tests Project ([Content](tasks/02-convert-test-project/task.md), [Progress](tasks/02-convert-test-project/progress-details.md))
+- 🔄 02-convert-test-project: Convert MAC_use_cases.Tests Project ([Content](tasks/02-convert-test-project/task.md))
 - 🔲 02-convert-test-project: Convert MAC_use_cases.Tests Project
 - 🔲 03-final-validation: Final Validation
 

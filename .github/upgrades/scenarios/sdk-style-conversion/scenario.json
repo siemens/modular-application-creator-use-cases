@@ -3,10 +3,11 @@
   "operationId": "043418ea-f896-426d-b876-25d76e7bdffb",
   "description": "Converts legacy .NET projects to SDK-style project format. Use when user wants to convert to SDK-style, modernize project files, or migrate from legacy csproj format. Does not change target frameworks.\n",
   "startTime": "2026-06-02T13:52:03.5334079Z",
-  "lastUpdateTime": "2026-06-02T14:34:05.3129345Z",
+  "lastUpdateTime": "2026-06-02T14:36:17.2242892Z",
   "properties": {
     "taskStates": {
-      "01-convert-main-project": "Completed"
+      "01-convert-main-project": "Completed",
+      "02-convert-test-project": "Completed"
     }
   },
   "folderPath": ""
