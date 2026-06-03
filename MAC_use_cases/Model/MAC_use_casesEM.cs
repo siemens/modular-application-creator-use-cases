@@ -180,7 +180,7 @@ namespace MAC_use_cases.Model
                 case TiaGenerationPhases.Build:
 
                     // Add equipment module specific code generation here.
-                    var opennessCpu = GeneralSupport.GetOpennessDeviceItem(tiaTemplateContext.TiaDevice);
+                    var opennessCpu = GeneralSupport.GetOpennessDeviceItem((Siemens.Engineering.HW.Device)tiaTemplateContext.TiaDevice);
                     _softwareUnit = SoftwareUnits.GetOrCreateSoftwareUnit(_plcDevice, "MyUnit", this, "Namesapce_example");
 
                     // Configure a Technology Object

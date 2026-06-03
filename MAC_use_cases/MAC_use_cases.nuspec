@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MAC_use_cases</id>
-    <version>1.0.9650-pre20260603080935</version>
+    <version>1.0.9649-pre20260602135335</version>
     <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
@@ -76,6 +76,15 @@
       <files include="any/net48/Images/OpenLibrary.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/OpenTiares.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/SetDefaultValue.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_GenerationError.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_GenerationSuccess.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_InstallStartDriveExtensions.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_NewEngineeringDlls.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_NewEngineeringReferences.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_OldEngineeringDll.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_RequiredNewEngineeringDlls.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_SelectMacMbPackages.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/V20_To_V21_UpdateMacPackages.png" buildAction="Content" copyToOutput="false" />
       <files include="lib/net48/MAC_use_cases.dll" buildAction="Content" copyToOutput="false" />
     </contentFiles>
   </metadata>
