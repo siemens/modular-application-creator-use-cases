@@ -1,4 +1,5 @@
 ﻿using MAC_use_cases.Model.ModuleEssentials.Example;
+﻿using System.Collections.ObjectModel;
 using MAC_use_cases.Model.UseCases;
 using MAC_use_cases.ViewModel;
 using Newtonsoft.Json;
@@ -86,6 +87,7 @@ namespace MAC_use_cases.Model
 
         public bool IsGenerateHardwareChecked { get; set; } = false;
 
+        public bool IsGenerateSafetyBlockChecked { get; set; } = false;
         /// <summary>
         ///     This attribute is the instance for the serialization
         /// </summary>
@@ -102,6 +104,21 @@ namespace MAC_use_cases.Model
         ///     This string can be changed in the View
         /// </summary>
         public string NameOfMyFailSafeFb { get; set; } = "MyFunctionBlock_FailSafe";
+
+        /// <summary>
+        ///     Controls whether additional readout from TIA Portal is required.
+        ///     Set this to true when you need to read additional data after assign or update.
+        /// </summary>
+        public override bool IsAdditionalReadOutRequired() => false;
+
+        [JsonIgnore]
+        public ObservableCollection<string> PlcBlockNames { get; set; } = new ObservableCollection<string>();
+
+        public override void ReadTiaPortalAfterAssignOrUpdate(TiaTemplateContext tiaTemplateContext)
+        {
+            base.ReadTiaPortalAfterAssignOrUpdate(tiaTemplateContext);
+            GeneralSupport.ReadAdditionalInformationsFromTIAPortalProject(this, tiaTemplateContext);
+        }
 
         [JsonIgnore]
         public string NameAndType
@@ -210,10 +227,13 @@ namespace MAC_use_cases.Model
                         $"{nameof(ResourceManagement.MyFunctionBlock_FailSafe)}Db",
                         ResourceManagement.ModuleBlocksRootGroup);
 
-                    GenericBlockCreation.CreateFailSafeFunctionBlock($"{NameOfMyFailSafeFb}_F_LAD",
-                        dbFromFailSafeFbMasterCopy.Name,
-                        ProgrammingLanguage.F_LAD,
-                        _plcDevice);
+                    if (IsGenerateSafetyBlockChecked)
+                    {
+                        GenericBlockCreation.CreateFailSafeFunctionBlock($"{NameOfMyFailSafeFb}_F_LAD",
+                            dbFromFailSafeFbMasterCopy.Name,
+                            ProgrammingLanguage.F_LAD,
+                            _plcDevice);
+                    }
                     GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_FBD",
                         ProgrammingLanguage.FBD, _plcDevice);
                     GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_LAD",
