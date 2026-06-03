@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
-    <langVersion>8.0</langVersion>
+    <langVersion>latest</langVersion>
     <UseWPF>true</UseWPF>
     <PackOnBuild>true</PackOnBuild>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
@@ -44,7 +44,6 @@
     <Reference Include="Siemens.Engineering.WinCCUnified">
       <HintPath>$(SiemensPath)\..\Siemens.Engineering.WinCCUnified.dll</HintPath>
     </Reference>
-    <Content Include="..\..\legal\SiemensMACEMPrintStandard__$(VersionForOss)__READMEOSS.html" />
   </ItemGroup>
 
   <ItemGroup>
