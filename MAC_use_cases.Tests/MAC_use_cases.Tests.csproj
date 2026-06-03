@@ -23,7 +23,7 @@
     <Compile Include="..\MAC_use_cases\TiaImports\GeneratedClasses\**\*.cs" Link="GeneratedClasses\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Siemens.ModularApplicationCreator.Testenvironment" Version="[20.1.6-0,)" IncludePrerelease="true" />
+    <PackageReference Include="Siemens.ModularApplicationCreator.Testenvironment" Version="[21.0.5,)" IncludePrerelease="true" />
     <PackageReference Include="StrongNamer" Version="0.2.5" />
   </ItemGroup>
   <ItemGroup>

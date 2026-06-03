@@ -53,7 +53,7 @@ namespace MAC_use_cases.Model.UseCases
         ///     This method performs a type conversion from the internal Device type to the Openness API Device type,
         ///     allowing access to the Openness object model for device navigation.
         /// </remarks>
-        public static DeviceItem GetOpennessDeviceItem(Device device)
+        public static DeviceItem GetOpennessDeviceItem(Siemens.Engineering.HW.Device device)
         {
             var opennessDevice = (Siemens.Engineering.HW.Device)device;
             return opennessDevice.DeviceItems.FirstOrDefault(x => x.Classification == DeviceItemClassifications.CPU);
@@ -63,10 +63,10 @@ namespace MAC_use_cases.Model.UseCases
         ///     This call returns the openness object of the TIA Portal project
         /// </summary>
         /// <param name="tiaProject">This object represents the TIA Portal Project in the Modular Application Creator context</param>
-        public static Project GetOpennessProject(
+        public static Siemens.Engineering.Project GetOpennessProject(
             Siemens.Automation.ModularApplicationCreator.Tia.Openness.Project tiaProject)
         {
-            return (Project)tiaProject;
+            return (Siemens.Engineering.Project)tiaProject;
         }
 
         /// <summary>
@@ -86,31 +86,31 @@ namespace MAC_use_cases.Model.UseCases
         ///     used to locate the CPU and its associated PLC software
         /// </param>
         public static void ReadAdditionalInformationsFromTIAPortalProject(MAC_use_casesEM module, TiaTemplateContext tiaTemplateContext)
+        {
+            DeviceItem plc = null;
+            foreach (var device in ((Siemens.Engineering.Project)tiaTemplateContext.TiaProject).Devices)
             {
-                DeviceItem plc = null;
-                foreach (var device in ((Siemens.Engineering.Project)tiaTemplateContext.TiaProject).Devices)
+                foreach (var deviceItem in device.DeviceItems)
                 {
-                    foreach (var deviceItem in device.DeviceItems)
+                    if (deviceItem.Classification == DeviceItemClassifications.CPU)
                     {
-                        if (deviceItem.Classification == DeviceItemClassifications.CPU)
-                        {
-                            plc = deviceItem;
-                            continue;
-                        }
+                        plc = deviceItem;
+                        continue;
                     }
                 }
-                var softwareContainer = plc.GetService<SoftwareContainer>().Software as PlcSoftware;
-                var allBlocks = GetAllBlocksRecursive(softwareContainer.BlockGroup);
-
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    module.PlcBlockNames.Clear();
-                    foreach (var block in allBlocks)
-                    {
-                        module.PlcBlockNames.Add(block.Name);
-                    }
-                });
             }
+            var softwareContainer = plc.GetService<SoftwareContainer>().Software as PlcSoftware;
+            var allBlocks = GetAllBlocksRecursive(softwareContainer.BlockGroup);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                module.PlcBlockNames.Clear();
+                foreach (var block in allBlocks)
+                {
+                    module.PlcBlockNames.Add(block.Name);
+                }
+            });
+        }
 
         /// <summary>
         ///     Recursively collects all <see cref="PlcBlock"/> objects from the given

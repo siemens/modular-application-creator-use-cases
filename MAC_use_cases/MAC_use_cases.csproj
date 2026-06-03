@@ -3,66 +3,20 @@
     <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
     <langVersion>8.0</langVersion>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
+    <PackOnBuild>true</PackOnBuild>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <!-- Default MAC version if not specified -->
-    <MacVersionMajor Condition="'$(MacVersionMajor)' == ''">20</MacVersionMajor>
+    <MacVersionMajor Condition="'$(MacVersionMajor)' == ''">21</MacVersionMajor>
     <!-- Platform configuration for x64 -->
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64</Platforms>
-    <!-- Disable deterministic builds to allow wildcard versioning in DEBUG -->
-    <Deterministic>false</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutputPath>bin\x64\Debug\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
-    <PackOnBuild>true</PackOnBuild>
-    <PrimaryOutputKind>lib</PrimaryOutputKind>
-    <IsDevelopmentDependency>true</IsDevelopmentDependency>
-    <SrcRoot>$(MSBuildProjectDirectory)\..\..\</SrcRoot>
-    <SrcRoot>$([System.IO.Path]::GetFullPath($(SrcRoot)))</SrcRoot>
-    <PackageOutputPath>$(OutputPath)</PackageOutputPath>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SiemensPath Condition="'$(MacVersionMajor)' != '21'">$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\Openness\$(MacVersionMajor).0\PublicAPI\$(MacVersionMajor).0.0.0`, `Siemens.Engineering`, '', RegistryView.Registry64, RegistryView.Registry32))</SiemensPath>
-    <SiemensPathHmi Condition="'$(MacVersionMajor)' != '21'">$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\Openness\$(MacVersionMajor).0\PublicAPI\$(MacVersionMajor).0.0.0`, `Siemens.Engineering.Hmi`, '', RegistryView.Registry64, RegistryView.Registry32))</SiemensPathHmi>
-    <SiemensPath Condition="'$(MacVersionMajor)' == '21'">$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\Openness\$(MacVersionMajor).0\PublicAPI\$(MacVersionMajor).0.0.0\net48`, `Siemens.Engineering.Base`, '', RegistryView.Registry64, RegistryView.Registry32))</SiemensPath>
-  </PropertyGroup>
-  <PropertyGroup>
-    <!-- Define a preprocessor symbol based on the MacVersion -->
-    <DefineConstants Condition="'$(MacVersion)' == '18.1.3'">MAC_VERSION_18_1_3</DefineConstants>
-    <DefineConstants Condition="'$(MacVersion)' == '19.2.10'">MAC_VERSION_19_2_10</DefineConstants>
-    <DefineConstants Condition="'$(MacVersion)' == '20.0.2'">MAC_VERSION_20_0_2</DefineConstants>
+    <SiemensPath>$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\Openness\$(MacVersionMajor).0\PublicAPI\$(MacVersionMajor).0.0.0\net48`, `Siemens.Engineering.Base`, '', RegistryView.Registry64, RegistryView.Registry32))</SiemensPath>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <SiemensPath Condition="'$(MacVersionMajor)' != '21'">$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\Openness\$(MacVersionMajor).0\PublicAPI\$(MacVersionMajor).0.0.0`, `Siemens.Engineering`, '', RegistryView.Registry64, RegistryView.Registry32))</SiemensPath>
-    <SiemensPathHmi Condition="'$(MacVersionMajor)' != '21'">$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\Openness\$(MacVersionMajor).0\PublicAPI\$(MacVersionMajor).0.0.0`, `Siemens.Engineering.Hmi`, '', RegistryView.Registry64, RegistryView.Registry32))</SiemensPathHmi>
-    <SiemensPath Condition="'$(MacVersionMajor)' == '21'">$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\Openness\$(MacVersionMajor).0\PublicAPI\$(MacVersionMajor).0.0.0\net48`, `Siemens.Engineering.Base`, '', RegistryView.Registry64, RegistryView.Registry32))</SiemensPath>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <DefineConstants Condition="'$(MacVersionMajor)' == '19'">MAC_VERSION_19</DefineConstants>
-    <DefineConstants Condition="'$(MacVersionMajor)' == '20'">MAC_VERSION_20</DefineConstants>
-    <DefineConstants Condition="'$(MacVersionMajor)' == '21'">MAC_VERSION_21</DefineConstants>
-  </PropertyGroup>
-
-  <!--References of the project-->
-  <ItemGroup Condition="'$(MacVersionMajor)' != '21'">
-    <Reference Include="Siemens.Engineering">
-      <HintPath>$(SiemensPath)</HintPath>
-    </Reference>
-    <Reference Include="Siemens.Engineering.Hmi">
-      <HintPath>$(SiemensPathHmi)</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(MacVersionMajor)' == '21'">
+  <ItemGroup>
     <Reference Include="Siemens.Engineering.Base">
       <HintPath>$(SiemensPath)</HintPath>
     </Reference>
@@ -93,24 +47,6 @@
     <Content Include="..\..\legal\SiemensMACEMPrintStandard__$(VersionForOss)__READMEOSS.html" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Windows.Presentation" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.ComponentModel.DataAnnotations"></Reference>
-  </ItemGroup>
   <ItemGroup>
     <None Update="MAC_use_cases.nuspec">
       <SubType>Content</SubType>
@@ -129,14 +65,14 @@
     </None>
     <Content Include="AdditionalContent\HardwareGenerationExcelBased.xlsx" />
   </ItemGroup>
+
   <ItemGroup>
+    <PackageReference Include="Microsoft.Office.Interop.Excel">
+      <Version>15.0.4795.1001</Version>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </PackageReference>
     <PackageReference Include="Doxygen">
       <Version>1.8.14</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Siemens.EquipmentModule.Build.Tasks">
-      <Version>20.1.6</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -149,11 +85,16 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Basics">
-      <Version>20.1.6</Version>
+      <Version>21.0.5</Version>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Core">
-      <Version>20.1.6</Version>
+      <Version>21.0.5</Version>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Siemens.EquipmentModule.Build.Tasks">
+      <Version>21.0.5</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
@@ -161,6 +102,7 @@
     <Content Include="Images\*" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\" />
     <Folder Include="TiaResources\" />
   </ItemGroup>
   <ItemGroup>

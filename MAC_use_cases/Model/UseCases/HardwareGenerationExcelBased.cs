@@ -43,7 +43,7 @@ namespace MAC_use_cases.Model.UseCases
             {
                 xlApp = new Excel.Application();
                 xlWorkbook = xlApp.Workbooks.Open(filePath);
-                xlWorksheet = xlWorkbook.Sheets[1];
+                xlWorksheet = (Excel.Worksheet)xlWorkbook.Sheets[1];
                 xlRange = xlWorksheet.UsedRange;
 
                 var rowCount = xlRange.Rows.Count;
@@ -53,9 +53,9 @@ namespace MAC_use_cases.Model.UseCases
                 var columnMap = new Dictionary<string, int>();
                 for (var j = 1; j <= colCount; j++)
                 {
-                    if (xlRange.Cells[1, j].Value2 != null)
+                    if (((Excel.Range)xlRange.Cells[1, j]).Value2 != null)
                     {
-                        columnMap[xlRange.Cells[1, j].Value2.ToString()] = j;
+                        columnMap[((Excel.Range)xlRange.Cells[1, j]).Value2.ToString()] = j;
                     }
                 }
 
@@ -72,23 +72,23 @@ namespace MAC_use_cases.Model.UseCases
                 // Read data rows
                 for (var i = 2; i <= rowCount; i++) // Start from row 2 to skip headers
                 {
-                    if (xlRange.Cells[i, columnMap["OrderNumber"]].Value2 == null)
+                    if (((Excel.Range)xlRange.Cells[i, columnMap["OrderNumber"]]).Value2 == null)
                     {
                         continue;
                     }
 
                     var device = new DeviceInfo
                     {
-                        OrderNumber = GetCellValueAsString(xlRange.Cells[i, columnMap["OrderNumber"]]),
-                        Version = GetCellValueAsString(xlRange.Cells[i, columnMap["Version"]]),
-                        Name = GetCellValueAsString(xlRange.Cells[i, columnMap["Name"]]),
-                        DeviceName = GetCellValueAsString(xlRange.Cells[i, columnMap["DeviceName"]])
+                        OrderNumber = GetCellValueAsString((Excel.Range)xlRange.Cells[i, columnMap["OrderNumber"]]),
+                        Version = GetCellValueAsString((Excel.Range)xlRange.Cells[i, columnMap["Version"]]),
+                        Name = GetCellValueAsString((Excel.Range)xlRange.Cells[i, columnMap["Name"]]),
+                        DeviceName = GetCellValueAsString((Excel.Range)xlRange.Cells[i, columnMap["DeviceName"]])
                     };
 
                     // Handle Type column separately as it's optional
                     if (columnMap.TryGetValue("Type", out var value))
                     {
-                        device.Type = GetCellValueAsString(xlRange.Cells[i, value]);
+                        device.Type = GetCellValueAsString((Excel.Range)xlRange.Cells[i, value]);
                     }
 
                     // Only add device if required fields are not empty
