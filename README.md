@@ -1,7 +1,7 @@
 # Usecases for the SIMATIC Modular Application Creator **Module Builder**
 
 This repository demonstrates how to use the comfort functions of the Modular Application Creator Module Builder. With those comfort functions the Openness programmer does not need to handle the xml file when e.g. calls in ladder logic should be generated. More information is available under [Modular Application Creator on SIOS](https://support.industry.siemens.com/cs/de/en/view/109762852).
-123123
+
 ## 🚀 Getting started Documentation
 
 We just updated our [Modular Application Creator Use Case Based Documentation](https://siemens.github.io/modular-application-creator-use-cases/html/index.html).
