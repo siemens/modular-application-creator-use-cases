@@ -6,40 +6,16 @@
     <title>MAC_use_cases</title>
     <authors>SIEMENS AG</authors>
     <projectUrl>http://equipmentmodule.info/</projectUrl>
-    <description>#descr_en##descr_de##descr_zh##rnote_en##rnote_de##rnote_zh#</description>
+    <description>MAC use cases for Modular Application Creator.</description>
     <releaseNotes>#rnote_en##rnote_de##rnote_zh#</releaseNotes>
     <copyright>Copyright © SIEMENS AG</copyright>
     <dependencies>
       <group targetFramework=".NETFramework4.8">
-        <dependency id="Newtonsoft.Json" version="13.0.3" />
+        <dependency id="Microsoft.Office.Interop.Excel" version="15.0.4795.1001" />
         <dependency id="Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials" version="19.0.3" />
       </group>
     </dependencies>
-    <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V19.0 FAILSAFE_CPU_REQUIRED</tags>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="Microsoft.VisualBasic" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="PresentationCore" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="PresentationFramework" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Configuration" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Data.DataSetExtensions" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Data" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Drawing" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.IO.Compression.FileSystem" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Web.Extensions" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Windows.Forms" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Windows.Presentation" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Xaml" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework=".NETFramework4.8" />
-      <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework4.8" />
-    </frameworkAssemblies>
+    <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V21.0 FAILSAFE_CPU_REQUIRED</tags>
     <contentFiles>
       <files include="any/net48/AdditionalContent/HardwareGenerationExcelBased.xlsx" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/AddLibrary.png" buildAction="Content" copyToOutput="false" />
@@ -85,7 +61,8 @@
       <files include="any/net48/Images/V20_To_V21_RequiredNewEngineeringDlls.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/V20_To_V21_SelectMacMbPackages.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/V20_To_V21_UpdateMacPackages.png" buildAction="Content" copyToOutput="false" />
-      <files include="lib/net48/MAC_use_cases.dll" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Helpfiles/OnlineHelp.zip" buildAction="None" copyToOutput="false" />
+      <files include="any/net48/Helpfiles/OnlineHelpTopics.xml" buildAction="None" copyToOutput="false" />
     </contentFiles>
   </metadata>
   <files>

@@ -142,28 +142,14 @@ dotnet_naming_symbols.all_members.applicable_kinds = *
 
 dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 
+file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.\nSee the LICENSE file in the project root for more information.
+
 # RS0016: Only enable if API files are present
 dotnet_public_api_analyzer.require_api_files = true
 
 # IDE0055: Fix formatting
 # Workaround for https://github.com/dotnet/roslyn/issues/70570
 dotnet_diagnostic.IDE0055.severity = warning
-
-# https://github.com/dotnet/roslyn-analyzers/issues/7436 - False positives from valid GetDeclaredSymbol calls
-dotnet_diagnostic.RS1039.severity = none
-
-# These xUnit analyzers were disabled temporarily to let us move to the
-# new xUnit and get past several component governance issues. The
-# following issue tracks enabling them
-#
-# https://github.com/dotnet/roslyn/issues/75093
-dotnet_diagnostic.xUnit1012.severity = none
-dotnet_diagnostic.xUnit1030.severity = none
-dotnet_diagnostic.xUnit1031.severity = none
-dotnet_diagnostic.xUnit2005.severity = none
-dotnet_diagnostic.xUnit2020.severity = none
-dotnet_diagnostic.xUnit2023.severity = none
-dotnet_diagnostic.xUnit2029.severity = none
 
 # CSharp code style settings:
 [*.cs]

@@ -1,0 +1,15 @@
+<Project >
+    <PropertyGroup>
+        <!--Call via cmd p:MacVersion=19.2.10 etc-->
+        <!--<MacVersionMajor Condition="'$(MacVersionMajor)' == ''">19</MacVersionMajor>
+        <MacVersion Condition="'$(MacVersion)' == ''">$(MacVersionMajor).2.10</MacVersion>-->
+        <!--Call via cmd p:MacVersion=20.1.6 etc-->
+        <!--<MacVersionMajor Condition="'$(MacVersionMajor)' == ''">20</MacVersionMajor>
+        <MacVersion Condition="'$(MacVersion)' == ''">$(MacVersionMajor).1.6</MacVersion>-->
+        <!--Call via cmd p:MacVersion=21.0.5 etc-->
+        <MacVersionMajor Condition="'$(MacVersionMajor)' == ''">21</MacVersionMajor>
+        <MacVersion Condition="'$(MacVersion)' == ''">$(MacVersionMajor).0.5</MacVersion>
+        <OpennessVersion Condition="'$(MACVersion)' != ''">$(MACVersion.Substring(0, $(MACVersion.IndexOf('.'))))</OpennessVersion>
+    </PropertyGroup>
+
+</Project>
