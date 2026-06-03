@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['readexcelfile_0',['ReadExcelFile',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation_excel_based.html#a0c92961530071d38658c8c10bec08339',1,'MAC_use_cases::Model::UseCases::HardwareGenerationExcelBased']]]
+  ['of_20control_20binding_20usage_0',['Example of Control Binding Usage',['../md_docs_2module_essentials_page.html#autotoc_md18',1,'']]],
+  ['of_20module_20essentials_20usage_1',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md16',1,'']]],
+  ['on_20your_20project_2',['on your project',['../index.html#autotoc_md3',1,'<b>Fix 1</b> - If you already have collaboration framework installed on your project.'],['../index.html#autotoc_md4',1,'<b>Fix 2</b> - If you do not have the Collaboration Framework installed on your project']]],
+  ['overview_3',['Overview',['../index.html',1,'Overview'],['../md_docs_2module_essentials_page.html#autotoc_md10',1,'Overview']]]
 ];

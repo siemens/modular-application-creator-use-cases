@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['of_20control_20binding_20usage_0',['Example of Control Binding Usage',['../md_docs_2module_essentials_page.html#autotoc_md14',1,'']]],
-  ['of_20module_20essentials_20usage_1',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md12',1,'']]],
-  ['overview_2',['Overview',['../index.html',1,'Overview'],['../md_docs_2module_essentials_page.html#autotoc_md6',1,'Overview']]]
+  ['lanugages_0',['How to use different lanugages',['../index.html#localization-id',1,'']]],
+  ['libraries_1',['How to integrate libraries',['../index.html#section-id',1,'']]],
+  ['logmessage_2',['LogMessage',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a5e4a55f6f80ee7681d5ab544ea1075b1',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]]
 ];

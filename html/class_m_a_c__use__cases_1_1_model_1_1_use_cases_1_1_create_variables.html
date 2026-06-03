@@ -153,9 +153,9 @@ Static Public Member Functions</h2></td></tr>
 <div class="ttc" id="aclass_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables_html_a196e9521a76bc297ab213ef7f1b53a12"><div class="ttname"><a href="#a196e9521a76bc297ab213ef7f1b53a12">MAC_use_cases.Model.UseCases.CreateVariables.CreateTagTable</a></div><div class="ttdeci">static ControllerTags CreateTagTable(PlcDevice plcDevice, string tableName)</div><div class="ttdoc">Creates a new tag table or retrieves an existing one in the specified PLC device.</div><div class="ttdef"><b>Definition</b> <a href="_create_variables_8cs_source.html#l00027">CreateVariables.cs:27</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00027">27</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   28</span>    {</div>
-<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">return</span> plcDevice.Tags.GetOrCreateGlobalTagTable(tableName);</div>
-<div class="line"><span class="lineno">   30</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">   28</span>        {</div>
+<div class="line"><span class="lineno">   29</span>            <span class="keywordflow">return</span> plcDevice.Tags.GetOrCreateGlobalTagTable(tableName);</div>
+<div class="line"><span class="lineno">   30</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -199,9 +199,9 @@ Static Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line">var tagTable = <a class="code hl_function" href="#a196e9521a76bc297ab213ef7f1b53a12">CreateTagTable</a>(mySoftwareUnit, <span class="stringliteral">&quot;ModuleSpecificTags&quot;</span>);</div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00048">48</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   49</span>    {</div>
-<div class="line"><span class="lineno">   50</span>        <span class="keywordflow">return</span> softwareUnit.Tags.GetOrCreateGlobalTagTable(tableName);</div>
-<div class="line"><span class="lineno">   51</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>        {</div>
+<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">return</span> softwareUnit.Tags.GetOrCreateGlobalTagTable(tableName);</div>
+<div class="line"><span class="lineno">   51</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -275,16 +275,16 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_create_variables_8cs_source.html#l00065">65</a> of file <a class="el" href="_create_variables_8cs_source.html">CreateVariables.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   67</span>    {</div>
-<div class="line"><span class="lineno">   68</span>        var tagAddress = addressType + addressByte + <span class="stringliteral">&quot;.&quot;</span> + addressBit;</div>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>        {</div>
+<div class="line"><span class="lineno">   68</span>            var tagAddress = addressType + addressByte + <span class="stringliteral">&quot;.&quot;</span> + addressBit;</div>
 <div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>        var tag = tagTable[tagName];</div>
+<div class="line"><span class="lineno">   70</span>            var tag = tagTable[tagName];</div>
 <div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>        tag?.Delete();</div>
+<div class="line"><span class="lineno">   72</span>            tag?.Delete();</div>
 <div class="line"><span class="lineno">   73</span> </div>
-<div class="line"><span class="lineno">   74</span>        tag = tagTable.AddTag(tagName, dataType, tagAddress);</div>
-<div class="line"><span class="lineno">   75</span>        tag.SetComment(<span class="stringliteral">&quot;en-EN&quot;</span>, tagComment);</div>
-<div class="line"><span class="lineno">   76</span>    }</div>
+<div class="line"><span class="lineno">   74</span>            tag = tagTable.AddTag(tagName, dataType, tagAddress);</div>
+<div class="line"><span class="lineno">   75</span>            tag.SetComment(<span class="stringliteral">&quot;en-EN&quot;</span>, tagComment);</div>
+<div class="line"><span class="lineno">   76</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>

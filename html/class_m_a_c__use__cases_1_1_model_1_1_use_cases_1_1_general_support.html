@@ -163,10 +163,6 @@ Static Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00022">22</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span>    {</div>
-<div class="line"><span class="lineno">   24</span>        MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);</div>
-<div class="line"><span class="lineno">   25</span>    }</div>
 <p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00028">28</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   29</span>        {</div>
 <div class="line"><span class="lineno">   30</span>            MacManagement.LoggingService.LogMessage(logType, logMessage, equipmentModule.Name);</div>
@@ -206,10 +202,6 @@ Static Private Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The localized string value corresponding to the specified key. If the key is not found, returns an empty string or the key itself (depending on the LanguageService implementation) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00036">36</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span>    {</div>
-<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">return</span> MacManagement.LanguageService.GetString(key);</div>
-<div class="line"><span class="lineno">   39</span>    }</div>
 <p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00042">42</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   43</span>        {</div>
 <div class="line"><span class="lineno">   44</span>            <span class="keywordflow">return</span> MacManagement.LanguageService.GetString(key);</div>
@@ -250,11 +242,6 @@ Static Private Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The first DeviceItem classified as CPU, or null if no CPU is found</dd></dl>
 <p>This method performs a type conversion from the internal Device type to the Openness API Device type, allowing access to the Openness object model for device navigation. </p>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00050">50</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>    {</div>
-<div class="line"><span class="lineno">   52</span>        var opennessDevice = (Siemens.Engineering.HW.Device)device;</div>
-<div class="line"><span class="lineno">   53</span>        <span class="keywordflow">return</span> opennessDevice.DeviceItems.FirstOrDefault(x =&gt; x.Classification == DeviceItemClassifications.CPU);</div>
-<div class="line"><span class="lineno">   54</span>    }</div>
 <p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00056">56</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   57</span>        {</div>
 <div class="line"><span class="lineno">   58</span>            var opennessDevice = (Siemens.Engineering.HW.Device)device;</div>
@@ -294,10 +281,6 @@ Static Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00060">60</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>    {</div>
-<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> (Project)tiaProject;</div>
-<div class="line"><span class="lineno">   64</span>    }</div>
 <p class="definition">Definition at line <a class="el" href="_general_support_8cs_source.html#l00066">66</a> of file <a class="el" href="_general_support_8cs_source.html">GeneralSupport.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   68</span>        {</div>
 <div class="line"><span class="lineno">   69</span>            <span class="keywordflow">return</span> (Project)tiaProject;</div>
