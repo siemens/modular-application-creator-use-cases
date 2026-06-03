@@ -87,6 +87,9 @@
       <Version>21.0.5</Version>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials">
+      <Version>19.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Core">
       <Version>21.0.5</Version>
       <PrivateAssets>all</PrivateAssets>

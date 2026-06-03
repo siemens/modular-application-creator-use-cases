@@ -26,6 +26,20 @@ var NAVTREE =
 [
   [ "Modular Application Creator Use Case Based Documentation", "index.html", [
     [ "Overview", "index.html", "index" ],
+    [ "Advanced", "md_docs_2module_essentials_page.html", [
+      [ "Module Essentials", "md_docs_2module_essentials_page.html#autotoc_md9", [
+        [ "Overview", "md_docs_2module_essentials_page.html#autotoc_md10", null ],
+        [ "Key Features", "md_docs_2module_essentials_page.html#autotoc_md11", null ],
+        [ "Getting Started", "md_docs_2module_essentials_page.html#autotoc_md12", null ],
+        [ "Versioning", "md_docs_2module_essentials_page.html#autotoc_md13", null ],
+        [ "Architecture", "md_docs_2module_essentials_page.html#autotoc_md14", null ],
+        [ "Parameter Types", "md_docs_2module_essentials_page.html#autotoc_md15", null ],
+        [ "Example of Module Essentials Usage", "md_docs_2module_essentials_page.html#autotoc_md16", [
+          [ "UI Control Binding", "md_docs_2module_essentials_page.html#autotoc_md17", null ],
+          [ "Example of Control Binding Usage", "md_docs_2module_essentials_page.html#autotoc_md18", null ]
+        ] ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
