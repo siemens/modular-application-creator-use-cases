@@ -20,20 +20,36 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
+      
         <!-- Row 0 -->
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2"
+          x:Name="StackPanel"
+          VerticalAlignment="Top"
+          d:DataContext="{d:DesignInstance Type=model:MAC_use_casesEM,
+                                     IsDesignTimeCreatable=True}">
+          <TextBlock Margin="30,0,0,0" Text="Example of Essential CheckBox Parameter " />
+          <StackPanel Orientation="Horizontal">
+          <TextBlock Margin="30,15,0,0" Text="Technology Object Configuration:" />
+
+          <checkBox:EssentialCheckBoxLineItem
+            CustomLabelLanguageKey="IsVirtualAxis"
+            LabelColumnVisibility="Collapsed"
+            Parameter="{Binding DataContext.MyEssentialTechnologyObjectViewModel.IsVirtualAxis, ElementName=StackPanel}" />
+        </StackPanel>
+      
+        <!-- Row 1 -->
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2"
                    Text="{DynamicResource SampleText2}"
                    Margin="5" />
 
-        <!-- Row 1 -->
-        <TextBlock Grid.Row="1" Grid.Column="0"
+        <!-- Row 2 -->
+        <TextBlock Grid.Row="2" Grid.Column="0"
                    VerticalAlignment="Top"
                    Text="PLC Blocks:"
                    FontWeight="Bold"
                    Margin="5,13,5,5" />
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+        <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                   ItemsSource="{Binding PlcBlockNames}"
                   MaxHeight="300"
                   Width="400"

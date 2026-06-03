@@ -13,7 +13,7 @@
     <AssemblyName>MAC_use_cases</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <langVersion>8.0</langVersion>
+    <langVersion>latest</langVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,6 +89,12 @@ where to where -->
   in MPFProj12\ProjectNode.cs, ProcessFiles.
   -->
   <ItemGroup>
+    <Compile Include="Model\ModuleEssentials\Base\BaseModelParameterOwner.cs" />
+    <Compile Include="Model\ModuleEssentials\Base\BaseParameter.cs" />
+    <Compile Include="Model\ModuleEssentials\Base\BaseParameterWithPredefinedTags.cs" />
+    <Compile Include="Model\ModuleEssentials\Example\Parameter\Parameter_IsVirtualAxis.cs" />
+    <Compile Include="Model\ModuleEssentials\Example\TechnologyObjectDataModel.cs" />
+    <Compile Include="Model\ModuleEssentials\Example\TechnologyObjectViewModel.cs" />
     <Compile Include="Model\UseCases\HardwareGenerationExcelBased.cs" />
     <Compile Include="TiaImports\CustomLibraryClasses\Lib_Screen_1.cs" />
     <Compile Include="TiaImports\CustomLibraryClasses\Lib_MAC_use_cases_custom.cs" />
@@ -187,6 +193,9 @@ where to where -->
     <PackageReference Include="Siemens.ModularApplicationCreator.Basics">
       <Version>20.1.6</Version>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials">
+      <Version>19.0.3</Version>
     </PackageReference>
     <PackageReference Include="Siemens.ModularApplicationCreator.Core">
       <Version>20.1.6</Version>
