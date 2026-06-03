@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
-    <RootNamespace>Module.Tests</RootNamespace>
-    <AssemblyName>Module.Tests</AssemblyName>
+    <RootNamespace>MAC_use_cases.Tests</RootNamespace>
+    <AssemblyName>MAC_use_cases.Tests</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup>
