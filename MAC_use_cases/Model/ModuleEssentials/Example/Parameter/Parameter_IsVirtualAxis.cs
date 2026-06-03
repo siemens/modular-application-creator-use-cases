@@ -8,7 +8,7 @@ namespace MAC_use_cases.Model.ModuleEssentials.Example.Parameter;
 
 public class Parameter_IsVirtualAxis :BaseParameter, ITOParameter
 {
-    private const bool _defaultValue = false;
+    private const bool _defaultValue = true;
     private const EssentialParameterType _parameterType = EssentialParameterType.Bool;
 
     public string ToPath => "VirtualAxis.Mode"; // Path for the parameter, used for identification in Openness

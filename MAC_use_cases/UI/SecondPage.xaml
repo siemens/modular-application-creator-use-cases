@@ -5,6 +5,7 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:modulesUI="clr-namespace:Siemens.Automation.ModularApplicationCreator.Modules.UI;assembly=Siemens.Automation.ModAppCreator.Core"
                       xmlns:model="clr-namespace:MAC_use_cases.Model"
+                      xmlns:checkBox="clr-namespace:Siemens.Automation.ModularApplicationCreator.ControlModules.ModuleEssentials.Controls.EssentialParameterControls.CheckBox;assembly=Siemens.Automation.ModAppCreator.CM.ModuleEssentials"
                       mc:Ignorable="d"
                       d:Background="White">
 
@@ -16,44 +17,40 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="400" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
       
         <!-- Row 0 -->
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2"
-          x:Name="StackPanel"
-          VerticalAlignment="Top"
-          d:DataContext="{d:DesignInstance Type=model:MAC_use_casesEM,
-                                     IsDesignTimeCreatable=True}">
-          <TextBlock Margin="30,0,0,0" Text="Example of Essential CheckBox Parameter " />
-          <StackPanel Orientation="Horizontal">
-          <TextBlock Margin="30,15,0,0" Text="Technology Object Configuration:" />
-
-          <checkBox:EssentialCheckBoxLineItem
-            CustomLabelLanguageKey="IsVirtualAxis"
-            LabelColumnVisibility="Collapsed"
-            Parameter="{Binding DataContext.MyEssentialTechnologyObjectViewModel.IsVirtualAxis, ElementName=StackPanel}" />
-        </StackPanel>
-      
-        <!-- Row 1 -->
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="2"
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
                    Text="{DynamicResource SampleText2}"
-                   Margin="5" />
+                   Margin="5,5,5,10" />
+
+        <!-- Row 1 -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" Text="Example of Essential CheckBox Parameter: " />
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Margin="5,0,0,0" Text="Technology Object Configuration:" />
+
+            <checkBox:EssentialCheckBoxLineItem
+                Margin="5,-15,0,0"
+                CustomLabelLanguageKey="IsVirtualAxis"
+                LabelColumnVisibility="Collapsed"
+                Parameter="{Binding MyEssentialTechnologyObjectViewModel.IsVirtualAxis}" />
+        </StackPanel>
 
         <!-- Row 2 -->
         <TextBlock Grid.Row="2" Grid.Column="0"
                    VerticalAlignment="Top"
                    Text="PLC Blocks:"
                    FontWeight="Bold"
-                   Margin="5,13,5,5" />
+                   Margin="5,10,5,5" />
 
         <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                   ItemsSource="{Binding PlcBlockNames}"
                   MaxHeight="300"
                   Width="400"
-                  Margin="155,5,5,5"
+                  Margin="5,10,5,5"
                   HorizontalAlignment="Left"
                   ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.ItemTemplate>

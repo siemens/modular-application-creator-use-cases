@@ -31,7 +31,7 @@ public class TechnologyObjectDataModel : BaseModelParameterOwner
     protected override void setup()
     {
         base.setup();
-        CreateParameters();
+        //CreateParameters();
     }
 
     protected override void CreateParameters()
