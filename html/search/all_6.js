@@ -1,6 +1,24 @@
 var searchData=
 [
-  ['features_0',['Key Features',['../md_docs_2module_essentials_page.html#autotoc_md7',1,'']]],
-  ['files_1',['Files',['../index.html#autotoc_md3',1,'']]],
-  ['for_20this_20documentation_2',['Help for this documentation',['../index.html#help-id',1,'']]]
+  ['change_20it_20for_20the_20collaboration_20framework_0',['&lt;b&gt;Fix 3&lt;/b&gt; - If your project has direct dll references and is not planned to change it for the Collaboration framework',['../index.html#autotoc_md5',1,'']]],
+  ['classes_1',['Classes',['../index.html#autotoc_md6',1,'']]],
+  ['collaboration_20framework_2',['&lt;b&gt;Fix 3&lt;/b&gt; - If your project has direct dll references and is not planned to change it for the Collaboration framework',['../index.html#autotoc_md5',1,'']]],
+  ['collaboration_20framework_20installed_20on_20your_20project_3',['&lt;b&gt;Fix 2&lt;/b&gt; - If you do not have the Collaboration Framework installed on your project',['../index.html#autotoc_md4',1,'']]],
+  ['collaboration_20framework_20installed_20on_20your_20project_4',['&lt;b&gt;Fix 1&lt;/b&gt; - If you already have collaboration framework installed on your project.',['../index.html#autotoc_md3',1,'']]],
+  ['configureto_5',['ConfigureTO',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#ae859ea41651156a7af5a56605ec52091',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
+  ['connectdrivetosubnet_6',['ConnectDriveToSubnet',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#abe88e524c8380dba5f0829ec093461e2',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['control_20binding_7',['UI Control Binding',['../md_docs_2module_essentials_page.html#autotoc_md17',1,'']]],
+  ['control_20binding_20usage_8',['Example of Control Binding Usage',['../md_docs_2module_essentials_page.html#autotoc_md18',1,'']]],
+  ['copymodel_9',['CopyModel',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html#ac8fb236613d22c1c39c665d37b523171',1,'MAC_use_cases::Model::UseCases::NonTIAProjectBased']]],
+  ['createcontrolmodules_10',['CreateControlModules',['../class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html#a24b53ba4d5580cb5881d99ba6bca233b',1,'MAC_use_cases::Model::BaseMAC_use_casesEM']]],
+  ['createfailsafefunctionblock_11',['CreateFailSafeFunctionBlock',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a869c0d174ae907351a1563388410270c',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['createfunctionblock_12',['CreateFunctionBlock',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#abbbdb0ec10e143cb726b5bead8516da6',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['createfunctionblockinsoftwareunit_13',['CreateFunctionBlockInSoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#aea38b42000923960f6ec253679a4244b',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['createinstancedatablock_14',['CreateInstanceDataBlock',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html#a7efd2433aa7db1be898c1a6840d502a1',1,'MAC_use_cases.Model.UseCases.IntegrateLibraries.CreateInstanceDataBlock(MAC_use_casesEM module, FBMasterCopy masterCopy, string instanceName, BlockGroup target)'],['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html#a3131011f1c75136ad403e00bf7d04385',1,'MAC_use_cases.Model.UseCases.IntegrateLibraries.CreateInstanceDataBlock(MAC_use_casesEM module, FBLibraryType libraryType, string instanceName, BlockGroup target)']]],
+  ['createinstancedb_5fvia_5fxmlinstdb_15',['CreateInstanceDB_via_XmlInstDB',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html#ad6ae2561ed2dc273e21d78659d072b77',1,'MAC_use_cases::Model::UseCases::IntegrateLibraries']]],
+  ['createnewdevicesfromexcelsheet_16',['CreateNewDevicesFromExcelSheet',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation_excel_based.html#a5a17bbc5dd169fdfeeb4189aebcc8c68',1,'MAC_use_cases::Model::UseCases::HardwareGenerationExcelBased']]],
+  ['createtagintagtable_17',['CreateTagInTagTable',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html#a4b1dcd0fee94bcf523825eddf1416d58',1,'MAC_use_cases::Model::UseCases::CreateVariables']]],
+  ['createtagtable_18',['CreateTagTable',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html#a196e9521a76bc297ab213ef7f1b53a12',1,'MAC_use_cases.Model.UseCases.CreateVariables.CreateTagTable(PlcDevice plcDevice, string tableName)'],['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html#aefc410f9ded76c97fb2f383c43ab6e3e',1,'MAC_use_cases.Model.UseCases.CreateVariables.CreateTagTable(ISoftwareUnitBase softwareUnit, string tableName)']]],
+  ['createtos_19',['CreateTOs',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html#a2b9391c022cdf2caa2ca2259498e6bff',1,'MAC_use_cases::Model::UseCases::TechnologyObjectClass']]],
+  ['createvariables_20',['CreateVariables',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html',1,'MAC_use_cases::Model::UseCases']]]
 ];

@@ -1,10 +1,4 @@
 var searchData=
 [
-  ['basemac_5fuse_5fcasesem_0',['BaseMAC_use_casesEM',['../class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html',1,'MAC_use_cases::Model']]],
-  ['basemodelparameterowner_1',['BaseModelParameterOwner',['../class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_model_parameter_owner.html',1,'MAC_use_cases::Model::ModuleEssentials::Base']]],
-  ['baseparameter_2',['BaseParameter',['../class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter.html',1,'MAC_use_cases.Model.ModuleEssentials.Base.BaseParameter'],['../class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter.html#a0f992afb4bf380722d33435e611ad834',1,'MAC_use_cases.Model.ModuleEssentials.Base.BaseParameter.BaseParameter()']]],
-  ['baseparameterwithpredefinedtags_3',['BaseParameterWithPredefinedTags',['../class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter_with_predefined_tags.html',1,'MAC_use_cases::Model::ModuleEssentials::Base']]],
-  ['beforemoduledeleted_4',['BeforeModuleDeleted',['../class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html#aa6b388e6b60c33bb8a1c167ec62ad693',1,'MAC_use_cases::Model::BaseMAC_use_casesEM']]],
-  ['binding_5',['UI Control Binding',['../md_docs_2module_essentials_page.html#autotoc_md13',1,'']]],
-  ['binding_20usage_6',['Example of Control Binding Usage',['../md_docs_2module_essentials_page.html#autotoc_md14',1,'']]]
+  ['3_20if_20your_20project_20has_20direct_20dll_20references_20and_20is_20not_20planned_20to_20change_20it_20for_20the_20collaboration_20framework_0',['&lt;b&gt;Fix 3&lt;/b&gt; - If your project has direct dll references and is not planned to change it for the Collaboration framework',['../index.html#autotoc_md5',1,'']]]
 ];
