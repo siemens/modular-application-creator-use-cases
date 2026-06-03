@@ -9,8 +9,8 @@ We just updated our [Modular Application Creator Use Case Based Documentation](h
 ## Prerequisites
 
 - TIA-Portal installed on Windows PC
-- Download the same major version of the [Modular Application Creator V19.2.10 or higher](https://support.industry.siemens.com/cs/de/en/view/109762852)
-- Microsoft Visual Studio with Extension [Modular Application Creator Module Builder V19.2.10 or higher](https://support.industry.siemens.com/cs/de/en/view/109762852) installed
+- Download the same major version of the [Modular Application Creator V21.0.5 or higher](https://support.industry.siemens.com/cs/de/en/view/109762852)
+- Microsoft Visual Studio with Extension [Modular Application Creator Module Builder V21.0.5 or higher](https://support.industry.siemens.com/cs/de/en/view/109762852) installed
 
 ## Quickstart
 
@@ -21,9 +21,10 @@ Follow these steps to get started with the Modular Application Creator:
 
 2. **Set Up Debugging** (Optional):
    - Open your project in Visual Studio.
-   - Go to `Properties` → `Debug` → `Start external program` and select `ModularApplicationCreator.exe`.
+   - Open launchSettings.json in MAC_use_cases project
+   - Adapt the executablePath according to the location of your ModularApplicationCreator.exe
 
-        ![Debug Setup](docs/images/debug-setup.png)
+        ![Debug Setup](docs/images/launch-settings.png)
 
 3. **Build & Run the Solution**:
    - Build the solution in Visual Studio and ensure it compiles successfully.
