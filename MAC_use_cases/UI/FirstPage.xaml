@@ -75,7 +75,7 @@
         <CheckBox Grid.Row="5" Grid.Column="1"
                   HorizontalAlignment="Left"
                   Margin="5"
-                  IsChecked="{Binding IsGenerateSafetyBlockChecked}" />
+                  IsChecked="{Binding IsGenerateHardwareChecked}" />
 
         <!-- Row 6 -->
         <TextBlock Grid.Row="6" Grid.Column="0"
