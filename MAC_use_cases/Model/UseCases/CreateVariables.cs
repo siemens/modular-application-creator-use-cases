@@ -72,7 +72,7 @@ namespace MAC_use_cases.Model.UseCases
             tag?.Delete();
 
             tag = tagTable.AddTag(tagName, dataType, tagAddress);
-            tag.SetComment("en-EN", tagComment);
+            tag.SetComment("en-US", tagComment);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace MAC_use_cases.Model.UseCases
 
             tag?.Delete();
             tag = tagTable.AddUserConstant(tagName, dataType, value);
-            tag.SetComment("en-EN", tagComment);
+            tag.SetComment("en-US", tagComment);
         }
     }
 }
