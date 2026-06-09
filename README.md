@@ -9,6 +9,7 @@ We just updated our [Modular Application Creator Use Case Based Documentation](h
 ## Prerequisites
 
 - TIA-Portal installed on Windows PC
+- TIA-Portal Editing language and Reference language set to English (United States)
 - Download the same major version of the [Modular Application Creator V21.0.5 or higher](https://support.industry.siemens.com/cs/de/en/view/109762852)
 - Microsoft Visual Studio with Extension [Modular Application Creator Module Builder V21.0.5 or higher](https://support.industry.siemens.com/cs/de/en/view/109762852) installed
 

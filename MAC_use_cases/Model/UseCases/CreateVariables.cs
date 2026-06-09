@@ -72,7 +72,26 @@ namespace MAC_use_cases.Model.UseCases
             tag?.Delete();
 
             tag = tagTable.AddTag(tagName, dataType, tagAddress);
-            tag.SetComment("en-EN", tagComment);
+            tag.SetComment("en-US", tagComment);
+        }
+
+        /// <summary>
+        ///     This Function creates a User Constant in a Tag Table
+        /// </summary>
+        /// <param name="tagTable">An existing tag table in which you want to create a user constant</param>
+        /// <param name="value"></param> value of the user constant
+        /// <param name="tagName">Name of the user constant</param>
+        /// <param name="dataType">Date type of the user constant</param>
+        /// <param name="tagComment">Comment of the user constant</param>
+        public static void CreateUserConstantInTagTable(ControllerTags tagTable,
+            string value, string tagName, string dataType, string tagComment)
+        {
+
+            var tag = tagTable[tagName];
+
+            tag?.Delete();
+            tag = tagTable.AddUserConstant(tagName, dataType, value);
+            tag.SetComment("en-US", tagComment);
         }
     }
 }
