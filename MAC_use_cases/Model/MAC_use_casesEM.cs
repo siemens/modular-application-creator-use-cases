@@ -251,7 +251,7 @@ namespace MAC_use_cases.Model
 
                     var myTagTable = CreateVariables.CreateTagTable(_plcDevice, "myTagTable");
                     var mySoftwareUnitTagTable = CreateVariables.CreateTagTable(_softwareUnit, "mySoftwareUnitTagTable");
-
+                    CreateVariables.CreateUserConstantInTagTable(myTagTable, "TRUE", "MY_USER_CONSTANT_1", "Bool", "My user constant comment");
                     CreateVariables.CreateTagInTagTable(myTagTable, "%I", "187", "0", "myTag_0", "Bool", "myTagComment");
                     CreateVariables.CreateTagInTagTable(mySoftwareUnitTagTable, "%I", "188", "0", "myTag_1", "Bool",
                         "myTagComment");
