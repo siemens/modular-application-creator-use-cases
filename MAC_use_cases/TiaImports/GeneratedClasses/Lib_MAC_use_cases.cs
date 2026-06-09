@@ -30,11 +30,21 @@ namespace MAC_use_cases
         {
         }
         
+        public Lib_MAC_use_cases(string libraryName) : 
+                this(true, libraryName)
+        {
+        }
+        
+        public Lib_MAC_use_cases(bool initMasterCopies, string libraryName) : 
+                base(initMasterCopies, libraryName)
+        {
+        }
+        
         public static string TiaVersion
         {
             get
             {
-                return "TIA-V19.0";
+                return "TIA-V21.0";
             }
         }
         

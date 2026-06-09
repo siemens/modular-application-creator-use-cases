@@ -6,7 +6,7 @@
     <LangVersion>latest</LangVersion>
     <IsPackable>true</IsPackable>
     <IsTestProject>false</IsTestProject>
-    <RootNamespace>Siemens.Automation.ModularApplicationCreator.UseCases</RootNamespace>
+    <RootNamespace>MAC_use_cases</RootNamespace>
     <AssemblyName>MAC_use_cases</AssemblyName>
     <UseWPF>true</UseWPF>
     <AssemblyTitle>MAC_use_cases</AssemblyTitle>
@@ -160,14 +160,14 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TiaImports\Lib_MAC_use_cases.zip" />
-  </ItemGroup>
   <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
     <Compile Remove="TiaImports\GeneratedClasses\Sollas.cs" />
     <Compile Remove="TiaImports\GeneratedClasses\pMiddleLayer.cs" />
     <Compile Remove="TiaImports\GeneratedClasses\LIBelt_V1_1_4_V17_V18_V19.cs" />
     <Compile Remove="TiaImports\GeneratedClasses\LIBelt_Manager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TiaImports\Lib_MAC_use_cases.zip" />
   </ItemGroup>
 
   <!--<ItemGroup>

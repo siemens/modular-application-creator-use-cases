@@ -28,6 +28,7 @@ namespace MAC_use_cases.TiaImports
         private List<LibraryBase> m_libraries;
         private Dictionary<NameAndType, LibraryTypeObject> m_nameAndType2LibraryTypeObject = new Dictionary<NameAndType, LibraryTypeObject>();
         private List<TagGroup> m_duplicatedRootTagGroups;
+        private List<TechnologicalObjectGroup> m_duplicatedRootTOGroups;
         private List<TypeGroup> m_duplicatedRootTypeGroups;
         private List<BlockGroup> m_duplicatedRootBlockGroups;
         private List<WatchTableGroup> m_duplicatedRootWatchTableGroups;
@@ -44,6 +45,8 @@ namespace MAC_use_cases.TiaImports
         public TypeGroup LibraryTypesRootGroup { get; private set; }
         public List<string> LibraryBlocksRootGroupPath { get; set; } = new List<string>();
         public BlockGroup LibraryBlocksRootGroup { get; private set; }
+        public List<string> LibraryTOsRootGroupPath { get; set; } = new List<string>();
+        public TechnologicalObjectGroup LibraryTOsRootGroup { get; private set; }
         public List<string> LibraryWatchTablesRootGroupPath { get; set; } = new List<string>();
         public WatchTableGroup LibraryWatchTablesRootGroup { get; private set; }
         public List<string> ModuleTagsRootGroupPath { get; set; } = new List<string>();
@@ -52,6 +55,8 @@ namespace MAC_use_cases.TiaImports
         public TypeGroup ModuleTypesRootGroup { get; private set; }
         public List<string> ModuleBlocksRootGroupPath { get; set; } = new List<string>();
         public BlockGroup ModuleBlocksRootGroup { get; private set; }
+        public List<string> ModuleTOsRootGroupPath { get; set; } = new List<string>();
+        public TechnologicalObjectGroup ModuleTOsRootGroup { get; private set; }
         public List<string> ModuleWatchTablesRootGroupPath { get; set; } = new List<string>();
         public WatchTableGroup ModuleWatchTablesRootGroup { get; private set; }
 
@@ -155,7 +160,7 @@ namespace MAC_use_cases.TiaImports
             }
 
             m_libraryInfos = new List<TiaLibraryInfo>();
-            LibraryBase lib = new Lib_MAC_use_cases(false);
+            LibraryBase lib = new Lib_MAC_use_cases(false, nameof(Lib_MAC_use_cases));
             var libInfo = new TiaLibraryInfo("Lib_MAC_use_cases", lib.Version);
             m_libraryInfos.Add(libInfo);
 
@@ -173,6 +178,7 @@ namespace MAC_use_cases.TiaImports
         private void InitDuplicateLists()
         {
             m_duplicatedRootTagGroups = new List<TagGroup>();
+            m_duplicatedRootTOGroups = new List<TechnologicalObjectGroup>();
             m_duplicatedRootTypeGroups = new List<TypeGroup>();
             m_duplicatedRootBlockGroups = new List<BlockGroup>();
             m_duplicatedRootWatchTableGroups = new List<WatchTableGroup>();
@@ -199,6 +205,13 @@ namespace MAC_use_cases.TiaImports
             {
                 _ModuleBlocksRootGroup.DeleteGroupItself();
                 _ModuleBlocksRootGroup = null;
+            }
+
+            TechnologicalObjectGroup _ModuleTOsRootGroup = FindRootGroup(ModuleTOsRootGroupPath, targetDevice.TechnologicalObjects.Groups) as TechnologicalObjectGroup;
+            if (_ModuleTOsRootGroup != null)
+            {
+                _ModuleTOsRootGroup.DeleteGroupItself();
+                _ModuleTOsRootGroup = null;
             }
 
             WatchTableGroup _ModuleWatchTablesRootGroup = FindRootGroup(ModuleWatchTablesRootGroupPath, targetDevice.WatchTables.Groups) as WatchTableGroup;
@@ -262,6 +275,10 @@ namespace MAC_use_cases.TiaImports
             LibraryBlocksRootGroupPath.AddRange(targetDevice.Blocks.DefaultLibraryGroup.PathAsList);
             LibraryBlocksRootGroup = null;
 
+            LibraryTOsRootGroupPath.Clear();
+            LibraryTOsRootGroupPath.AddRange(targetDevice.TechnologicalObjects.DefaultLibraryGroup.PathAsList);
+            LibraryTOsRootGroup = null;
+
             LibraryWatchTablesRootGroupPath.Clear();
             LibraryWatchTablesRootGroupPath.AddRange(targetDevice.WatchTables.DefaultLibraryGroup.PathAsList);
             LibraryWatchTablesRootGroup = null;
@@ -275,10 +292,12 @@ namespace MAC_use_cases.TiaImports
             ModuleBlocksRootGroupPath = tiaTemplateContext.EquipmentModuleHierarchyBuilder.CalculateAbsoluteRootPath(module, TiaGroupTypes.PROGRAM_BLOCKS);
             ModuleBlocksRootGroup = null;
 
+            ModuleTOsRootGroup = null;
+
             ModuleWatchTablesRootGroupPath = tiaTemplateContext.EquipmentModuleHierarchyBuilder.CalculateAbsoluteRootPath(module, TiaGroupTypes.WATCH_TABLES);
             ModuleWatchTablesRootGroup = null;
 
-            Lib_MAC_use_cases = new Lib_MAC_use_cases();
+            Lib_MAC_use_cases = new Lib_MAC_use_cases(nameof(Lib_MAC_use_cases));
             Lib_MAC_use_cases.InstallLibrary();
             Lib_MAC_use_cases.Open();
         }
@@ -299,16 +318,20 @@ namespace MAC_use_cases.TiaImports
             LibraryTagsRootGroup = GenerateGroupHierarchy(LibraryTagsRootGroupPath, targetDevice.Tags.Groups) as TagGroup;
             LibraryTypesRootGroup = GenerateGroupHierarchy(LibraryTypesRootGroupPath, targetDevice.Types.Groups) as TypeGroup;
             LibraryBlocksRootGroup = GenerateGroupHierarchy(LibraryBlocksRootGroupPath, targetDevice.Blocks.Groups) as BlockGroup;
+            LibraryTOsRootGroup = GenerateGroupHierarchy(LibraryTOsRootGroupPath, targetDevice.TechnologicalObjects.Groups) as TechnologicalObjectGroup;
             LibraryWatchTablesRootGroup = GenerateGroupHierarchy(LibraryWatchTablesRootGroupPath, targetDevice.WatchTables.Groups) as WatchTableGroup;
             ModuleTagsRootGroup = GenerateGroupHierarchy(ModuleTagsRootGroupPath, targetDevice.Tags.Groups) as TagGroup;
             ModuleTypesRootGroup = GenerateGroupHierarchy(ModuleTypesRootGroupPath, targetDevice.Types.Groups) as TypeGroup;
             ModuleBlocksRootGroup = GenerateGroupHierarchy(ModuleBlocksRootGroupPath, targetDevice.Blocks.Groups) as BlockGroup;
+            ModuleTOsRootGroup = GenerateGroupHierarchy(ModuleTOsRootGroupPath, targetDevice.TechnologicalObjects.Groups) as TechnologicalObjectGroup;
             ModuleWatchTablesRootGroup = GenerateGroupHierarchy(ModuleWatchTablesRootGroupPath, targetDevice.WatchTables.Groups) as WatchTableGroup;
             LibraryTagsRootGroup.AddGroup("Lib_MAC_use_cases_Tags");
 
             LibraryTypesRootGroup.AddGroup("Lib_MAC_use_cases_Types");
 
             LibraryBlocksRootGroup.AddGroup("Lib_MAC_use_cases_Blocks");
+
+            LibraryTOsRootGroup.AddGroup("Lib_MAC_use_cases_TOs");
 
             LibraryWatchTablesRootGroup.AddGroup("Lib_MAC_use_cases_WatchTables");
 
@@ -325,7 +348,7 @@ namespace MAC_use_cases.TiaImports
                 CollectLibraryTypeCreationInfo(Lib_MAC_use_cases.MyDataType);
             }
 
-            // Create technological objects
+            // Create TO lists
 
             // Create blocks
             if (MyFunctionBlock.IsIncludedInTiaProject)
@@ -382,6 +405,11 @@ namespace MAC_use_cases.TiaImports
             }
 
             foreach (var group in m_duplicatedRootTagGroups)
+            {
+                tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(group);
+            }
+
+            foreach (var group in m_duplicatedRootTOGroups)
             {
                 tiaTemplateContext.EquipmentModuleHierarchyBuilder.RemoveEmptyGroups(group);
             }

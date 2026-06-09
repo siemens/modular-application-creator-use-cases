@@ -18,7 +18,7 @@ public class TechnologyObjectDataModel : BaseModelParameterOwner
         
     }
 
-    public string MotionControlVersion => "8.0"; // Example version for TIA V19
+    public string MotionControlVersion => "10.0"; // Example version for TIA V21
     public TechnologicalObjectInfo TechObjectInfo { get; set; }
 
     public TechnologyObjectDataModel(MAC_use_casesEM parentModel) : base(parentModel)

@@ -31,6 +31,7 @@ namespace MAC_use_cases
     
     [DefaultVersionGuid("37350dd3-dc9a-4954-a0dd-22084d7f0321")]
     [DefaultVersionIsIndependent(true)]
+    [OriginalLibraryName("Lib_MAC_use_cases")]
     [OriginalTypeName("MyFunctionBlock_Typed")]
     public class MyFunctionBlock_Typed : FBLibraryType, ITiaResource, ITiaProjectLibraryResource
     {

@@ -29,6 +29,7 @@ namespace MAC_use_cases
         }
     }
     
+    [OriginalLibraryName("Lib_MAC_use_cases")]
     [OriginalTypeName("MyDataType")]
     public class MyDataType : ProgramMasterCopy, ITiaResource
     {

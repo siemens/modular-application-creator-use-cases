@@ -10,6 +10,9 @@
 
 using Siemens.Automation.ModularApplicationCreator.Tia;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
+using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
+using Siemens.Automation.ModularApplicationCreator.Tia.Openness.TO;
+using System;
 
 
 namespace MAC_use_cases
@@ -19,30 +22,38 @@ namespace MAC_use_cases
     public partial class Lib_MAC_use_cases : LibraryBase
     {
         
-        public virtual FBMasterCopy MyFunctionBlock
+        public virtual DeviceMasterCopy S120DriveControl
         {
             get
             {
-                FBMasterCopy returnValue = ((FBMasterCopy)(MasterCopies["MyFunctionBlock"]));
+                DeviceMasterCopy returnValue = ((DeviceMasterCopy)(MasterCopies["Drives.S120DriveControl"]));
                 return returnValue;
             }
         }
     }
     
     [OriginalLibraryName("Lib_MAC_use_cases")]
-    [OriginalTypeName("MyFunctionBlock")]
-    public class MyFunctionBlock : FBMasterCopy, ITiaResource
+    [OriginalTypeName("Drives.S120DriveControl")]
+    public class S120DriveControl : DeviceMasterCopy
     {
         
-        public Siemens.Automation.ModularApplicationCreator.Tia.Openness.PlcDevice ParentDevice{get;set;}=null;
+        public const string ORIGINAL_TYPE_NAME="Drives.S120DriveControl";
         
-        public bool IsIncludedInTiaProject{get;set;}=true;
+        public const string ORIGINAL_LIBRARY_NAME="Lib_MAC_use_cases";
         
-        public override string TiaProjectRootGroupName
+        public override string OriginalTypeName
         {
             get
             {
-                return TiaDynamicProperties.ProgramBlocksRootGroupName;
+                return ORIGINAL_TYPE_NAME;
+            }
+        }
+        
+        public override string OriginalLibraryName
+        {
+            get
+            {
+                return ORIGINAL_LIBRARY_NAME;
             }
         }
     }
