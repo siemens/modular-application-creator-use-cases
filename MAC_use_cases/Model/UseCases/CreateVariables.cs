@@ -1,6 +1,9 @@
-﻿using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
+﻿using System;
+using System.Collections.Generic;
+using Siemens.Automation.ModularApplicationCreator.Tia.Helper;
+using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
-
+using Siemens.Engineering.Library.Types;
 namespace MAC_use_cases.Model.UseCases
 {
     /// <summary>
@@ -28,7 +31,6 @@ namespace MAC_use_cases.Model.UseCases
         {
             return plcDevice.Tags.GetOrCreateGlobalTagTable(tableName);
         }
-
         /// <summary>
         ///     Creates a new tag table or retrieves an existing one in the specified software unit.
         /// </summary>
@@ -49,8 +51,6 @@ namespace MAC_use_cases.Model.UseCases
         {
             return softwareUnit.Tags.GetOrCreateGlobalTagTable(tableName);
         }
-
-
         /// <summary>
         ///     This Function creates a Tag in a Tag Table
         ///     \image html CreateTag.png
@@ -66,15 +66,11 @@ namespace MAC_use_cases.Model.UseCases
             string addressBit, string tagName, string dataType, string tagComment)
         {
             var tagAddress = addressType + addressByte + "." + addressBit;
-
             var tag = tagTable[tagName];
-
             tag?.Delete();
-
             tag = tagTable.AddTag(tagName, dataType, tagAddress);
             tag.SetComment("en-US", tagComment);
         }
-
         /// <summary>
         ///     This Function creates a User Constant in a Tag Table
         /// </summary>
@@ -86,12 +82,49 @@ namespace MAC_use_cases.Model.UseCases
         public static void CreateUserConstantInTagTable(ControllerTags tagTable,
             string value, string tagName, string dataType, string tagComment)
         {
-
             var tag = tagTable[tagName];
-
             tag?.Delete();
             tag = tagTable.AddUserConstant(tagName, dataType, value);
             tag.SetComment("en-US", tagComment);
+        }
+        /// <summary>
+        ///     Writes a UDT definition in SCL source format to a <c>.udt</c> file.
+        /// </summary>
+        /// <param name="plcdevice">The PLC Device where the UDT shall be created.</param>
+        /// <param name="udtName">The name of the UDT type, e.g. <c>MyDataType1</c>.</param>
+        /// <param name="version">The version string, e.g. <c>0.2</c>.</param>
+        /// <param name="members">Dictionary of member names and their data types, e.g. ("Int", "Int").</param>
+        public static void CreateUDT(
+            PlcDevice plcdevice,
+            string udtName,
+            string version,
+            Dictionary<string, string> members)
+        {
+            var structMembers = new System.Text.StringBuilder();
+            foreach (var member in members)
+            {
+                structMembers.AppendLine($"         \"{member.Key}\" : {member.Value};");
+            }
+
+            var udtContent = $@"TYPE ""{udtName}""
+            VERSION : {version}
+            STRUCT
+            myStruct : Struct
+            {structMembers}      END_STRUCT;
+             END_STRUCT;
+
+            END_TYPE
+            ";
+            var filePath = System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), ".udt");
+            try
+            {
+                System.IO.File.WriteAllText(filePath, udtContent, System.Text.Encoding.UTF8);
+                OpennessFuncs.ImportToPlc(filePath, plcdevice);
+            }
+            finally
+            {
+                System.IO.File.Delete(filePath);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using MAC_use_cases.Model.ModuleEssentials.Example;
+﻿using System.Collections.Generic;
 ﻿using System.Collections.ObjectModel;
+using MAC_use_cases.Model.ModuleEssentials.Example;
 using MAC_use_cases.Model.UseCases;
 using MAC_use_cases.ViewModel;
 using Newtonsoft.Json;
@@ -265,6 +266,18 @@ namespace MAC_use_cases.Model
                         IntegrateLibraries.GenerateScreenFromMastercopy(hmiSoftware,
                             ResourceManagement.Lib_MAC_use_cases.Lib_Screen_1);
                     }
+                    CreateVariables.CreateUDT(
+                        _plcDevice,
+                        "MyUDT1",
+                        "0.1",
+                        new Dictionary<string, string>
+                        {
+                            { "TestInt",  "Int"  },
+                            { "TestBool", "Bool" }
+                        });
+
+                    // Compile all types after creation
+                    OpennessFuncs.CompileAllTypes(_plcDevice);
 
                     provider.CollectAttributes(Attributes);
                     provider.WriteValues(_plcDevice);
