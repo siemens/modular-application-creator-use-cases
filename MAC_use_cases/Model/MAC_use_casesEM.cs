@@ -266,7 +266,7 @@ namespace MAC_use_cases.Model
                         IntegrateLibraries.GenerateScreenFromMastercopy(hmiSoftware,
                             ResourceManagement.Lib_MAC_use_cases.Lib_Screen_1);
                     }
-                    CreateVariables.createUDT(
+                    CreateVariables.CreateUDT(
                         _plcDevice,
                         "MyUDT1",
                         "0.1",

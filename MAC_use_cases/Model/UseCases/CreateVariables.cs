@@ -94,7 +94,7 @@ namespace MAC_use_cases.Model.UseCases
         /// <param name="udtName">The name of the UDT type, e.g. <c>MyDataType1</c>.</param>
         /// <param name="version">The version string, e.g. <c>0.2</c>.</param>
         /// <param name="members">Dictionary of member names and their data types, e.g. ("Int", "Int").</param>
-        public static void createUDT(
+        public static void CreateUDT(
             PlcDevice plcdevice,
             string udtName,
             string version,
