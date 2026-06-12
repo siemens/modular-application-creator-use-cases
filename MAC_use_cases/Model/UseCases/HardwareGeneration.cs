@@ -65,7 +65,6 @@ namespace MAC_use_cases.Model.UseCases
                 var myInfeed = myDrive.GetInfeed();
                 var sAxis1 = myDrive.GetAxis("SAxis_1");
                 var dAxis1A = myDrive.GetAxis("DAxis_1A");
-                var dAxis1B = myDrive.GetAxis("DAxis_1B");
                 myDrive.DriveCLiQPorts[0].Connect(myInfeed.LineModuleObjects[0].DriveCLiQPorts[0]);
                 // SMM
                 myDrive.DriveCLiQPorts[1].Connect(sAxis1.DriveCLiQPorts[0]);
