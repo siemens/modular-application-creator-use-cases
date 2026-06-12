@@ -16,6 +16,13 @@ namespace MAC_use_cases.Model.UseCases
     /// </summary>
     public class HardwareGeneration
     {
+
+        private const string Cliqmlfb = "OrderNumber:XExxxxx-xxxxx-xxxx//DRIVE-CLIQ.222";
+        private const string ActiveInfeedChassisMlfb = "OrderNumber:6SL3330-7TE32-1AAx";
+        private const string TypeIdentifierSmm = "OrderNumber:6SL3120-1TE13-0Axx//10001";
+        private const string TypeIdentifierDmm = "OrderNumber:6SL3120-2TE13-0Axx//10011";
+        private const string TypeIdentifierMotSer = "OrderNumber:1FE2183-8LNxx-xCC0";
+
         /// <summary>
         ///     This function generates an S120 Drive based on a MasterCopy
         ///     \image html GenerateS120.png
@@ -31,18 +38,40 @@ namespace MAC_use_cases.Model.UseCases
             if (!module.SynchronizedCollection.HardwareInterfaces.OfType<ProfiDriveObjectInfo>()
                     .Any(x => x.DriveDevice.Equals(name)))
             {
-                var info = HardwareBlueprintFactory.CreateDrive(S120PNOrderNumbers.S120_CU_320_2_PN).LatestFirmware()
-                    .CreateBlueprint(name, deviceName);
+                var info = HardwareBlueprintFactory.CreateDrive(S120PNOrderNumbers.S120_CU_320_2_PN).LatestFirmware().CreateBlueprint(name, deviceName);
 
-                info.DevicePath = path;
-                info.Comment = comment;
-                info.PlcName = module.ParentDevice.Name;
-                info.CreateSingleAxis("SingleAxis", "OrderNumber:6SL3310-1TE32-1AAx", out _,
-                    AxisDriveObjectType.Vector);
+                info.SetInfeed("MyInfeed", ActiveInfeedChassisMlfb, 1, out var infeedBp);
 
-                info.GetAxis("SingleAxis").PlcName = module.ParentDevice.Name;
+
+                info.CreateSingleAxis("SAxis_1", TypeIdentifierSmm, "MM", out var axisInfo1, doType: AxisDriveObjectType.Servo);
+                axisInfo1.AddEncoder("Encoder1", Cliqmlfb);
+                axisInfo1.SetMotor("motor1", TypeIdentifierMotSer);
+
+                info.CreateDoubleAxis("DAxis_1A", "DAxis_1B", TypeIdentifierDmm, out var ax1, out var ax2, motorModuleName: "MM", doType: AxisDriveObjectType.Servo);
+                ax1.AddEncoder("Encoder1", Cliqmlfb);
+                ax1.SetMotor("motor1", TypeIdentifierMotSer);
+
+                //clear connections 
+                info.ClearNonUserDriveCLiQConnections = true;
 
                 module.SynchronizedCollection.HardwareInterfaces.Add(info);
+                var myDrive = module.SynchronizedCollection.HardwareInterfaces.OfType<S120PNDriveInfo>()
+                    .FirstOrDefault(x => x.DriveDevice.Equals(name) || x.DeviceName.Equals(name));
+                if (myDrive == null)
+                {
+                    return info;
+                }
+
+                var myInfeed = myDrive.GetInfeed();
+                var sAxis1 = myDrive.GetAxis("SAxis_1");
+                var dAxis1A = myDrive.GetAxis("DAxis_1A");
+                myDrive.DriveCLiQPorts[0].Connect(myInfeed.LineModuleObjects[0].DriveCLiQPorts[0]);
+                // SMM
+                myDrive.DriveCLiQPorts[1].Connect(sAxis1.DriveCLiQPorts[0]);
+                sAxis1.DriveCLiQPorts[2].Connect(sAxis1.GetEncoders().First().DriveCLiQPorts[0]);
+                //Servo DMMs
+                myDrive.DriveCLiQPorts[2].Connect(dAxis1A.DriveCLiQPorts[0]);
+                dAxis1A.DriveCLiQPorts[1].Connect(dAxis1A.GetEncoders().First().DriveCLiQPorts[0]);
 
                 return info;
             }
