@@ -60,6 +60,57 @@ Follow these steps to get started with the Modular Application Creator:
 
    > **Note**: Once completed, your TIA-Portal project will be generated.
 
+## Triggering Generation from a 3rd Party Application (CLI)
+
+The **Modular Application Creator CLI** lets you automate project creation, module installation and configuration without opening the GUI.
+
+### 1. Create a new project
+
+Creates a new MAC project from a template and saves it to a specified path. It is located next to the ModularApplicatoinCreator.exe file.
+
+#### Command structure
+```bash
+<PATH_TO_CLI>\ModularApplicationCreatorCLI.exe createProject "<TEMPLATE_NAME>:<TEMPLATE_VERSION>" "<PATH_TO_MAC_PROJECT>"
+```
+#### Placeholders
+
+| Placeholder | Description | Example |
+|---|---|---|
+| `<PATH_TO_CLI>` | Directory containing `ModularApplicationCreatorCLI.exe` | `C:\Program Files\Siemens\MAC` |
+| `<TEMPLATE_NAME>` | Name of the project template | `DemoCase_S71500_S210_GSD_ET200SP` |
+| `<TEMPLATE_VERSION>` | Version of the template | `21.0.5` |
+| `<PATH_TO_MAC_PROJECT>` | Full path where the `.project` file will be saved | `C:\Projects\MyProject\ModularApplicationCreator.project` |
+
+#### Full example
+```bash
+C:\Program Files\Siemens\MAC\ModularApplicationCreatorCLI.exe createProject "DemoCase_S71500_S210_GSD_ET200SP:21.0.5" "C:\Projects\MyProject\ModularApplicationCreator.project"
+```
+
+### 2. Load, install and configure a module
+
+Loads an existing MAC project, installs a module on a device and applies a JSON configuration file.
+
+#### Command structure
+```bash
+<PATH_TO_CLI>\ModularApplicationCreatorCLI.exe loadProject      "<PATH_TO_MAC_PROJECT>" installModules   "<DEVICE_NAME>:MAC_use_cases:<MODULE_INSTANCE_NAME>" ` configureModules "<DEVICE_NAME>:<MODULE_INSTANCE_NAME>:<PATH_TO_CONFIG_JSON>" generate
+```
+
+#### Placeholders
+
+| Placeholder | Description | Example |
+|---|---|---|
+| `<PATH_TO_CLI>` | Directory containing `ModularApplicationCreatorCLI.exe` | `C:\Program Files\Siemens\MAC` |
+| `<PATH_TO_MAC_PROJECT>` | Full path to the `.project` file | `C:\Projects\MyProject\ModularApplicationCreator.project` |
+| `<DEVICE_NAME>` | PLC device name in the MAC project | `PLC_1` |
+| `<MODULE_INSTANCE_NAME>` | Module instance name assigned to the device | `Mac_use_cases` |
+| `<PATH_TO_CONFIG_JSON>` | Full path to the JSON config file from the **Export** button | `C:\Config\MAC_use_cases.json` |
+
+#### Full example
+```bash
+C:\Program Files\Siemens\MAC\ModularApplicationCreatorCLI.exe loadProject "C:\Projects\MyProject\ModularApplicationCreator.project" installModules   "PLC_1:MAC_use_cases:Mac_use_cases" configureModules "PLC_1:Mac_use_cases:C:\Config\MAC_use_cases.json" generate
+```
+
+> **Tip**: Use the **Export** button on the *First Page* of the module UI to generate the `<PATH_TO_CONFIG_JSON>` file. Also a already exported config Json is located in CLI_Example\ModulConfig\MAC_use_cases.json
 ## Contact us
 
 If you have problems or suggestions, please send an email to [modular.application.creator.industry@siemens.com](mailto:modular.application.creator.industry@siemens.com)

@@ -1,0 +1,157 @@
+{
+  "$id": "1",
+  "ModuleStart": {
+    "$id": "2"
+  },
+  "HardwareGenerationExcelBasedViewModel": {
+    "$id": "3",
+    "ImportSource": "C:\\Users\\adhobe8\\ModularApplicationCreator\\DemoCase_S71500_S210_GSD_ET200SP (70)\\InstalledPackages\\MAC_use_cases.21.0.0-pre202606161256\\contentFiles\\any\\net48\\AdditionalContent\\HardwareGenerationExcelBased.xlsx",
+    "BrowseImportFile": {
+      "$type": "Siemens.Automation.ModularApplicationCreatorBasics.ViewModels.RelayCommand, Siemens.Automation.ModAppCreator.Basics"
+    }
+  },
+  "MyTo": {
+    "$id": "4",
+    "MaximumVelocity": "999.0",
+    "Name": "myTO",
+    "VirtualAxisMode": "1",
+    "TechnologicalObject": {
+      "$id": "5",
+      "m_subToInfos": {
+        "$id": "6",
+        "$values": []
+      },
+      "m_users": {
+        "$id": "7",
+        "$values": []
+      },
+      "ObjectParameters": {},
+      "LeadingValueInterconnections": {
+        "$id": "8",
+        "$values": []
+      },
+      "LeadingValueMasterInterconnections": {
+        "$id": "9",
+        "$values": []
+      },
+      "ToVersion": "10.0",
+      "ParentDevice": "",
+      "ParentTechnologicalObject": "",
+      "IsUsed": false,
+      "MainTelegramNumber": 105,
+      "SafetyTelegramNumber": 0,
+      "TorqueTelegramNumber": 0,
+      "SupplementaryTelegramNumber": 0,
+      "Users": {
+        "$ref": "7"
+      },
+      "CanBeSuperseded": false,
+      "Id": "15036e15-2160-4119-a348-8bbc8a8c49f9",
+      "Name": "myTO",
+      "Type": "TO_PositioningAxis",
+      "AdditionalParameter": {
+        "$id": "10"
+      }
+    }
+  },
+  "IsGenerateHardwareChecked": false,
+  "IsGenerateSafetyBlockChecked": true,
+  "NonTiaProjectBased": {
+    "$id": "11",
+    "ModelList": {
+      "$id": "12",
+      "$values": [
+        {
+          "$id": "13",
+          "_name": "myModel"
+        },
+        {
+          "$id": "14",
+          "_name": "myModel"
+        }
+      ]
+    },
+    "StringOfAllNames": "myModel, myModel"
+  },
+  "NameOfMyFb": "MyFunctionBlock_Exported",
+  "NameOfMyFailSafeFb": "MyFunctionBlock_FailSafe_Exported",
+  "ReadyFlag": 0,
+  "AnnotationNotes": "",
+  "GrantRequestData": "bbs9W1LCGSWJ3UtWFrkTLdyiRcER57DQevvvIt7BjQhUSGSUeM3inYWzXufIvDSn/uOahUN3C6ETwmkzAjpqTQePnpOGwtqeADBI+v10cn39+yurHSODtTdPE82Cl2QcleDC7kJ1MWLrjL4Ic54BvYkG6jJHV4u21x4Dedbujuk=",
+  "ProvidedTechnologicalObjects": {
+    "$id": "15",
+    "$type": "Siemens.Automation.ModularApplicationCreator.Tia.Openness.TO.ProvidedTechnologicalObjectsObservableCollection, Siemens.Automation.ModAppCreator.Core",
+    "$values": [
+      {
+        "$ref": "5"
+      },
+      {
+        "$id": "16",
+        "m_subToInfos": {
+          "$id": "17",
+          "$values": []
+        },
+        "m_users": {
+          "$id": "18",
+          "$values": []
+        },
+        "ObjectParameters": {},
+        "LeadingValueInterconnections": {
+          "$id": "19",
+          "$values": []
+        },
+        "LeadingValueMasterInterconnections": {
+          "$id": "20",
+          "$values": []
+        },
+        "ToVersion": "10.0",
+        "ParentTechnologicalObject": "",
+        "IsUsed": false,
+        "MainTelegramNumber": 0,
+        "SafetyTelegramNumber": 0,
+        "TorqueTelegramNumber": 0,
+        "SupplementaryTelegramNumber": 0,
+        "Users": {
+          "$ref": "18"
+        },
+        "CanBeSuperseded": false,
+        "Id": "7b36c8b7-6221-4752-90fe-ae33f3200b42",
+        "Name": "MyEssentialTechnologyObject",
+        "Type": "TO_PositioningAxis",
+        "AdditionalParameter": {
+          "$id": "21"
+        }
+      }
+    ]
+  },
+  "ProvidedCommonInformation": {
+    "$id": "22",
+    "$values": []
+  },
+  "ControlModules": [],
+  "SoftCompatibleResult": {
+    "$id": "23",
+    "Item1": true,
+    "Item2": ""
+  },
+  "State": {
+    "NotExists": false,
+    "SelectedForGeneration": true
+  },
+  "SoftCompatibleValidationResults": [],
+  "Name": "MAC_use_cases",
+  "ModuleID": "e7cec0cd-96c7-41f9-b588-ab5e99dcc158",
+  "TopLevelEM": true,
+  "ModuleEnd": {
+    "$id": "24",
+    "AssemblyName": "MAC_use_cases"
+  },
+  "SynchronizedCollection": {
+    "$id": "25",
+    "InternalModules": []
+  },
+  "SubModules": {
+    "$id": "26",
+    "$values": []
+  }
+}
