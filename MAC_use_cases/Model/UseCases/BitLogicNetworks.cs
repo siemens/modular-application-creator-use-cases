@@ -130,14 +130,19 @@ namespace MAC_use_cases.Model.UseCases
 
         /// <summary>
         ///     Generates a Function Block (FB) containing two chained RS flip-flop networks in FBD language
-        ///     and imports it into the given <paramref name="plcDevice"/>.
+        ///     and a third network in SCL implementing the same RS logic, then imports it into the given
+        ///     <paramref name="plcDevice"/>.
         ///     <para>
-        ///     Network 1: RS driven by <c>InputBool_R</c> / <c>InputBool_S1</c>; result written to
+        ///     Network 1 (FBD): RS driven by <c>InputBool_R</c> / <c>InputBool_S1</c>; result written to
         ///     <c>OutputBool</c> (via Coil) and <c>RSOperand</c> (operand pin).
         ///     </para>
         ///     <para>
-        ///     Network 2: RS driven by <c>InputBool_R2</c> / <c>OutputBool</c> (chained from Network 1);
+        ///     Network 2 (FBD): RS driven by <c>InputBool_R2</c> / <c>OutputBool</c> (chained from Network 1);
         ///     result written to <c>OutputBool2</c> and <c>RSOperand2</c>.
+        ///     </para>
+        ///     <para>
+        ///     Network 3 (SCL): Simple assignment <c>#TempVariable := #OutputBool</c> demonstrating
+        ///     how an SCL network can be mixed into an FBD block.
         ///     </para>
         /// </summary>
         /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
@@ -155,18 +160,30 @@ namespace MAC_use_cases.Model.UseCases
             block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool_R2", "Bool"));
 
             var staticItf = block.Interface[InterfaceSections.Static];
+            // FBD RS pair (Networks 1 & 2)
             staticItf.Add(new InterfaceParameter("RSOperand", "Bool"));
             staticItf.Add(new InterfaceParameter("OutputBool", "Bool"));
             staticItf.Add(new InterfaceParameter("RSOperand2", "Bool"));
             staticItf.Add(new InterfaceParameter("OutputBool2", "Bool"));
+            // SCL network temp variable
+            staticItf.Add(new InterfaceParameter("TempVariable", "Bool"));
 
-            // Network 1: first RS flip-flop
+            // Network 1: first RS flip-flop (FBD)
             var rsNetwork1 = CreateRSNetwork("#InputBool_R", "#InputBool_S1", "#OutputBool", "#RSOperand", opnsProgrammingLanguage);
             block.Networks.Add(rsNetwork1.GenerateFixNetwork());
 
-            // Network 2: second RS flip-flop – S1 driven by #OutputBool written in Network 1
+            // Network 2: second RS flip-flop (FBD) – S1 driven by #OutputBool written in Network 1
             var rsNetwork2 = CreateRSNetwork("#InputBool_R2", "#OutputBool", "#OutputBool2", "#RSOperand2", opnsProgrammingLanguage);
             block.Networks.Add(rsNetwork2.GenerateFixNetwork());
+
+            // Network 3: simple SCL assignment – reads the result of Network 1 into TempVariable
+            var sclCode = "#TempVariable := #OutputBool;";
+
+            var sclNetworks = new Parser().ParseSclSnippet(sclCode, block, plcDevice, GroupBlockCalls.NOGROUPING);
+            foreach (var sclNw in sclNetworks)
+            {
+                block.Networks.Add(sclNw);
+            }
 
             block.GenerateXmlBlock(plcDevice);
         }
