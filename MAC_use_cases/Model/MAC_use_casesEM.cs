@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Linq;
-using Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.XmlBlocks.BlockFrames;
 using MAC_use_cases.Model.ModuleEssentials.Example;
 using MAC_use_cases.Model.UseCases;
 using MAC_use_cases.Serialization;
 using MAC_use_cases.ViewModel;
 using Newtonsoft.Json;
-using Siemens.Automation.ModularApplicationCreator.ControlModules.ModuleEssentials.Objects.Generation.Openness.XML;
-using Siemens.Automation.ModularApplicationCreator.ControlModules.ModuleEssentials.Objects.Generation.Openness.XML.Parts;
 using Siemens.Automation.ModularApplicationCreator.Modules;
 using Siemens.Automation.ModularApplicationCreator.Serializer;
 using Siemens.Automation.ModularApplicationCreator.Tia;
@@ -21,7 +18,6 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
 using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
 using MacPLang = Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.ProgrammingLanguage;
-using MEPlang = Siemens.Automation.ModularApplicationCreator.ControlModules.ModuleEssentials.Objects.Generation.Openness.XML.ProgrammingLanguage;
 
 namespace MAC_use_cases.Model
 {
@@ -303,10 +299,10 @@ namespace MAC_use_cases.Model
                         });
 
                     // Create FB with RS network in FBD
-                    GenerateFbWithRSNetworkFBD("FunctionBlockRS_FBD", _plcDevice, MacPLang.FBD);
+                    BitLogicNetworks.GenerateFbWithRSNetworkFBD("FunctionBlockRS_FBD", _plcDevice, MacPLang.FBD);
 
                     // Create FB with RS network in LAD (no Coil element – operand IS the output)
-                    GenerateFbWithRSNetworkLAD("FunctionBlockRS_LAD", _plcDevice);
+                    BitLogicNetworks.GenerateFbWithRSNetworkLAD("FunctionBlockRS_LAD", _plcDevice);
 
                     // Compile all types after creation
                     OpennessFuncs.CompileAllTypes(_plcDevice);
@@ -319,144 +315,5 @@ namespace MAC_use_cases.Model
             return true;
         }
         
-        private static SystemBlockCall CreateRSCall(XmlNetwork parent)
-        {
-            var rsCall = parent.AddSystemBlockCall("Rs");
-            rsCall.AddCallParameter("q", "Bool", Section.Output);
-            rsCall.AddCallParameter("r", "Bool", Section.Input);
-            rsCall.AddCallParameter("s1", "Bool", Section.Input);
-            rsCall.AddCallParameter("operand", "Bool", Section.Output);
-
-            return rsCall;
+            }
         }
-
-        private static SystemBlockCall CreateAssignmentCall(XmlNetwork parent)
-        {
-            var coil = parent.AddSystemBlockCall("Coil");
-            var coilInParameter = new CustomBlockCallParameter(coil, "in", "Bool", Section.Input);
-            coil.CallParameters.Add(coilInParameter);
-            var coilOutParameter = new CustomBlockCallParameter(coil, "out", "Bool", Section.Output);
-            coil.CallParameters.Add(coilOutParameter);
-            var operandParameter = new CustomBlockCallParameter(coil, "operand", "Bool", Section.Output);
-            coil.CallParameters.Add(operandParameter);
-            return coil;
-        }
-
-        private static XmlNetwork CreateRSNetwork(string rInputName, string s1InputName, string outputVariableName, string rsOperandVariableName, MEPlang opnsProgrammingLanguage)
-        {
-            var xmlNw = new XmlNetwork(opnsProgrammingLanguage);
-
-            var rsCall = CreateRSCall(xmlNw);
-
-            var rInputVar = xmlNw.AddVariable(rInputName);
-            xmlNw.AddConnection(rInputVar, rsCall.CallParameters.Single(x => x.Name == "r"));
-
-            var s1InputVar = xmlNw.AddVariable(s1InputName);
-            xmlNw.AddConnection(s1InputVar, rsCall.CallParameters.Single(x => x.Name == "s1"));
-
-            var operandOutputVar = xmlNw.AddVariable(rsOperandVariableName);
-            xmlNw.AddConnection(rsCall.CallParameters.Single(x => x.Name == "operand"), operandOutputVar);
-
-            var assignmentCall = CreateAssignmentCall(xmlNw);
-            xmlNw.AddConnection(rsCall.CallParameters.Single(x => x.Name.Contains("q")), assignmentCall.CallParameters.First(x => x.Name.Contains("in")));
-            var assignmentOperandOutput = xmlNw.AddVariable(outputVariableName);
-            xmlNw.AddConnection(assignmentCall.CallParameters.First(x => x.Name.Contains("operand")), assignmentOperandOutput);
-
-            return xmlNw;
-        }
-
-        private static void GenerateFbWithRSNetworkFBD(string blockName, PlcDevice plcDevice, MacPLang macProgrammingLanguage)
-        {
-            var opnsProgrammingLanguage = (MEPlang)Enum.Parse(typeof(MEPlang), macProgrammingLanguage.ToString());
-
-            var block = new XmlFB(blockName);
-            block.BlockAttributes.ProgrammingLanguage = macProgrammingLanguage;
-
-            // Inputs: R and S1 for the first RS, R2 for the second RS
-            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool_R", "Bool"));
-            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool_S1", "Bool"));
-            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool_R2", "Bool"));
-
-            var staticItf = block.Interface[InterfaceSections.Static];
-            staticItf.Add(new InterfaceParameter("RSOperand", "Bool"));
-            staticItf.Add(new InterfaceParameter("OutputBool", "Bool"));
-            staticItf.Add(new InterfaceParameter("RSOperand2", "Bool"));
-            staticItf.Add(new InterfaceParameter("OutputBool2", "Bool"));
-
-            // Network 1: first RS flip-flop
-            var rsNetwork1 = CreateRSNetwork("#InputBool_R", "#InputBool_S1", "#OutputBool", "#RSOperand", opnsProgrammingLanguage);
-            block.Networks.Add(rsNetwork1.GenerateFixNetwork());
-
-            // Network 2: second RS flip-flop – S1 is driven by #OutputBool written in Network 1
-            var rsNetwork2 = CreateRSNetwork("#InputBool_R2", "#OutputBool", "#OutputBool2", "#RSOperand2", opnsProgrammingLanguage);
-            block.Networks.Add(rsNetwork2.GenerateFixNetwork());
-
-            block.GenerateXmlBlock(plcDevice);
-        }
-
-        /// <summary>
-        /// Generates an FB with two RS networks in LAD language.
-        /// In LAD the Q output of RS is left unconnected (null) and the operand pin
-        /// carries the bit-memory result – no separate Coil element is used.
-        /// </summary>
-        private static void GenerateFbWithRSNetworkLAD(string blockName, PlcDevice plcDevice)
-        {
-            var block = new XmlFB(blockName);
-            block.BlockAttributes.ProgrammingLanguage = MacPLang.LAD;
-
-            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool_R", "Bool"));
-            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool_S1", "Bool"));
-            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool_R2", "Bool"));
-
-            var staticItf = block.Interface[InterfaceSections.Static];
-            staticItf.Add(new InterfaceParameter("RSOperand", "Bool"));
-            staticItf.Add(new InterfaceParameter("RSOperand2", "Bool"));
-
-            // Network 1: RS flip-flop in LAD
-            var rsNetwork1 = CreateRSNetworkLAD("#InputBool_R", "#InputBool_S1", "#RSOperand");
-            block.Networks.Add(rsNetwork1.GenerateFixNetwork());
-
-            // Network 2: RS flip-flop in LAD – S1 driven by the operand written in Network 1
-            var rsNetwork2 = CreateRSNetworkLAD("#InputBool_R2", "#RSOperand", "#RSOperand2");
-            block.Networks.Add(rsNetwork2.GenerateFixNetwork());
-
-            block.GenerateXmlBlock(plcDevice);
-        }
-
-        /// <summary>
-        /// Creates a single RS network intended for use inside a LAD-language FB.
-        /// <para>
-        /// Note: <see cref="XmlNetwork"/> must be constructed with <see cref="MEPlang.FBD"/> even for
-        /// LAD blocks. LAD and FBD share the same underlying graph XML schema in TIA Portal's
-        /// Openness import format. Passing <see cref="MEPlang.LAD"/> to <see cref="XmlNetwork"/>
-        /// produces XML that TIA Portal rejects with a <see cref="System.Xml.XmlException"/> at
-        /// import time. The block-level <c>ProgrammingLanguage</c> attribute set in
-        /// <see cref="GenerateFbWithRSNetworkLAD"/> is what causes TIA Portal to display the block
-        /// in LAD view.
-        /// </para>
-
-        /// </summary>
-        private static XmlNetwork CreateRSNetworkLAD(string rInputName, string s1InputName, string rsOperandVariableName)
-        {
-            // XmlNetwork must use FBD here: LAD and FBD share the same underlying graph XML in
-            // TIA Portal. XmlNetwork(MEPlang.LAD) generates a schema TIA Portal rejects on import.
-            var xmlNw = new XmlNetwork(MEPlang.FBD);
-
-            var rsCall = CreateRSCall(xmlNw);
-
-            var rInputVar = xmlNw.AddVariable(rInputName);
-            xmlNw.AddConnection(rInputVar, rsCall.CallParameters.Single(x => x.Name == "r"));
-
-            var s1InputVar = xmlNw.AddVariable(s1InputName);
-            xmlNw.AddConnection(s1InputVar, rsCall.CallParameters.Single(x => x.Name == "s1"));
-
-            var operandOutputVar = xmlNw.AddVariable(rsOperandVariableName);
-            xmlNw.AddConnection(rsCall.CallParameters.Single(x => x.Name == "operand"), operandOutputVar);
-
-            // Q output left unconnected – required for RS in LAD (no downstream Coil element)
-            xmlNw.AddConnection(rsCall.CallParameters.Single(x => x.Name == "q"), null);
-
-            return xmlNw;
-        }
-    }
-}
