@@ -304,6 +304,12 @@ namespace MAC_use_cases.Model
                     // Create FB with RS network in LAD (no Coil element – operand IS the output)
                     BitLogicNetworks.GenerateFbWithRSNetworkLAD("FunctionBlockRS_LAD", _plcDevice);
 
+                    // Create FB with AND networks in FBD
+                    BitLogicNetworks.GenerateFbWithANDNetworkFBD("FunctionBlockAND_FBD", _plcDevice);
+
+                    // Create FB with AND networks in LAD
+                    BitLogicNetworks.GenerateFbWithANDNetworkLAD("FunctionBlockAND_LAD", _plcDevice);
+
                     // Compile all types after creation
                     OpennessFuncs.CompileAllTypes(_plcDevice);
 

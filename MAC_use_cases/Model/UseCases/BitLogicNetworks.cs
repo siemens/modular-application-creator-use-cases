@@ -11,7 +11,7 @@ using MEPlang = Siemens.Automation.ModularApplicationCreator.ControlModules.Modu
 namespace MAC_use_cases.Model.UseCases
 {
     /// <summary>
-    ///     Reusable helper methods for building bit-logic RS networks using the
+    ///     Reusable helper methods for building bit-logic AND and RS networks using the
     ///     Module Essentials <see cref="XmlNetwork"/> API.
     /// </summary>
     public static class BitLogicNetworks
@@ -203,6 +203,10 @@ namespace MAC_use_cases.Model.UseCases
         ///     See <see cref="CreateRSNetworkLAD"/> for details on why <see cref="MEPlang.FBD"/> is used
         ///     at the network level.
         ///     </para>
+        ///     <para>
+        ///     Network 3 (SCL): Simple assignment <c>#TempVariable := #RSOperand</c> demonstrating
+        ///     how an SCL network can be mixed into a LAD block.
+        ///     </para>
         /// </summary>
         /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
         /// <param name="plcDevice">Target PLC device.</param>
@@ -218,6 +222,8 @@ namespace MAC_use_cases.Model.UseCases
             var staticItf = block.Interface[InterfaceSections.Static];
             staticItf.Add(new InterfaceParameter("RSOperand", "Bool"));
             staticItf.Add(new InterfaceParameter("RSOperand2", "Bool"));
+            // SCL network temp variable
+            staticItf.Add(new InterfaceParameter("TempVariable", "Bool"));
 
             // Network 1: RS flip-flop in LAD
             var rsNetwork1 = CreateRSNetworkLAD("#InputBool_R", "#InputBool_S1", "#RSOperand");
@@ -226,6 +232,226 @@ namespace MAC_use_cases.Model.UseCases
             // Network 2: RS flip-flop in LAD – S1 driven by the operand written in Network 1
             var rsNetwork2 = CreateRSNetworkLAD("#InputBool_R2", "#RSOperand", "#RSOperand2");
             block.Networks.Add(rsNetwork2.GenerateFixNetwork());
+
+            // Network 3: simple SCL assignment – reads the result of Network 1 into TempVariable
+            var sclCode = "#TempVariable := #RSOperand;";
+            var sclNetworks = new Parser().ParseSclSnippet(sclCode, block, plcDevice, GroupBlockCalls.NOGROUPING);
+            foreach (var sclNw in sclNetworks)
+            {
+                block.Networks.Add(sclNw);
+            }
+
+            block.GenerateXmlBlock(plcDevice);
+        }
+
+        // ----------------------------------------------------------------
+        // AND network helpers
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        ///     Adds an AND (<c>"A"</c>) system block call to the given network.
+        ///     <para>
+        ///     The call has <paramref name="cardinality"/> input pins (<c>in1</c>…<c>inN</c>)
+        ///     and one output pin (<c>out</c>). Following the reference project convention the
+        ///     output and the last input are negated.
+        ///     </para>
+        /// </summary>
+        /// <param name="parent">Network to add the call to.</param>
+        /// <param name="cardinality">Number of boolean inputs.</param>
+        public static SystemBlockCall CreateANDCall(XmlNetwork parent, int cardinality)
+        {
+            var andCall = parent.AddSystemBlockCall("A");
+            andCall.AddSystemParameter("Card", "Cardinality", cardinality.ToString());
+            andCall.AddCallParameter("out", "Bool", Section.Output);
+            for (int i = 1; i <= cardinality; i++)
+            {
+                andCall.AddCallParameter("in" + i, "Bool", Section.Input);
+            }
+            // Negate the output and the last input (mirrors reference project behaviour)
+            andCall.CallParameters.First(x => x.Section == Section.Output).Negated = true;
+            andCall.CallParameters.Last(x => x.Section == Section.Input).Negated = true;
+            return andCall;
+        }
+
+        /// <summary>
+        ///     Creates a network that ANDs all <paramref name="inputVariableNames"/> together and
+        ///     writes the result to <paramref name="outputVariableName"/> via a Coil element.
+        /// </summary>
+        /// <param name="inputVariableNames">Variables connected to the AND inputs (e.g. <c>#InputBool0</c>).</param>
+        /// <param name="outputVariableName">Variable written by the Coil (AND result).</param>
+        /// <param name="opnsProgrammingLanguage">Network language – use <see cref="MEPlang.FBD"/>.</param>
+        public static XmlNetwork CreateANDCallNetwork(
+            System.Collections.Generic.List<string> inputVariableNames,
+            string outputVariableName,
+            MEPlang opnsProgrammingLanguage)
+        {
+            var xmlNw = new XmlNetwork(opnsProgrammingLanguage);
+            var andCall = CreateANDCall(xmlNw, inputVariableNames.Count);
+
+            var currentIdx = 1;
+            foreach (var varName in inputVariableNames)
+            {
+                var inputVar = xmlNw.AddVariable(varName);
+                xmlNw.AddConnection(inputVar, andCall.CallParameters.Single(x => x.Name == "in" + currentIdx));
+                currentIdx++;
+            }
+
+            var assignmentCall = CreateAssignmentCall(xmlNw);
+            xmlNw.AddConnection(andCall.CallParameters.Single(x => x.Name.Contains("out")),
+                                assignmentCall.CallParameters.First(x => x.Name.Contains("in")));
+            var assignmentOperandOutput = xmlNw.AddVariable(outputVariableName);
+            xmlNw.AddConnection(assignmentCall.CallParameters.First(x => x.Name.Contains("operand")),
+                                assignmentOperandOutput);
+
+            return xmlNw;
+        }
+
+        /// <summary>
+        ///     Creates a <strong>single</strong> network that contains two independent parallel
+        ///     AND→RS circuits side by side (FBD only).
+        ///     <para>
+        ///     Each circuit: AND(2) → RS.S1, with a shared R input and a shared DB operand.
+        ///     The RS Q output is explicitly left unconnected (<c>null</c>).
+        ///     </para>
+        ///     <para>
+        ///     <strong>Important:</strong> all elements of circuit 1 must be added before
+        ///     starting circuit 2 – this is an <see cref="XmlNetwork"/> requirement.
+        ///     </para>
+        /// </summary>
+        /// <param name="inputVariableNames">Two variable names used as AND inputs for both circuits.</param>
+        /// <param name="rInputName">Variable connected to the R (reset) input of both RS calls.</param>
+        /// <param name="operandVariableName">DB variable connected to the operand output of both RS calls.</param>
+        public static XmlNetwork CreateNetworkWith2Circuits(
+            System.Collections.Generic.List<string> inputVariableNames,
+            string rInputName,
+            string operandVariableName)
+        {
+            var xmlNw = new XmlNetwork(MEPlang.FBD);
+
+            // ---- Circuit 1 ----
+            var andCall1 = CreateANDCall(xmlNw, 2);
+            var idx = 1;
+            foreach (var varName in inputVariableNames)
+            {
+                var inputVar = xmlNw.AddVariable(varName);
+                xmlNw.AddConnection(inputVar, andCall1.CallParameters.Single(x => x.Name == "in" + idx));
+                idx++;
+            }
+            var rsCall1 = CreateRSCall(xmlNw);
+            xmlNw.AddConnection(andCall1.CallParameters.Single(x => x.Name == "out"),
+                                rsCall1.CallParameters.Single(x => x.Name == "s1"));
+            xmlNw.AddConnection(xmlNw.AddVariable(rInputName),
+                                rsCall1.CallParameters.Single(x => x.Name == "r"));
+            xmlNw.AddConnection(rsCall1.CallParameters.Single(x => x.Name == "operand"),
+                                xmlNw.AddVariable(operandVariableName));
+            // Q left unconnected – must be declared explicitly
+            xmlNw.AddConnection(rsCall1.CallParameters.Single(x => x.Name == "q"), null);
+
+            // ---- Circuit 2 (start only after circuit 1 is complete) ----
+            idx = 1;
+            var andCall2 = CreateANDCall(xmlNw, 2);
+            foreach (var varName in inputVariableNames)
+            {
+                var inputVar = xmlNw.AddVariable(varName);
+                xmlNw.AddConnection(inputVar, andCall2.CallParameters.Single(x => x.Name == "in" + idx));
+                idx++;
+            }
+            var rsCall2 = CreateRSCall(xmlNw);
+            xmlNw.AddConnection(andCall2.CallParameters.Single(x => x.Name == "out"),
+                                rsCall2.CallParameters.Single(x => x.Name == "s1"));
+            xmlNw.AddConnection(xmlNw.AddVariable(rInputName),
+                                rsCall2.CallParameters.Single(x => x.Name == "r"));
+            xmlNw.AddConnection(rsCall2.CallParameters.Single(x => x.Name == "operand"),
+                                xmlNw.AddVariable(operandVariableName));
+            xmlNw.AddConnection(rsCall2.CallParameters.Single(x => x.Name == "q"), null);
+
+            return xmlNw;
+        }
+
+        // ----------------------------------------------------------------
+        // FB generators – AND networks
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        ///     Generates an FB in FBD language with two networks and imports it into
+        ///     <paramref name="plcDevice"/>:
+        ///     <list type="bullet">
+        ///     <item>Network 1: AND of three inputs written to <c>OutputBool</c> via Coil.</item>
+        ///     <item>Network 2: Two parallel AND→RS circuits in a single network (see
+        ///     <see cref="CreateNetworkWith2Circuits"/>).</item>
+        ///     </list>
+        /// </summary>
+        /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
+        /// <param name="plcDevice">Target PLC device.</param>
+        public static void GenerateFbWithANDNetworkFBD(string blockName, PlcDevice plcDevice)
+        {
+            var block = new XmlFB(blockName);
+            block.BlockAttributes.ProgrammingLanguage = MacPLang.FBD;
+
+            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool1", "Bool"));
+            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool2", "Bool"));
+            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool3", "Bool"));
+
+            var staticItf = block.Interface[InterfaceSections.Static];
+            staticItf.Add(new InterfaceParameter("OutputBool", "Bool"));
+            staticItf.Add(new InterfaceParameter("AndOperand", "Bool"));
+
+            // Network 1: AND of all three inputs → OutputBool
+            var inputVars = new System.Collections.Generic.List<string>
+                { "#InputBool1", "#InputBool2", "#InputBool3" };
+            var andNetwork = CreateANDCallNetwork(inputVars, "#OutputBool", MEPlang.FBD);
+            block.Networks.Add(andNetwork.GenerateFixNetwork());
+
+            // Network 2: two parallel AND→RS circuits in a single FBD network
+            var circuitNetwork = CreateNetworkWith2Circuits(
+                new System.Collections.Generic.List<string> { "#InputBool1", "#InputBool2" },
+                "#InputBool3",
+                "#AndOperand");
+            block.Networks.Add(circuitNetwork.GenerateFixNetwork());
+
+            block.GenerateXmlBlock(plcDevice);
+        }
+
+        /// <summary>
+        ///     Generates an FB in LAD language with two networks and imports it into
+        ///     <paramref name="plcDevice"/>:
+        ///     <list type="bullet">
+        ///     <item>Network 1: AND of three inputs written to <c>OutputBool</c> via Coil.</item>
+        ///     <item>Network 2: Two parallel AND→RS circuits (Q left unconnected – LAD convention).</item>
+        ///     </list>
+        ///     <para>
+        ///     Like all LAD blocks using <see cref="XmlNetwork"/>, the networks are built with
+        ///     <see cref="MEPlang.FBD"/> at the network level. The block-level
+        ///     <c>ProgrammingLanguage = LAD</c> attribute controls the TIA Portal display.
+        ///     </para>
+        /// </summary>
+        /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
+        /// <param name="plcDevice">Target PLC device.</param>
+        public static void GenerateFbWithANDNetworkLAD(string blockName, PlcDevice plcDevice)
+        {
+            var block = new XmlFB(blockName);
+            block.BlockAttributes.ProgrammingLanguage = MacPLang.LAD;
+
+            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool1", "Bool"));
+            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool2", "Bool"));
+            block.Interface[InterfaceSections.Input].Add(new InterfaceParameter("InputBool3", "Bool"));
+
+            var staticItf = block.Interface[InterfaceSections.Static];
+            staticItf.Add(new InterfaceParameter("OutputBool", "Bool"));
+            staticItf.Add(new InterfaceParameter("AndOperand", "Bool"));
+
+            // Network 1: AND of all three inputs → OutputBool (FBD graph XML, LAD display)
+            var inputVars = new System.Collections.Generic.List<string>
+                { "#InputBool1", "#InputBool2", "#InputBool3" };
+            var andNetwork = CreateANDCallNetwork(inputVars, "#OutputBool", MEPlang.FBD);
+            block.Networks.Add(andNetwork.GenerateFixNetwork());
+
+            // Network 2: two parallel AND→RS circuits (Q unconnected – LAD convention)
+            var circuitNetwork = CreateNetworkWith2Circuits(
+                new System.Collections.Generic.List<string> { "#InputBool1", "#InputBool2" },
+                "#InputBool3",
+                "#AndOperand");
+            block.Networks.Add(circuitNetwork.GenerateFixNetwork());
 
             block.GenerateXmlBlock(plcDevice);
         }
