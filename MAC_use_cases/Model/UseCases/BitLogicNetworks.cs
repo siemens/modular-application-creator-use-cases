@@ -62,7 +62,6 @@ namespace MAC_use_cases.Model.UseCases
         public static XmlNetwork CreateRSNetwork(
             string rInputName,
             string s1InputName,
-            string outputVariableName,
             string rsOperandVariableName,
             MEPlang opnsProgrammingLanguage)
         {
@@ -79,11 +78,8 @@ namespace MAC_use_cases.Model.UseCases
             var operandOutputVar = xmlNw.AddVariable(rsOperandVariableName);
             xmlNw.AddConnection(rsCall.CallParameters.Single(x => x.Name == "operand"), operandOutputVar);
 
-            var assignmentCall = CreateAssignmentCall(xmlNw);
-            xmlNw.AddConnection(rsCall.CallParameters.Single(x => x.Name.Contains("q")), assignmentCall.CallParameters.First(x => x.Name.Contains("in")));
-            var assignmentOperandOutput = xmlNw.AddVariable(outputVariableName);
-            xmlNw.AddConnection(assignmentCall.CallParameters.First(x => x.Name.Contains("operand")), assignmentOperandOutput);
-
+            //var assignmentCall = CreateAssignmentCall(xmlNw);
+            //xmlNw.AddConnection(rsCall.CallParameters.Single(x => x.Name.Contains("q")), assignmentCall.CallParameters.First(x => x.Name.Contains("in")));
             return xmlNw;
         }
 
@@ -165,22 +161,20 @@ namespace MAC_use_cases.Model.UseCases
             var staticItf = block.Interface[InterfaceSections.Static];
             // FBD RS pair (Networks 1 & 2)
             staticItf.Add(new InterfaceParameter("RSOperand", "Bool"));
-            staticItf.Add(new InterfaceParameter("OutputBool", "Bool"));
             staticItf.Add(new InterfaceParameter("RSOperand2", "Bool"));
-            staticItf.Add(new InterfaceParameter("OutputBool2", "Bool"));
             // SCL network temp variable
             staticItf.Add(new InterfaceParameter("TempVariable", "Bool"));
 
             // Network 1: first RS flip-flop (FBD)
-            var rsNetwork1 = CreateRSNetwork("#InputBool_R", "#InputBool_S1", "#OutputBool", "#RSOperand", opnsProgrammingLanguage);
+            var rsNetwork1 = CreateRSNetwork("#InputBool_R", "#InputBool_S1", "#RSOperand", opnsProgrammingLanguage);
             block.Networks.Add(rsNetwork1.GenerateFixNetwork());
 
             // Network 2: second RS flip-flop (FBD) – S1 driven by #OutputBool written in Network 1
-            var rsNetwork2 = CreateRSNetwork("#InputBool_R2", "#OutputBool", "#OutputBool2", "#RSOperand2", opnsProgrammingLanguage);
+            var rsNetwork2 = CreateRSNetwork("#InputBool_R2", "#RSOperand", "#RSOperand2", opnsProgrammingLanguage);
             block.Networks.Add(rsNetwork2.GenerateFixNetwork());
 
             // Network 3: simple SCL assignment – reads the result of Network 1 into TempVariable
-            var sclCode = "#TempVariable := #OutputBool;";
+            var sclCode = "#TempVariable := #RSOperand;";
 
             var sclNetworks = new Parser().ParseSclSnippet(sclCode, block, plcDevice, GroupBlockCalls.NOGROUPING);
             foreach (var sclNw in sclNetworks)
@@ -434,12 +428,17 @@ namespace MAC_use_cases.Model.UseCases
             var andNetwork = CreateANDCallNetwork(inputVars, "#OutputBool", MEPlang.FBD);
             block.Networks.Add(andNetwork.GenerateFixNetwork());
 
-            // Network 2: two parallel AND→RS circuits in a single FBD network
-            var circuitNetwork = CreateNetworkWith2Circuits(
-                new System.Collections.Generic.List<string> { "#InputBool1", "#InputBool2" },
-                "#InputBool3",
-                "#AndOperand");
-            block.Networks.Add(circuitNetwork.GenerateFixNetwork());
+            // Network 2: AndOperand := OutputBool
+            var assignNetwork = new XmlNetwork(MEPlang.FBD);
+            var assignCall = CreateAssignmentCall(assignNetwork);
+            var outputBoolVar = assignNetwork.AddVariable("#OutputBool");
+            assignNetwork.AddConnection(outputBoolVar,
+                assignCall.CallParameters.First(x => x.Name.Contains("in")));
+            var andOperandVar = assignNetwork.AddVariable("#AndOperand");
+            assignNetwork.AddConnection(
+                assignCall.CallParameters.First(x => x.Name.Contains("operand")),
+                andOperandVar);
+            block.Networks.Add(assignNetwork.GenerateFixNetwork());
 
             block.GenerateXmlBlock(plcDevice);
         }
@@ -480,21 +479,17 @@ namespace MAC_use_cases.Model.UseCases
             var andNetwork = CreateANDCallNetwork(inputVars, "#OutputBool", MEPlang.FBD);
             block.Networks.Add(andNetwork.GenerateFixNetwork());
 
-            // Network 2: first AND→RS circuit (single-rung network for stable LAD import)
-            var circuitNetwork1 = CreateSingleAndRsCircuitNetwork(
-                "#InputBool1",
-                "#InputBool2",
-                "#InputBool3",
-                "#AndOperand");
-            block.Networks.Add(circuitNetwork1.GenerateFixNetwork());
-
-            // Network 3: second AND→RS circuit (kept in separate network to avoid LAD flow-order conflicts)
-            var circuitNetwork2 = CreateSingleAndRsCircuitNetwork(
-                "#InputBool1",
-                "#InputBool2",
-                "#InputBool3",
-                "#AndOperand");
-            block.Networks.Add(circuitNetwork2.GenerateFixNetwork());
+            // Network 2: AndOperand := OutputBool
+            var assignNetwork = new XmlNetwork(MEPlang.FBD);
+            var assignCall = CreateAssignmentCall(assignNetwork);
+            var outputBoolVar = assignNetwork.AddVariable("#OutputBool");
+            assignNetwork.AddConnection(outputBoolVar,
+                assignCall.CallParameters.First(x => x.Name.Contains("in")));
+            var andOperandVar = assignNetwork.AddVariable("#AndOperand");
+            assignNetwork.AddConnection(
+                assignCall.CallParameters.First(x => x.Name.Contains("operand")),
+                andOperandVar);
+            block.Networks.Add(assignNetwork.GenerateFixNetwork());
 
             // Generate the XML in FBD mode (XmlNetwork only produces valid graph XML in FBD),
             // patch every CompileUnit language to LAD in memory, then import directly.
@@ -504,8 +499,6 @@ namespace MAC_use_cases.Model.UseCases
         // ----------------------------------------------------------------
         // LAD import helper
         // ----------------------------------------------------------------
-
-        private const string DebugExportDir = @"D:\APC\LADFBDTest";
 
         // FlgNet namespace used in every CompileUnit network source
         private static readonly XNamespace FlgNetNs =
@@ -517,19 +510,13 @@ namespace MAC_use_cases.Model.UseCases
         ///     topology of every LAD CompileUnit into LAD topology (inserts Contact elements
         ///     between variable accesses and instruction inputs), patches every
         ///     <c>ProgrammingLanguage</c> element from <c>FBD</c> to <c>LAD</c> in memory,
-        ///     saves the result to <see cref="DebugExportDir"/> for investigation, and imports
-        ///     the patched file into <paramref name="plcDevice"/>.
+        ///     then imports the patched block.
         ///     SCL networks already carry <c>SCL</c> as their language and are untouched.
         /// </summary>
         private static void ImportBlockAsLad(XmlFB block, PlcDevice plcDevice)
         {
-            Directory.CreateDirectory(DebugExportDir);
-
             // Generate the XML in FBD mode – the only mode that produces valid Openness graph XML.
             var xdoc = block.GenerateXmlFile(MacPLang.FBD);
-
-            // Save the raw FBD-topology file before any transformation.
-            xdoc.Save(Path.Combine(DebugExportDir, block.Name + "_BEFORE.xml"));
 
             // Compute a document-wide UId ceiling so new elements added to any FlgNet
             // cannot collide with UIds in other compile units of the same FB.
@@ -559,11 +546,18 @@ namespace MAC_use_cases.Model.UseCases
                                          .Where(e => e.Value == "FBD").ToList())
                 langElem.Value = "LAD";
 
-            // Save the patched LAD file – this is what gets imported.
-            var ladFile = Path.Combine(DebugExportDir, block.Name + "_LAD.xml");
-            xdoc.Save(ladFile);
-
-            OpennessFuncs.ImportBlockToPlc(ladFile, plcDevice);
+            // Import patched XML via a temporary file and clean it up immediately.
+            var tempFile = Path.ChangeExtension(Path.GetTempFileName(), ".xml");
+            try
+            {
+                xdoc.Save(tempFile);
+                OpennessFuncs.ImportBlockToPlc(tempFile, plcDevice);
+            }
+            finally
+            {
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+            }
         }
 
         /// <summary>
