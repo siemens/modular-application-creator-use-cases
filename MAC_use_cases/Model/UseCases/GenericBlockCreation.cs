@@ -456,8 +456,9 @@ namespace MAC_use_cases.Model.UseCases
             for (var i = 1; i <= numberOfCalls; i++)
             {
                 var blockName = $"{nameof(module.ResourceManagement.MyFunctionBlock)}DB" + i;
-                IntegrateLibraries.CreateInstanceDataBlock(module, module.ResourceManagement.MyFunctionBlock,
-                    blockName, module.ResourceManagement.ModuleBlocksRootGroup);
+                if (plcDevice.Blocks.FindBlockInPlcByName(blockName) == null)
+                    IntegrateLibraries.CreateInstanceDataBlock(module, module.ResourceManagement.MyFunctionBlock,
+                        blockName, module.ResourceManagement.ModuleBlocksRootGroup);
                 var myOBCall = new BlockCall(blockName, plcDevice)
                 {
                     ["Input1"] = "1", // inputVariable1
