@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using MAC_use_cases.Model.ModuleEssentials.Example;
 using MAC_use_cases.Model.UseCases;
 using MAC_use_cases.Serialization;
@@ -219,9 +221,10 @@ namespace MAC_use_cases.Model
                     GenericBlockCreation.GenerateMultiInstanceFB(_plcDevice,
                         tiaTemplateContext.TiaProject.GetEditingLanguage(), this);
 
-                    var dbFromMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(this,
-                        ResourceManagement.MyFunctionBlock,
-                        $"{nameof(ResourceManagement.MyFunctionBlock)}Db", ResourceManagement.ModuleBlocksRootGroup);
+                    var dbFromMasterCopy = _plcDevice.Blocks.FindBlockInPlcByName($"{nameof(ResourceManagement.MyFunctionBlock)}Db") as DataBlock
+                        ?? IntegrateLibraries.CreateInstanceDataBlock(this,
+                            ResourceManagement.MyFunctionBlock,
+                            $"{nameof(ResourceManagement.MyFunctionBlock)}Db", ResourceManagement.ModuleBlocksRootGroup);
 
                     GenericBlockCreation.GenerateOB_Main(dbFromMasterCopy.Name, this,
                         tiaTemplateContext.TiaProject.GetEditingLanguage(), _plcDevice);
@@ -239,10 +242,11 @@ namespace MAC_use_cases.Model
                         ProgrammingLanguage.SCL,
                         _plcDevice);
 
-                    var dbFromFailSafeFbMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(this,
-                        ResourceManagement.MyFunctionBlock_FailSafe,
-                        $"{nameof(ResourceManagement.MyFunctionBlock_FailSafe)}Db",
-                        ResourceManagement.ModuleBlocksRootGroup);
+                    var dbFromFailSafeFbMasterCopy = _plcDevice.Blocks.FindBlockInPlcByName($"{nameof(ResourceManagement.MyFunctionBlock_FailSafe)}Db") as DataBlock
+                        ?? IntegrateLibraries.CreateInstanceDataBlock(this,
+                            ResourceManagement.MyFunctionBlock_FailSafe,
+                            $"{nameof(ResourceManagement.MyFunctionBlock_FailSafe)}Db",
+                            ResourceManagement.ModuleBlocksRootGroup);
 
                     if (IsGenerateSafetyBlockChecked)
                     {
@@ -257,9 +261,10 @@ namespace MAC_use_cases.Model
                         ProgrammingLanguage.LAD, _plcDevice);
                     GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_SCL", ProgrammingLanguage.SCL, _plcDevice);
 
-                    var dbFromTypedMasterCopy = IntegrateLibraries.CreateInstanceDataBlock(this,
-                        ResourceManagement.MyFunctionBlock_Typed,
-                        $"{nameof(ResourceManagement.MyFunctionBlock_Typed)}Db", ResourceManagement.ModuleBlocksRootGroup);
+                    var dbFromTypedMasterCopy = _plcDevice.Blocks.FindBlockInPlcByName($"{nameof(ResourceManagement.MyFunctionBlock_Typed)}Db") as DataBlock
+                        ?? IntegrateLibraries.CreateInstanceDataBlock(this,
+                            ResourceManagement.MyFunctionBlock_Typed,
+                            $"{nameof(ResourceManagement.MyFunctionBlock_Typed)}Db", ResourceManagement.ModuleBlocksRootGroup);
 
                     GenericBlockCreation.CreateFunctionBlock($"{nameof(ResourceManagement.MyFunctionBlock_Typed)}_FBD",
                         dbFromTypedMasterCopy.Name,
@@ -292,6 +297,18 @@ namespace MAC_use_cases.Model
                             { "TestBool", "Bool" }
                         });
 
+                    // Create FB with RS network in FBD
+                    BitLogicNetworks.GenerateFbWithRSNetworkFBD("FunctionBlockRS_FBD", _plcDevice, ProgrammingLanguage.FBD);
+
+                    // Create FB with RS network in LAD (no Coil element – operand IS the output)
+                    BitLogicNetworks.GenerateFbWithRSNetworkLAD("FunctionBlockRS_LAD", _plcDevice);
+
+                    // Create FB with AND networks in FBD
+                    BitLogicNetworks.GenerateFbWithANDNetworkFBD("FunctionBlockAND_FBD", _plcDevice);
+
+                    // Create FB with AND networks in LAD
+                    BitLogicNetworks.GenerateFbWithANDNetworkLAD("FunctionBlockAND_LAD", _plcDevice);
+
                     // Compile all types after creation
                     OpennessFuncs.CompileAllTypes(_plcDevice);
 
@@ -302,5 +319,6 @@ namespace MAC_use_cases.Model
 
             return true;
         }
-    }
-}
+        
+            }
+        }
