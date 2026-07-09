@@ -17,7 +17,6 @@ using Siemens.Automation.ModularApplicationCreator.Tia.Openness;
 using Siemens.Automation.ModularApplicationCreator.Tia.Openness.SoftwareUnit;
 using Siemens.Automation.ModularApplicationCreator.Tia.TiaAttributeFuncs;
 using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
-using MacPLang = Siemens.Automation.ModularApplicationCreator.Tia.Helper.Create_XML_Block.ProgrammingLanguage;
 
 namespace MAC_use_cases.Model
 {
@@ -234,13 +233,13 @@ namespace MAC_use_cases.Model
                         tiaTemplateContext.TiaProject.GetEditingLanguage(), _plcDevice, this);
 
                     GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_FBD", dbFromMasterCopy.Name,
-                        MacPLang.FBD,
+                        ProgrammingLanguage.FBD,
                         _plcDevice);
                     GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_LAD", dbFromMasterCopy.Name,
-                        MacPLang.LAD,
+                        ProgrammingLanguage.LAD,
                         _plcDevice);
                     GenericBlockCreation.CreateFunctionBlock($"{NameOfMyFb}_SCL", dbFromMasterCopy.Name,
-                        MacPLang.SCL,
+                        ProgrammingLanguage.SCL,
                         _plcDevice);
 
                     var dbFromFailSafeFbMasterCopy = _plcDevice.Blocks.FindBlockInPlcByName($"{nameof(ResourceManagement.MyFunctionBlock_FailSafe)}Db") as DataBlock
@@ -253,14 +252,14 @@ namespace MAC_use_cases.Model
                     {
                         GenericBlockCreation.CreateFailSafeFunctionBlock($"{NameOfMyFailSafeFb}_F_LAD",
                             dbFromFailSafeFbMasterCopy.Name,
-                            MacPLang.F_LAD,
+                            ProgrammingLanguage.F_LAD,
                             _plcDevice);
                     }
                     GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_FBD",
-                        MacPLang.FBD, _plcDevice);
+                        ProgrammingLanguage.FBD, _plcDevice);
                     GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_LAD",
-                        MacPLang.LAD, _plcDevice);
-                    GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_SCL", MacPLang.SCL, _plcDevice);
+                        ProgrammingLanguage.LAD, _plcDevice);
+                    GenericBlockCreation.CreateFunctionBlockInSoftwareUnit(_softwareUnit, "MyFb_SCL", ProgrammingLanguage.SCL, _plcDevice);
 
                     var dbFromTypedMasterCopy = _plcDevice.Blocks.FindBlockInPlcByName($"{nameof(ResourceManagement.MyFunctionBlock_Typed)}Db") as DataBlock
                         ?? IntegrateLibraries.CreateInstanceDataBlock(this,
@@ -269,7 +268,7 @@ namespace MAC_use_cases.Model
 
                     GenericBlockCreation.CreateFunctionBlock($"{nameof(ResourceManagement.MyFunctionBlock_Typed)}_FBD",
                         dbFromTypedMasterCopy.Name,
-                        MacPLang.FBD,
+                        ProgrammingLanguage.FBD,
                         _plcDevice);
 
                     var myTagTable = CreateVariables.CreateTagTable(_plcDevice, "myTagTable");
@@ -299,7 +298,7 @@ namespace MAC_use_cases.Model
                         });
 
                     // Create FB with RS network in FBD
-                    BitLogicNetworks.GenerateFbWithRSNetworkFBD("FunctionBlockRS_FBD", _plcDevice, MacPLang.FBD);
+                    BitLogicNetworks.GenerateFbWithRSNetworkFBD("FunctionBlockRS_FBD", _plcDevice, ProgrammingLanguage.FBD);
 
                     // Create FB with RS network in LAD (no Coil element – operand IS the output)
                     BitLogicNetworks.GenerateFbWithRSNetworkLAD("FunctionBlockRS_LAD", _plcDevice);
