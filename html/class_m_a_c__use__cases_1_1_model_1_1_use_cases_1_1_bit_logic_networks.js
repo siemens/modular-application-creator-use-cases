@@ -14,9 +14,7 @@ var class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks =
     [ "GenerateFbWithANDNetworkLAD", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#ae4fed2dcbaf54f6336cda4434455d4f2", null ],
     [ "ImportBlockAsLad", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a1f51a1b79e487bf0ddcf9bb15a76f1ad", null ],
     [ "ConvertFlgNetToLad", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a4587fc83d29ba5fd6fb12d738f2e54d1", null ],
-    [ "GetUId", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a95c443c83f41e62699a74c8495a89e4b", null ],
     [ "ExpandAndParts", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a60b98a459da92ca85054be729ba638ce", null ],
     [ "SortFlgNetInFlowOrder", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a5b7a54245186650ca662e771c46fcc67", null ],
-    [ "ConvertDirectInputWires", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a1d0a9ede010874cc1fea9e6527079d0e", null ],
-    [ "FlgNetNs", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#af4f090f68e5dd86dd083543a6a1b3e86", null ]
+    [ "ConvertDirectInputWires", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a1d0a9ede010874cc1fea9e6527079d0e", null ]
 ];
