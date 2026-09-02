@@ -1,5 +1,6 @@
 var dir_75741d63eca49886cf63e3468c9fd903 =
 [
+    [ "BitLogicNetworks.cs", "_bit_logic_networks_8cs_source.html", null ],
     [ "CreateVariables.cs", "_create_variables_8cs_source.html", null ],
     [ "GeneralSupport.cs", "_general_support_8cs_source.html", null ],
     [ "GenericBlockCreation.cs", "_generic_block_creation_8cs_source.html", null ],

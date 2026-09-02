@@ -1,35 +1,36 @@
 var annotated_dup =
 [
-    [ "MAC_use_cases", "namespace_m_a_c__use__cases.html", [
-      [ "Model", "namespace_m_a_c__use__cases_1_1_model.html", [
-        [ "ModuleEssentials", "namespace_m_a_c__use__cases_1_1_model_1_1_module_essentials.html", [
-          [ "Base", "namespace_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base.html", [
-            [ "BaseModelParameterOwner", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_model_parameter_owner.html", null ],
-            [ "BaseParameter", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter.html", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter" ],
-            [ "BaseParameterWithPredefinedTags", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_base_1_1_base_parameter_with_predefined_tags.html", null ]
-          ] ],
-          [ "Example", "namespace_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_example.html", [
-            [ "Parameter", "namespace_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_example_1_1_parameter.html", [
-              [ "Parameter_IsVirtualAxis", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_example_1_1_parameter_1_1_parameter___is_virtual_axis.html", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_example_1_1_parameter_1_1_parameter___is_virtual_axis" ]
-            ] ],
-            [ "TechnologyObjectDataModel", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_example_1_1_technology_object_data_model.html", null ],
-            [ "TechnologyObjectViewModel", "class_m_a_c__use__cases_1_1_model_1_1_module_essentials_1_1_example_1_1_technology_object_view_model.html", null ]
-          ] ]
-        ] ],
-        [ "UseCases", "namespace_m_a_c__use__cases_1_1_model_1_1_use_cases.html", [
-          [ "CreateVariables", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables" ],
-          [ "GeneralSupport", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support" ],
-          [ "GenericBlockCreation", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation" ],
-          [ "HardwareGeneration", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation" ],
-          [ "HardwareGenerationExcelBased", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation_excel_based.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation_excel_based" ],
-          [ "IntegrateLibraries", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries" ],
-          [ "ModelToSerialize", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_model_to_serialize" ],
-          [ "NonTIAProjectBased", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based" ],
-          [ "SoftwareUnits", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units" ],
-          [ "TechnologyObjectClass", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class" ]
-        ] ],
-        [ "BaseMAC_use_casesEM", "class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html", "class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m" ],
-        [ "MAC_use_casesEM", "class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html", "class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m" ]
+    [ "Quick Navigation", "index.html#autotoc_md1", null ],
+    [ "How to integrate libraries", "index.html#section-id", null ],
+    [ "How to use different lanugages", "index.html#localization-id", null ],
+    [ "How to upgrade a v20 module to v21", "index.html#module-upgrade-id", [
+      [ "How does it work if the EQM is not upgraded?", "index.html#autotoc_md2", [
+        [ "**Fix 1** - If you already have collaboration framework installed on your project.", "index.html#autotoc_md3", null ],
+        [ "**Fix 2** - If you do not have the Collaboration Framework installed on your project", "index.html#autotoc_md4", null ],
+        [ "**Fix 3** - If your project has direct dll references and is not planned to change it for the Collaboration framework", "index.html#autotoc_md5", null ]
       ] ]
-    ] ]
+    ] ],
+    [ "Help for this documentation", "index.html#help-id", [
+      [ "Classes", "index.html#autotoc_md6", null ],
+      [ "Files", "index.html#autotoc_md7", null ]
+    ] ],
+    [ "Module Essentials", "autotoc_md8.html#autotoc_md9", [
+      [ "Overview", "autotoc_md8.html#autotoc_md10", null ],
+      [ "Key Features", "autotoc_md8.html#autotoc_md11", null ],
+      [ "Getting Started", "autotoc_md8.html#autotoc_md12", null ],
+      [ "Versioning", "autotoc_md8.html#autotoc_md13", null ],
+      [ "Architecture", "autotoc_md8.html#autotoc_md14", null ],
+      [ "Parameter Types", "autotoc_md8.html#autotoc_md15", null ],
+      [ "Example of Module Essentials Usage", "autotoc_md8.html#autotoc_md16", [
+        [ "UI Control Binding", "autotoc_md8.html#autotoc_md17", null ],
+        [ "Example of Control Binding Usage", "autotoc_md8.html#autotoc_md18", null ]
+      ] ]
+    ] ],
+    [ "MAC_use_cases", "namespace_m_a_c__use__cases.html", "namespace_m_a_c__use__cases" ],
+    [ "BaseModelParameterOwner", "class_base_model_parameter_owner.html", "class_base_model_parameter_owner" ],
+    [ "BaseParameter", "class_base_parameter.html", "class_base_parameter" ],
+    [ "BaseParameterWithPredefinedTags", "class_base_parameter_with_predefined_tags.html", "class_base_parameter_with_predefined_tags" ],
+    [ "Parameter_IsVirtualAxis", "class_parameter___is_virtual_axis.html", "class_parameter___is_virtual_axis" ],
+    [ "TechnologyObjectDataModel", "class_technology_object_data_model.html", "class_technology_object_data_model" ],
+    [ "TechnologyObjectViewModel", "class_technology_object_view_model.html", "class_technology_object_view_model" ]
 ];

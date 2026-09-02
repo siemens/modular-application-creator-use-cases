@@ -131,18 +131,24 @@ namespace MAC_use_cases.Model.UseCases
         ///     Generates a Function Block (FB) containing two chained RS flip-flop networks in FBD language
         ///     and a third network in SCL implementing the same RS logic, then imports it into the given
         ///     <paramref name="plcDevice"/>.
+        ///     \image html BitLogicNetworks_02.png
         ///     <para>
         ///     Network 1 (FBD): RS driven by <c>InputBool_R</c> / <c>InputBool_S1</c>; result written to
-        ///     <c>OutputBool</c> (via Coil) and <c>RSOperand</c> (operand pin).
+        ///     <c>RSOperand</c> (operand pin).
         ///     </para>
         ///     <para>
-        ///     Network 2 (FBD): RS driven by <c>InputBool_R2</c> / <c>OutputBool</c> (chained from Network 1);
-        ///     result written to <c>OutputBool2</c> and <c>RSOperand2</c>.
+        ///     Network 2 (FBD): RS driven by <c>InputBool_R2</c> / <c>RSOperand</c> (chained from Network 1);
+        ///     the result is written to <c>RSOperand2</c>.
         ///     </para>
         ///     <para>
-        ///     Network 3 (SCL): Simple assignment <c>#TempVariable := #OutputBool</c> demonstrating
+        ///     Network 3 (SCL): Simple assignment <c>#TempVariable := #RSOperand</c> demonstrating
         ///     how an SCL network can be mixed into an FBD block.
         ///     </para>
+        ///     <example>
+        ///         <code>
+        /// BitLogicNetworks.GenerateFbWithRSNetworkFBD("FunctionBlockRS_FBD", plcDevice, MacPLang.FBD);
+        ///         </code>
+        ///     </example>
         /// </summary>
         /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
         /// <param name="plcDevice">Target PLC device.</param>
@@ -401,11 +407,16 @@ namespace MAC_use_cases.Model.UseCases
         /// <summary>
         ///     Generates an FB in FBD language with two networks and imports it into
         ///     <paramref name="plcDevice"/>:
+        ///     \image html BitLogicNetworks_01.png
         ///     <list type="bullet">
         ///     <item>Network 1: AND of three inputs written to <c>OutputBool</c> via Coil.</item>
-        ///     <item>Network 2: Two parallel AND→RS circuits in a single network (see
-        ///     <see cref="CreateNetworkWith2Circuits"/>).</item>
+        ///     <item>Network 2: Copies <c>OutputBool</c> to the <c>AndOperand</c> static variable.</item>
         ///     </list>
+        ///     <example>
+        ///         <code>
+        /// BitLogicNetworks.GenerateFbWithANDNetworkFBD("FunctionBlockAND_FBD", plcDevice);
+        ///         </code>
+        ///     </example>
         /// </summary>
         /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
         /// <param name="plcDevice">Target PLC device.</param>
@@ -448,7 +459,7 @@ namespace MAC_use_cases.Model.UseCases
         ///     <paramref name="plcDevice"/>:
         ///     <list type="bullet">
         ///     <item>Network 1: AND of three inputs written to <c>OutputBool</c> via Coil.</item>
-        ///     <item>Network 2: Two parallel AND→RS circuits (Q left unconnected – LAD convention).</item>
+        ///     <item>Network 2: Copies <c>OutputBool</c> to the <c>AndOperand</c> static variable.</item>
         ///     </list>
         ///     <para>
         ///     <b>LAD import mechanism:</b> Networks are built with <see cref="MEPlang.FBD"/> because

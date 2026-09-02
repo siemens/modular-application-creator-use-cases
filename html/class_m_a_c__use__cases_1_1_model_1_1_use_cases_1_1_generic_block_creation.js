@@ -10,5 +10,6 @@ var class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation =
     [ "GenerateOB_Main", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a402cc20191963a0871d53273afbf909d", null ],
     [ "AddCodeBlockToOB", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#ada5f907ee47083f9e85cc949d79ab8ad", null ],
     [ "GenerateOBWithMultipleCalls", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a8b2bff310be5f504302fcfb93eb12f50", null ],
+    [ "ParseSingleSCLCall", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#aa65aba74c4f54b9ed08cf9cf88d7ea37", null ],
     [ "ParameterName", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a6baef2959818992e06c49f62525a5b2c", null ]
 ];

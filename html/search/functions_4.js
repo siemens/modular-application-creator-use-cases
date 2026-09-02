@@ -1,6 +1,26 @@
 var searchData=
 [
-  ['initafterfirstcreationordeserialization_0',['InitAfterFirstCreationOrDeserialization',['../class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html#a18ef0a60847ff2495a4afc1ad535a7af',1,'MAC_use_cases::Model::BaseMAC_use_casesEM']]],
-  ['initmodule_1',['InitModule',['../class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html#abea8e1472e9e95e6cc9641bf3ce84775',1,'MAC_use_cases::Model::BaseMAC_use_casesEM']]],
-  ['isadditionalreadoutrequired_2',['IsAdditionalReadOutRequired',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#a5dec75864ddc1d0c8e008f0827036763',1,'MAC_use_cases::Model::MAC_use_casesEM']]]
+  ['generateblock',['GenerateBlock',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#aedce987a76e148aaf68d196ab91327d4',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generatefbwithandnetworkfbd',['GenerateFbWithANDNetworkFBD',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a20670727ee2dcaa659b23ae12993de14',1,'MAC_use_cases::Model::UseCases::BitLogicNetworks']]],
+  ['generatefbwithandnetworklad',['GenerateFbWithANDNetworkLAD',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#ae4fed2dcbaf54f6336cda4434455d4f2',1,'MAC_use_cases::Model::UseCases::BitLogicNetworks']]],
+  ['generatefbwithrsnetworkfbd',['GenerateFbWithRSNetworkFBD',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a5db8fb7058e01124c053811dad01a2e7',1,'MAC_use_cases::Model::UseCases::BitLogicNetworks']]],
+  ['generatefbwithrsnetworklad',['GenerateFbWithRSNetworkLAD',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a42c6f8bfcea05b98981579f5b0fff256',1,'MAC_use_cases::Model::UseCases::BitLogicNetworks']]],
+  ['generateglobaldatablock',['GenerateGlobalDataBlock',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a0e37bca94696fd314ca9137944280bbc',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generatemultiinstancefb',['GenerateMultiInstanceFB',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a17a82e9f89386b2646840fc5b8d3f048',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generateob_5fmain',['GenerateOB_Main',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a402cc20191963a0871d53273afbf909d',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generateobwithmultiplecalls',['GenerateOBWithMultipleCalls',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html#a8b2bff310be5f504302fcfb93eb12f50',1,'MAC_use_cases::Model::UseCases::GenericBlockCreation']]],
+  ['generates120',['GenerateS120',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a7d5006c4913789ae5058a3e5509d0203',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['generates210',['GenerateS210',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a782897c3d537e943b5d7a1dfb57c812d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['generatescreenfrommastercopy',['GenerateScreenFromMastercopy',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html#a3315703cfbf49ca6581c56508e99aec9',1,'MAC_use_cases::Model::UseCases::IntegrateLibraries']]],
+  ['getallblocksrecursive',['GetAllBlocksRecursive',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a01fce2b33a7035ae9671820cd5cbfaf4',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getcellvalueasstring',['GetCellValueAsString',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation_excel_based.html#a7f684b029e82b0902a37e7f100579fa6',1,'MAC_use_cases::Model::UseCases::HardwareGenerationExcelBased']]],
+  ['getlocalizedstring',['GetLocalizedString',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#aff97a98b46f419847390811bd027b05d',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getopennessdeviceitem',['GetOpennessDeviceItem',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a5fdb6ea494132829d7bd0862aabf90d8',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getopennessproject',['GetOpennessProject',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html#a3f2fea29eb28d484b25b0d1999eacf11',1,'MAC_use_cases::Model::UseCases::GeneralSupport']]],
+  ['getorcreatedevice',['GetOrCreateDevice',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#a2247d2a45fea4739a31b6f8ff786ccf9',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['getorcreatehmisoftware',['GetOrCreateHMISoftware',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#aff273d38f036f9f1b8b1c603a5422efb',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['getorcreatesoftwareunit',['GetOrCreateSoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html#a609a670185b4e3172043b74ff2263026',1,'MAC_use_cases::Model::UseCases::SoftwareUnits']]],
+  ['getorcreatesubnet',['GetOrCreateSubnet',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_hardware_generation.html#af53a3919d93de83d94c0b58213a9339d',1,'MAC_use_cases::Model::UseCases::HardwareGeneration']]],
+  ['getsafetysoftwareunit',['GetSafetySoftwareUnit',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html#a1dbe558328e20da047c8bad1a5033a18',1,'MAC_use_cases::Model::UseCases::SoftwareUnits']]],
+  ['getvalueforgeneration',['GetValueForGeneration',['../class_parameter___is_virtual_axis.html#a7ac221b878f2cdf6778f0931d880fa5a',1,'Parameter_IsVirtualAxis']]]
 ];

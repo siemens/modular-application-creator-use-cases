@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['eqm_20is_20not_20upgraded_0',['How does it work if the EQM is not upgraded?',['../index.html#autotoc_md2',1,'']]],
-  ['essentials_1',['Module Essentials',['../md_docs_2module_essentials_page.html#autotoc_md9',1,'']]],
-  ['essentials_20usage_2',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md16',1,'']]],
-  ['example_20of_20control_20binding_20usage_3',['Example of Control Binding Usage',['../md_docs_2module_essentials_page.html#autotoc_md18',1,'']]],
-  ['example_20of_20module_20essentials_20usage_4',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md16',1,'']]]
+  ['importblockaslad',['ImportBlockAsLad',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a1f51a1b79e487bf0ddcf9bb15a76f1ad',1,'MAC_use_cases::Model::UseCases::BitLogicNetworks']]],
+  ['initafterfirstcreationordeserialization',['InitAfterFirstCreationOrDeserialization',['../class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html#a18ef0a60847ff2495a4afc1ad535a7af',1,'MAC_use_cases::Model::BaseMAC_use_casesEM']]],
+  ['initmodule',['InitModule',['../class_m_a_c__use__cases_1_1_model_1_1_base_m_a_c__use__cases_e_m.html#abea8e1472e9e95e6cc9641bf3ce84775',1,'MAC_use_cases::Model::BaseMAC_use_casesEM']]],
+  ['integratelibraries',['IntegrateLibraries',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_integrate_libraries.html',1,'MAC_use_cases::Model::UseCases']]],
+  ['isadditionalreadoutrequired',['IsAdditionalReadOutRequired',['../class_m_a_c__use__cases_1_1_model_1_1_m_a_c__use__cases_e_m.html#a5dec75864ddc1d0c8e008f0827036763',1,'MAC_use_cases::Model::MAC_use_casesEM']]]
 ];
