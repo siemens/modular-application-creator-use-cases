@@ -18,12 +18,14 @@ namespace MAC_use_cases.Tests.TestEnvironment
         }
         protected override void InitializeModuleClassesForTesting()
         {
+            MacPackageResolverTestSetup.Initialize();
         }
 
         protected override string DirectoryNameOfViewTestResources =>
             this.Get(() => "MAC_use_cases.Tests.Resources");
 
-protected override string NameOfTiaZapFileFromResources => this.Get(() => "MacTestenvironmentBaseProject.zap20");
+protected override string NameOfTiaZapFileFromResources => this.Get(() => "MacTestenvironmentBaseProject.zap21");
+protected override bool UseZapFileInsteadOfProjectFile => this.Get(() => true);
         protected override Assembly Assembly => this.Get(() => typeof(MacGenerationTestBaseMAC_use_cases).Assembly);
 
         protected override string PlcName => this.Get(() => "S7-1500/ET200MP station_1");
