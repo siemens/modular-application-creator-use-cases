@@ -12,7 +12,7 @@
     <dependencies>
       <group targetFramework=".NETFramework4.8">
         <dependency id="Microsoft.Office.Interop.Excel" version="15.0.4795.1001" />
-        <dependency id="Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials" version="19.0.3" />
+        <dependency id="Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials" version="21.0.1" />
       </group>
     </dependencies>
     <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V21.0 FAILSAFE_CPU_REQUIRED</tags>
