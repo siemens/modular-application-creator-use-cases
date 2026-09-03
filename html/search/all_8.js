@@ -4,5 +4,6 @@ var searchData=
   ['essentials_1',['Module Essentials',['../md_docs_2module_essentials_page.html#autotoc_md9',1,'']]],
   ['essentials_20usage_2',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md16',1,'']]],
   ['example_20of_20control_20binding_20usage_3',['Example of Control Binding Usage',['../md_docs_2module_essentials_page.html#autotoc_md18',1,'']]],
-  ['example_20of_20module_20essentials_20usage_4',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md16',1,'']]]
+  ['example_20of_20module_20essentials_20usage_4',['Example of Module Essentials Usage',['../md_docs_2module_essentials_page.html#autotoc_md16',1,'']]],
+  ['expandandparts_5',['ExpandAndParts',['../class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html#a60b98a459da92ca85054be729ba638ce',1,'MAC_use_cases::Model::UseCases::BitLogicNetworks']]]
 ];

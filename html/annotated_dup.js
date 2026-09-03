@@ -17,6 +17,7 @@ var annotated_dup =
           ] ]
         ] ],
         [ "UseCases", "namespace_m_a_c__use__cases_1_1_model_1_1_use_cases.html", [
+          [ "BitLogicNetworks", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks" ],
           [ "CreateVariables", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_create_variables" ],
           [ "GeneralSupport", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_general_support" ],
           [ "GenericBlockCreation", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation.html", "class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_generic_block_creation" ],

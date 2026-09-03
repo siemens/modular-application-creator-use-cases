@@ -13,6 +13,7 @@
     8. [Non Tia Portal Bases Operations](class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_non_t_i_a_project_based.html)
     9. [Technology Object Handling](class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_technology_object_class.html)
     10. [Software Units](class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_software_units.html)
+    11. [Bit Logic Networks](class_m_a_c__use__cases_1_1_model_1_1_use_cases_1_1_bit_logic_networks.html)
 2. [How to integrate libraries](@ref section-id)
 3. [How to use different lanugages](@ref localization-id)
 4. [How to upgrade a v20 module to v21](@ref module-upgrade-id)

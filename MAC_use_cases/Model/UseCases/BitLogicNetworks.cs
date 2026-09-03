@@ -36,7 +36,6 @@ namespace MAC_use_cases.Model.UseCases
 
         /// <summary>
         ///     Adds a Coil (assignment) system block call to the given network and returns it.
-        ///     Used in FBD RS networks to write the Q output to a local variable.
         ///     Pins: in (input), out (output), operand (output).
         /// </summary>
         public static SystemBlockCall CreateAssignmentCall(XmlNetwork parent)
@@ -50,13 +49,11 @@ namespace MAC_use_cases.Model.UseCases
 
         /// <summary>
         ///     Creates an RS flip-flop network for use in an FBD block.
-        ///     The RS Q output is routed through a Coil element to write the result to
-        ///     <paramref name="outputVariableName"/>. The operand pin writes to
-        ///     <paramref name="rsOperandVariableName"/>.
+        ///     The R and S1 inputs are connected to the specified variables, and the operand pin writes to
+        ///     <paramref name="rsOperandVariableName"/>. The Q output remains unconnected.
         /// </summary>
         /// <param name="rInputName">Variable name connected to the R (reset) input.</param>
         /// <param name="s1InputName">Variable name connected to the S1 (set) input.</param>
-        /// <param name="outputVariableName">Variable name written by the Coil (Q result).</param>
         /// <param name="rsOperandVariableName">Variable name written by the RS operand pin (bit memory).</param>
         /// <param name="opnsProgrammingLanguage">Network programming language (use <see cref="MEPlang.FBD"/>).</param>
         public static XmlNetwork CreateRSNetwork(
@@ -128,22 +125,21 @@ namespace MAC_use_cases.Model.UseCases
         }
 
         /// <summary>
-        ///     Generates a Function Block (FB) containing two chained RS flip-flop networks in FBD language
-        ///     and a third network in SCL implementing the same RS logic, then imports it into the given
-        ///     <paramref name="plcDevice"/>.
-        ///     <para>
-        ///     Network 1 (FBD): RS driven by <c>InputBool_R</c> / <c>InputBool_S1</c>; result written to
-        ///     <c>OutputBool</c> (via Coil) and <c>RSOperand</c> (operand pin).
-        ///     </para>
-        ///     <para>
-        ///     Network 2 (FBD): RS driven by <c>InputBool_R2</c> / <c>OutputBool</c> (chained from Network 1);
-        ///     result written to <c>OutputBool2</c> and <c>RSOperand2</c>.
-        ///     </para>
-        ///     <para>
-        ///     Network 3 (SCL): Simple assignment <c>#TempVariable := #OutputBool</c> demonstrating
-        ///     how an SCL network can be mixed into an FBD block.
-        ///     </para>
+        ///     Generates an FBD Function Block (FB) with two chained RS networks and one SCL assignment network.
         /// </summary>
+        /// <remarks>
+        ///     The generated block contains:
+        ///     <list type="bullet">
+        ///     <item>Network 1: RS driven by <c>InputBool_R</c> / <c>InputBool_S1</c>; result written to <c>RSOperand</c>.</item>
+        ///     <item>Network 2: RS driven by <c>InputBool_R2</c> / <c>RSOperand</c>; result written to <c>RSOperand2</c>.</item>
+        ///     <item>Network 3: SCL assignment <c>#TempVariable := #RSOperand</c>, demonstrating mixed-language networks.</item>
+        ///     </list>
+        /// </remarks>
+        /// <example>
+        ///     <code>
+        /// BitLogicNetworks.GenerateFbWithRSNetworkFBD("FunctionBlockRS_FBD", plcDevice, MacPLang.FBD);
+        ///     </code>
+        /// </example>
         /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
         /// <param name="plcDevice">Target PLC device.</param>
         /// <param name="macProgrammingLanguage">Programming language for the block (use <see cref="MacPLang.FBD"/>).</param>
@@ -186,19 +182,15 @@ namespace MAC_use_cases.Model.UseCases
         }
 
         /// <summary>
-        ///     Generates a Function Block (FB) containing two chained RS flip-flop networks in LAD language
-        ///     and imports it into the given <paramref name="plcDevice"/>.
-        ///     <para>
-        ///     Network 1: RS driven by <c>InputBool_R</c> / <c>InputBool_S1</c>; result stored in <c>RSOperand</c>.
-        ///     </para>
-        ///     <para>
-        ///     Network 2: RS driven by <c>InputBool_R2</c> / <c>RSOperand</c> (chained from Network 1);
-        ///     result stored in <c>RSOperand2</c>.
-        ///     </para>
-        ///     <para>
-        ///     Network 3 (SCL): Simple assignment <c>#TempVariable := #RSOperand</c> demonstrating
-        ///     how an SCL network can be mixed into a LAD block.
-        ///     </para>
+        ///     Generates a LAD Function Block (FB) with two chained RS networks and one SCL assignment network.
+        /// </summary>
+        /// <remarks>
+        ///     The generated block contains:
+        ///     <list type="bullet">
+        ///     <item>Network 1: RS driven by <c>InputBool_R</c> / <c>InputBool_S1</c>; result stored in <c>RSOperand</c>.</item>
+        ///     <item>Network 2: RS driven by <c>InputBool_R2</c> / <c>RSOperand</c>; result stored in <c>RSOperand2</c>.</item>
+        ///     <item>Network 3: SCL assignment <c>#TempVariable := #RSOperand</c>, demonstrating mixed-language networks.</item>
+        ///     </list>
         ///     <para>
         ///     <b>LAD import mechanism:</b> Networks are built with <see cref="MEPlang.FBD"/> because
         ///     <see cref="XmlNetwork"/> only generates valid graph XML in FBD mode. After the initial
@@ -206,7 +198,12 @@ namespace MAC_use_cases.Model.UseCases
         ///     is changed from <c>FBD</c> to <c>LAD</c>, and the block is reimported so TIA Portal
         ///     displays it correctly as LAD. SCL networks are left unchanged.
         ///     </para>
-        /// </summary>
+        /// </remarks>
+        /// <example>
+        ///     <code>
+        /// BitLogicNetworks.GenerateFbWithRSNetworkLAD("FunctionBlockRS_LAD", plcDevice);
+        ///     </code>
+        /// </example>
         /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
         /// <param name="plcDevice">Target PLC device.</param>
         public static void GenerateFbWithRSNetworkLAD(string blockName, PlcDevice plcDevice)
@@ -399,14 +396,21 @@ namespace MAC_use_cases.Model.UseCases
         // ----------------------------------------------------------------
 
         /// <summary>
-        ///     Generates an FB in FBD language with two networks and imports it into
-        ///     <paramref name="plcDevice"/>:
-        ///     <list type="bullet">
-        ///     <item>Network 1: AND of three inputs written to <c>OutputBool</c> via Coil.</item>
-        ///     <item>Network 2: Two parallel AND→RS circuits in a single network (see
-        ///     <see cref="CreateNetworkWith2Circuits"/>).</item>
-        ///     </list>
+        ///     Generates an FBD Function Block (FB) with an AND network and an assignment network.
+        ///     \image html BitLogicNetworks_01.png
         /// </summary>
+        /// <remarks>
+        ///     The generated block contains:
+        ///     <list type="bullet">
+        ///     <item>Network 1: AND of three inputs written to <c>OutputBool</c>.</item>
+        ///     <item>Network 2: Copies <c>OutputBool</c> to the <c>AndOperand</c> static variable.</item>
+        ///     </list>
+        /// </remarks>
+        /// <example>
+        ///     <code>
+        /// BitLogicNetworks.GenerateFbWithANDNetworkFBD("FunctionBlockAND_FBD", plcDevice);
+        ///     </code>
+        /// </example>
         /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
         /// <param name="plcDevice">Target PLC device.</param>
         public static void GenerateFbWithANDNetworkFBD(string blockName, PlcDevice plcDevice)
@@ -444,11 +448,13 @@ namespace MAC_use_cases.Model.UseCases
         }
 
         /// <summary>
-        ///     Generates an FB in LAD language with two networks and imports it into
-        ///     <paramref name="plcDevice"/>:
+        ///     Generates a LAD Function Block (FB) with an AND network and an assignment network.
+        /// </summary>
+        /// <remarks>
+        ///     The generated block contains:
         ///     <list type="bullet">
-        ///     <item>Network 1: AND of three inputs written to <c>OutputBool</c> via Coil.</item>
-        ///     <item>Network 2: Two parallel AND→RS circuits (Q left unconnected – LAD convention).</item>
+        ///     <item>Network 1: AND of three inputs written to <c>OutputBool</c>.</item>
+        ///     <item>Network 2: Copies <c>OutputBool</c> to the <c>AndOperand</c> static variable.</item>
         ///     </list>
         ///     <para>
         ///     <b>LAD import mechanism:</b> Networks are built with <see cref="MEPlang.FBD"/> because
@@ -457,7 +463,12 @@ namespace MAC_use_cases.Model.UseCases
         ///     is changed from <c>FBD</c> to <c>LAD</c>, and the block is reimported so TIA Portal
         ///     displays it correctly as LAD.
         ///     </para>
-        /// </summary>
+        /// </remarks>
+        /// <example>
+        ///     <code>
+        /// BitLogicNetworks.GenerateFbWithANDNetworkLAD("FunctionBlockAND_LAD", plcDevice);
+        ///     </code>
+        /// </example>
         /// <param name="blockName">Name of the FB to create in TIA Portal.</param>
         /// <param name="plcDevice">Target PLC device.</param>
         public static void GenerateFbWithANDNetworkLAD(string blockName, PlcDevice plcDevice)
