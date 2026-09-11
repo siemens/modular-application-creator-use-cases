@@ -52,7 +52,7 @@
   <!--End of Nuget Specification-->
 
   <PropertyGroup>
-    <ModuleEssentialsVersion>21.0.1</ModuleEssentialsVersion>
+    <ModuleEssentialsVersion>19.0.4</ModuleEssentialsVersion>
   </PropertyGroup>
 
   <!-- Define a preprocessor symbol based on the MacVersionMajor -->
