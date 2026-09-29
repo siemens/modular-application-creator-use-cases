@@ -80,7 +80,7 @@
 
         <!-- Row 6 -->
         <TextBlock Grid.Row="6" Grid.Column="0"
-                   Text="Generate Hardware based on Excel:"
+                   Text="Generate Hardware based on CSV file:"
                    Margin="5" />
         <TextBox Grid.Row="6" Text="{Binding HardwareGenerationExcelBasedViewModel.ImportSource}" Grid.Column="1"
                  Width="550"

@@ -60,6 +60,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\MacTestenvironmentBaseProject.zap21" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\MAC_use_cases\AdditionalContent\HardwareGeneration.csv" Link="Resources\HardwareGeneration.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
   <Target Name="StoreOriginalReferencePath" BeforeTargets="ModifyReferencePathForStrongNamer">
     <ItemGroup>
       <OriginalReferencePath Include="@(ReferencePath)" />
