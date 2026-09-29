@@ -51,12 +51,12 @@ namespace MAC_use_cases.Model.UseCases
         /// <param name="tiaProject">The target TIA Portal project.</param>
         /// <param name="csvFilePath">Path to the CSV file containing device specifications.</param>
         /// <exception cref="Exception">
-        ///     Thrown when the CSV file doesn't exist or can't be read (e.g. a required column is missing).
+        ///     Thrown when the CSV file can't be read (e.g. a required column is missing).
         /// </exception>
         /// <remarks>
         ///     This method:
-        ///     - Logs a warning and returns if an Excel file is selected (e.g. from an older module configuration)
-        ///     - Validates the CSV file existence
+        ///     - Logs a warning and returns if the file doesn't exist or is an Excel file
+        ///       (e.g. a path saved in an older module configuration), so the generation continues
         ///     - Reads device information from the CSV file
         ///     - Creates devices in the TIA Portal project
         ///     - Logs the progress and any errors that occur during device creation
@@ -64,22 +64,15 @@ namespace MAC_use_cases.Model.UseCases
         public static void CreateNewDevicesFromCsvFile(MAC_use_casesEM module, Project tiaProject,
             string csvFilePath)
         {
-            if (IsExcelFile(csvFilePath))
+            var warning = GetImportSourceWarning(csvFilePath);
+            if (warning != null)
             {
-                MacManagement.LoggingService.LogMessage(LogTypes.GenerationWarning,
-                    $"Excel files are no longer supported for the hardware generation: '{csvFilePath}'. " +
-                    "Save the sheet as CSV and select the CSV file instead. No devices were created from this file.",
-                    module.Name);
+                MacManagement.LoggingService.LogMessage(LogTypes.GenerationWarning, warning, module.Name);
                 return;
             }
 
             try
             {
-                if (!File.Exists(csvFilePath))
-                {
-                    throw new FileNotFoundException("CSV file not found", csvFilePath);
-                }
-
                 var deviceInfos = ReadDevicesFromCsvFile(csvFilePath);
 
                 foreach (var deviceInfo in deviceInfos)
@@ -196,6 +189,30 @@ namespace MAC_use_cases.Model.UseCases
             }
 
             return devices;
+        }
+
+        /// <summary>
+        ///     Checks whether the import source can be used for the hardware generation.
+        /// </summary>
+        /// <param name="csvFilePath">The path of the CSV file.</param>
+        /// <returns>
+        ///     A warning message if the file is an Excel file or doesn't exist; null if the file can be imported.
+        /// </returns>
+        public static string? GetImportSourceWarning(string csvFilePath)
+        {
+            if (IsExcelFile(csvFilePath))
+            {
+                return $"Excel files are no longer supported for the hardware generation: '{csvFilePath}'. " +
+                       "Save the sheet as CSV and select the CSV file instead. No devices were created from this file.";
+            }
+
+            if (!File.Exists(csvFilePath))
+            {
+                return $"CSV file for the hardware generation not found: '{csvFilePath}'. " +
+                       "Select an existing CSV file. No devices were created from this file.";
+            }
+
+            return null;
         }
 
         /// <summary>

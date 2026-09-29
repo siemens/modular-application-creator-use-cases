@@ -207,6 +207,33 @@ namespace MAC_use_cases.Tests.Unit.Tests
             Assert.That(HardwareGenerationFileBased.IsExcelFile(path), Is.EqualTo(expected));
         }
 
+        [Test]
+        public void GetImportSourceWarning_ExistingCsvFile_ReturnsNull()
+        {
+            var path = WriteFile("OrderNumber;Version;Name;DeviceName", new UTF8Encoding(true));
+
+            Assert.That(HardwareGenerationFileBased.GetImportSourceWarning(path), Is.Null);
+        }
+
+        [Test]
+        public void GetImportSourceWarning_MissingFile_ReturnsWarningWithPath()
+        {
+            var path = Path.Combine(_tempDirectory, "missing.csv");
+
+            Assert.That(HardwareGenerationFileBased.GetImportSourceWarning(path),
+                Does.Contain("not found").And.Contain(path));
+        }
+
+        [Test]
+        public void GetImportSourceWarning_ExistingExcelFile_ReturnsExcelWarning()
+        {
+            var path = Path.Combine(_tempDirectory, "HardwareGenerationExcelBased.xlsx");
+            File.WriteAllBytes(path, new byte[] { 0x50, 0x4B });
+
+            Assert.That(HardwareGenerationFileBased.GetImportSourceWarning(path),
+                Does.Contain("Excel files are no longer supported"));
+        }
+
         private string WriteFile(string content, Encoding encoding)
         {
             var path = Path.Combine(_tempDirectory, "devices.csv");
