@@ -123,14 +123,10 @@
     <None Update="Helpfiles\OnlineHelpTopics.xml">
       <SubType>Content</SubType>
     </None>
-    <Content Include="AdditionalContent\HardwareGenerationExcelBased.xlsx" />
+    <Content Include="AdditionalContent\HardwareGeneration.csv" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Office.Interop.Excel">
-      <Version>15.0.4795.1001</Version>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </PackageReference>
     <PackageReference Include="Doxygen">
       <Version>1.8.14</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

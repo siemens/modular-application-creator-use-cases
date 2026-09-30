@@ -8,6 +8,10 @@ using Siemens.Automation.ModularApplicationCreatorBasics.ViewModels;
 
 namespace MAC_use_cases.ViewModel
 {
+    /// <summary>
+    ///     ViewModel for the hardware generation based on a CSV file.
+    ///     The class name is kept for compatibility with saved module configurations.
+    /// </summary>
     public class HardwareGenerationExcelBasedViewModel : INotifyPropertyChanged
     {
         private string _importSource;
@@ -15,7 +19,7 @@ namespace MAC_use_cases.ViewModel
         public HardwareGenerationExcelBasedViewModel()
         {
             BrowseImportFile = new RelayCommand(ExecuteBrowseImportFile);
-            ImportSource = GetDefaultExcelFilePath();
+            ImportSource = GetDefaultCsvFilePath();
         }
 
         public string ImportSource
@@ -35,9 +39,9 @@ namespace MAC_use_cases.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private static string GetDefaultExcelFilePath()
+        private static string GetDefaultCsvFilePath()
         {
-            return Path.Combine(GetInitialDirectory(), "HardwareGenerationExcelBased.xlsx");
+            return Path.Combine(GetInitialDirectory(), "HardwareGeneration.csv");
         }
 
         private static string GetAssemblyLocation()
@@ -55,10 +59,10 @@ namespace MAC_use_cases.ViewModel
         {
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "Excel Files|*.xlsx;*.xls|All Files|*.*",
-                Title = "Select Excel File",
+                Filter = "CSV Files|*.csv|All Files|*.*",
+                Title = "Select CSV File",
                 InitialDirectory = GetInitialDirectory(),
-                FileName = GetDefaultExcelFilePath()
+                FileName = GetDefaultCsvFilePath()
             };
 
             if (openFileDialog.ShowDialog() == true)

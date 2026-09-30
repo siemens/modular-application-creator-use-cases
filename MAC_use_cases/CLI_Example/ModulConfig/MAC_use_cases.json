@@ -5,7 +5,7 @@
   },
   "HardwareGenerationExcelBasedViewModel": {
     "$id": "3",
-    "ImportSource": "C:\\Users\\adhobe8\\ModularApplicationCreator\\DemoCase_S71500_S210_GSD_ET200SP (70)\\InstalledPackages\\MAC_use_cases.21.0.0-pre202606161256\\contentFiles\\any\\net48\\AdditionalContent\\HardwareGenerationExcelBased.xlsx",
+    "ImportSource": "C:\\Users\\adhobe8\\ModularApplicationCreator\\DemoCase_S71500_S210_GSD_ET200SP (70)\\InstalledPackages\\MAC_use_cases.21.0.0-pre202606161256\\contentFiles\\any\\net48\\AdditionalContent\\HardwareGeneration.csv",
     "BrowseImportFile": {
       "$type": "Siemens.Automation.ModularApplicationCreatorBasics.ViewModels.RelayCommand, Siemens.Automation.ModAppCreator.Basics"
     }

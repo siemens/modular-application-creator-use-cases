@@ -11,13 +11,12 @@
     <copyright>Copyright © SIEMENS AG</copyright>
     <dependencies>
       <group targetFramework=".NETFramework4.8">
-        <dependency id="Microsoft.Office.Interop.Excel" version="15.0.4795.1001" />
         <dependency id="Siemens.ModularApplicationCreator.ControlModules.ModuleEssentials" version="19.0.4" />
       </group>
     </dependencies>
     <tags>MODULARAPPLICATIONCREATOR EQUIPMENTMODULE TIA-V21.0 FAILSAFE_CPU_REQUIRED</tags>
     <contentFiles>
-      <files include="any/net48/AdditionalContent/HardwareGenerationExcelBased.xlsx" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/AdditionalContent/HardwareGeneration.csv" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/AddLibrary.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/Architecture.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/ClassExplanation.PNG" buildAction="Content" copyToOutput="false" />
@@ -28,13 +27,13 @@
       <files include="any/net48/Images/CreateInstanceDB.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateInstanceDBFromTypedBlock.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateInstanceDB_via_XmlInstDB.png" buildAction="Content" copyToOutput="false" />
-      <files include="any/net48/Images/CreateNewDevicesFromExcelSheet.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/CreateNewDevicesFromCsvFile.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateScreenFromMastercopy.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateTag.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateTagTable.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/CreateTO.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/DynamicCall.png" buildAction="Content" copyToOutput="false" />
-      <files include="any/net48/Images/ExampleExcelFile.png" buildAction="Content" copyToOutput="false" />
+      <files include="any/net48/Images/ExampleCsvFile.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/FunctionExplanation.PNG" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GenerateDB.png" buildAction="Content" copyToOutput="false" />
       <files include="any/net48/Images/GenerateOB.png" buildAction="Content" copyToOutput="false" />
