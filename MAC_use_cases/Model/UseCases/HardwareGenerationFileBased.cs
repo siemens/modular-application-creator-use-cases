@@ -192,6 +192,111 @@ namespace MAC_use_cases.Model.UseCases
         }
 
         /// <summary>
+        ///     Gets the AdditionalContent folder of the installed package, which contains the example
+        ///     HardwareGeneration.csv.
+        /// </summary>
+        /// <returns>
+        ///     The absolute path &lt;package&gt;\contentFiles\any\net48\AdditionalContent, derived from the
+        ///     location of this assembly (&lt;package&gt;\lib\net48).
+        /// </returns>
+        public static string GetAdditionalContentDirectory()
+        {
+            var assemblyDirectory = Path.GetDirectoryName(typeof(HardwareGenerationFileBased).Assembly.Location);
+            return Path.GetFullPath(Path.Combine(assemblyDirectory, "..", "..", "contentFiles", "any", "net48",
+                "AdditionalContent"));
+        }
+
+        /// <summary>
+        ///     Resolves a relative import source against a base directory, e.g. the folder of an imported
+        ///     module configuration .json.
+        /// </summary>
+        /// <param name="importSource">The absolute or relative path of the CSV file.</param>
+        /// <param name="baseDirectory">The directory a relative path is resolved against.</param>
+        /// <returns>
+        ///     The absolute path for a relative import source; the unchanged value for an absolute path,
+        ///     an empty value or a value that isn't a valid path.
+        /// </returns>
+        /// <example>
+        ///     "HardwareGeneration.csv" is resolved to &lt;baseDirectory&gt;\HardwareGeneration.csv.
+        /// </example>
+        public static string ResolveImportSource(string importSource, string baseDirectory)
+        {
+            if (string.IsNullOrWhiteSpace(importSource))
+            {
+                return importSource;
+            }
+
+            try
+            {
+                var path = importSource.Trim();
+                return Path.IsPathRooted(path)
+                    ? importSource
+                    : Path.GetFullPath(Path.Combine(baseDirectory, path));
+            }
+            catch (Exception ex) when (ex is ArgumentException || ex is NotSupportedException ||
+                                       ex is PathTooLongException)
+            {
+                // GetImportSourceWarning reports the invalid value as a missing file.
+                return importSource;
+            }
+        }
+
+        /// <summary>
+        ///     Converts an absolute import source into a path relative to a base directory, e.g. the folder
+        ///     of an exported module configuration .json.
+        /// </summary>
+        /// <param name="importSource">The absolute path of the CSV file.</param>
+        /// <param name="baseDirectory">The directory the path is made relative to.</param>
+        /// <returns>
+        ///     The relative path (e.g. "HardwareGeneration.csv" or "..\Data\HardwareGeneration.csv");
+        ///     the unchanged value if it's empty, already relative, not a valid path or on another drive/share.
+        /// </returns>
+        public static string MakeRelativeImportSource(string importSource, string baseDirectory)
+        {
+            if (string.IsNullOrWhiteSpace(importSource) || string.IsNullOrWhiteSpace(baseDirectory))
+            {
+                return importSource;
+            }
+
+            try
+            {
+                var path = importSource.Trim();
+                if (!Path.IsPathRooted(path))
+                {
+                    return importSource;
+                }
+
+                var fullPath = Path.GetFullPath(path);
+                var fullBase = Path.GetFullPath(baseDirectory);
+                if (!string.Equals(Path.GetPathRoot(fullPath), Path.GetPathRoot(fullBase),
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    return importSource;
+                }
+
+                var separators = new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
+                var pathParts = fullPath.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                var baseParts = fullBase.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+                var common = 0;
+                while (common < pathParts.Length && common < baseParts.Length &&
+                       string.Equals(pathParts[common], baseParts[common], StringComparison.OrdinalIgnoreCase))
+                {
+                    common++;
+                }
+
+                var relativeParts = Enumerable.Repeat("..", baseParts.Length - common)
+                    .Concat(pathParts.Skip(common));
+                return string.Join(Path.DirectorySeparatorChar.ToString(), relativeParts);
+            }
+            catch (Exception ex) when (ex is ArgumentException || ex is NotSupportedException ||
+                                       ex is PathTooLongException)
+            {
+                return importSource;
+            }
+        }
+
+        /// <summary>
         ///     Checks whether the import source can be used for the hardware generation.
         /// </summary>
         /// <param name="csvFilePath">The path of the CSV file.</param>
