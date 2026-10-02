@@ -338,3 +338,6 @@ ASALocalRun/
 .localhistory/
 /_nuget_packages
 /tools
+
+# Machine-specific debug settings (see README, "Set Up Debugging")
+MAC_use_cases/Properties/launchSettings.json
