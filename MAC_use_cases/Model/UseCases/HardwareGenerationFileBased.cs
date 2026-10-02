@@ -305,16 +305,28 @@ namespace MAC_use_cases.Model.UseCases
         /// </returns>
         public static string? GetImportSourceWarning(string csvFilePath)
         {
+            var problem = GetImportSourceProblem(csvFilePath);
+            return problem == null ? null : problem + " No devices were created from this file.";
+        }
+
+        /// <summary>
+        ///     Describes why the import source can't be used for the hardware generation, without stating
+        ///     the consequence, so the caller can add a message that fits its context (generation or UI).
+        /// </summary>
+        /// <param name="csvFilePath">The path of the CSV file.</param>
+        /// <returns>The problem description if the file is an Excel file or doesn't exist; null otherwise.</returns>
+        public static string? GetImportSourceProblem(string csvFilePath)
+        {
             if (IsExcelFile(csvFilePath))
             {
                 return $"Excel files are no longer supported for the hardware generation: '{csvFilePath}'. " +
-                       "Save the sheet as CSV and select the CSV file instead. No devices were created from this file.";
+                       "Save the sheet as CSV and select the CSV file instead.";
             }
 
             if (!File.Exists(csvFilePath))
             {
                 return $"CSV file for the hardware generation not found: '{csvFilePath}'. " +
-                       "Select an existing CSV file. No devices were created from this file.";
+                       "Select an existing CSV file.";
             }
 
             return null;

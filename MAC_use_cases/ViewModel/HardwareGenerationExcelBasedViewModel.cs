@@ -1,9 +1,13 @@
-﻿using System.ComponentModel;
+using System;
+using System.Collections;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using MAC_use_cases.Model.UseCases;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using Siemens.Automation.ModularApplicationCreatorBasics.ViewModels;
 
 namespace MAC_use_cases.ViewModel
@@ -12,9 +16,10 @@ namespace MAC_use_cases.ViewModel
     ///     ViewModel for the hardware generation based on a CSV file.
     ///     The class name is kept for compatibility with saved module configurations.
     /// </summary>
-    public class HardwareGenerationExcelBasedViewModel : INotifyPropertyChanged
+    public class HardwareGenerationExcelBasedViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private string _importSource;
+        private string? _importSourceError;
         private bool _exportRelativeImportSource;
 
         public HardwareGenerationExcelBasedViewModel()
@@ -32,8 +37,29 @@ namespace MAC_use_cases.ViewModel
                 {
                     _importSource = value;
                     OnPropertyChanged();
+                    ValidateImportSource();
                 }
             }
+        }
+
+        /// <summary>
+        ///     True if <see cref="ImportSource" /> points to a missing file or an Excel file.
+        ///     The error is only shown in the UI; saving, export and generation are not blocked.
+        /// </summary>
+        [JsonIgnore]
+        public bool HasErrors => _importSourceError != null;
+
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+
+        public IEnumerable GetErrors(string? propertyName)
+        {
+            if (_importSourceError != null &&
+                (string.IsNullOrEmpty(propertyName) || propertyName == nameof(ImportSource)))
+            {
+                return new[] { _importSourceError };
+            }
+
+            return Enumerable.Empty<string>();
         }
 
         /// <summary>
@@ -82,6 +108,24 @@ namespace MAC_use_cases.ViewModel
             {
                 ImportSource = openFileDialog.FileName;
             }
+        }
+
+        private void ValidateImportSource()
+        {
+            // An empty ImportSource is skipped by the generation, so it isn't an error.
+            var problem = string.IsNullOrWhiteSpace(_importSource)
+                ? null
+                : HardwareGenerationFileBased.GetImportSourceProblem(_importSource);
+            var error = problem == null ? null : problem + " No devices will be generated from this file.";
+
+            if (error == _importSourceError)
+            {
+                return;
+            }
+
+            _importSourceError = error;
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(ImportSource)));
+            OnPropertyChanged(nameof(HasErrors));
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
