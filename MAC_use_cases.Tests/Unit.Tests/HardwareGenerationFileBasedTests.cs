@@ -234,6 +234,111 @@ namespace MAC_use_cases.Tests.Unit.Tests
                 Does.Contain("Excel files are no longer supported"));
         }
 
+        [TestCase("HardwareGeneration.csv")]
+        [TestCase(" HardwareGeneration.csv ")]
+        [TestCase(@".\HardwareGeneration.csv")]
+        [TestCase(@"Sub\..\HardwareGeneration.csv")]
+        public void ResolveImportSource_RelativePath_ResolvesAgainstBaseDirectory(string importSource)
+        {
+            Assert.That(HardwareGenerationFileBased.ResolveImportSource(importSource, _tempDirectory),
+                Is.EqualTo(Path.Combine(_tempDirectory, "HardwareGeneration.csv")));
+        }
+
+        [Test]
+        public void ResolveImportSource_RelativePathToSubfolder_ResolvesAgainstBaseDirectory()
+        {
+            Assert.That(HardwareGenerationFileBased.ResolveImportSource(@"Plants\Line1.csv", _tempDirectory),
+                Is.EqualTo(Path.Combine(_tempDirectory, "Plants", "Line1.csv")));
+        }
+
+        [TestCase(@"C:\Temp\HardwareGeneration.csv")]
+        [TestCase(@"\\server\share\HardwareGeneration.csv")]
+        public void ResolveImportSource_AbsolutePath_ReturnsUnchanged(string importSource)
+        {
+            Assert.That(HardwareGenerationFileBased.ResolveImportSource(importSource, _tempDirectory),
+                Is.EqualTo(importSource));
+        }
+
+        [TestCase("")]
+        [TestCase("   ")]
+        [TestCase(null)]
+        [TestCase("Invalid|Name.csv")]
+        public void ResolveImportSource_EmptyOrInvalidValue_ReturnsUnchanged(string importSource)
+        {
+            Assert.That(HardwareGenerationFileBased.ResolveImportSource(importSource, _tempDirectory),
+                Is.EqualTo(importSource));
+        }
+
+        [Test]
+        public void ResolveImportSource_RelativePathToExistingFile_CanBeImported()
+        {
+            var expectedPath = WriteFile("OrderNumber;Version;Name;DeviceName\n6ES7 511-1AK00-0AB0;V1.8;Name_9;D_9",
+                new UTF8Encoding(true));
+
+            var resolvedPath = HardwareGenerationFileBased.ResolveImportSource("devices.csv", _tempDirectory);
+
+            Assert.That(resolvedPath, Is.EqualTo(expectedPath));
+            Assert.That(HardwareGenerationFileBased.GetImportSourceWarning(resolvedPath), Is.Null);
+            Assert.That(HardwareGenerationFileBased.ReadDevicesFromCsvFile(resolvedPath).Single().Name,
+                Is.EqualTo("Name_9"));
+        }
+
+        [Test]
+        public void ResolveImportSource_RelativePathToMissingFile_WarningShowsResolvedPath()
+        {
+            var resolvedPath = HardwareGenerationFileBased.ResolveImportSource("missing.csv", _tempDirectory);
+
+            Assert.That(HardwareGenerationFileBased.GetImportSourceWarning(resolvedPath),
+                Does.Contain("not found").And.Contain(Path.Combine(_tempDirectory, "missing.csv")));
+        }
+
+        [TestCase(@"C:\Data\Config", @"C:\Data\Config\HardwareGeneration.csv", "HardwareGeneration.csv")]
+        [TestCase(@"C:\Data\Config\", @"C:\Data\Config\Csv\Line1.csv", @"Csv\Line1.csv")]
+        [TestCase(@"C:\Data\Config\ModulConfig", @"C:\Data\AdditionalContent\HardwareGeneration.csv",
+            @"..\..\AdditionalContent\HardwareGeneration.csv")]
+        [TestCase(@"c:\data\config", @"C:\Data\Config\HardwareGeneration.csv", "HardwareGeneration.csv")]
+        [TestCase(@"\\server\share\config", @"\\server\share\csv\Line1.csv", @"..\csv\Line1.csv")]
+        public void MakeRelativeImportSource_PathOnSameRoot_ReturnsRelativePath(string baseDirectory,
+            string importSource, string expected)
+        {
+            Assert.That(HardwareGenerationFileBased.MakeRelativeImportSource(importSource, baseDirectory),
+                Is.EqualTo(expected));
+        }
+
+        [TestCase(@"C:\Data\Config", @"D:\Data\HardwareGeneration.csv")]
+        [TestCase(@"C:\Data\Config", @"\\server\share\HardwareGeneration.csv")]
+        [TestCase(@"C:\Data\Config", "HardwareGeneration.csv")]
+        [TestCase(@"C:\Data\Config", "")]
+        [TestCase(@"C:\Data\Config", null)]
+        [TestCase(@"C:\Data\Config", "Invalid|Name.csv")]
+        public void MakeRelativeImportSource_OtherRootRelativeOrInvalid_ReturnsUnchanged(string baseDirectory,
+            string importSource)
+        {
+            Assert.That(HardwareGenerationFileBased.MakeRelativeImportSource(importSource, baseDirectory),
+                Is.EqualTo(importSource));
+        }
+
+        [TestCase("HardwareGeneration.csv")]
+        [TestCase(@"Csv\Line1.csv")]
+        [TestCase(@"..\..\AdditionalContent\HardwareGeneration.csv")]
+        public void MakeRelativeImportSource_AfterResolve_ReturnsOriginalRelativePath(string relativePath)
+        {
+            var resolved = HardwareGenerationFileBased.ResolveImportSource(relativePath, _tempDirectory);
+
+            Assert.That(HardwareGenerationFileBased.MakeRelativeImportSource(resolved, _tempDirectory),
+                Is.EqualTo(relativePath));
+        }
+
+        [Test]
+        public void GetAdditionalContentDirectory_IsContentFilesFolderOfThePackage()
+        {
+            var assemblyDirectory = Path.GetDirectoryName(typeof(HardwareGenerationFileBased).Assembly.Location);
+            var expected = Path.GetFullPath(Path.Combine(assemblyDirectory, "..", "..", "contentFiles", "any",
+                "net48", "AdditionalContent"));
+
+            Assert.That(HardwareGenerationFileBased.GetAdditionalContentDirectory(), Is.EqualTo(expected));
+        }
+
         private string WriteFile(string content, Encoding encoding)
         {
             var path = Path.Combine(_tempDirectory, "devices.csv");
