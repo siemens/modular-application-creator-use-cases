@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using MAC_use_cases.Model;
+using MAC_use_cases.Model.UseCases;
+using MAC_use_cases.ViewModel;
 using Siemens.Automation.ModularApplicationCreator.Core;
 using Siemens.Automation.ModularApplicationCreatorBasics.Logging;
 
@@ -87,6 +89,8 @@ namespace MAC_use_cases.Serialization
                     json.Remove(prop);
                 }
 
+                ResolveImportSourceOnImport(json, Path.GetDirectoryName(Path.GetFullPath(filePath)));
+
                 var settings = new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,
@@ -108,9 +112,70 @@ namespace MAC_use_cases.Serialization
 
         public static void ExportModule(MAC_use_casesEM module, string filePath)
         {
-            if (module != null)
+            if (module == null)
+            {
+                return;
+            }
+
+            if (module.HardwareGenerationExcelBasedViewModel?.ExportRelativeImportSource != true)
             {
                 SerializeModuleToFile(module, filePath);
+                return;
+            }
+
+            try
+            {
+                var serializer = GetSerializer();
+                var stringWriter = new StringWriter();
+                serializer.Serialize(stringWriter, module);
+
+                JObject json;
+                using (var reader = new JsonTextReader(new StringReader(stringWriter.ToString()))
+                       { DateParseHandling = DateParseHandling.None })
+                {
+                    json = JObject.Load(reader);
+                }
+
+                MakeImportSourceRelativeOnExport(json, Path.GetDirectoryName(Path.GetFullPath(filePath)));
+                File.WriteAllText(filePath, json.ToString(serializer.Formatting));
+            }
+            catch (Exception e)
+            {
+                MacManagement.LoggingService.LogMessage(LogTypes.GenerationError, e.Message, nameof(MAC_use_casesSerializer));
+            }
+        }
+
+        /// <summary>
+        ///     Resolves a relative ImportSource of the CSV based hardware generation in a module configuration
+        ///     against the folder of the imported .json, so the module stores and shows the absolute path.
+        /// </summary>
+        /// <param name="json">The module configuration.</param>
+        /// <param name="configDirectory">The folder of the imported .json.</param>
+        public static void ResolveImportSourceOnImport(JObject json, string configDirectory)
+        {
+            UpdateImportSource(json,
+                importSource => HardwareGenerationFileBased.ResolveImportSource(importSource, configDirectory));
+        }
+
+        /// <summary>
+        ///     Writes the ImportSource of the CSV based hardware generation in a module configuration relative
+        ///     to the folder of the exported .json.
+        /// </summary>
+        /// <param name="json">The module configuration.</param>
+        /// <param name="configDirectory">The folder of the exported .json.</param>
+        public static void MakeImportSourceRelativeOnExport(JObject json, string configDirectory)
+        {
+            UpdateImportSource(json,
+                importSource => HardwareGenerationFileBased.MakeRelativeImportSource(importSource, configDirectory));
+        }
+
+        private static void UpdateImportSource(JObject json, Func<string, string> update)
+        {
+            var importSource = json?[nameof(MAC_use_casesEM.HardwareGenerationExcelBasedViewModel)]?
+                [nameof(HardwareGenerationExcelBasedViewModel.ImportSource)] as JValue;
+            if (importSource?.Type == JTokenType.String)
+            {
+                importSource.Value = update((string)importSource.Value);
             }
         }
 
