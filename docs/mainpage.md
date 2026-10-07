@@ -86,10 +86,6 @@ If your project has collaboration framework then the changeover can be very easy
     ![Update MAC Packages](../MAC_use_cases/Images/V20_To_V21_UpdateMacPackages.png)
 5.	Rebuild your project
 6.	If the build fails, please proceed to fix incompatibilities with the Openness V21 API until every error is resolved. 
-Some useful links:
-https://asrdwiki.siemens.com/tiapdev/index.php/Openness/How_to_handle_cross_dependencies_of_EOM_with_Segmented_Engineering_Assemblies
-https://asrdwiki.siemens.com/tiapdev/index.php/Openness/How_to_Generate_Openness_Segmented_Assemblies
-https://asrdwiki.siemens.com/tiapdev/index.php/Openness/How_to_Use_Openness_Segmented_Assemblies_in_Tests
 7.	Try to generate your module with MAC V21. It should work now.
 
     ![Generation Success](../MAC_use_cases/Images/V20_To_V21_GenerationSuccess.png)

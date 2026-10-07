@@ -22,8 +22,19 @@ Follow these steps to get started with the Modular Application Creator:
 
 2. **Set Up Debugging** (Optional):
    - Open your project in Visual Studio.
-   - Open launchSettings.json in MAC_use_cases project
-   - Adapt the executablePath according to the location of your ModularApplicationCreator.exe
+   - Create the file `MAC_use_cases\Properties\launchSettings.json` (it is machine-specific and not tracked by Git) with the following content
+   - Set `executablePath` to the location of your `ModularApplicationCreator.exe`
+
+        ```json
+        {
+          "profiles": {
+            "MAC_use_cases": {
+              "commandName": "Executable",
+              "executablePath": "<PATH_TO_MAC>\\ModularApplicationCreator.exe"
+            }
+          }
+        }
+        ```
 
         ![Debug Setup](docs/images/launch-settings.png)
 
