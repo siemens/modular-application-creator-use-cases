@@ -221,7 +221,25 @@ namespace MAC_use_cases.Tests.Unit.Tests
             var path = Path.Combine(_tempDirectory, "missing.csv");
 
             Assert.That(HardwareGenerationFileBased.GetImportSourceWarning(path),
-                Does.Contain("not found").And.Contain(path));
+                Does.Contain("not found").And.Contain(path)
+                    .And.EndWith("No devices were created from this file."));
+        }
+
+        [Test]
+        public void GetImportSourceProblem_MissingFile_HasNoConsequenceSentence()
+        {
+            var path = Path.Combine(_tempDirectory, "missing.csv");
+
+            Assert.That(HardwareGenerationFileBased.GetImportSourceProblem(path),
+                Does.Contain("not found").And.Not.Contain("No devices"));
+        }
+
+        [Test]
+        public void GetImportSourceProblem_ExistingCsvFile_ReturnsNull()
+        {
+            var path = WriteFile("OrderNumber;Version;Name;DeviceName", new UTF8Encoding(true));
+
+            Assert.That(HardwareGenerationFileBased.GetImportSourceProblem(path), Is.Null);
         }
 
         [Test]
