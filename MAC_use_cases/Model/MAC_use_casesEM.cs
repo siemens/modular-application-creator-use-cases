@@ -88,6 +88,10 @@ namespace MAC_use_cases.Model
             set { }
         }
 
+        /// <summary>
+        ///     ViewModel of the file based hardware generation (CSV file).
+        ///     The property and class names are kept for compatibility with saved module configurations.
+        /// </summary>
         public HardwareGenerationExcelBasedViewModel HardwareGenerationExcelBasedViewModel { get; set; } = new HardwareGenerationExcelBasedViewModel();
 
         [JsonIgnore]
@@ -173,11 +177,11 @@ namespace MAC_use_cases.Model
             {
                 case TiaGenerationPhases.Init:
 
-                    //if (!string.IsNullOrWhiteSpace(HardwareGenerationExcelBasedViewModel.ImportSource))
-                    //{
-                    //    HardwareGenerationExcelBased.CreateNewDevicesFromExcelSheet(this, opennessTiaPortalProject,
-                    //        HardwareGenerationExcelBasedViewModel.ImportSource);
-                    //}
+                    if (!string.IsNullOrWhiteSpace(HardwareGenerationExcelBasedViewModel.ImportSource))
+                    {
+                        HardwareGenerationFileBased.CreateNewDevicesFromCsvFile(this, opennessTiaPortalProject,
+                            HardwareGenerationExcelBasedViewModel.ImportSource);
+                    }
 
                     //if (!IsGenerateHardwareChecked)
                     //{

@@ -122,6 +122,9 @@ C:\Program Files\Siemens\MAC\ModularApplicationCreatorCLI.exe loadProject "C:\Pr
 ```
 
 > **Tip**: Use the **Export** button on the *First Page* of the module UI to generate the `<PATH_TO_CONFIG_JSON>` file. Also a already exported config Json is located in CLI_Example\ModulConfig\MAC_use_cases.json
+
+> **Note**: The `ImportSource` of the CSV based hardware generation (`HardwareGenerationExcelBasedViewModel.ImportSource` in the config JSON) accepts an absolute path or a path relative to the folder of the config JSON. On **Import** (UI button or CLI `configureModules`), a relative path is resolved and the module stores and shows the absolute path. On **Export**, the checkbox *Export CSV path relative to the .json* (`ExportRelativeImportSource`, default off) defines whether the path is written relative to the exported JSON or as an absolute path. For example, `CLI_Example\ModulConfig\MAC_use_cases.json` uses `"ImportSource": "..\\..\\AdditionalContent\\HardwareGeneration.csv"`, the example CSV in this repository.
+
 ## Contact us
 
 If you have problems or suggestions, please send an email to [modular.application.creator.industry@siemens.com](mailto:modular.application.creator.industry@siemens.com)
